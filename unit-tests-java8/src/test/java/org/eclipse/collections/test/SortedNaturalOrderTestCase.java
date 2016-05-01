@@ -54,7 +54,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertThrows;
 
 @SuppressWarnings("UnnecessaryCodeBlock")
-public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
+public interface SortedNaturalOrderTestCase extends SortedIterableTestCase
 {
     @Test
     default void Iterable_toString()
@@ -570,6 +570,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
         assertSame(target, result);
     }
 
+    @Override
     @Test
     default void SortedIterable_comparator()
     {

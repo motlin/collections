@@ -11,9 +11,11 @@
 package org.eclipse.collections.test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
+import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 
 public interface MutableSortedIterableTestCase extends MutableOrderedIterableTestCase
@@ -27,5 +29,25 @@ public interface MutableSortedIterableTestCase extends MutableOrderedIterableTes
         assertEquals(Integer.valueOf(3), iterator.next());
         iterator.remove();
         assertEquals(this.newWith(2, 1), iterable);
+
+        assertThrows(IllegalStateException.class, iterator::remove);
+        assertEquals(this.newWith(2, 1), iterable);
+
+        assertEquals(Integer.valueOf(2), iterator.next());
+        iterator.remove();
+        assertEquals(this.newWith(1), iterable);
+
+        assertThrows(IllegalStateException.class, iterator::remove);
+        assertEquals(this.newWith(1), iterable);
+
+        assertEquals(Integer.valueOf(1), iterator.next());
+        iterator.remove();
+        assertEquals(this.newWith(), iterable);
+
+        assertThrows(IllegalStateException.class, iterator::remove);
+        assertEquals(this.newWith(), iterable);
+
+        assertThrows(NoSuchElementException.class, iterator::next);
+        assertThrows(IllegalStateException.class, iterator::remove);
     }
 }

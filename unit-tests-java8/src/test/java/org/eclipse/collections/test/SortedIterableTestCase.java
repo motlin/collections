@@ -39,5 +39,12 @@ public interface SortedIterableTestCase extends OrderedIterableTestCase, NoDetec
     default void RichIterable_minOptional_maxOptional_non_comparable()
     {
         assertThrows(ClassCastException.class, () -> this.newWith(new Object()));
+	}
+
+    @Test
+    default void SortedIterable_with_null()
+    {
+        assertThrows(NullPointerException.class, () -> this.newWith(null, null));
+        assertThrows(NullPointerException.class, () -> this.newWith((Object) null));
     }
 }
