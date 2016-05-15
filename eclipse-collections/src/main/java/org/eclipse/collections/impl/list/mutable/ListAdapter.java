@@ -124,12 +124,6 @@ public final class ListAdapter<T>
     }
 
     @Override
-    public void forEach(Procedure<? super T> procedure)
-    {
-        this.each(procedure);
-    }
-
-    @Override
     public void each(Procedure<? super T> procedure)
     {
         ListIterate.forEach(this.delegate, procedure);

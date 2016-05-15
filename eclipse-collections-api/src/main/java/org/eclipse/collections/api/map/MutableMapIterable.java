@@ -12,20 +12,15 @@ package org.eclipse.collections.api.map;
 
 import java.util.Map;
 
+import org.eclipse.collections.api.MutableIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.function.primitive.DoubleFunction;
-import org.eclipse.collections.api.block.function.primitive.FloatFunction;
-import org.eclipse.collections.api.block.function.primitive.IntFunction;
-import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.MutableCollection;
-import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
@@ -33,7 +28,7 @@ import org.eclipse.collections.api.tuple.Pair;
 /**
  * @since 6.0
  */
-public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
+public interface MutableMapIterable<K, V> extends MapIterable<K, V>, MutableIterable<V>, Map<K, V>
 {
     /**
      * This method allows mutable map the ability to add an element in the form of Pair<K,V>.
@@ -186,6 +181,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      *
      * @return an unmodifiable view of this map.
      */
+    @Override
     MutableMapIterable<K, V> asUnmodifiable();
 
     /**
@@ -226,6 +222,7 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
      * <p>
      * The returned map will be serializable if the specified map is serializable.
      */
+    @Override
     MutableMapIterable<K, V> asSynchronized();
 
     /**
@@ -276,27 +273,6 @@ public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
 
     @Override
     <S> MutableCollection<S> selectInstancesOf(Class<S> clazz);
-
-    @Override
-    <V1> MutableObjectLongMap<V1> sumByInt(Function<? super V, ? extends V1> groupBy, IntFunction<? super V> function);
-
-    @Override
-    <V1> MutableObjectDoubleMap<V1> sumByFloat(Function<? super V, ? extends V1> groupBy, FloatFunction<? super V> function);
-
-    @Override
-    <V1> MutableObjectLongMap<V1> sumByLong(Function<? super V, ? extends V1> groupBy, LongFunction<? super V> function);
-
-    @Override
-    <V1> MutableObjectDoubleMap<V1> sumByDouble(Function<? super V, ? extends V1> groupBy, DoubleFunction<? super V> function);
-
-    @Override
-    <V1> MutableMultimap<V1, V> groupBy(Function<? super V, ? extends V1> function);
-
-    @Override
-    <V1> MutableMultimap<V1, V> groupByEach(Function<? super V, ? extends Iterable<V1>> function);
-
-    @Override
-    <V1> MutableMapIterable<V1, V> groupByUniqueKey(Function<? super V, ? extends V1> function);
 
     @Override
     <S> MutableCollection<Pair<V, S>> zip(Iterable<S> that);

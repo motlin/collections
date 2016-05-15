@@ -137,12 +137,6 @@ public final class ArrayListAdapter<T>
     }
 
     @Override
-    public void forEach(Procedure<? super T> procedure)
-    {
-        this.each(procedure);
-    }
-
-    @Override
     public void each(Procedure<? super T> procedure)
     {
         ArrayListIterate.forEach(this.delegate, procedure);

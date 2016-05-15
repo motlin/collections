@@ -8,12 +8,8 @@
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
 
-package org.eclipse.collections.impl.bag.immutable;
+package org.eclipse.collections.impl.collection.immutable;
 
-import java.util.Collection;
-
-import net.jcip.annotations.Immutable;
-import org.eclipse.collections.api.bag.ImmutableBagIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -28,18 +24,15 @@ import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
-import org.eclipse.collections.impl.bag.AbstractBag;
+import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
+import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
+import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
-import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 
-@Immutable
-public abstract class AbstractImmutableBagIterable<T>
-        extends AbstractBag<T>
-        implements ImmutableBagIterable<T>
+public abstract class AbstractImmutableIterable<T> extends AbstractRichIterable<T>
 {
     @Override
     public <K, V> ImmutableMap<K, V> aggregateInPlaceBy(
@@ -66,64 +59,28 @@ public abstract class AbstractImmutableBagIterable<T>
     @Override
     public <V> ImmutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
-        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function)).toImmutable();
     }
 
     @Override
     public <V> ImmutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
-        MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function)).toImmutable();
     }
 
     @Override
     public <V> ImmutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
-        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function)).toImmutable();
     }
 
     @Override
     public <V> ImmutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
-        MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleMaps.mutable.empty();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function)).toImmutable();
-    }
-
-    @Override
-    public boolean add(T t)
-    {
-        throw new UnsupportedOperationException("Cannot call add() on " + this.getClass().getSimpleName());
-    }
-
-    @Override
-    public boolean remove(Object o)
-    {
-        throw new UnsupportedOperationException("Cannot call remove() on " + this.getClass().getSimpleName());
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> collection)
-    {
-        throw new UnsupportedOperationException("Cannot call addAll() on " + this.getClass().getSimpleName());
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> collection)
-    {
-        throw new UnsupportedOperationException("Cannot call removeAll() on " + this.getClass().getSimpleName());
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> collection)
-    {
-        throw new UnsupportedOperationException("Cannot call retainAll() on " + this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void clear()
-    {
-        throw new UnsupportedOperationException("Cannot call clear() on " + this.getClass().getSimpleName());
     }
 }
