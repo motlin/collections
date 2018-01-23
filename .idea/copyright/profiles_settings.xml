@@ -1,5 +1,5 @@
 <component name="CopyrightManager">
-  <settings default="Eclipse">
+  <settings default="Eclipse (TS)">
     <LanguageOptions name="JAVA">
       <option name="separateBefore" value="true" />
       <option name="separateAfter" value="true" />
