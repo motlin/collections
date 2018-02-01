@@ -242,7 +242,10 @@ public class ObjectBooleanHashMap<K> implements MutableObjectBooleanMap<K>, Exte
         {
             if (ObjectBooleanHashMap.isNonSentinel(this.keys[i]))
             {
-                result += (this.toNonSentinel(this.keys[i]) == null ? 0 : this.keys[i].hashCode()) ^ (this.values.get(i) ? 1231 : 1237);
+                K nonSentinel = this.toNonSentinel(this.keys[i]);
+                int keyHash = nonSentinel == null ? 0 : this.keys[i].hashCode();
+                int valueHash = this.values.get(i) ? 1231 : 1237;
+                result += keyHash ^ valueHash;
             }
         }
         return result;

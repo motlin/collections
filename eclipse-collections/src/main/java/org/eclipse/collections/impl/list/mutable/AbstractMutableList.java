@@ -80,7 +80,9 @@ public abstract class AbstractMutableList<T>
         extends AbstractMutableCollection<T>
         implements MutableList<T>
 {
-    private static final IntObjectToIntFunction<?> HASH_CODE_FUNCTION = (hashCode, item) -> 31 * hashCode + (item == null ? 0 : item.hashCode());
+    private static final IntObjectToIntFunction<?> HASH_CODE_FUNCTION = (hashCode, item) -> 31 * hashCode + (item == null
+            ? 0
+            : item.hashCode());
 
     @Override
     public MutableList<T> clone()

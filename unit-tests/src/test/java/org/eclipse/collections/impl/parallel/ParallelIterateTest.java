@@ -80,8 +80,12 @@ public class ParallelIterateTest
     private static final Function<Integer, Collection<String>> INT_TO_TWO_STRINGS = integer -> Lists.fixedSize.of(integer.toString(), integer.toString());
 
     private static final Function<Integer, String> EVEN_OR_ODD = value -> value % 2 == 0 ? "Even" : "Odd";
-    private static final Function<BigDecimal, String> EVEN_OR_ODD_BD = value -> value.intValue() % 2 == 0 ? "Even" : "Odd";
-    private static final Function<BigInteger, String> EVEN_OR_ODD_BI = value -> value.intValue() % 2 == 0 ? "Even" : "Odd";
+    private static final Function<BigDecimal, String> EVEN_OR_ODD_BD = value -> value.intValue() % 2 == 0
+            ? "Even"
+            : "Odd";
+    private static final Function<BigInteger, String> EVEN_OR_ODD_BI = value -> value.intValue() % 2 == 0
+            ? "Even"
+            : "Odd";
     private static final int UNEVEN_COUNT_FOR_SUMBY = 43957;
 
     private ImmutableList<RichIterable<Integer>> iterables;

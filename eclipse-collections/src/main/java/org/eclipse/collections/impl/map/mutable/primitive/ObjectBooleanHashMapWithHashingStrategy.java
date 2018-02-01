@@ -257,7 +257,10 @@ public class ObjectBooleanHashMapWithHashingStrategy<K> implements MutableObject
         {
             if (ObjectBooleanHashMapWithHashingStrategy.isNonSentinel(this.keys[i]))
             {
-                result += this.hashingStrategy.computeHashCode(this.toNonSentinel(this.keys[i])) ^ (this.values.get(i) ? 1231 : 1237);
+                K nonSentinel = this.toNonSentinel(this.keys[i]);
+                int keyHash = this.hashingStrategy.computeHashCode(nonSentinel);
+                int valueHash = this.values.get(i) ? 1231 : 1237;
+                result += keyHash ^ valueHash;
             }
         }
         return result;
