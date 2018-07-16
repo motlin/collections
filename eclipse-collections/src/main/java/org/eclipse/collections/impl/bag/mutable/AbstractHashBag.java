@@ -23,7 +23,6 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectIntMap;
 import org.eclipse.collections.impl.Counter;
-import org.eclipse.collections.impl.block.factory.primitive.IntToIntFunctions;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 
@@ -41,7 +40,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
         }
         if (occurrences > 0)
         {
-            int updatedOccurrences = this.items.updateValue(item, 0, IntToIntFunctions.add(occurrences));
+            int updatedOccurrences = this.items.updateValue(item, 0, existingOccurrences -> Math.addExact(existingOccurrences, occurrences));
             this.size += occurrences;
             return updatedOccurrences;
         }
@@ -113,7 +112,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     @Override
     public boolean add(T item)
     {
-        this.items.updateValue(item, 0, IntToIntFunctions.increment());
+        this.items.updateValue(item, 0, Math::incrementExact);
         this.size++;
         return true;
     }
@@ -121,7 +120,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
     @Override
     public boolean remove(Object item)
     {
-        int newValue = this.items.updateValue((T) item, 0, IntToIntFunctions.decrement());
+        int newValue = this.items.updateValue((T) item, 0, Math::decrementExact);
         if (newValue <= 0)
         {
             this.items.removeKey((T) item);
@@ -204,7 +203,7 @@ public abstract class AbstractHashBag<T> extends AbstractMutableBag<T>
             return false;
         }
 
-        int newValue = this.items.updateValue((T) item, 0, IntToIntFunctions.subtract(occurrences));
+        int newValue = this.items.updateValue((T) item, 0, existingOccurrences -> Math.subtractExact(existingOccurrences, occurrences));
 
         if (newValue <= 0)
         {

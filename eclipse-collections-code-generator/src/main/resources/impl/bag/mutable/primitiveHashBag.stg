@@ -44,7 +44,6 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.block.factory.primitive.IntToIntFunctions;
 import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.eclipse.collections.impl.map.mutable.primitive.<name>IntHashMap;
 import org.eclipse.collections.impl.primitive.Abstract<name>Iterable;
@@ -286,7 +285,7 @@ public class <name>HashBag
     @Override
     public boolean add(<type> item)
     {
-        this.items.updateValue(item, 0, IntToIntFunctions.increment());
+        this.items.updateValue(item, 0, Math::incrementExact);
         this.size++;
         return true;
     }
@@ -294,7 +293,7 @@ public class <name>HashBag
     @Override
     public boolean remove(<type> item)
     {
-        int newValue = this.items.updateValue(item, 0, IntToIntFunctions.decrement());
+        int newValue = this.items.updateValue(item, 0, Math::decrementExact);
         if (newValue \<= 0)
         {
             this.items.removeKey(item);

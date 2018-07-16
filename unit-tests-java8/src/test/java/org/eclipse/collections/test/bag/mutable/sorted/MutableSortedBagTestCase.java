@@ -39,14 +39,6 @@ public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableOrde
     }
 
     @Override
-    @Test(expected = IllegalArgumentException.class)
-    default void MutableBagIterable_addOccurrences_throws()
-    {
-        MutableSortedBag<Integer> mutableSortedBag = this.newWith(3, 3, 3, 2, 2, 1);
-        mutableSortedBag.addOccurrences(4, -1);
-    }
-
-    @Override
     @Test
     default void MutableBagIterable_removeOccurrences()
     {
@@ -63,13 +55,5 @@ public interface MutableSortedBagTestCase extends SortedBagTestCase, MutableOrde
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 3, 2), mutableBag);
         assertTrue(mutableBag.removeOccurrences(2, 2));
         assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 3), mutableBag);
-    }
-
-    @Override
-    @Test(expected = IllegalArgumentException.class)
-    default void MutableBagIterable_removeOccurrences_throws()
-    {
-        MutableSortedBag<Integer> mutableBag = this.newWith(3, 3, 3, 2, 2, 1);
-        assertFalse(mutableBag.removeOccurrences(4, -1));
     }
 }

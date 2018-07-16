@@ -28,17 +28,31 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     @Test
     default void MutableBagIterable_addOccurrences_throws()
     {
+        MutableBagIterable<Integer> bag = this.newWith(1, 2, 2, 3, 3, 3);
+
         Verify.assertThrows(
                 IllegalArgumentException.class,
-                () -> this.newWith(1, 2, 2, 3, 3, 3).addOccurrences(4, -1));
+                () -> bag.addOccurrences(4, -1));
+
+        Verify.assertThrows(
+                ArithmeticException.class,
+                () -> bag.addOccurrences(3, Integer.MAX_VALUE));
+
+        bag.addOccurrences(4, Integer.MAX_VALUE);
+
+        Verify.assertThrows(
+                ArithmeticException.class,
+                () -> bag.add(4));
     }
 
     @Test
     default void MutableBagIterable_removeOccurrences_throws()
     {
+        MutableBagIterable<Integer> bag = this.newWith(1, 2, 2, 3, 3, 3);
+
         Verify.assertThrows(
                 IllegalArgumentException.class,
-                () -> this.newWith(1, 2, 2, 3, 3, 3).removeOccurrences(4, -1));
+                () -> bag.removeOccurrences(4, -1));
     }
 
     @Test

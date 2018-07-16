@@ -60,7 +60,7 @@ public class TreeBag<T>
         implements Externalizable
 {
     private static final long serialVersionUID = 1L;
-    private MutableSortedMap<T, Counter> items;
+    private MutableSortedMap<T, Integer> items;
     private int size;
 
     public TreeBag()
@@ -68,10 +68,10 @@ public class TreeBag<T>
         this.items = TreeSortedMap.newMap();
     }
 
-    private TreeBag(MutableSortedMap<T, Counter> map)
+    private TreeBag(MutableSortedMap<T, Integer> map)
     {
         this.items = map;
-        this.size = (int) map.valuesView().sumOfInt(Counter.TO_COUNT);
+        this.size = (int) map.valuesView().sumOfInt(Integer::intValue);
     }
 
     public TreeBag(Comparator<? super T> comparator)
@@ -149,7 +149,7 @@ public class TreeBag<T>
             return false;
         }
 
-        return this.items.keyValuesView().allSatisfy(each -> bag.occurrencesOf(each.getOne()) == each.getTwo().getCount());
+        return this.items.keyValuesView().allSatisfy(each -> bag.occurrencesOf(each.getOne()) == each.getTwo().intValue());
     }
 
     @Override
@@ -175,23 +175,20 @@ public class TreeBag<T>
     @Override
     public void forEachWithOccurrences(ObjectIntProcedure<? super T> procedure)
     {
-        this.items.forEachKeyValue((item, count) -> procedure.value(item, count.getCount()));
+        this.items.forEachKeyValue((item, count) -> procedure.value(item, count.intValue()));
     }
 
     @Override
     public MutableSortedBag<T> selectByOccurrences(IntPredicate predicate)
     {
-        MutableSortedMap<T, Counter> map = this.items.select((each, occurrences) -> {
-            return predicate.accept(occurrences.getCount());
-        });
-        return new TreeBag<>(map);
+        return new TreeBag<>(this.items.select((each, occurrences) -> predicate.accept(occurrences.intValue())));
     }
 
     @Override
     public int occurrencesOf(Object item)
     {
-        Counter counter = this.items.get(item);
-        return counter == null ? 0 : counter.getCount();
+        Integer integer = this.items.get(item);
+        return integer == null ? 0 : integer.intValue();
     }
 
     @Override
@@ -203,21 +200,17 @@ public class TreeBag<T>
     @Override
     public boolean remove(Object item)
     {
-        Counter counter = this.items.get(item);
-        if (counter != null)
+        int newValue = this.items.updateValue((T) item, () -> 0, Math::decrementExact);
+        if (newValue <= 0)
         {
-            if (counter.getCount() > 1)
+            this.items.removeKey((T) item);
+            if (newValue == -1)
             {
-                counter.decrement();
+                return false;
             }
-            else
-            {
-                this.items.remove(item);
-            }
-            this.size--;
-            return true;
         }
-        return false;
+        this.size--;
+        return true;
     }
 
     @Override
@@ -246,12 +239,12 @@ public class TreeBag<T>
         out.writeInt(this.items.size());
         try
         {
-            this.items.forEachKeyValue(new CheckedProcedure2<T, Counter>()
+            this.items.forEachKeyValue(new CheckedProcedure2<T, Integer>()
             {
-                public void safeValue(T object, Counter parameter) throws Exception
+                public void safeValue(T object, Integer parameter) throws Exception
                 {
                     out.writeObject(object);
-                    out.writeInt(parameter.getCount());
+                    out.writeInt(parameter.intValue());
                 }
             });
         }
@@ -280,7 +273,7 @@ public class TreeBag<T>
     public void each(Procedure<? super T> procedure)
     {
         this.items.forEachKeyValue((key, value) -> {
-            for (int i = 0; i < value.getCount(); i++)
+            for (int i = 0; i < value.intValue(); i++)
             {
                 procedure.value(key);
             }
@@ -292,7 +285,7 @@ public class TreeBag<T>
     {
         Counter index = new Counter();
         this.items.forEachKeyValue((key, value) -> {
-            for (int i = 0; i < value.getCount(); i++)
+            for (int i = 0; i < value.intValue(); i++)
             {
                 objectIntProcedure.value(key, index.getCount());
                 index.increment();
@@ -309,13 +302,13 @@ public class TreeBag<T>
             throw new IllegalArgumentException("fromIndex must not be greater than toIndex");
         }
 
-        Iterator<Map.Entry<T, Counter>> iterator = this.items.entrySet().iterator();
+        Iterator<Map.Entry<T, Integer>> iterator = this.items.entrySet().iterator();
         int i = 0;
         while (iterator.hasNext() && i < fromIndex)
         {
-            Map.Entry<T, Counter> entry = iterator.next();
-            Counter value = entry.getValue();
-            int count = value.getCount();
+            Map.Entry<T, Integer> entry = iterator.next();
+            Integer value = entry.getValue();
+            int count = value.intValue();
             if (i + count < fromIndex)
             {
                 i += count;
@@ -334,9 +327,9 @@ public class TreeBag<T>
         }
         while (iterator.hasNext() && i <= toIndex)
         {
-            Map.Entry<T, Counter> entry = iterator.next();
-            Counter value = entry.getValue();
-            int count = value.getCount();
+            Map.Entry<T, Integer> entry = iterator.next();
+            Integer value = entry.getValue();
+            int count = value.intValue();
 
             for (int j = 0; j < count; j++)
             {
@@ -358,13 +351,13 @@ public class TreeBag<T>
             throw new IllegalArgumentException("fromIndex must not be greater than toIndex");
         }
 
-        Iterator<Map.Entry<T, Counter>> iterator = this.items.entrySet().iterator();
+        Iterator<Map.Entry<T, Integer>> iterator = this.items.entrySet().iterator();
         int i = 0;
         while (iterator.hasNext() && i < fromIndex)
         {
-            Map.Entry<T, Counter> entry = iterator.next();
-            Counter value = entry.getValue();
-            int count = value.getCount();
+            Map.Entry<T, Integer> entry = iterator.next();
+            Integer value = entry.getValue();
+            int count = value.intValue();
             if (i + count < fromIndex)
             {
                 i += count;
@@ -383,9 +376,9 @@ public class TreeBag<T>
         }
         while (iterator.hasNext() && i <= toIndex)
         {
-            Map.Entry<T, Counter> entry = iterator.next();
-            Counter value = entry.getValue();
-            int count = value.getCount();
+            Map.Entry<T, Integer> entry = iterator.next();
+            Integer value = entry.getValue();
+            int count = value.intValue();
 
             for (int j = 0; j < count; j++)
             {
@@ -402,7 +395,7 @@ public class TreeBag<T>
     public <P> void forEachWith(Procedure2<? super T, ? super P> procedure, P parameter)
     {
         this.items.forEachKeyValue((key, value) -> {
-            for (int i = 0; i < value.getCount(); i++)
+            for (int i = 0; i < value.intValue(); i++)
             {
                 procedure.value(key, parameter);
             }
@@ -424,10 +417,9 @@ public class TreeBag<T>
         }
         if (occurrences > 0)
         {
-            Counter counter = this.items.getIfAbsentPut(item, Counter::new);
-            counter.add(occurrences);
+            int updatedOccurrences = this.items.updateValue(item, () -> 0, existingOccurrences -> Math.addExact(existingOccurrences, occurrences));
             this.size += occurrences;
-            return counter.getCount();
+            return updatedOccurrences;
         }
         return this.occurrencesOf(item);
     }
@@ -445,21 +437,15 @@ public class TreeBag<T>
             return false;
         }
 
-        Counter counter = this.items.get(item);
-        if (counter == null)
-        {
-            return false;
-        }
-        int startCount = counter.getCount();
+        int newValue = this.items.updateValue((T) item, () -> 0, existingOccurrences -> Math.subtractExact(existingOccurrences, occurrences));
 
-        if (occurrences >= startCount)
+        if (newValue <= 0)
         {
+            this.size -= occurrences + newValue;
             this.items.remove(item);
-            this.size -= startCount;
-            return true;
+            return newValue + occurrences != 0;
         }
 
-        counter.add(occurrences * -1);
         this.size -= occurrences;
         return true;
     }
@@ -485,7 +471,7 @@ public class TreeBag<T>
         }
         else
         {
-            this.items.put(item, new Counter(occurrences));
+            this.items.put(item, occurrences);
         }
 
         this.size -= originalOccurrences - occurrences;
@@ -530,13 +516,13 @@ public class TreeBag<T>
     public boolean removeIf(Predicate<? super T> predicate)
     {
         boolean changed = false;
-        Set<Map.Entry<T, Counter>> entries = this.items.entrySet();
-        for (Iterator<Map.Entry<T, Counter>> iterator = entries.iterator(); iterator.hasNext(); )
+        Set<Map.Entry<T, Integer>> entries = this.items.entrySet();
+        for (Iterator<Map.Entry<T, Integer>> iterator = entries.iterator(); iterator.hasNext(); )
         {
-            Map.Entry<T, Counter> entry = iterator.next();
+            Map.Entry<T, Integer> entry = iterator.next();
             if (predicate.accept(entry.getKey()))
             {
-                this.size -= entry.getValue().getCount();
+                this.size -= entry.getValue().intValue();
                 iterator.remove();
                 changed = true;
             }
@@ -548,13 +534,13 @@ public class TreeBag<T>
     public <P> boolean removeIfWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         boolean changed = false;
-        Set<Map.Entry<T, Counter>> entries = this.items.entrySet();
-        for (Iterator<Map.Entry<T, Counter>> iterator = entries.iterator(); iterator.hasNext(); )
+        Set<Map.Entry<T, Integer>> entries = this.items.entrySet();
+        for (Iterator<Map.Entry<T, Integer>> iterator = entries.iterator(); iterator.hasNext(); )
         {
-            Map.Entry<T, Counter> entry = iterator.next();
+            Map.Entry<T, Integer> entry = iterator.next();
             if (predicate.accept(entry.getKey(), parameter))
             {
-                this.size -= entry.getValue().getCount();
+                this.size -= entry.getValue().intValue();
                 iterator.remove();
                 changed = true;
             }
@@ -568,10 +554,10 @@ public class TreeBag<T>
         int oldSize = this.size;
         for (Object each : iterable)
         {
-            Counter removed = this.items.remove(each);
+            Integer removed = this.items.remove(each);
             if (removed != null)
             {
-                this.size -= removed.getCount();
+                this.size -= removed.intValue();
             }
         }
         return this.size != oldSize;
@@ -588,7 +574,7 @@ public class TreeBag<T>
     {
         if (this.items.containsKey(object))
         {
-            long result = this.items.headMap((T) object).values().sumOfInt(Counter.TO_COUNT);
+            long result = this.items.headMap((T) object).values().sumOfInt(Integer::intValue);
             if (result > Integer.MAX_VALUE)
             {
                 throw new IllegalStateException();
@@ -693,8 +679,7 @@ public class TreeBag<T>
     @Override
     public boolean add(T item)
     {
-        Counter counter = this.items.getIfAbsentPut(item, Counter::new);
-        counter.increment();
+        this.items.updateValue(item, () -> 0, Math::incrementExact);
         this.size++;
         return true;
     }
