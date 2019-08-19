@@ -121,7 +121,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <clover.version>4.0.6</clover.version>
         <scala.version>2.12.6</scala.version>
-        <guava.version>25.1-jre</guava.version>
+        <guava.version>28.0-jre</guava.version>
         <trove4j.version>3.0.3</trove4j.version>
         <checkstyle.version>8.23</checkstyle.version>
         <checkstyle.plugin.version>3.1.1</checkstyle.plugin.version>
