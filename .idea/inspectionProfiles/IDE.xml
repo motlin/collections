@@ -1,7 +1,6 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0" is_locked="false">
     <option name="myName" value="IDE" />
-    <option name="myLocal" value="false" />
     <inspection_tool class="AbstractBeanReferencesInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
     <inspection_tool class="AbstractClassExtendsConcreteClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AbstractClassNeverImplemented" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -37,6 +36,7 @@
     <inspection_tool class="ArraySizeCall" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="AssertEqualsBetweenInconvertibleTypes" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AssertWithSideEffects" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="AssertionCanBeIf" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="AssignmentToForLoopParameter" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_checkForeachParameters" value="false" />
     </inspection_tool>
@@ -70,8 +70,6 @@
     </inspection_tool>
     <inspection_tool class="BadExpressionStatementJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="BadOddness" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="BeforeClassOrAfterClassIsPublicStaticVoidNoArg" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="BeforeOrAfterIsPublicVoidNoArg" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="BigDecimalEquals" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="BigDecimalLegacyMethod" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="BooleanConstructor" enabled="true" level="INSPECTION" enabled_by_default="true" />
@@ -81,7 +79,6 @@
     <inspection_tool class="BreakStatementWithLabel" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="BusyWait" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CStyleArrayDeclaration" enabled="true" level="INSPECTION" enabled_by_default="true" />
-    <inspection_tool class="CachedNumberConstructorCall" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CallToNativeMethodWhileLocked" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CallToSimpleGetterInClass" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreGetterCallsOnOtherObjects" value="false" />
@@ -100,9 +97,11 @@
     <inspection_tool class="CastConflictsWithInstanceof" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="CastThatLosesPrecision" enabled="true" level="INFO" enabled_by_default="true">
       <option name="ignoreIntegerCharCasts" value="false" />
+      <option name="ignoreOverflowingByteCasts" value="false" />
     </inspection_tool>
     <inspection_tool class="CastToIncompatibleInterface" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CatchGenericClass" enabled="true" level="INFO" enabled_by_default="true" />
+    <inspection_tool class="CatchMayIgnoreExceptionMerged" />
     <inspection_tool class="ChainedEquality" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ChannelResource" enabled="true" level="INFO" enabled_by_default="true">
       <option name="insideTryAllowed" value="false" />
@@ -133,15 +132,15 @@
       <option name="m_ignoreCloneableDueToInheritance" value="false" />
     </inspection_tool>
     <inspection_tool class="CodeBlock2Expr" enabled="true" level="INSPECTION" enabled_by_default="true" />
-    <inspection_tool class="CollectionAddedToSelf" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CollectionContainsUrl" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="ComparableImplementedButEqualsNotOverridden" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="ComparatorMethodParameterNotUsed" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="ComparatorNotSerializable" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CompareToUsesNonFinalVariable" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="ComparisonOfShortAndChar" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="ComparisonToNaN" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ConditionSignal" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConditionalCanBeOptional" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ConditionalCanBePushedInsideExpression" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ConditionalExpressionWithIdenticalBranches" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ConfusingElse" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="reportWhenNoStatementFollow" value="true" />
@@ -165,14 +164,19 @@
       <option name="m_maxLength" value="99" />
     </inspection_tool>
     <inspection_tool class="ConstantOnLHSOfComparison" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ConstantOnWrongSideOfComparison" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="myConstantShouldGoLeft" value="false" />
+    </inspection_tool>
     <inspection_tool class="ConstantStringIntern" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ConstantValueVariableUse" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ConstraintValidatorCreator" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ContinueOrBreakFromFinallyBlockJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ControlFlowStatementWithoutBraces" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="Convert to string" enabled="false" level="INFO" enabled_by_default="false" />
     <inspection_tool class="Convert2Diamond" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="Convert2Lambda" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="Convert2MethodRef" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="Convert2streamapi" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ConvertAnnotations" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ConvertJavadoc" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ConvertOldAnnotations" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -225,9 +229,6 @@
     <inspection_tool class="DriverManagerGetConnection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DuplicateBooleanBranch" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DuplicateCaseLabelJS" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="DuplicateCondition" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="ignoreMethodCalls" value="false" />
-    </inspection_tool>
     <inspection_tool class="DuplicateMnemonic" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DuplicatePropertyOnObjectJS" level="WARNING" enabled="false" />
     <inspection_tool class="DuplicatedBeanNamesInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
@@ -242,6 +243,7 @@
       </option>
       <option name="ignoreClassWithParameterization" value="false" />
       <option name="ignoreThrowables" value="true" />
+      <option name="commentsAreContent" value="true" />
     </inspection_tool>
     <inspection_tool class="EmptyInitializer" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="EmptyMethod" enabled="true" level="INSPECTION" enabled_by_default="true" />
@@ -270,6 +272,7 @@
       <option name="ignoreCantWrap" value="false" />
     </inspection_tool>
     <inspection_tool class="ExceptionNameDoesntEndWithException" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ExplicitArgumentCanBeLambda" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ExtendsConcreteCollection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ExtendsThread" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ExtendsUtilityClass" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -290,6 +293,28 @@
     </inspection_tool>
     <inspection_tool class="FieldMayBeFinal" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="FieldMayBeStatic" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="FieldNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+      <extension name="ConstantNamingConvention" enabled="true">
+        <option name="m_regex" value="[A-Z_\d]*" />
+        <option name="m_minLength" value="2" />
+        <option name="m_maxLength" value="99" />
+      </extension>
+      <extension name="ConstantWithMutableFieldTypeNamingConvention" enabled="true">
+        <option name="m_regex" value="[A-Z_\d]*" />
+        <option name="m_minLength" value="2" />
+        <option name="m_maxLength" value="99" />
+      </extension>
+      <extension name="EnumeratedConstantNamingConvention" enabled="true">
+        <option name="m_regex" value="[A-Z_\d]*" />
+        <option name="m_minLength" value="2" />
+        <option name="m_maxLength" value="99" />
+      </extension>
+      <extension name="InstanceVariableNamingConvention" enabled="false">
+        <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+        <option name="m_minLength" value="2" />
+        <option name="m_maxLength" value="32" />
+      </extension>
+    </inspection_tool>
     <inspection_tool class="FinalMethodInFinalClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="FinalPrivateMethod" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="FinalStaticMethod" enabled="true" level="INSPECTION" enabled_by_default="true" />
@@ -298,6 +323,7 @@
     </inspection_tool>
     <inspection_tool class="FinalizeNotProtected" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="FloatingPointEquality" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="FoldExpressionIntoStream" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ForLoopReplaceableByWhile" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreLoopsWithoutConditions" value="false" />
     </inspection_tool>
@@ -305,6 +331,7 @@
     <inspection_tool class="ForLoopWithMissingComponent" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreCollectionLoops" value="false" />
     </inspection_tool>
+    <inspection_tool class="FrequentlyUsedInheritorInspection" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="GWTRemoteServiceAsyncCheck" enabled="false" level="INSPECTION" enabled_by_default="false" />
     <inspection_tool class="GWTStyleCheck" enabled="false" level="INSPECTION" enabled_by_default="false" />
     <inspection_tool class="GroovyUnnecessaryContinue" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -500,6 +527,7 @@
     <inspection_tool class="JavaLangImport" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="JavaLangReflect" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="JavaeeApplicationDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JoinDeclarationAndAssignmentJava" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="JpaDataSourceORMDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JpaDataSourceORMInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JpaDomInspection" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -510,6 +538,7 @@
     <inspection_tool class="JpaQueryApiInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="KeySetIterationMayUseEntrySet" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="LabeledStatement" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="LambdaCanBeMethodCall" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="LegacyStringFormatting" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="LengthOneStringInIndexOf" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="LengthOneStringsInConcatenation" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -540,9 +569,6 @@
     </inspection_tool>
     <inspection_tool class="LoggingConditionDisagreesWithLogStatement" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="LongLiteralsEndingWithLowercaseL" enabled="true" level="INSPECTION" enabled_by_default="true" />
-    <inspection_tool class="LoopConditionNotUpdatedInsideLoop" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="ignoreIterators" value="false" />
-    </inspection_tool>
     <inspection_tool class="LoopStatementThatDoesntLoopJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="LoopWithImplicitTerminationCondition" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="MapReplaceableByEnumMap" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -575,6 +601,9 @@
       <option name="updateNames">
         <value />
       </option>
+      <option name="ignoredClasses">
+        <value />
+      </option>
     </inspection_tool>
     <inspection_tool class="MisorderedAssertEqualsParameters" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="MissingDeprecatedAnnotation" enabled="true" level="INSPECTION" enabled_by_default="true" />
@@ -592,10 +621,14 @@
     <inspection_tool class="MisspelledSetUp" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="MisspelledTearDown" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="MisspelledToString" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MoveFieldAssignmentToInitializer" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="MultipleDeclaration" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="ignoreForLoopDeclarations" value="false" />
     </inspection_tool>
     <inspection_tool class="MultipleTopLevelClassesInFile" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="MultipleVariablesInDeclaration" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreForLoopDeclarations" value="false" />
+    </inspection_tool>
     <inspection_tool class="NakedNotify" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="NativeMethods" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="NegatedConditional" enabled="true" level="INSPECTION" enabled_by_default="true">
@@ -660,8 +693,10 @@
       <option name="m_ignoreClassObjects" value="true" />
       <option name="m_ignorePrivateConstructors" value="true" />
     </inspection_tool>
+    <inspection_tool class="ObjectEqualsCanBeEquality" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ObjectEqualsNull" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ObjectNotify" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ObjectsEqualsCanBeSimplified" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ObsoleteCollection" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="ignoreRequiredObsoleteCollectionTypes" value="true" />
     </inspection_tool>
@@ -729,6 +764,7 @@
       <option name="nameString" value="aa,abc,bad,bar,bar2,baz,baz1,baz2,baz3,bb,blah,bogus,bool,cc,dd,defau1t,dummy,dummy2,ee,fa1se,ff,foo,foo1,foo2,foo3,foobar,four,fred,fred1,fred2,gg,hh,hello,hello1,hello2,hello3,ii,nu11,one,silly,silly2,string,two,then,three,whi1e,var" />
     </inspection_tool>
     <inspection_tool class="RandomDoubleForRandomInteger" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="RawTypeCanBeGeneric" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="RawUseOfParameterizedType" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="ignoreObjectConstruction" value="false" />
       <option name="ignoreUncompilable" value="true" />
@@ -744,9 +780,9 @@
       <option name="ignoreCloneable" value="false" />
     </inspection_tool>
     <inspection_tool class="RedundantImport" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="RedundantLambdaParameterType" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="RedundantMethodOverride" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="RedundantStringFormatCall" enabled="true" level="INSPECTION" enabled_by_default="true" />
-    <inspection_tool class="RedundantSuppression" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantThrowsDeclaration" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantTypeArguments" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ReferencesToClassesFromDefaultPackagesInJSPFile" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -765,6 +801,7 @@
     <inspection_tool class="ResultSetIndexZero" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ReturnFromFinallyBlockJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ReturnOfDateField" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="ReturnSeparatedFromComputation" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="ReturnThis" enabled="true" level="INFO" enabled_by_default="true" />
     <inspection_tool class="ReuseOfLocalVariable" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="RuntimeExec" enabled="true" level="INSPECTION" enabled_by_default="true" />
@@ -969,7 +1006,6 @@
       </replaceConfiguration>
       <replaceConfiguration name="assertNotContains" text="Assert.assertFalse($string$, $collection$.contains($obj$))" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertNotContains($string$, $obj$, $collection$)">
         <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
-        <constraint name="coll" within="" contains="" />
         <constraint name="collection" within="" contains="" />
         <constraint name="obj" within="" contains="" />
       </replaceConfiguration>
@@ -988,12 +1024,12 @@
       <replaceConfiguration name="assertItemAtIndex 3" text="Assert.assertEquals($string$, $item$, $array$[$index$])" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertItemAtIndex($string$, $item$, $index$, $array$)">
         <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
         <constraint name="item" within="" contains="" />
-        <constraint name="array" nameOfExprType="Object\[\]" within="" contains="" />
+        <constraint name="array" nameOfExprType="Object\[\]" expressionTypes="Object[]" within="" contains="" />
         <constraint name="index" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="assertItemAtIndex 4" text="Assert.assertEquals($string$, $array$[$index$], $item$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertItemAtIndex($string$, $item$, $index$, $array$)">
         <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
-        <constraint name="array" nameOfExprType="Object\[\]" within="" contains="" />
+        <constraint name="array" nameOfExprType="Object\[\]" expressionTypes="Object[]" within="" contains="" />
         <constraint name="index" within="" contains="" />
         <constraint name="item" within="" contains="" />
       </replaceConfiguration>
@@ -1091,11 +1127,9 @@
         <constraint name="array" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="ArrayIterate.asList() to FastList.newListWith()" text="ArrayIterate.asList(new Object[]{$expr$})" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.list.mutable.FastList.newListWith($expr$)">
-        <constraint name="obj" within="" contains="" />
         <constraint name="expr" minCount="0" maxCount="2147483647" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="Iterate to ArrayIterate" text="Iterate.$method$(Arrays.asList($array$), $expr$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.ArrayIterate.$method$($array$, $expr$)">
-        <constraint name="list" within="" contains="" />
         <constraint name="array" within="" contains="" />
         <constraint name="expr" minCount="0" maxCount="2147483647" within="" contains="" />
         <constraint name="method" within="" contains="" />
@@ -1127,9 +1161,6 @@
       </replaceConfiguration>
       <replaceConfiguration name="newSetWith 7" text="$coll$ = UnifiedSet.newSet();&#10;$coll$.add($expr$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = UnifiedSet.newSetWith($expr$);">
         <constraint name="coll" within="" contains="" />
-        <constraint name="type" within="" contains="" />
-        <constraint name="expr1" within="" contains="" />
-        <constraint name="expr2" within="" contains="" />
         <constraint name="expr" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="newSetWith 8" text="$coll$ = UnifiedSet.&lt;$type$&gt;newSetWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = UnifiedSet.&lt;$type$&gt;newSetWith($expr1$, $expr2$);">
@@ -1140,33 +1171,20 @@
       </replaceConfiguration>
       <replaceConfiguration name="newSetWith 9" text="$coll$ = UnifiedSet.newSetWith($expr1$);&#10;$coll$.add($expr2$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$coll$ = UnifiedSet.newSetWith($expr1$, $expr2$);">
         <constraint name="coll" within="" contains="" />
-        <constraint name="type" within="" contains="" />
         <constraint name="expr1" within="" contains="" />
         <constraint name="expr2" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="size of array 1" text="Assert.assertTrue($string$, $array$.length == $size$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertSize($string$, $size$, $array$)">
-        <constraint name="coll" within="" contains="" />
-        <constraint name="type" within="" contains="" />
-        <constraint name="expr1" within="" contains="" />
-        <constraint name="expr2" within="" contains="" />
         <constraint name="string" minCount="0" within="" contains="" />
         <constraint name="array" within="" contains="" />
         <constraint name="size" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="size of array 2" text="Assert.assertEquals($string$, $size$, $array$.length)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertSize($string$, $size$, $array$)">
-        <constraint name="coll" within="" contains="" />
-        <constraint name="type" within="" contains="" />
-        <constraint name="expr1" within="" contains="" />
-        <constraint name="expr2" within="" contains="" />
         <constraint name="string" minCount="0" within="" contains="" />
         <constraint name="array" within="" contains="" />
         <constraint name="size" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="size of array 3" text="Assert.assertTrue($string$, $size$ == $array$.length)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertSize($string$, $size$, $array$)">
-        <constraint name="coll" within="" contains="" />
-        <constraint name="type" within="" contains="" />
-        <constraint name="expr1" within="" contains="" />
-        <constraint name="expr2" within="" contains="" />
         <constraint name="string" minCount="0" within="" contains="" />
         <constraint name="array" within="" contains="" />
         <constraint name="size" within="" contains="" />
@@ -1192,8 +1210,6 @@
       </replaceConfiguration>
       <replaceConfiguration name="Verify.assertNotNull" text="Assert.assertTrue($string$, $expr$ != null)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertNotNull($string$, $expr$)">
         <constraint name="string" nameOfExprType="String" minCount="0" within="" contains="" />
-        <constraint name="left" within="" contains="" />
-        <constraint name="right" within="" contains="" />
         <constraint name="expr" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="not Iterate.notEmpty()" text="!Iterate.notEmpty($iterable$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.utility.Iterate.isEmpty($iterable$)">
@@ -1262,26 +1278,18 @@
         <constraint name="expr2" script="&quot;&quot;" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="synchronizedList() to asSynchronized()" text="Collections.synchronizedList($list$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$list$.asSynchronized()">
-        <constraint name="set" script="&quot;&quot;" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
         <constraint name="list" script="&quot;&quot;" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="synchronizedSet() to asSynchronized()" text="Collections.synchronizedSet($set$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$set$.asSynchronized()">
         <constraint name="set" script="&quot;&quot;" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
-        <constraint name="list" script="&quot;&quot;" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="synchronizedMap() to asSynchronized()" text="Collections.synchronizedMap($map$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$map$.asSynchronized()">
-        <constraint name="set" script="&quot;&quot;" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
-        <constraint name="list" script="&quot;&quot;" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
         <constraint name="map" script="&quot;&quot;" nameOfExprType="MutableMap" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="synchronizedCollection() to asSynchronized()" text="Collections.synchronizedCollection($collection$)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="$collection$.asSynchronized()">
-        <constraint name="set" script="&quot;&quot;" nameOfExprType="MutableSet" exprTypeWithinHierarchy="true" within="" contains="" />
-        <constraint name="list" script="&quot;&quot;" nameOfExprType="MutableList" exprTypeWithinHierarchy="true" within="" contains="" />
-        <constraint name="map" script="&quot;&quot;" nameOfExprType="MutableMap" exprTypeWithinHierarchy="true" within="" contains="" />
         <constraint name="collection" script="&quot;&quot;" nameOfExprType="MutableCollection" exprTypeWithinHierarchy="true" within="" contains="" />
       </replaceConfiguration>
       <replaceConfiguration name="Verify.assertCount()" text="Assert.assertEquals($expectedCount$, Iterate.count($iterable$, $discriminator$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="true" replacement="org.eclipse.collections.impl.test.Verify.assertCount($expectedCount$, $iterable$, $discriminator$);">
-        <constraint name="size" within="" contains="" />
         <constraint name="iterable" within="" contains="" />
         <constraint name="discriminator" within="" contains="" />
         <constraint name="expectedCount" within="" contains="" />
@@ -1335,6 +1343,7 @@
     <inspection_tool class="SimplifiableEqualsExpression" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="SimplifiableIfStatement" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SimplifiableJUnitAssertion" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="SimplifyForEach" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="Since15" enabled="false" level="WARNING" enabled_by_default="true">
       <effectiveLL value="JDK_1_6" />
     </inspection_tool>
@@ -1394,15 +1403,14 @@
     <inspection_tool class="StringBufferReplaceableByStringBuilder" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="StringBufferToStringInConcatenation" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="StringConcatenationArgumentToLogCall" enabled="true" level="INSPECTION" enabled_by_default="true" />
-    <inspection_tool class="StringConcatenationInLoops" enabled="true" level="INSPECTION" enabled_by_default="true">
-      <option name="m_ignoreUnlessAssigned" value="true" />
-    </inspection_tool>
+    <inspection_tool class="StringConcatenationInLoops" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="StringConcatenationInsideStringBufferAppend" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="StringConstructor" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="ignoreSubstringArguments" value="false" />
     </inspection_tool>
     <inspection_tool class="StringEquality" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="StringEqualsEmptyString" enabled="false" level="INSPECTION" enabled_by_default="false" />
+    <inspection_tool class="StringOperationCanBeSimplified" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="StringReplaceableByStringBuffer" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="onlyWarnOnLoop" value="true" />
     </inspection_tool>
@@ -1425,6 +1433,9 @@
     <inspection_tool class="SuspiciousNameCombination" enabled="false" level="WARNING" enabled_by_default="false">
       <group names="x,width,left,right" />
       <group names="y,height,top,bottom" />
+      <ignored>
+        <option name="METHOD_MATCHER_CONFIG" value="java.io.PrintStream,println,java.io.PrintWriter,println,java.lang.System,identityHashCode,java.sql.PreparedStatement,set.*,java.sql.ResultSet,update.*,java.sql.SQLOutput,write.*,java.lang.Integer,compare.*,java.lang.Long,compare.*,java.lang.Short,compare,java.lang.Byte,compare,java.lang.Character,compare,java.lang.Boolean,compare,java.lang.Math,.*,java.lang.StrictMath,.*" />
+      </ignored>
     </inspection_tool>
     <inspection_tool class="SuspiciousSystemArraycopy" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SuspiciousToArrayCall" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -1529,6 +1540,9 @@
     <inspection_tool class="UnconstructableTestCase" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="UnitMethodDefinedLikeProcedure" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnknownGuard" enabled="true" level="INSPECTION" enabled_by_default="true" />
+    <inspection_tool class="UnnecessarilyQualifiedInnerClassAccess" enabled="true" level="INSPECTION" enabled_by_default="true">
+      <option name="ignoreReferencesNeedingImport" value="false" />
+    </inspection_tool>
     <inspection_tool class="UnnecessarilyQualifiedStaticallyImportedElement" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryAnnotationParentheses" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryBlockStatement" enabled="true" level="INSPECTION" enabled_by_default="true">
@@ -1541,7 +1555,6 @@
     <inspection_tool class="UnnecessaryConstructor" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryContinue" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryContinueJS" enabled="false" level="INSPECTION" enabled_by_default="false" />
-    <inspection_tool class="UnnecessaryDefault" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryEnumModifier" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryFinalOnLocalVariable" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryFinalOnLocalVariableOrParameter" enabled="true" level="INSPECTION" enabled_by_default="true" />
@@ -1551,8 +1564,10 @@
     <inspection_tool class="UnnecessaryFullyQualifiedName" enabled="true" level="INSPECTION" enabled_by_default="false">
       <scope name="No package-info.java" level="INSPECTION" enabled="true">
         <option name="m_ignoreJavadoc" value="false" />
+        <option name="ignoreInModuleStatements" value="true" />
       </scope>
       <option name="m_ignoreJavadoc" value="false" />
+      <option name="ignoreInModuleStatements" value="true" />
     </inspection_tool>
     <inspection_tool class="UnnecessaryInheritDoc" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryInterfaceModifier" enabled="true" level="INSPECTION" enabled_by_default="true" />
