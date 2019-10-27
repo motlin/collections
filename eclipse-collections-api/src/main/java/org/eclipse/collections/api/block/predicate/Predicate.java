@@ -27,4 +27,10 @@ public interface Predicate<T>
     {
         return this.accept(each);
     }
+
+    @Override
+    default Predicate<T> negate()
+    {
+        return each -> !this.accept(each);
+    }
 }
