@@ -126,7 +126,7 @@
         <checkstyle.version>8.23</checkstyle.version>
         <checkstyle.plugin.version>3.1.0</checkstyle.plugin.version>
         <findbugs.plugin.version>3.0.5</findbugs.plugin.version>
-        <jacoco.plugin.version>0.8.4</jacoco.plugin.version>
+        <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
