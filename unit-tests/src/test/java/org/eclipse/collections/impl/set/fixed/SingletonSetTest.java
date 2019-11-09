@@ -37,9 +37,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
-
 /**
  * JUnit test for {@link SingletonSet}.
  */
@@ -234,23 +231,23 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void partition()
     {
         PartitionMutableSet<Integer> partition = this.intSet.partition(Predicates.lessThan(3));
-        Assert.assertEquals(mSet(1), partition.getSelected());
-        Assert.assertEquals(mSet(), partition.getRejected());
+        Assert.assertEquals(Sets.mutable.with(1), partition.getSelected());
+        Assert.assertEquals(Sets.mutable.empty(), partition.getRejected());
     }
 
     @Test
     public void partitionWith()
     {
         PartitionMutableSet<Integer> partition = this.intSet.partitionWith(Predicates2.lessThan(), 3);
-        Assert.assertEquals(mSet(1), partition.getSelected());
-        Assert.assertEquals(mSet(), partition.getRejected());
+        Assert.assertEquals(Sets.mutable.with(1), partition.getSelected());
+        Assert.assertEquals(Sets.mutable.empty(), partition.getRejected());
     }
 
     @Test
     public void selectInstancesOf()
     {
         MutableSet<Number> numbers = Sets.fixedSize.of(1);
-        Assert.assertEquals(iSet(1), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(Sets.immutable.with(1), numbers.selectInstancesOf(Integer.class));
         Verify.assertEmpty(numbers.selectInstancesOf(Double.class));
     }
 

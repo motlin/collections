@@ -43,8 +43,6 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
-
 /**
  * Abstract JUnit test for {@link UnmodifiableBag}.
  */
@@ -149,15 +147,15 @@ public class UnmodifiableBagTest
     public void selectInstancesOf()
     {
         MutableBag<Number> numbers = UnmodifiableBag.of(HashBag.newBagWith(1, 2.0, 3, 4.0, 5));
-        Assert.assertEquals(iBag(1, 3, 5), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
+        Assert.assertEquals(Bags.immutable.with(1, 3, 5), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(Bags.immutable.with(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
     }
 
     @Test
     public void selectByOccurrences()
     {
         MutableBag<Integer> integers = UnmodifiableBag.of(HashBag.newBagWith(1, 1, 1, 1, 2, 2, 2, 3, 3, 4));
-        Assert.assertEquals(iBag(1, 1, 1, 1, 3, 3), integers.selectByOccurrences(IntPredicates.isEven()));
+        Assert.assertEquals(Bags.immutable.with(1, 1, 1, 1, 3, 3), integers.selectByOccurrences(IntPredicates.isEven()));
     }
 
     @Test

@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.collection.mutable;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
@@ -25,8 +26,6 @@ import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 /**
  * JUnit test for {@link SynchronizedMutableCollection}.
@@ -105,8 +104,8 @@ public class SynchronizedMutableCollectionTest extends AbstractSynchronizedColle
     {
         MutableCollection<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         PartitionMutableCollection<Integer> result = integers.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        Assert.assertEquals(Lists.immutable.with(-2, 0, 2, 4, 6, 8), result.getSelected());
+        Assert.assertEquals(Lists.immutable.with(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
     @Override
@@ -115,8 +114,8 @@ public class SynchronizedMutableCollectionTest extends AbstractSynchronizedColle
     {
         MutableCollection<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         PartitionMutableCollection<Integer> result = integers.partitionWith(Predicates2.in(), integers.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        Assert.assertEquals(Lists.immutable.with(-2, 0, 2, 4, 6, 8), result.getSelected());
+        Assert.assertEquals(Lists.immutable.with(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
     @Override

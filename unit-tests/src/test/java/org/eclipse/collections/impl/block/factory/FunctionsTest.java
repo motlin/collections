@@ -38,8 +38,6 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-
 public class FunctionsTest
 {
     private static final Function<String, Integer> STRING_LENGTH = String::length;
@@ -214,7 +212,7 @@ public class FunctionsTest
                 Functions.getFixedValue(Lists.immutable.of()),
                 Functions.getFixedValue(Lists.immutable.of("hello")),
                 Functions.getFixedValue(Lists.immutable.of()));
-        Assert.assertEquals(iList("hello"), function1.valueOf(null));
+        Assert.assertEquals(Lists.immutable.with("hello"), function1.valueOf(null));
 
         Function<Object, ImmutableList<String>> function2 = Functions.firstNotEmptyCollectionValue(
                 Functions.getFixedValue(Lists.immutable.of()),

@@ -35,8 +35,6 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
-
 /**
  * JUnit test for {@link SynchronizedBag}.
  */
@@ -116,8 +114,8 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
 
         MutableBag<Integer> integers = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         PartitionMutableCollection<Integer> result = integers.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iBag(2, 2, 4, 4, 4, 4), result.getSelected());
-        Assert.assertEquals(iBag(1, 3, 3, 3), result.getRejected());
+        Assert.assertEquals(Bags.immutable.with(2, 2, 4, 4, 4, 4), result.getSelected());
+        Assert.assertEquals(Bags.immutable.with(1, 3, 3, 3), result.getRejected());
     }
 
     @Override
@@ -128,22 +126,22 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
 
         MutableBag<Integer> integers = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         PartitionMutableCollection<Integer> result = integers.partitionWith(Predicates2.in(), integers.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iBag(2, 2, 4, 4, 4, 4), result.getSelected());
-        Assert.assertEquals(iBag(1, 3, 3, 3), result.getRejected());
+        Assert.assertEquals(Bags.immutable.with(2, 2, 4, 4, 4, 4), result.getSelected());
+        Assert.assertEquals(Bags.immutable.with(1, 3, 3, 3), result.getRejected());
     }
 
     @Test
     public void selectByOccurrences()
     {
         MutableBag<Integer> integers = this.newWith(1, 1, 1, 1, 2, 2, 2, 3, 3, 4);
-        Assert.assertEquals(iBag(1, 1, 1, 1, 3, 3), integers.selectByOccurrences(IntPredicates.isEven()));
+        Assert.assertEquals(Bags.immutable.with(1, 1, 1, 1, 3, 3), integers.selectByOccurrences(IntPredicates.isEven()));
     }
 
     @Test
     public void selectDuplicates()
     {
         Assert.assertEquals(
-                iBag(1, 1, 1, 1, 2, 2, 2, 3, 3),
+                Bags.immutable.with(1, 1, 1, 1, 2, 2, 2, 3, 3),
                 this.newWith(0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 5).selectDuplicates());
     }
 

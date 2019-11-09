@@ -91,9 +91,6 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
-
 public abstract class MapIterableTestCase
 {
     protected abstract <K, V> MapIterable<K, V> newMap();
@@ -1435,8 +1432,8 @@ public abstract class MapIterableTestCase
                 "C", 3,
                 "D", 4);
         PartitionIterable<Integer> partition = map.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iSet(4, 2), partition.getSelected().toSet());
-        Assert.assertEquals(iSet(3, 1), partition.getRejected().toSet());
+        Assert.assertEquals(Sets.immutable.with(4, 2), partition.getSelected().toSet());
+        Assert.assertEquals(Sets.immutable.with(3, 1), partition.getRejected().toSet());
     }
 
     @Test
@@ -1448,15 +1445,15 @@ public abstract class MapIterableTestCase
                 "C", 3,
                 "D", 4);
         PartitionIterable<Integer> partition = map.partitionWith(Predicates2.in(), map.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iSet(4, 2), partition.getSelected().toSet());
-        Assert.assertEquals(iSet(3, 1), partition.getRejected().toSet());
+        Assert.assertEquals(Sets.immutable.with(4, 2), partition.getSelected().toSet());
+        Assert.assertEquals(Sets.immutable.with(3, 1), partition.getRejected().toSet());
     }
 
     @Test
     public void selectInstancesOf_value()
     {
         MapIterable<String, Number> map = this.newMapWithKeysValues("1", 1, "2", 2.0, "3", 3, "4", 4.0);
-        Assert.assertEquals(iBag(1, 3), map.selectInstancesOf(Integer.class).toBag());
+        Assert.assertEquals(Bags.immutable.with(1, 3), map.selectInstancesOf(Integer.class).toBag());
     }
 
     @Test

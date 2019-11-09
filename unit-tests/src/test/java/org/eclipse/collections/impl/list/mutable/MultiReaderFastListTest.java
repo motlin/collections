@@ -47,8 +47,6 @@ import org.eclipse.collections.impl.utility.ListIterate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-
 /**
  * JUnit test for {@link MultiReaderFastList}.
  */
@@ -1095,7 +1093,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
     public void asReversed()
     {
         MultiReaderFastList<Integer> multiReaderFastList = this.newWith(1, 2, 3, 4);
-        multiReaderFastList.withReadLockAndDelegate(delegate -> Verify.assertIterablesEqual(iList(4, 3, 2, 1), delegate.asReversed()));
+        multiReaderFastList.withReadLockAndDelegate(delegate -> Verify.assertIterablesEqual(Lists.immutable.with(4, 3, 2, 1), delegate.asReversed()));
     }
 
     @Override

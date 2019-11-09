@@ -43,8 +43,6 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
-
 public class SetsTest
 {
     private final MutableList<UnifiedSet<String>> uniqueSets =
@@ -521,8 +519,8 @@ public class SetsTest
     @Test
     public void subsetEmpty()
     {
-        MutableSet<String> emptySet = mSet();
-        MutableSet<String> singletonSet = mSet("Bertha");
+        MutableSet<String> emptySet = org.eclipse.collections.api.factory.Sets.mutable.empty();
+        MutableSet<String> singletonSet = org.eclipse.collections.api.factory.Sets.mutable.with("Bertha");
         Assert.assertTrue(Sets.isSubsetOf(emptySet, singletonSet));
         Assert.assertFalse(Sets.isSubsetOf(singletonSet, emptySet));
     }
@@ -548,7 +546,7 @@ public class SetsTest
     @Test
     public void properSubsetEmpty()
     {
-        MutableSet<String> emptySet = mSet();
+        MutableSet<String> emptySet = org.eclipse.collections.api.factory.Sets.mutable.empty();
         MutableSet<String> singletonSet = UnifiedSet.newSetWith("Bertha");
         Assert.assertTrue(Sets.isProperSubsetOf(emptySet, singletonSet));
         Assert.assertFalse(Sets.isProperSubsetOf(singletonSet, emptySet));

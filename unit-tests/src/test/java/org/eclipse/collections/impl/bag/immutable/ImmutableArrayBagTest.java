@@ -26,8 +26,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
-
 public class ImmutableArrayBagTest extends ImmutableBagTestCase
 {
     @Override
@@ -133,8 +131,8 @@ public class ImmutableArrayBagTest extends ImmutableBagTestCase
         super.selectInstancesOf();
 
         ImmutableBag<Number> numbers = ImmutableArrayBag.newBagWith(1, 2.0, 2.0, 3, 3, 3, 4.0, 4.0, 4.0, 4.0);
-        Assert.assertEquals(iBag(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
+        Assert.assertEquals(Bags.immutable.with(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(Bags.immutable.with(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
     }
 
     @Override

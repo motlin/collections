@@ -31,8 +31,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
-
 /**
  * JUnit test for {@link DoubletonSet}.
  */
@@ -80,7 +78,7 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         super.equalsAndHashCode();
         MutableSet<String> one = Sets.fixedSize.of("1", "2");
-        Verify.assertEqualsAndHashCode(one, mSet("1", "2"));
+        Verify.assertEqualsAndHashCode(one, Sets.mutable.with("1", "2"));
         Verify.assertPostSerializedEqualsAndHashCode(one);
     }
 

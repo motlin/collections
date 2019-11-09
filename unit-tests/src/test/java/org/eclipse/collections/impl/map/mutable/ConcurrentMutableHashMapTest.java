@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.map.mutable;
 
 import org.eclipse.collections.api.factory.Maps;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.ConcurrentMutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -23,8 +24,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
 
 /**
  * JUnit test for {@link ConcurrentMutableHashMap}.
@@ -144,8 +143,8 @@ public class ConcurrentMutableHashMapTest extends ConcurrentHashMapTestCase
                 "C", 3,
                 "D", 4);
         PartitionIterable<Integer> partition = map.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iSet(2, 4), partition.getSelected().toSet());
-        Assert.assertEquals(iSet(1, 3), partition.getRejected().toSet());
+        Assert.assertEquals(Sets.immutable.with(2, 4), partition.getSelected().toSet());
+        Assert.assertEquals(Sets.immutable.with(1, 3), partition.getRejected().toSet());
     }
 
     @Override
@@ -158,8 +157,8 @@ public class ConcurrentMutableHashMapTest extends ConcurrentHashMapTestCase
                 "C", 3,
                 "D", 4);
         PartitionIterable<Integer> partition = map.partitionWith(Predicates2.in(), map.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iSet(2, 4), partition.getSelected().toSet());
-        Assert.assertEquals(iSet(1, 3), partition.getRejected().toSet());
+        Assert.assertEquals(Sets.immutable.with(2, 4), partition.getSelected().toSet());
+        Assert.assertEquals(Sets.immutable.with(1, 3), partition.getRejected().toSet());
     }
 
     @Override

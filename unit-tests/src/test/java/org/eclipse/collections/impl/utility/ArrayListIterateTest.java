@@ -61,9 +61,6 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
-
 /**
  * JUnit test for {@link ArrayListIterate}.
  */
@@ -818,8 +815,8 @@ public class ArrayListIterateTest
     public void forEachInBoth()
     {
         MutableList<Pair<String, String>> list = Lists.mutable.empty();
-        ArrayList<String> list1 = new ArrayList<>(mList("1", "2"));
-        ArrayList<String> list2 = new ArrayList<>(mList("a", "b"));
+        ArrayList<String> list1 = new ArrayList<>(Lists.mutable.with("1", "2"));
+        ArrayList<String> list2 = new ArrayList<>(Lists.mutable.with("a", "b"));
         ArrayListIterate.forEachInBoth(list1, list2, (argument1, argument2) -> list.add(Tuples.twin(argument1, argument2)));
 
         Assert.assertEquals(FastList.newListWith(Tuples.twin("1", "a"), Tuples.twin("2", "b")), list);
@@ -978,7 +975,7 @@ public class ArrayListIterateTest
         ArrayList<Number> list = new ArrayList<>(Interval.oneTo(101));
         list.add(102.0);
         MutableList<Double> results = ArrayListIterate.selectInstancesOf(list, Double.class);
-        Assert.assertEquals(iList(102.0), results);
+        Assert.assertEquals(Lists.immutable.with(102.0), results);
     }
 
     public static final class CollectionCreator
@@ -1414,7 +1411,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> arrayList = new ArrayList<>(Interval.oneTo(100));
 
         Assert.assertEquals(
-                iList(1, 2, 3),
+                Lists.immutable.with(1, 2, 3),
                 ArrayListIterate.takeWhile(arrayList, Predicates.lessThan(4)));
 
         Assert.assertEquals(
@@ -1422,7 +1419,7 @@ public class ArrayListIterateTest
                 ArrayListIterate.takeWhile(arrayList, Predicates.lessThan(1000)));
 
         Assert.assertEquals(
-                iList(),
+                Lists.immutable.empty(),
                 ArrayListIterate.takeWhile(arrayList, Predicates.lessThan(0)));
     }
 
@@ -1512,7 +1509,7 @@ public class ArrayListIterateTest
                 ArrayListIterate.dropWhile(arrayList, Predicates.lessThan(4)));
 
         Assert.assertEquals(
-                iList(),
+                Lists.immutable.empty(),
                 ArrayListIterate.dropWhile(arrayList, Predicates.lessThan(1000)));
 
         Assert.assertEquals(
@@ -1526,16 +1523,16 @@ public class ArrayListIterateTest
         ArrayList<Integer> arrayList = new ArrayList<>(Interval.oneTo(100));
 
         PartitionMutableList<Integer> partition1 = ArrayListIterate.partitionWhile(arrayList, Predicates.lessThan(4));
-        Assert.assertEquals(iList(1, 2, 3), partition1.getSelected());
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3), partition1.getSelected());
         Assert.assertEquals(Interval.fromTo(4, 100), partition1.getRejected());
 
         PartitionMutableList<Integer> partition2 = ArrayListIterate.partitionWhile(arrayList, Predicates.lessThan(0));
-        Assert.assertEquals(iList(), partition2.getSelected());
+        Assert.assertEquals(Lists.immutable.empty(), partition2.getSelected());
         Assert.assertEquals(Interval.fromTo(1, 100), partition2.getRejected());
 
         PartitionMutableList<Integer> partition3 = ArrayListIterate.partitionWhile(arrayList, Predicates.lessThan(1000));
         Assert.assertEquals(Interval.fromTo(1, 100), partition3.getSelected());
-        Assert.assertEquals(iList(), partition3.getRejected());
+        Assert.assertEquals(Lists.immutable.empty(), partition3.getRejected());
     }
 
     @Test
@@ -1544,7 +1541,7 @@ public class ArrayListIterateTest
         ArrayList<Integer> arrayList = new ArrayList<>(Interval.oneTo(101));
 
         Assert.assertEquals(
-                iList(1, 2, 3),
+                Lists.immutable.with(1, 2, 3),
                 ArrayListIterate.takeWhile(arrayList, Predicates.lessThan(4)));
 
         Assert.assertEquals(
@@ -1552,7 +1549,7 @@ public class ArrayListIterateTest
                 ArrayListIterate.takeWhile(arrayList, Predicates.lessThan(1000)));
 
         Assert.assertEquals(
-                iList(),
+                Lists.immutable.empty(),
                 ArrayListIterate.takeWhile(arrayList, Predicates.lessThan(0)));
     }
 
@@ -1566,7 +1563,7 @@ public class ArrayListIterateTest
                 ArrayListIterate.dropWhile(arrayList, Predicates.lessThan(4)));
 
         Assert.assertEquals(
-                iList(),
+                Lists.immutable.empty(),
                 ArrayListIterate.dropWhile(arrayList, Predicates.lessThan(1000)));
 
         Assert.assertEquals(
@@ -1580,26 +1577,26 @@ public class ArrayListIterateTest
         ArrayList<Integer> arrayList = new ArrayList<>(Interval.oneTo(101));
 
         PartitionMutableList<Integer> partition1 = ArrayListIterate.partitionWhile(arrayList, Predicates.lessThan(4));
-        Assert.assertEquals(iList(1, 2, 3), partition1.getSelected());
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3), partition1.getSelected());
         Assert.assertEquals(Interval.fromTo(4, 101), partition1.getRejected());
 
         PartitionMutableList<Integer> partition2 = ArrayListIterate.partitionWhile(arrayList, Predicates.lessThan(0));
-        Assert.assertEquals(iList(), partition2.getSelected());
+        Assert.assertEquals(Lists.immutable.empty(), partition2.getSelected());
         Assert.assertEquals(Interval.fromTo(1, 101), partition2.getRejected());
 
         PartitionMutableList<Integer> partition3 = ArrayListIterate.partitionWhile(arrayList, Predicates.lessThan(1000));
         Assert.assertEquals(Interval.fromTo(1, 101), partition3.getSelected());
-        Assert.assertEquals(iList(), partition3.getRejected());
+        Assert.assertEquals(Lists.immutable.empty(), partition3.getRejected());
     }
 
     private ArrayList<Integer> newArrayList(Integer... items)
     {
-        return new ArrayList<>(mList(items));
+        return new ArrayList<>(Lists.mutable.with(items));
     }
 
     private ThisIsNotAnArrayList<Integer> newNotAnArrayList(Integer... items)
     {
-        return new ThisIsNotAnArrayList<>(mList(items));
+        return new ThisIsNotAnArrayList<>(Lists.mutable.with(items));
     }
 
     @Test

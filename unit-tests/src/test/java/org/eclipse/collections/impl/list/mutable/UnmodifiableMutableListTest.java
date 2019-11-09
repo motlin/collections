@@ -32,8 +32,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-
 /**
  * JUnit test for {@link UnmodifiableMutableList}.
  */
@@ -280,8 +278,8 @@ public class UnmodifiableMutableListTest
     public void selectInstancesOf()
     {
         MutableList<Number> numbers = UnmodifiableMutableList.of(FastList.newListWith(1, 2.0, 3, 4.0, 5));
-        Assert.assertEquals(iList(1, 3, 5), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iList(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
+        Assert.assertEquals(Lists.immutable.with(1, 3, 5), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(Lists.immutable.with(1, 2.0, 3, 4.0, (Number) 5), numbers.selectInstancesOf(Number.class));
     }
 
     @Test
@@ -314,12 +312,12 @@ public class UnmodifiableMutableListTest
     public void take()
     {
         UnmodifiableMutableList<Integer> unmodifiableList = UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5));
-        Assert.assertEquals(iList(), unmodifiableList.take(0));
-        Assert.assertEquals(iList(1, 2, 3), unmodifiableList.take(3));
-        Assert.assertEquals(iList(1, 2, 3, 4), unmodifiableList.take(unmodifiableList.size() - 1));
-        Assert.assertEquals(iList(1, 2, 3, 4, 5), unmodifiableList.take(unmodifiableList.size()));
-        Assert.assertEquals(iList(1, 2, 3, 4, 5), unmodifiableList.take(10));
-        Assert.assertEquals(iList(1, 2, 3, 4, 5), unmodifiableList.take(Integer.MAX_VALUE));
+        Assert.assertEquals(Lists.immutable.empty(), unmodifiableList.take(0));
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3), unmodifiableList.take(3));
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4), unmodifiableList.take(unmodifiableList.size() - 1));
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4, 5), unmodifiableList.take(unmodifiableList.size()));
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4, 5), unmodifiableList.take(10));
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4, 5), unmodifiableList.take(Integer.MAX_VALUE));
         Assert.assertNotSame(unmodifiableList, unmodifiableList.take(Integer.MAX_VALUE));
     }
 
@@ -333,7 +331,7 @@ public class UnmodifiableMutableListTest
     public void takeWhile()
     {
         Assert.assertEquals(
-                iList(1, 2, 3),
+                Lists.immutable.with(1, 2, 3),
                 UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5)).takeWhile(Predicates.lessThan(4)));
     }
 
@@ -341,13 +339,13 @@ public class UnmodifiableMutableListTest
     public void drop()
     {
         UnmodifiableMutableList<Integer> unmodifiableList = UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5));
-        Assert.assertEquals(iList(1, 2, 3, 4, 5), unmodifiableList.drop(0));
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3, 4, 5), unmodifiableList.drop(0));
         Assert.assertNotSame(unmodifiableList, unmodifiableList.drop(0));
-        Assert.assertEquals(iList(4, 5), unmodifiableList.drop(3));
-        Assert.assertEquals(iList(5), unmodifiableList.drop(unmodifiableList.size() - 1));
-        Assert.assertEquals(iList(), unmodifiableList.drop(unmodifiableList.size()));
-        Assert.assertEquals(iList(), unmodifiableList.drop(10));
-        Assert.assertEquals(iList(), unmodifiableList.drop(Integer.MAX_VALUE));
+        Assert.assertEquals(Lists.immutable.with(4, 5), unmodifiableList.drop(3));
+        Assert.assertEquals(Lists.immutable.with(5), unmodifiableList.drop(unmodifiableList.size() - 1));
+        Assert.assertEquals(Lists.immutable.empty(), unmodifiableList.drop(unmodifiableList.size()));
+        Assert.assertEquals(Lists.immutable.empty(), unmodifiableList.drop(10));
+        Assert.assertEquals(Lists.immutable.empty(), unmodifiableList.drop(Integer.MAX_VALUE));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -360,7 +358,7 @@ public class UnmodifiableMutableListTest
     public void dropWhile()
     {
         Assert.assertEquals(
-                iList(4, 5),
+                Lists.immutable.with(4, 5),
                 UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5)).dropWhile(Predicates.lessThan(4)));
     }
 
@@ -371,8 +369,8 @@ public class UnmodifiableMutableListTest
         MutableList<Integer> selected = partition.getSelected();
         MutableList<Integer> rejected = partition.getRejected();
 
-        Assert.assertEquals(iList(1, 2, 3), selected);
-        Assert.assertEquals(iList(4, 5), rejected);
+        Assert.assertEquals(Lists.immutable.with(1, 2, 3), selected);
+        Assert.assertEquals(Lists.immutable.with(4, 5), rejected);
     }
 
     @Test

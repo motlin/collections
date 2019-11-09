@@ -20,6 +20,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
@@ -39,9 +40,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
  * JUnit test for {@link AbstractMutableSet}.
@@ -440,8 +438,8 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
             MutableSet<Integer> integers = this.<Integer>newWith().withAll(MORE_COLLISIONS);
             @SuppressWarnings("BoxingBoxedValue")
             Integer keyCopy = new Integer(item);
-            Assert.assertTrue(integers.retainAll(mList(keyCopy)));
-            Assert.assertEquals(iSet(keyCopy), integers);
+            Assert.assertTrue(integers.retainAll(Lists.mutable.with(keyCopy)));
+            Assert.assertEquals(Sets.immutable.with(keyCopy), integers);
             Assert.assertNotSame(keyCopy, Iterate.getOnly(integers));
         }
 

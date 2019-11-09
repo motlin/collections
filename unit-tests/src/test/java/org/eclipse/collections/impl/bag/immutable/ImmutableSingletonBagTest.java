@@ -42,8 +42,6 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
-
 public class ImmutableSingletonBagTest extends ImmutableBagTestCase
 {
     private static final String VAL = "1";
@@ -638,8 +636,8 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
     public void selectInstancesOf()
     {
         ImmutableBag<Number> numbers = new ImmutableSingletonBag<>(1);
-        Assert.assertEquals(iBag(1), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Double.class));
+        Assert.assertEquals(Bags.immutable.with(1), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(Bags.immutable.empty(), numbers.selectInstancesOf(Double.class));
     }
 
     @Override

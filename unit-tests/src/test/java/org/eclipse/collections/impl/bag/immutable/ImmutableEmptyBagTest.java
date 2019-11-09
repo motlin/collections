@@ -49,8 +49,6 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
-
 public class ImmutableEmptyBagTest extends ImmutableBagTestCase
 {
     public static final Predicate<String> ERROR_THROWING_PREDICATE = each -> { throw new AssertionError(); };
@@ -160,9 +158,9 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void selectInstancesOf()
     {
         ImmutableBag<Number> numbers = Bags.immutable.of();
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Double.class));
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Number.class));
+        Assert.assertEquals(Bags.immutable.empty(), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(Bags.immutable.empty(), numbers.selectInstancesOf(Double.class));
+        Assert.assertEquals(Bags.immutable.empty(), numbers.selectInstancesOf(Number.class));
     }
 
     @Override

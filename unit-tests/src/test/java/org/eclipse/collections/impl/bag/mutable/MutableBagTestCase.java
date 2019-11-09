@@ -34,7 +34,6 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionTestCase;
-import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.math.IntegerSum;
@@ -417,8 +416,8 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
 
         MutableBagIterable<Integer> integers = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         PartitionMutableCollection<Integer> result = integers.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(Iterables.iBag(2, 2, 4, 4, 4, 4), result.getSelected());
-        Assert.assertEquals(Iterables.iBag(1, 3, 3, 3), result.getRejected());
+        Assert.assertEquals(Bags.immutable.with(2, 2, 4, 4, 4, 4), result.getSelected());
+        Assert.assertEquals(Bags.immutable.with(1, 3, 3, 3), result.getRejected());
     }
 
     @Override
@@ -429,22 +428,22 @@ public abstract class MutableBagTestCase extends AbstractCollectionTestCase
 
         MutableBagIterable<Integer> integers = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         PartitionMutableCollection<Integer> result = integers.partitionWith(Predicates2.in(), integers.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(Iterables.iBag(2, 2, 4, 4, 4, 4), result.getSelected());
-        Assert.assertEquals(Iterables.iBag(1, 3, 3, 3), result.getRejected());
+        Assert.assertEquals(Bags.immutable.with(2, 2, 4, 4, 4, 4), result.getSelected());
+        Assert.assertEquals(Bags.immutable.with(1, 3, 3, 3), result.getRejected());
     }
 
     @Test
     public void selectByOccurrences()
     {
         MutableBagIterable<Integer> integers = this.newWith(1, 1, 1, 1, 2, 2, 2, 3, 3, 4);
-        Assert.assertEquals(Iterables.iBag(1, 1, 1, 1, 3, 3), integers.selectByOccurrences(IntPredicates.isEven()));
+        Assert.assertEquals(Bags.immutable.with(1, 1, 1, 1, 3, 3), integers.selectByOccurrences(IntPredicates.isEven()));
     }
 
     @Test
     public void selectDuplicates()
     {
         MutableBagIterable<Integer> integers = this.newWith(0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 5);
-        Assert.assertEquals(Iterables.iBag(1, 1, 1, 1, 2, 2, 2, 3, 3), integers.selectDuplicates());
+        Assert.assertEquals(Bags.immutable.with(1, 1, 1, 1, 2, 2, 2, 3, 3), integers.selectDuplicates());
     }
 
     @Test

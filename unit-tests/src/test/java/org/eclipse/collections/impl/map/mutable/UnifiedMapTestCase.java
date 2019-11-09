@@ -19,6 +19,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -36,9 +37,6 @@ import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iMap;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 public abstract class UnifiedMapTestCase extends MutableMapTestCase
 {
@@ -422,8 +420,8 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
             MutableMap<Integer, Integer> integers = this.mapWithCollisionsOfSize(9);
             @SuppressWarnings("BoxingBoxedValue")
             Integer keyCopy = new Integer(item);
-            Assert.assertTrue(integers.entrySet().retainAll(mList(ImmutableEntry.of(keyCopy, keyCopy))));
-            Assert.assertEquals(iMap(keyCopy, keyCopy), integers);
+            Assert.assertTrue(integers.entrySet().retainAll(Lists.mutable.with((ImmutableEntry<Integer, Integer>[]) new ImmutableEntry[]{ImmutableEntry.of(keyCopy, keyCopy)})));
+            Assert.assertEquals(Maps.immutable.with(keyCopy, keyCopy), integers);
             Assert.assertNotSame(keyCopy, Iterate.getOnly(integers.entrySet()).getKey());
         }
 

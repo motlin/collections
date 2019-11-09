@@ -61,8 +61,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-
 public class ArrayIterateTest
 {
     private static final Integer[] INTEGER_ARRAY = {5, 4, 3, 2, 1};
@@ -326,7 +324,7 @@ public class ArrayIterateTest
     {
         Boolean[] objectArray = {true, false, null};
         Assert.assertEquals(
-                iList("true", "false", "null"),
+                Lists.immutable.with("true", "false", "null"),
                 ArrayIterate.collect(objectArray, String::valueOf));
     }
 
@@ -527,7 +525,7 @@ public class ArrayIterateTest
     {
         Boolean[] objectArray = {true, false, null};
         Assert.assertEquals(
-                iList("true", "false", "null"),
+                Lists.immutable.with("true", "false", "null"),
                 ArrayIterate.collectWith(objectArray, Functions2.fromFunction(String::valueOf), null));
     }
 
@@ -632,7 +630,7 @@ public class ArrayIterateTest
     public void selectInstancesOf()
     {
         Assert.assertEquals(
-                iList(1, 3, 5),
+                Lists.immutable.with(1, 3, 5),
                 ArrayIterate.selectInstancesOf(new Number[]{1, 2.0, 3, 4.0, 5}, Integer.class));
     }
 

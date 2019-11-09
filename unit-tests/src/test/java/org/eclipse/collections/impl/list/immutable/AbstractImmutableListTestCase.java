@@ -61,8 +61,6 @@ import org.eclipse.collections.impl.utility.ListIterate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-
 public abstract class AbstractImmutableListTestCase extends AbstractImmutableCollectionTestCase
 {
     @Override
@@ -544,7 +542,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     {
         ImmutableList<Integer> immutableList = this.classUnderTest();
         Assert.assertEquals(Lists.immutable.of(), immutableList.take(0));
-        Assert.assertEquals(iList(1), immutableList.take(1));
+        Assert.assertEquals(Lists.immutable.with(1), immutableList.take(1));
         Assert.assertEquals(immutableList, immutableList.take(10));
         MutableList<Integer> mutableList = Lists.mutable.ofAll(immutableList);
         Assert.assertEquals(
@@ -565,7 +563,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     public void takeWhile()
     {
         Assert.assertEquals(
-                iList(1),
+                Lists.immutable.with(1),
                 this.classUnderTest().takeWhile(Predicates.lessThan(2)));
     }
 

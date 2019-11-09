@@ -12,11 +12,11 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction0;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
 import org.eclipse.collections.api.tuple.primitive.ObjectBooleanPair;
-import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
@@ -483,12 +483,9 @@ public abstract class AbstractMutableObjectBooleanMapTestCase extends AbstractOb
         MutableObjectBooleanMap<Integer> emptyMap = this.getEmptyMap();
         MutableObjectBooleanMap<Integer> partialMap = this.newWithKeysValues(1, true, 3, false);
         MutableObjectBooleanMap<Integer> completeMap = this.newWithKeysValues(1, true, 2, true, 3, false, 4, false);
-        Iterable<ObjectBooleanPair<Integer>> emptyIterable = Iterables.iList();
-        Iterable<ObjectBooleanPair<Integer>> partialIterable = Iterables.iList(
-                PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(3), false));
-        Iterable<ObjectBooleanPair<Integer>> completeIterable = Iterables.iList(
-                PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), true),
-                PrimitiveTuples.pair(Integer.valueOf(3), false), PrimitiveTuples.pair(Integer.valueOf(4), false));
+        Iterable<ObjectBooleanPair<Integer>> emptyIterable = Lists.immutable.empty();
+        Iterable<ObjectBooleanPair<Integer>> partialIterable = Lists.immutable.with(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(3), false));
+        Iterable<ObjectBooleanPair<Integer>> completeIterable = Lists.immutable.with(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), true), PrimitiveTuples.pair(Integer.valueOf(3), false), PrimitiveTuples.pair(Integer.valueOf(4), false));
         Assert.assertEquals(emptyMap, emptyMap.withAllKeyValues(emptyIterable));
         Assert.assertEquals(partialMap, emptyMap.withAllKeyValues(partialIterable));
         Assert.assertEquals(completeMap, emptyMap.withAllKeyValues(completeIterable));

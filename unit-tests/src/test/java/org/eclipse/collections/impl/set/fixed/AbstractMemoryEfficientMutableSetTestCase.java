@@ -47,8 +47,6 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.mList;
-
 /**
  * JUnit test for {@link AbstractMemoryEfficientMutableSet}.
  */
@@ -101,28 +99,28 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
     public void removeAll_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.removeAll(mList("1", "2"));
+        set.removeAll(Lists.mutable.with("1", "2"));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void removeAllIterable_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.removeAllIterable(mList("1", "2"));
+        set.removeAllIterable(Lists.mutable.with("1", "2"));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void retainAll_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.retainAll(mList("1", "2"));
+        set.retainAll(Lists.mutable.with("1", "2"));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void retainAllIterable_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.retainAllIterable(mList("1", "2"));
+        set.retainAllIterable(Lists.mutable.with("1", "2"));
     }
 
     @Test(expected = UnsupportedOperationException.class)

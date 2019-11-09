@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.bag.immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.ImmutableList;
@@ -29,8 +30,6 @@ import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
 
 public class ImmutableHashBagTest extends ImmutableBagTestCase
 {
@@ -69,8 +68,8 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         super.selectInstancesOf();
 
         ImmutableBag<Number> numbers = ImmutableHashBag.newBagWith(1, 2.0, 2.0, 3, 3, 3, 4.0, 4.0, 4.0, 4.0);
-        Assert.assertEquals(iBag(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
+        Assert.assertEquals(Bags.immutable.with(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(Bags.immutable.with(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
     }
 
     @Override

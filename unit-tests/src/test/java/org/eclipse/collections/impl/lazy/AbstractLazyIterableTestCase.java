@@ -70,8 +70,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-
 public abstract class AbstractLazyIterableTestCase
 {
     private final LazyIterable<Integer> lazyIterable = this.newWith(1, 2, 3, 4, 5, 6, 7);
@@ -163,16 +161,16 @@ public abstract class AbstractLazyIterableTestCase
     public void partition()
     {
         PartitionIterable<Integer> partition = this.lazyIterable.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iList(2, 4, 6), partition.getSelected());
-        Assert.assertEquals(iList(1, 3, 5, 7), partition.getRejected());
+        Assert.assertEquals(Lists.immutable.with(2, 4, 6), partition.getSelected());
+        Assert.assertEquals(Lists.immutable.with(1, 3, 5, 7), partition.getRejected());
     }
 
     @Test
     public void partitionWith()
     {
         PartitionIterable<Integer> partition = this.lazyIterable.partitionWith(Predicates2.in(), this.lazyIterable.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iList(2, 4, 6), partition.getSelected());
-        Assert.assertEquals(iList(1, 3, 5, 7), partition.getRejected());
+        Assert.assertEquals(Lists.immutable.with(2, 4, 6), partition.getSelected());
+        Assert.assertEquals(Lists.immutable.with(1, 3, 5, 7), partition.getRejected());
     }
 
     @Test

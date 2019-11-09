@@ -58,8 +58,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-
 /**
  * JUnit test for {@link UnmodifiableMutableCollection}.
  */
@@ -396,7 +394,7 @@ public class UnmodifiableMutableCollectionTest
     public void selectInstancesOf()
     {
         MutableCollection<Number> numbers = UnmodifiableMutableCollection.of(FastList.newListWith(1, 2.0, 3, 4.0, 5));
-        Assert.assertEquals(iList(1, 3, 5), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iList(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
+        Assert.assertEquals(Lists.immutable.with(1, 3, 5), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(Lists.immutable.with(1, 2.0, 3, 4.0, (Number) 5), numbers.selectInstancesOf(Number.class));
     }
 }

@@ -15,6 +15,8 @@ import java.util.Collections;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Twin;
@@ -30,9 +32,6 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
 
 /**
  * Abstract JUnit test for {@link MutableCollection}s.
@@ -176,7 +175,7 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
     public void retainAll()
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3);
-        Assert.assertTrue(objects.retainAll(mSet(1, 2)));
+        Assert.assertTrue(objects.retainAll(Sets.mutable.with(1, 2)));
         Verify.assertSize(2, objects);
         Verify.assertContainsAll(objects, 1, 2);
 
@@ -195,7 +194,7 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
     public void retainAllIterable()
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3);
-        Assert.assertTrue(objects.retainAllIterable(iList(1, 2)));
+        Assert.assertTrue(objects.retainAllIterable(Lists.immutable.with(1, 2)));
         Verify.assertSize(2, objects);
         Verify.assertContainsAll(objects, 1, 2);
 

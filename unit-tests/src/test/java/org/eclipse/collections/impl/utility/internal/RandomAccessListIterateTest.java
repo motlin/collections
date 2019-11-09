@@ -42,9 +42,6 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
-
 public class RandomAccessListIterateTest
 {
     @Test(expected = IndexOutOfBoundsException.class)
@@ -146,8 +143,8 @@ public class RandomAccessListIterateTest
     public void collect()
     {
         Assert.assertEquals(
-                iList("true", "false", "null"),
-                RandomAccessListIterate.collect(mList(true, false, null), String::valueOf));
+                Lists.immutable.with("true", "false", "null"),
+                RandomAccessListIterate.collect(Lists.mutable.with(true, false, null), String::valueOf));
     }
 
     /**
@@ -180,12 +177,12 @@ public class RandomAccessListIterateTest
     public void collectReflective()
     {
         Assert.assertEquals(
-                iList("true", "false", "null"),
-                RandomAccessListIterate.collect(mList(true, false, null), String::valueOf));
+                Lists.immutable.with("true", "false", "null"),
+                RandomAccessListIterate.collect(Lists.mutable.with(true, false, null), String::valueOf));
 
         Assert.assertEquals(
-                iList("true", "false", "null"),
-                RandomAccessListIterate.collect(mList(true, false, null), String::valueOf, new ArrayList<>()));
+                Lists.immutable.with("true", "false", "null"),
+                RandomAccessListIterate.collect(Lists.mutable.with(true, false, null), String::valueOf, new ArrayList<>()));
     }
 
     @Test
