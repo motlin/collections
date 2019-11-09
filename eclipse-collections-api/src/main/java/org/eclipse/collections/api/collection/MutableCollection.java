@@ -79,7 +79,11 @@ public interface MutableCollection<T>
      *
      * @see #add(Object)
      */
-    MutableCollection<T> with(T element);
+    default MutableCollection<T> with(T element)
+    {
+        this.add(element);
+        return this;
+    }
 
     /**
      * This method allows mutable and fixed size collections the ability to remove elements from their existing elements.
@@ -100,7 +104,11 @@ public interface MutableCollection<T>
      *
      * @see #remove(Object)
      */
-    MutableCollection<T> without(T element);
+    default MutableCollection<T> without(T element)
+    {
+        this.remove(element);
+        return this;
+    }
 
     /**
      * This method allows mutable and fixed size collections the ability to add multiple elements to their existing
@@ -119,7 +127,11 @@ public interface MutableCollection<T>
      *
      * @see #addAll(Collection)
      */
-    MutableCollection<T> withAll(Iterable<? extends T> elements);
+    default MutableCollection<T> withAll(Iterable<? extends T> elements)
+    {
+        this.addAllIterable(elements);
+        return this;
+    }
 
     /**
      * This method allows mutable and fixed size collections the ability to remove multiple elements from their existing
@@ -138,7 +150,11 @@ public interface MutableCollection<T>
      *
      * @see #removeAll(Collection)
      */
-    MutableCollection<T> withoutAll(Iterable<? extends T> elements);
+    default MutableCollection<T> withoutAll(Iterable<? extends T> elements)
+    {
+        this.removeAllIterable(elements);
+        return this;
+    }
 
     /**
      * Creates a new empty mutable version of the same collection type. For example, if this instance is a FastList,
