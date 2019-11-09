@@ -12,7 +12,7 @@ package org.eclipse.collections.test.list;
 
 import java.util.List;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.test.CollectionTestCase;
 import org.junit.Test;
 

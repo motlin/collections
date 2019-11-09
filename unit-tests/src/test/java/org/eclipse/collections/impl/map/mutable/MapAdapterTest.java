@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.map.mutable;
 
 import java.util.HashMap;
 
+import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;

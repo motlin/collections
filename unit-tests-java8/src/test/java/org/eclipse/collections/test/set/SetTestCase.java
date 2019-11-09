@@ -14,8 +14,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.test.CollectionTestCase;
 import org.junit.Assert;
@@ -26,7 +26,6 @@ import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 

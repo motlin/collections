@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.bag.immutable;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
-import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;

@@ -18,10 +18,10 @@ body(type, wrapperName, name) ::= <<
 package org.eclipse.collections.impl.factory.primitive;
 
 import org.eclipse.collections.api.factory.stack.primitive.Immutable<name>StackFactory;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.stack.primitive.Immutable<name>Stack;
 import org.eclipse.collections.api.stack.primitive.Mutable<name>Stack;
 import org.eclipse.collections.impl.stack.mutable.primitive.<name>ArrayStack;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;

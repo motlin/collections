@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.stack.immutable;
 
 import java.util.EmptyStackException;
 
+import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.stack.ImmutableStack;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;

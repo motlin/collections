@@ -15,9 +15,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.collections.api.bimap.BiMap;
+import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
 import org.eclipse.collections.test.set.UnsortedSetLikeTestTrait;
 import org.junit.Assert;
