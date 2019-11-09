@@ -39,7 +39,9 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -235,13 +237,15 @@ final class ImmutableArrayList<T>
     @Override
     public <V> ImmutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return InternalArrayIterate.collect(this.items, this.items.length, function, FastList.<V>newList(this.items.length)).toImmutable();
+        MutableList<V> target = Lists.mutable.withInitialCapacity(this.items.length);
+        return InternalArrayIterate.collect(this.items, this.items.length, function, target).toImmutable();
     }
 
     @Override
     public <P, V> ImmutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return InternalArrayIterate.collectWith(this.items, this.items.length, function, parameter, FastList.<V>newList(this.items.length)).toImmutable();
+        MutableList<V> target = Lists.mutable.withInitialCapacity(this.items.length);
+        return InternalArrayIterate.collectWith(this.items, this.items.length, function, parameter, target).toImmutable();
     }
 
     /**
@@ -250,7 +254,8 @@ final class ImmutableArrayList<T>
     @Override
     public <V> ImmutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        return this.collectWithIndex(function, FastList.<V>newList(this.items.length)).toImmutable();
+        MutableList<V> target = Lists.mutable.withInitialCapacity(this.items.length);
+        return this.collectWithIndex(function, target).toImmutable();
     }
 
     /**
@@ -267,7 +272,8 @@ final class ImmutableArrayList<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return InternalArrayIterate.collectIf(this.items, this.items.length, predicate, function, FastList.<V>newList(this.items.length)).toImmutable();
+        MutableList<V> target = Lists.mutable.withInitialCapacity(this.items.length);
+        return InternalArrayIterate.collectIf(this.items, this.items.length, predicate, function, target).toImmutable();
     }
 
     @Override
@@ -282,7 +288,7 @@ final class ImmutableArrayList<T>
     @Override
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, FastList.newList(this.items.length)).toImmutable();
+        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, Lists.mutable.withInitialCapacity(this.items.length)).toImmutable();
     }
 
     @Override

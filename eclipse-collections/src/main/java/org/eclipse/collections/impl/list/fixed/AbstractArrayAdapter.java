@@ -30,12 +30,12 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.list.mutable.AbstractMutableList;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -207,7 +207,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, FastList.newList(this.size()));
+        return this.collect(function, Lists.mutable.withInitialCapacity(this.size()));
     }
 
     @Override
@@ -226,7 +226,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, FastList.newList(this.items.length));
+        return InternalArrayIterate.flatCollect(this.items, this.items.length, function, Lists.mutable.withInitialCapacity(this.items.length));
     }
 
     @Override
@@ -473,7 +473,7 @@ public abstract class AbstractArrayAdapter<T>
     @Override
     public <P, A> MutableList<A> collectWith(Function2<? super T, ? super P, ? extends A> function, P parameter)
     {
-        return this.collectWith(function, parameter, FastList.newList(this.items.length));
+        return this.collectWith(function, parameter, Lists.mutable.withInitialCapacity(this.items.length));
     }
 
     @Override

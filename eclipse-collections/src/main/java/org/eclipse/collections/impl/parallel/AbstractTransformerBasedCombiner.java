@@ -14,6 +14,7 @@ import java.util.Collection;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.set.SetIterable;
@@ -69,7 +70,7 @@ public abstract class AbstractTransformerBasedCombiner<V, T, BT extends Procedur
         {
             return DefaultSpeciesNewStrategy.INSTANCE.speciesNew((Collection<?>) sourceCollection, initialCapacity);
         }
-        return FastList.newList(initialCapacity);
+        return Lists.mutable.withInitialCapacity(initialCapacity);
     }
 
     public Collection<V> getResult()
