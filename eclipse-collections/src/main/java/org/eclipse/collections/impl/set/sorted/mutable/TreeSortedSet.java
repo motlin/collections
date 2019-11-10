@@ -58,6 +58,7 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
+import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.set.sorted.PartitionMutableSortedSet;
 import org.eclipse.collections.api.set.SetIterable;
@@ -125,17 +126,17 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
         this.addAllIterable(iterable);
     }
 
-    public static <T> TreeSortedSet<T> newSet()
+    public static <T> MutableSortedSet<T> newSet()
     {
         return new TreeSortedSet<>();
     }
 
-    public static <T> TreeSortedSet<T> newSet(Comparator<? super T> comparator)
+    public static <T> MutableSortedSet<T> newSet(Comparator<? super T> comparator)
     {
         return new TreeSortedSet<>(comparator);
     }
 
-    public static <T> TreeSortedSet<T> newSet(Iterable<? extends T> source)
+    public static <T> MutableSortedSet<T> newSet(Iterable<? extends T> source)
     {
         if (source instanceof SortedSet<?>)
         {
@@ -146,17 +147,17 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
         return sortedSet;
     }
 
-    public static <T> TreeSortedSet<T> newSet(Comparator<? super T> comparator, Iterable<? extends T> iterable)
+    public static <T> MutableSortedSet<T> newSet(Comparator<? super T> comparator, Iterable<? extends T> iterable)
     {
         return new TreeSortedSet<>(comparator, iterable);
     }
 
-    public static <T> TreeSortedSet<T> newSetWith(T... elements)
+    public static <T> MutableSortedSet<T> newSetWith(T... elements)
     {
         return new TreeSortedSet<T>().with(elements);
     }
 
-    public static <T> TreeSortedSet<T> newSetWith(Comparator<? super T> comparator, T... elements)
+    public static <T> MutableSortedSet<T> newSetWith(Comparator<? super T> comparator, T... elements)
     {
         return new TreeSortedSet<T>(comparator).with(elements);
     }
@@ -231,7 +232,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     }
 
     @Override
-    public TreeSortedSet<T> clone()
+    public MutableSortedSet<T> clone()
     {
         try
         {
@@ -263,20 +264,20 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     }
 
     @Override
-    public TreeSortedSet<T> with(T element)
+    public MutableSortedSet<T> with(T element)
     {
         this.treeSet.add(element);
         return this;
     }
 
-    public TreeSortedSet<T> with(T element1, T element2)
+    public MutableSortedSet<T> with(T element1, T element2)
     {
         this.treeSet.add(element1);
         this.treeSet.add(element2);
         return this;
     }
 
-    public TreeSortedSet<T> with(T element1, T element2, T element3)
+    public MutableSortedSet<T> with(T element1, T element2, T element3)
     {
         this.treeSet.add(element1);
         this.treeSet.add(element2);
@@ -284,41 +285,41 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
         return this;
     }
 
-    public TreeSortedSet<T> with(T... elements)
+    public MutableSortedSet<T> with(T... elements)
     {
         ArrayIterate.forEach(elements, CollectionAddProcedure.on(this.treeSet));
         return this;
     }
 
     @Override
-    public TreeSortedSet<T> without(T element)
+    public MutableSortedSet<T> without(T element)
     {
         this.remove(element);
         return this;
     }
 
     @Override
-    public TreeSortedSet<T> withAll(Iterable<? extends T> elements)
+    public MutableSortedSet<T> withAll(Iterable<? extends T> elements)
     {
         this.addAllIterable(elements);
         return this;
     }
 
     @Override
-    public TreeSortedSet<T> withoutAll(Iterable<? extends T> elements)
+    public MutableSortedSet<T> withoutAll(Iterable<? extends T> elements)
     {
         this.removeAllIterable(elements);
         return this;
     }
 
     @Override
-    public TreeSortedSet<T> newEmpty()
+    public MutableSortedSet<T> newEmpty()
     {
         return TreeSortedSet.newSet(this.treeSet.comparator());
     }
 
     @Override
-    public TreeSortedSet<T> tap(Procedure<? super T> procedure)
+    public MutableSortedSet<T> tap(Procedure<? super T> procedure)
     {
         this.forEach(procedure);
         return this;
@@ -331,7 +332,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     }
 
     @Override
-    public TreeSortedSet<T> select(Predicate<? super T> predicate)
+    public MutableSortedSet<T> select(Predicate<? super T> predicate)
     {
         TreeSortedSet<T> result = this.newEmpty();
         this.forEach(new SelectProcedure<>(predicate, result));
@@ -339,7 +340,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     }
 
     @Override
-    public TreeSortedSet<T> reject(Predicate<? super T> predicate)
+    public MutableSortedSet<T> reject(Predicate<? super T> predicate)
     {
         TreeSortedSet<T> result = this.newEmpty();
         this.forEach(new RejectProcedure<>(predicate, result));
@@ -370,7 +371,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     }
 
     @Override
-    public <S> TreeSortedSet<S> selectInstancesOf(Class<S> clazz)
+    public <S> MutableSortedSet<S> selectInstancesOf(Class<S> clazz)
     {
         TreeSortedSet<S> result = (TreeSortedSet<S>) this.newEmpty();
         this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
@@ -458,25 +459,25 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     }
 
     @Override
-    public <V> TreeSortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
+    public <V> MutableSortedSetMultimap<V, T> groupBy(Function<? super T, ? extends V> function)
     {
         return Iterate.groupBy(this.treeSet, function, TreeSortedSetMultimap.newMultimap(this.comparator()));
     }
 
     @Override
-    public <V> TreeSortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
+    public <V> MutableSortedSetMultimap<V, T> groupByEach(Function<? super T, ? extends Iterable<V>> function)
     {
         return Iterate.groupByEach(this.treeSet, function, TreeSortedSetMultimap.newMultimap(this.comparator()));
     }
 
     @Override
-    public <P> TreeSortedSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    public <P> MutableSortedSet<T> selectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return Iterate.selectWith(this.treeSet, predicate, parameter, this.newEmpty());
     }
 
     @Override
-    public <P> TreeSortedSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
+    public <P> MutableSortedSet<T> rejectWith(Predicate2<? super T, ? super P> predicate, P parameter)
     {
         return Iterate.rejectWith(this.treeSet, predicate, parameter, this.newEmpty());
     }
@@ -500,7 +501,7 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     }
 
     @Override
-    public TreeSortedSet<Pair<T, Integer>> zipWithIndex()
+    public MutableSortedSet<Pair<T, Integer>> zipWithIndex()
     {
         Comparator<? super T> comparator = this.comparator();
         if (comparator == null)
@@ -660,19 +661,19 @@ public class TreeSortedSet<T> extends AbstractMutableCollection<T>
     }
 
     @Override
-    public TreeSortedSet<T> union(SetIterable<? extends T> set)
+    public MutableSortedSet<T> union(SetIterable<? extends T> set)
     {
         return SetIterables.unionInto(this, set, this.newEmpty());
     }
 
     @Override
-    public TreeSortedSet<T> intersect(SetIterable<? extends T> set)
+    public MutableSortedSet<T> intersect(SetIterable<? extends T> set)
     {
         return SetIterables.intersectInto(this, set, this.newEmpty());
     }
 
     @Override
-    public TreeSortedSet<T> difference(SetIterable<? extends T> subtrahendSet)
+    public MutableSortedSet<T> difference(SetIterable<? extends T> subtrahendSet)
     {
         return SetIterables.differenceInto(this, subtrahendSet, this.newEmpty());
     }
