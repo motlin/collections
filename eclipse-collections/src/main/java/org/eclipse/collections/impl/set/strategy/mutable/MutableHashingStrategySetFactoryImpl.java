@@ -76,6 +76,6 @@ public enum MutableHashingStrategySetFactoryImpl implements MutableHashingStrate
     @Override
     public <T> MutableSet<T> withInitialCapacity(HashingStrategy<? super T> hashingStrategy, int capacity)
     {
-        return UnifiedSetWithHashingStrategy.newSet(hashingStrategy, capacity);
+        return new UnifiedSetWithHashingStrategy<>(hashingStrategy, capacity);
     }
 }

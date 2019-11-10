@@ -119,14 +119,14 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
 {
     private static final long serialVersionUID = 1L;
-    private final FastList<T> delegate;
+    private final MutableList<T> delegate;
 
     private ImmutableArrayStack(T[] newElements)
     {
         this.delegate = FastList.newListWith(newElements);
     }
 
-    private ImmutableArrayStack(FastList<T> newElements)
+    private ImmutableArrayStack(MutableList<T> newElements)
     {
         this.delegate = newElements;
     }
@@ -159,7 +159,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     @Override
     public ImmutableStack<T> push(T item)
     {
-        FastList<T> newDelegate = FastList.newList(this.delegate);
+        MutableList<T> newDelegate = FastList.newList(this.delegate);
         newDelegate.add(item);
         return new ImmutableArrayStack<>(newDelegate);
     }
@@ -168,7 +168,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     public ImmutableStack<T> pop()
     {
         this.checkEmptyStack();
-        FastList<T> newDelegate = FastList.newList(this.delegate);
+        MutableList<T> newDelegate = FastList.newList(this.delegate);
         newDelegate.remove(this.delegate.size() - 1);
         return new ImmutableArrayStack<>(newDelegate);
     }
@@ -183,7 +183,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         }
         this.checkEmptyStack();
         this.checkSizeLessThanCount(count);
-        FastList<T> newDelegate = this.delegate.clone();
+        MutableList<T> newDelegate = this.delegate.clone();
         while (count > 0)
         {
             newDelegate.remove(this.delegate.size() - 1);
@@ -1201,7 +1201,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
         {
             int size = in.readInt();
-            FastList<T> deserializedDelegate = new FastList<>(size);
+            MutableList<T> deserializedDelegate = new FastList<>(size);
 
             for (int i = 0; i < size; i++)
             {

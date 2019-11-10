@@ -84,7 +84,7 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
     {
         super.addAll();
 
-        UnifiedSet<Integer> expected = UnifiedSet.newSetWith(1, 2, 3);
+        MutableSet<Integer> expected = UnifiedSet.newSetWith(1, 2, 3);
         MutableSet<Integer> collection = this.newWith();
 
         Assert.assertTrue(collection.addAll(FastList.newListWith(1, 2, 3)));
@@ -100,7 +100,7 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
     {
         super.addAllIterable();
 
-        UnifiedSet<Integer> expected = UnifiedSet.newSetWith(1, 2, 3);
+        MutableSet<Integer> expected = UnifiedSet.newSetWith(1, 2, 3);
         MutableSet<Integer> collection = this.newWith();
 
         Assert.assertTrue(collection.addAllIterable(FastList.newListWith(1, 2, 3)));
@@ -458,7 +458,7 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
     {
         super.equalsAndHashCode();
 
-        UnifiedSet<Integer> expected = UnifiedSet.newSetWith(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4);
+        MutableSet<Integer> expected = UnifiedSet.newSetWith(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4);
         Assert.assertNotEquals(expected, this.newWith(COLLISION_2, COLLISION_3, COLLISION_4, COLLISION_5));
         Assert.assertNotEquals(expected, this.newWith(COLLISION_1, COLLISION_3, COLLISION_4, COLLISION_5));
         Assert.assertNotEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_4, COLLISION_5));
@@ -566,7 +566,7 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
         }
 
         // test iterating on a bucket with only one element
-        UnifiedSet<Integer> set = UnifiedSet.newSetWith(COLLISION_1, COLLISION_2);
+        MutableSet<Integer> set = UnifiedSet.newSetWith(COLLISION_1, COLLISION_2);
         set.remove(COLLISION_2);
         Counter counter = new Counter();
         set.forEachWithIndex((each, index) -> counter.increment());

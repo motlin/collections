@@ -76,8 +76,8 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
     AbstractMutableBiMap(Map<K, V> map)
     {
-        this.delegate = UnifiedMap.newMap();
-        this.inverse = new Inverse<>(UnifiedMap.newMap(), this);
+        this.delegate = new UnifiedMap<>();
+        this.inverse = new Inverse<>(new UnifiedMap<>(), this);
         this.putAll(map);
     }
 
@@ -85,13 +85,13 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     {
         this.checkNull(delegate, inverse);
         this.checkSame(delegate, inverse);
-        this.delegate = UnifiedMap.newMap(delegate);
+        this.delegate = new UnifiedMap<>(delegate);
         this.inverse = new Inverse<>(inverse, this);
     }
 
     private AbstractMutableBiMap(Map<K, V> delegate, AbstractMutableBiMap<V, K> valuesToKeys)
     {
-        this.delegate = UnifiedMap.newMap(delegate);
+        this.delegate = new UnifiedMap<>(delegate);
         this.inverse = valuesToKeys;
     }
 
@@ -600,7 +600,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
         if (that instanceof Collection || that instanceof RichIterable)
         {
             int thatSize = Iterate.sizeOf(that);
-            UnifiedSet<Pair<V, S>> target = UnifiedSet.newSet(Math.min(this.size(), thatSize));
+            MutableSet<Pair<V, S>> target = new UnifiedSet<>(Math.min(this.size(), thatSize));
             return this.delegate.zip(that, target);
         }
         return this.delegate.zip(that, UnifiedSet.newSet());
@@ -695,9 +695,9 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
 
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException
     {
-        this.delegate = UnifiedMap.newMap();
+        this.delegate = new UnifiedMap<>();
         this.delegate.readExternal(in);
-        UnifiedMap<V, K> inverseDelegate = UnifiedMap.newMap();
+        UnifiedMap<V, K> inverseDelegate = new UnifiedMap<>();
         this.delegate.forEachKeyValue((key, value) -> inverseDelegate.put(value, key));
         this.inverse = new Inverse<>(inverseDelegate, this);
     }
