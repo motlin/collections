@@ -470,7 +470,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
         {
             collection.add(eachValue);
         }
-        Assert.assertEquals(FastList.newListWith(), collection);
+        Assert.assertEquals(Lists.mutable.empty(), collection);
     }
 
     @Test
