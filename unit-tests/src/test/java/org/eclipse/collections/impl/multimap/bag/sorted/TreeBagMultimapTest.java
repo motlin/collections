@@ -100,7 +100,7 @@ public class TreeBagMultimapTest extends AbstractMutableSortedBagMultimapTestCas
     @Override
     protected <V> TreeBag<V> createCollection(V... args)
     {
-        return TreeBag.newBagWith(args);
+        return (TreeBag<V>) TreeBag.newBagWith(args);
     }
 
     @Test
