@@ -93,7 +93,7 @@ public abstract class AbstractImmutableUnifiedSetTestCase
         Assert.assertNotEquals(set, withoutAll);
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3), withoutAll);
         ImmutableSet<Integer> largeList = this.newSet(Interval.oneTo(200).toArray());
-        ImmutableSet<Integer> largeWithoutAll = largeList.newWithoutAll(FastList.newList(Interval.oneTo(100)));
+        ImmutableSet<Integer> largeWithoutAll = largeList.newWithoutAll(Lists.mutable.withAll(Interval.oneTo(100)));
         Assert.assertEquals(UnifiedSet.newSet(Interval.fromTo(101, 200)), largeWithoutAll);
         ImmutableSet<Integer> largeWithoutAll2 = largeWithoutAll.newWithoutAll(Interval.fromTo(101, 150));
         Assert.assertEquals(UnifiedSet.newSet(Interval.fromTo(151, 200)), largeWithoutAll2);

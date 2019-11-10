@@ -84,10 +84,10 @@ public class ImmutableArrayListTest extends AbstractImmutableListTestCase
         Assert.assertEquals(FastList.newListWith(1, 2, 3), withoutAll);
         Assert.assertEquals(FastList.newListWith(1, 2, 3), list.newWithoutAll(HashBag.newBagWith(4, 4, 5)));
         ImmutableList<Integer> largeList = this.newList(Interval.oneTo(20).toArray());
-        ImmutableList<Integer> largeWithoutAll = largeList.newWithoutAll(FastList.newList(Interval.oneTo(10)));
-        Assert.assertEquals(FastList.newList(Interval.fromTo(11, 20)), largeWithoutAll);
+        ImmutableList<Integer> largeWithoutAll = largeList.newWithoutAll(Lists.mutable.withAll(Interval.oneTo(10)));
+        Assert.assertEquals(Lists.mutable.withAll(Interval.fromTo(11, 20)), largeWithoutAll);
         ImmutableList<Integer> largeWithoutAll2 = largeWithoutAll.newWithoutAll(Interval.fromTo(11, 15));
-        Assert.assertEquals(FastList.newList(Interval.fromTo(16, 20)), largeWithoutAll2);
+        Assert.assertEquals(Lists.mutable.withAll(Interval.fromTo(16, 20)), largeWithoutAll2);
         ImmutableList<Integer> largeWithoutAll3 = largeWithoutAll2.newWithoutAll(UnifiedSet.newSet(Interval.fromTo(16, 19)));
         Assert.assertEquals(FastList.newListWith(20), largeWithoutAll3);
     }

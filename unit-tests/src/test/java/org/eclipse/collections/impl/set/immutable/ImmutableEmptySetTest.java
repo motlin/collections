@@ -12,11 +12,11 @@ package org.eclipse.collections.impl.set.immutable;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.list.Interval;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
@@ -47,7 +47,7 @@ public class ImmutableEmptySetTest extends AbstractImmutableEmptySetTestCase
         MutableSet<Integer> mutable = UnifiedSet.newSet(immutable);
         Verify.assertEqualsAndHashCode(mutable, immutable);
         Verify.assertPostSerializedIdentity(immutable);
-        Assert.assertNotEquals(FastList.newList(mutable), immutable);
+        Assert.assertNotEquals(Lists.mutable.withAll(mutable), immutable);
     }
 
     @Test

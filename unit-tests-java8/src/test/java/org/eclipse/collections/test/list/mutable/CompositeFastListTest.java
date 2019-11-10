@@ -11,6 +11,7 @@
 package org.eclipse.collections.test.list.mutable;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -28,7 +29,7 @@ public class CompositeFastListTest implements MutableListTestCase
         CompositeFastList<T> result = new CompositeFastList<>();
         for (RichIterable<T> chunk : chunks)
         {
-            result.addAll(FastList.newList(chunk));
+            result.addAll(Lists.mutable.withAll(chunk));
         }
         return result;
     }

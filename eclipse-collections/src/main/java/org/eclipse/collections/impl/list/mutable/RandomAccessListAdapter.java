@@ -134,7 +134,7 @@ public final class RandomAccessListAdapter<T>
     @Override
     public MutableList<T> clone()
     {
-        return FastList.newList(this.delegate);
+        return Lists.mutable.withAll(this.delegate);
     }
 
     /**

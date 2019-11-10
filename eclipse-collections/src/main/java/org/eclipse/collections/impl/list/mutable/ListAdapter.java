@@ -108,7 +108,7 @@ public final class ListAdapter<T>
     @Override
     public MutableList<T> clone()
     {
-        return FastList.newList(this.delegate);
+        return Lists.mutable.withAll(this.delegate);
     }
 
     /**

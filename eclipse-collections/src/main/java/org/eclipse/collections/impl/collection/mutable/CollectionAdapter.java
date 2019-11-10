@@ -117,7 +117,7 @@ public final class CollectionAdapter<T>
         {
             return ListAdapter.adapt((List<E>) iterable);
         }
-        return FastList.newList(iterable);
+        return Lists.mutable.withAll(iterable);
     }
 
     public static <E> MutableCollection<E> adapt(Collection<E> collection)

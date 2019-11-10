@@ -637,7 +637,7 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
         MutableMapIterable<Integer, Integer> map = this.newMap();
         Iterate.forEach(Interval.oneTo(1000), each -> map.updateValue(each % 10, () -> 0, integer -> integer + 1));
         Assert.assertEquals(Interval.zeroTo(9).toSet(), map.keySet());
-        Assert.assertEquals(FastList.newList(Collections.nCopies(10, 100)), FastList.newList(map.values()));
+        Assert.assertEquals(Lists.mutable.withAll(Collections.nCopies(10, 100)), Lists.mutable.withAll(map.values()));
     }
 
     @Test
@@ -649,8 +649,8 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
         Assert.assertEquals(Interval.zeroTo(999).toSet(), map.keySet());
         Assert.assertEquals(
                 HashBag.newBag(map.values()).toStringOfItemToCount(),
-                FastList.newList(Collections.nCopies(1000, 2)),
-                FastList.newList(map.values()));
+                Lists.mutable.withAll(Collections.nCopies(1000, 2)),
+                Lists.mutable.withAll(map.values()));
     }
 
     @Test
@@ -662,7 +662,7 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
             return integer + 1;
         }, "test"));
         Assert.assertEquals(Interval.zeroTo(9).toSet(), map.keySet());
-        Assert.assertEquals(FastList.newList(Collections.nCopies(10, 100)), FastList.newList(map.values()));
+        Assert.assertEquals(Lists.mutable.withAll(Collections.nCopies(10, 100)), Lists.mutable.withAll(map.values()));
     }
 
     @Test
@@ -677,7 +677,7 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
         Assert.assertEquals(Interval.zeroTo(999).toSet(), map.keySet());
         Assert.assertEquals(
                 HashBag.newBag(map.values()).toStringOfItemToCount(),
-                FastList.newList(Collections.nCopies(1000, 2)),
-                FastList.newList(map.values()));
+                Lists.mutable.withAll(Collections.nCopies(1000, 2)),
+                Lists.mutable.withAll(map.values()));
     }
 }

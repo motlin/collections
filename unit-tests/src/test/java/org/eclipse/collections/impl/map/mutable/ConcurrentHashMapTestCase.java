@@ -14,11 +14,11 @@ import java.util.Collections;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ConcurrentMutableMap;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.list.Interval;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.parallel.ParallelIterate;
 import org.junit.After;
 import org.junit.Assert;
@@ -53,7 +53,7 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
         ConcurrentMutableMap<Integer, Integer> map = this.newMap();
         ParallelIterate.forEach(Interval.oneTo(100), each -> map.updateValue(each % 10, () -> 0, integer -> integer + 1), 1, this.executor);
         Assert.assertEquals(Interval.zeroTo(9).toSet(), map.keySet());
-        Assert.assertEquals(FastList.newList(Collections.nCopies(10, 10)), FastList.newList(map.values()));
+        Assert.assertEquals(Lists.mutable.withAll(Collections.nCopies(10, 10)), Lists.mutable.withAll(map.values()));
     }
 
     @Override
@@ -68,8 +68,8 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
         Assert.assertEquals(Interval.zeroTo(49).toSet(), map.keySet());
         Assert.assertEquals(
                 HashBag.newBag(map.values()).toStringOfItemToCount(),
-                FastList.newList(Collections.nCopies(50, 2)),
-                FastList.newList(map.values()));
+                Lists.mutable.withAll(Collections.nCopies(50, 2)),
+                Lists.mutable.withAll(map.values()));
     }
 
     @Override
@@ -84,7 +84,7 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
             return integer + 1;
         }, "test"), 1, this.executor);
         Assert.assertEquals(Interval.zeroTo(9).toSet(), map.keySet());
-        Assert.assertEquals(FastList.newList(Collections.nCopies(10, 10)), FastList.newList(map.values()));
+        Assert.assertEquals(Lists.mutable.withAll(Collections.nCopies(10, 10)), Lists.mutable.withAll(map.values()));
     }
 
     @Override
@@ -102,7 +102,7 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
         Assert.assertEquals(Interval.zeroTo(99).toSet(), map.keySet());
         Assert.assertEquals(
                 HashBag.newBag(map.values()).toStringOfItemToCount(),
-                FastList.newList(Collections.nCopies(100, 2)),
-                FastList.newList(map.values()));
+                Lists.mutable.withAll(Collections.nCopies(100, 2)),
+                Lists.mutable.withAll(map.values()));
     }
 }
