@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.stack.mutable;
 
 import java.util.EmptyStackException;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
@@ -74,7 +75,7 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
         Assert.assertEquals(this.newStackFromTopToBottom(1, 2, 3), stack5);
 
         MutableStack<Integer> stack6 = this.newStackFromTopToBottom(1, 2, 3, 4);
-        Assert.assertEquals(FastList.newListWith(1, 2), stack6.pop(2, FastList.newList()));
+        Assert.assertEquals(FastList.newListWith(1, 2), stack6.pop(2, Lists.mutable.empty()));
 
         MutableStack<Integer> stack7 = this.newStackFromTopToBottom(1, 2, 3, 4);
         Assert.assertEquals(ArrayStack.newStackFromTopToBottom(2, 1), stack7.pop(2, ArrayStack.newStack()));
@@ -82,12 +83,12 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
         MutableStack<Integer> stack8 = this.newStackFromTopToBottom(1, 2, 3, 4);
         Verify.assertIterableEmpty(stack8.pop(0));
         Assert.assertEquals(ArrayStack.newStackFromTopToBottom(1, 2, 3, 4), stack8);
-        Assert.assertEquals(FastList.newList(), stack8.peek(0));
+        Assert.assertEquals(Lists.mutable.empty(), stack8.peek(0));
 
         MutableStack<Integer> stack9 = ArrayStack.newStack();
-        Assert.assertEquals(FastList.newList(), stack9.pop(0));
-        Assert.assertEquals(FastList.newList(), stack9.peek(0));
-        Assert.assertEquals(FastList.newList(), stack9.pop(0, FastList.newList()));
+        Assert.assertEquals(Lists.mutable.empty(), stack9.pop(0));
+        Assert.assertEquals(Lists.mutable.empty(), stack9.peek(0));
+        Assert.assertEquals(Lists.mutable.empty(), stack9.pop(0, Lists.mutable.empty()));
         Assert.assertEquals(ArrayStack.newStack(), stack9.pop(0, ArrayStack.newStack()));
     }
 
@@ -163,19 +164,19 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
     @Test(expected = EmptyStackException.class)
     public void pop_target_empty_throws()
     {
-        this.newStackWith().pop(5, FastList.newList());
+        this.newStackWith().pop(5, Lists.mutable.empty());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void pop_target_count_throws()
     {
-        this.newStackWith(1, 2, 3).pop(5, FastList.newList());
+        this.newStackWith(1, 2, 3).pop(5, Lists.mutable.empty());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void pop_target_neg_throws()
     {
-        this.newStackWith(1, 2, 3).pop(-1, FastList.newList());
+        this.newStackWith(1, 2, 3).pop(-1, Lists.mutable.empty());
     }
 
     @Test(expected = EmptyStackException.class)

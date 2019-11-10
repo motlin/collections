@@ -198,7 +198,7 @@ public class MapIterateTest
     public void selectWithDifferentTargetCollection()
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
-        Collection<Integer> results = MapIterate.select(map, Integer.class::isInstance, FastList.newList());
+        Collection<Integer> results = MapIterate.select(map, Integer.class::isInstance, Lists.mutable.empty());
         Assert.assertEquals(Bags.mutable.of(1, 2, 3, 4, 5), HashBag.newBag(results));
     }
 
@@ -213,7 +213,7 @@ public class MapIterateTest
     public void rejectWithDifferentTargetCollection()
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
-        MutableList<Integer> list = MapIterate.reject(map, Integer.class::isInstance, FastList.newList());
+        MutableList<Integer> list = MapIterate.reject(map, Integer.class::isInstance, Lists.mutable.empty());
         Verify.assertEmpty(list);
     }
 

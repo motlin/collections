@@ -51,6 +51,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
@@ -87,7 +88,7 @@ public final class IterableIterate
      */
     public static <T> MutableList<T> select(Iterable<T> iterable, Predicate<? super T> predicate)
     {
-        return IterableIterate.select(iterable, predicate, FastList.newList());
+        return IterableIterate.select(iterable, predicate, Lists.mutable.empty());
     }
 
     /**
@@ -160,7 +161,7 @@ public final class IterableIterate
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        return IterableIterate.collectIf(iterable, predicate, function, FastList.newList());
+        return IterableIterate.collectIf(iterable, predicate, function, Lists.mutable.empty());
     }
 
     public static boolean isEmpty(Iterable<?> iterable)
@@ -258,7 +259,7 @@ public final class IterableIterate
      */
     public static <T> MutableList<T> reject(Iterable<T> iterable, Predicate<? super T> predicate)
     {
-        return IterableIterate.reject(iterable, predicate, FastList.newList());
+        return IterableIterate.reject(iterable, predicate, Lists.mutable.empty());
     }
 
     /**
@@ -291,7 +292,7 @@ public final class IterableIterate
             Iterable<T> iterable,
             Function<? super T, ? extends V> function)
     {
-        return IterableIterate.collect(iterable, function, FastList.newList());
+        return IterableIterate.collect(iterable, function, Lists.mutable.empty());
     }
 
     /**
@@ -463,7 +464,7 @@ public final class IterableIterate
             Iterable<T> iterable,
             Function<? super T, ? extends Iterable<V>> function)
     {
-        return IterableIterate.flatCollect(iterable, function, FastList.newList());
+        return IterableIterate.flatCollect(iterable, function, Lists.mutable.empty());
     }
 
     /**
@@ -805,7 +806,7 @@ public final class IterableIterate
             Function2<? super T, ? super P, ? extends V> function,
             P parameter)
     {
-        return IterableIterate.collectWith(iterable, function, parameter, FastList.newList());
+        return IterableIterate.collectWith(iterable, function, parameter, Lists.mutable.empty());
     }
 
     /**
@@ -829,7 +830,7 @@ public final class IterableIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return IterableIterate.take(iterable, count, FastList.newList());
+        return IterableIterate.take(iterable, count, Lists.mutable.empty());
     }
 
     /**
@@ -860,7 +861,7 @@ public final class IterableIterate
         {
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
-        return IterableIterate.drop(list, count, FastList.newList());
+        return IterableIterate.drop(list, count, Lists.mutable.empty());
     }
 
     /**
@@ -1004,7 +1005,7 @@ public final class IterableIterate
             Iterable<X> xs,
             Iterable<Y> ys)
     {
-        return IterableIterate.zip(xs, ys, FastList.newList());
+        return IterableIterate.zip(xs, ys, Lists.mutable.empty());
     }
 
     /**
@@ -1023,7 +1024,7 @@ public final class IterableIterate
      */
     public static <T> MutableList<Pair<T, Integer>> zipWithIndex(Iterable<T> iterable)
     {
-        return IterableIterate.zipWithIndex(iterable, FastList.newList());
+        return IterableIterate.zipWithIndex(iterable, Lists.mutable.empty());
     }
 
     /**

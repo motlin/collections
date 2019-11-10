@@ -23,7 +23,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -354,7 +353,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     @Test
     public void collect_target()
     {
-        MutableList<Integer> targetCollection = FastList.newList();
+        MutableList<Integer> targetCollection = Lists.mutable.empty();
         MutableList<Integer> actual = this.classUnderTest().collect(object -> {
             throw new AssertionError();
         }, targetCollection);
@@ -366,7 +365,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     @Test
     public void collectWith_target()
     {
-        MutableList<Integer> targetCollection = FastList.newList();
+        MutableList<Integer> targetCollection = Lists.mutable.empty();
         MutableList<Integer> actual = this.classUnderTest().collectWith((argument1, argument2) -> {
             throw new AssertionError();
         }, 1, targetCollection);

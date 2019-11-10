@@ -151,14 +151,14 @@ public abstract class AbstractImmutableSetTestCase extends AbstractImmutableColl
     {
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Assert.assertEquals(integers, integers.select(Predicates.lessThan(integers.size() + 1), UnifiedSet.newSet()));
-        Verify.assertEmpty(integers.select(Predicates.greaterThan(integers.size()), FastList.newList()));
+        Verify.assertEmpty(integers.select(Predicates.greaterThan(integers.size()), Lists.mutable.empty()));
     }
 
     @Test
     public void reject_target()
     {
         ImmutableCollection<Integer> integers = this.classUnderTest();
-        Verify.assertEmpty(integers.reject(Predicates.lessThan(integers.size() + 1), FastList.newList()));
+        Verify.assertEmpty(integers.reject(Predicates.lessThan(integers.size() + 1), Lists.mutable.empty()));
         Assert.assertEquals(integers, integers.reject(Predicates.greaterThan(integers.size()), UnifiedSet.newSet()));
     }
 

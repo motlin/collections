@@ -291,7 +291,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
         Verify.assertContainsAll(SingletonListTest.newWith(1).collectIf(
                 Integer.class::isInstance,
                 String::valueOf,
-                FastList.newList()), "1");
+                Lists.mutable.empty()), "1");
     }
 
     @Test
@@ -302,7 +302,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
                 SingletonListTest.newWith(1).collectWith(AddFunction.INTEGER, 1));
         Assert.assertEquals(
                 FastList.newListWith(2),
-                SingletonListTest.newWith(1).collectWith(AddFunction.INTEGER, 1, FastList.newList()));
+                SingletonListTest.newWith(1).collectWith(AddFunction.INTEGER, 1, Lists.mutable.empty()));
     }
 
     @Test

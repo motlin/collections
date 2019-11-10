@@ -38,6 +38,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -58,7 +59,6 @@ import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure2;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMapUnsafe;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -474,8 +474,8 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     @Override
     public MutableList<T> toList()
     {
-        Function<Batch<T>, FastList<T>> map = batch -> {
-            FastList<T> list = FastList.newList();
+        Function<Batch<T>, MutableList<T>> map = batch -> {
+            MutableList<T> list = Lists.mutable.empty();
             batch.forEach(CollectionAddProcedure.on(list));
             return list;
         };

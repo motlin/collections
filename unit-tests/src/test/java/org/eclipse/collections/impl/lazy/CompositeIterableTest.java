@@ -126,7 +126,7 @@ public class CompositeIterableTest extends AbstractLazyIterableTestCase
     {
         CompositeIterable<Integer> composite = CompositeIterable.with(
                 FastList.newListWith(1, 2),
-                FastList.newList(),
+                Lists.mutable.empty(),
                 FastList.newListWith(3, 4, 5, 6));
         Assert.assertEquals(Integer.valueOf(3), composite.detect(Integer.valueOf(3)::equals));
         Assert.assertNull(composite.detect(Integer.valueOf(8)::equals));
@@ -137,7 +137,7 @@ public class CompositeIterableTest extends AbstractLazyIterableTestCase
     {
         CompositeIterable<Integer> composite = CompositeIterable.with(
                 FastList.newListWith(1, 2),
-                FastList.newList(),
+                Lists.mutable.empty(),
                 FastList.newListWith(3, 4, 5, 6));
         Assert.assertEquals(Integer.valueOf(3), composite.detectWith(Object::equals, Integer.valueOf(3)));
         Assert.assertNull(composite.detectWith(Object::equals, Integer.valueOf(8)));
@@ -148,7 +148,7 @@ public class CompositeIterableTest extends AbstractLazyIterableTestCase
     {
         CompositeIterable<Integer> composite = CompositeIterable.with(
                 FastList.newListWith(1, 2),
-                FastList.newList(),
+                Lists.mutable.empty(),
                 FastList.newListWith(3, 4, 5, 6));
         Assert.assertEquals(Optional.of(Integer.valueOf(3)), composite.detectOptional(Integer.valueOf(3)::equals));
         Assert.assertEquals(Optional.empty(), composite.detectOptional(Integer.valueOf(8)::equals));
@@ -159,7 +159,7 @@ public class CompositeIterableTest extends AbstractLazyIterableTestCase
     {
         CompositeIterable<Integer> composite = CompositeIterable.with(
                 FastList.newListWith(1, 2),
-                FastList.newList(),
+                Lists.mutable.empty(),
                 FastList.newListWith(3, 4, 5, 6));
         Assert.assertEquals(Optional.of(Integer.valueOf(3)), composite.detectWithOptional(Object::equals, Integer.valueOf(3)));
         Assert.assertEquals(Optional.empty(), composite.detectWithOptional(Object::equals, Integer.valueOf(8)));

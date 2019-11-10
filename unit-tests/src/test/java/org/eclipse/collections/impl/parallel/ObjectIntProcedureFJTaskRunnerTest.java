@@ -14,9 +14,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.ObjectIntProcedures;
 import org.eclipse.collections.impl.block.procedure.DoNothingProcedure;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class ObjectIntProcedureFJTaskRunnerTest
                 () -> this.undertest.executeAndCombine(
                         new DoNothingExecutor(),
                         new PassThroughObjectIntProcedureFactory(),
-                        FastList.newList()));
+                        Lists.mutable.empty()));
     }
 
     private static class DoNothingWithFalseCombineOneCombiner implements Combiner<ObjectIntProcedure<Integer>>

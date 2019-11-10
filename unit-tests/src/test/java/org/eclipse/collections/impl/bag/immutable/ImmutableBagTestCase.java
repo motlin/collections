@@ -382,15 +382,15 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
 
         Assert.assertEquals(
                 strings,
-                strings.selectWith(Predicates2.greaterThan(), "0", FastList.newList()).toBag());
+                strings.selectWith(Predicates2.greaterThan(), "0", Lists.mutable.empty()).toBag());
     }
 
     @Test
     public void selectToTarget()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals(strings, strings.select(Predicates.greaterThan("0"), FastList.newList()).toBag());
-        Verify.assertEmpty(strings.select(Predicates.lessThan("0"), FastList.newList()));
+        Assert.assertEquals(strings, strings.select(Predicates.greaterThan("0"), Lists.mutable.empty()).toBag());
+        Verify.assertEmpty(strings.select(Predicates.lessThan("0"), Lists.mutable.empty()));
     }
 
     @Override
@@ -422,15 +422,15 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         ImmutableBag<String> strings = this.newBag();
         Assert.assertEquals(strings, strings.reject(Predicates.lessThan("0")));
 
-        Verify.assertEmpty(strings.rejectWith(Predicates2.greaterThan(), "0", FastList.newList()));
+        Verify.assertEmpty(strings.rejectWith(Predicates2.greaterThan(), "0", Lists.mutable.empty()));
     }
 
     @Test
     public void rejectToTarget()
     {
         ImmutableBag<String> strings = this.newBag();
-        Assert.assertEquals(strings, strings.reject(Predicates.lessThan("0"), FastList.newList()).toBag());
-        Verify.assertEmpty(strings.reject(Predicates.greaterThan("0"), FastList.newList()));
+        Assert.assertEquals(strings, strings.reject(Predicates.lessThan("0"), Lists.mutable.empty()).toBag());
+        Verify.assertEmpty(strings.reject(Predicates.greaterThan("0"), Lists.mutable.empty()));
     }
 
     @Override
@@ -748,7 +748,7 @@ public abstract class ImmutableBagTestCase extends AbstractRichIterableTestCase
         HashBag<String> actual = strings.collect(Functions.getStringPassThru(), target);
         Assert.assertEquals(strings, actual);
         Assert.assertSame(target, actual);
-        Assert.assertEquals(strings, strings.collect(Functions.getStringPassThru(), FastList.newList()).toBag());
+        Assert.assertEquals(strings, strings.collect(Functions.getStringPassThru(), Lists.mutable.empty()).toBag());
     }
 
     @Override

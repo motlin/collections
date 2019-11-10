@@ -37,9 +37,9 @@ public class ListsTest
     public void immutables()
     {
         ImmutableListFactory listFactory = Lists.immutable;
-        Assert.assertEquals(FastList.newList(), listFactory.of());
-        Assert.assertEquals(FastList.newList(), listFactory.with());
-        Assert.assertEquals(FastList.newList(), listFactory.empty());
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), listFactory.of());
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), listFactory.with());
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), listFactory.empty());
         Verify.assertInstanceOf(ImmutableList.class, listFactory.of());
         Verify.assertInstanceOf(ImmutableList.class, listFactory.with());
         Verify.assertInstanceOf(ImmutableList.class, listFactory.empty());
@@ -73,9 +73,9 @@ public class ListsTest
     public void mutables()
     {
         MutableListFactory listFactory = Lists.mutable;
-        Assert.assertEquals(FastList.newList(), listFactory.of());
-        Assert.assertEquals(FastList.newList(), listFactory.with());
-        Assert.assertEquals(FastList.newList(), listFactory.empty());
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), listFactory.of());
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), listFactory.with());
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), listFactory.empty());
         Verify.assertInstanceOf(MutableList.class, listFactory.of());
         Verify.assertInstanceOf(MutableList.class, listFactory.with());
         Verify.assertInstanceOf(MutableList.class, listFactory.empty());
@@ -122,9 +122,9 @@ public class ListsTest
     public void fixedSize()
     {
         FixedSizeListFactory listFactory = Lists.fixedSize;
-        Assert.assertEquals(FastList.newList(), listFactory.of());
-        Assert.assertEquals(FastList.newList(), listFactory.with());
-        Assert.assertEquals(FastList.newList(), listFactory.empty());
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), listFactory.of());
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), listFactory.with());
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), listFactory.empty());
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.of());
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.with());
         Verify.assertInstanceOf(FixedSizeList.class, listFactory.empty());
@@ -433,7 +433,7 @@ public class ListsTest
     @Test
     public void newListWithWithList()
     {
-        Assert.assertEquals(FastList.newList(), Lists.immutable.ofAll(FastList.newList()));
+        Assert.assertEquals(org.eclipse.collections.api.factory.Lists.mutable.empty(), Lists.immutable.ofAll(org.eclipse.collections.api.factory.Lists.mutable.empty()));
         for (int i = 0; i < 12; i++)
         {
             List<Integer> list = Interval.fromTo(0, i);

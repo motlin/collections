@@ -228,7 +228,7 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
         Assert.assertTrue(listWith.containsAll(list));
         Verify.assertContainsAll(listWith, "11", "12");
         Verify.assertInstanceOf(FixedSizeList.class, listWith);
-        Assert.assertSame(listWith, listWith.withAll(FastList.newList()));
+        Assert.assertSame(listWith, listWith.withAll(Lists.mutable.empty()));
     }
 
     @Test
@@ -239,7 +239,7 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
         Assert.assertTrue(listWithout.containsAll(this.classUnderTest()));
         Verify.assertContainsNone(listWithout, "11", "12");
         Verify.assertInstanceOf(FixedSizeList.class, listWithout);
-        Assert.assertSame(listWithout, listWithout.withoutAll(FastList.newList()));
+        Assert.assertSame(listWithout, listWithout.withoutAll(Lists.mutable.empty()));
     }
 
     @Test

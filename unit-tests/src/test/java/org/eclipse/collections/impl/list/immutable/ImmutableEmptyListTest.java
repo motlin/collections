@@ -335,7 +335,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         Assert.assertEquals(immutableList, pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
         Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo));
 
-        Assert.assertEquals(immutableList.zip(nulls), immutableList.zip(nulls, FastList.newList()));
+        Assert.assertEquals(immutableList.zip(nulls), immutableList.zip(nulls, Lists.mutable.empty()));
     }
 
     @Override
@@ -346,9 +346,9 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         ImmutableList<Pair<Integer, Integer>> pairs = immutableList.zipWithIndex();
 
         Assert.assertEquals(immutableList, pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne));
-        Assert.assertEquals(FastList.<Integer>newList(), pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
+        Assert.assertEquals(Lists.mutable.<Integer>empty(), pairs.collect((Function<Pair<?, Integer>, Integer>) Pair::getTwo));
 
-        Assert.assertEquals(immutableList.zipWithIndex(), immutableList.zipWithIndex(FastList.newList()));
+        Assert.assertEquals(immutableList.zipWithIndex(), immutableList.zipWithIndex(Lists.mutable.empty()));
     }
 
     @Test
@@ -458,7 +458,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void collect_target()
     {
-        MutableList<Integer> targetCollection = FastList.newList();
+        MutableList<Integer> targetCollection = Lists.mutable.empty();
         MutableList<Integer> actual = this.classUnderTest().collect(object -> {
             throw new AssertionError();
         }, targetCollection);
@@ -470,7 +470,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void collectWith_target()
     {
-        MutableList<Integer> targetCollection = FastList.newList();
+        MutableList<Integer> targetCollection = Lists.mutable.empty();
         MutableList<Integer> actual = this.classUnderTest().collectWith((argument1, argument2) -> {
             throw new AssertionError();
         }, 1, targetCollection);

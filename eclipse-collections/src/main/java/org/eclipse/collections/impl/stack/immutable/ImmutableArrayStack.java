@@ -56,6 +56,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -205,7 +206,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         this.checkNegativeCount(count);
         if (this.checkZeroCount(count))
         {
-            return FastList.newList();
+            return Lists.mutable.empty();
         }
         this.checkEmptyStack();
         this.checkSizeLessThanCount(count);

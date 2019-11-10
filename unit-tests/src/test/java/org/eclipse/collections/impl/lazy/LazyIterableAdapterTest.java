@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.lazy;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -44,7 +45,7 @@ public class LazyIterableAdapterTest extends AbstractLazyIterableTestCase
     @Test
     public void into()
     {
-        int sum = new LazyIterableAdapter<>(Interval.oneTo(5)).into(FastList.newList()).injectInto(0, AddFunction.INTEGER_TO_INT);
+        int sum = new LazyIterableAdapter<>(Interval.oneTo(5)).into(Lists.mutable.empty()).injectInto(0, AddFunction.INTEGER_TO_INT);
         Assert.assertEquals(15, sum);
     }
 

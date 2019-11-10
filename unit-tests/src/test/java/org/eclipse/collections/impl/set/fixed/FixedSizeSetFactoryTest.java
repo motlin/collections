@@ -218,7 +218,7 @@ public class FixedSizeSetFactoryTest
     @Test
     public void ofAllSizeZero()
     {
-        MutableSet<Integer> set = Sets.fixedSize.ofAll(FastList.newList());
+        MutableSet<Integer> set = Sets.fixedSize.ofAll(Lists.mutable.empty());
         Assert.assertEquals(UnifiedSet.<Integer>newSetWith(), set);
         Verify.assertInstanceOf(FixedSizeSet.class, set);
     }

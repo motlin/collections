@@ -12,10 +12,10 @@ package org.eclipse.collections.impl.list.fixed;
 
 import java.util.ListIterator;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -50,7 +50,7 @@ public abstract class UnmodifiableMemoryEfficientListTestCase<T> extends Unmodif
     @Test
     public void addAllAtIndex()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.getCollection().addAll(0, FastList.<T>newList().with((T) null)));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.getCollection().addAll(0, Lists.mutable.<T>empty().with((T) null)));
     }
 
     @Test

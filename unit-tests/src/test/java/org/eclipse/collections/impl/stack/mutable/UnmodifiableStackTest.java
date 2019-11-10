@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.stack.mutable;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -82,7 +83,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
 
         Verify.assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).pop(3));
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).pop(3, FastList.newList()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).pop(3, Lists.mutable.empty()));
 
         Verify.assertThrows(UnsupportedOperationException.class, () -> this.newStackFromTopToBottom(1, 2, 3).pop(3, ArrayStack.newStack()));
     }
@@ -103,7 +104,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
     public void testSelect()
     {
         Assert.assertEquals(ArrayStack.newStackFromTopToBottom(2, 3), this.unmodifiableStack.select(Predicates.greaterThan(1)));
-        Verify.assertSize(3, this.unmodifiableStackString.select(ignored -> true, FastList.newList()));
+        Verify.assertSize(3, this.unmodifiableStackString.select(ignored -> true, Lists.mutable.empty()));
     }
 
     @Test
@@ -114,7 +115,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
                 this.unmodifiableStackString.selectWith(
                         Object::equals,
                         "2",
-                        FastList.newList()));
+                        Lists.mutable.empty()));
     }
 
     @Test
@@ -123,7 +124,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
         Assert.assertEquals(ArrayStack.newStackFromTopToBottom("2", "3"), this.unmodifiableStackString.reject(StringPredicates.contains("1")));
         Assert.assertEquals(
                 FastList.newListWith("2", "3"),
-                this.unmodifiableStackString.reject(StringPredicates.contains("1"), FastList.newList()));
+                this.unmodifiableStackString.reject(StringPredicates.contains("1"), Lists.mutable.empty()));
     }
 
     @Test
@@ -134,7 +135,7 @@ public class UnmodifiableStackTest extends StackIterableTestCase
                 this.unmodifiableStackString.rejectWith(
                         Object::equals,
                         3,
-                        FastList.newList()));
+                        Lists.mutable.empty()));
     }
 
     @Test

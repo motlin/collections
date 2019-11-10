@@ -366,7 +366,7 @@ public class ArrayAdapterTest extends AbstractListTestCase
         Verify.assertEqualsAndHashCode(array1, new ArrayList<>(array1));
         Verify.assertEqualsAndHashCode(array1, new LinkedList<>(array1));
         Verify.assertEqualsAndHashCode(array1, ArrayListAdapter.<Integer>newList().with(1, 2, 3, 4));
-        Verify.assertEqualsAndHashCode(array1, FastList.<Integer>newList().with(1, 2, 3, 4));
+        Verify.assertEqualsAndHashCode(array1, Lists.mutable.<Integer>empty().with(1, 2, 3, 4));
         Assert.assertNotEquals(array1, new LinkedList<>(array4));
     }
 
@@ -486,7 +486,7 @@ public class ArrayAdapterTest extends AbstractListTestCase
                 ArrayAdapter.newArrayWith(1, 2, 3).collectWith(addBlock, 1));
         Assert.assertEquals(
                 FastList.newListWith(2, 3, 4),
-                ArrayAdapter.newArrayWith(1, 2, 3).collectWith(addBlock, 1, FastList.newList()));
+                ArrayAdapter.newArrayWith(1, 2, 3).collectWith(addBlock, 1, Lists.mutable.empty()));
     }
 
     @Override
@@ -591,21 +591,21 @@ public class ArrayAdapterTest extends AbstractListTestCase
     @Test(expected = UnsupportedOperationException.class)
     public void addAllAtIndex()
     {
-        this.newArray().addAll(0, FastList.newList());
+        this.newArray().addAll(0, Lists.mutable.empty());
     }
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addAll()
     {
-        this.newArray().addAll(FastList.newList());
+        this.newArray().addAll(Lists.mutable.empty());
     }
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void addAllIterable()
     {
-        this.newArray().addAllIterable(FastList.newList());
+        this.newArray().addAllIterable(Lists.mutable.empty());
     }
 
     @Override
@@ -619,28 +619,28 @@ public class ArrayAdapterTest extends AbstractListTestCase
     @Test(expected = UnsupportedOperationException.class)
     public void removeAll()
     {
-        this.newArray().removeAll(FastList.newList());
+        this.newArray().removeAll(Lists.mutable.empty());
     }
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void removeAllIterable()
     {
-        this.newArray().removeAllIterable(FastList.newList());
+        this.newArray().removeAllIterable(Lists.mutable.empty());
     }
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void retainAll()
     {
-        this.newArray().retainAll(FastList.newList());
+        this.newArray().retainAll(Lists.mutable.empty());
     }
 
     @Override
     @Test(expected = UnsupportedOperationException.class)
     public void retainAllIterable()
     {
-        this.newArray().retainAllIterable(FastList.newList());
+        this.newArray().retainAllIterable(Lists.mutable.empty());
     }
 
     @Override
@@ -655,7 +655,7 @@ public class ArrayAdapterTest extends AbstractListTestCase
         this.validateForEachOnRange(list, 9, 9, FastList.newListWith(9));
         this.validateForEachOnRange(list, 0, 9, FastList.newListWith(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.validateForEachOnRange(list, 10, 10, FastList.newList()));
+        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.validateForEachOnRange(list, 10, 10, Lists.mutable.empty()));
     }
 
     @Override
@@ -669,7 +669,7 @@ public class ArrayAdapterTest extends AbstractListTestCase
         this.validateForEachWithIndexOnRange(list, 4, 6, FastList.newListWith(4, 5, 6));
         this.validateForEachWithIndexOnRange(list, 9, 9, FastList.newListWith(9));
         this.validateForEachWithIndexOnRange(list, 0, 9, FastList.newListWith(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
-        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.validateForEachWithIndexOnRange(list, 10, 10, FastList.newList()));
+        Verify.assertThrows(IndexOutOfBoundsException.class, () -> this.validateForEachWithIndexOnRange(list, 10, 10, Lists.mutable.empty()));
     }
 
     @Override
@@ -700,7 +700,7 @@ public class ArrayAdapterTest extends AbstractListTestCase
         MutableCollection<Integer> collWith = coll.withAll(FastList.newListWith(4, 5));
         Assert.assertNotSame(coll, collWith);
         Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5), collWith);
-        Assert.assertSame(collWith, collWith.withAll(FastList.newList()));
+        Assert.assertSame(collWith, collWith.withAll(Lists.mutable.empty()));
     }
 
     @Override
@@ -723,6 +723,6 @@ public class ArrayAdapterTest extends AbstractListTestCase
         Assert.assertNotSame(coll, collWithout);
         Assert.assertEquals(FastList.newListWith(1, 3, 5), collWithout);
         Assert.assertSame(collWithout, collWithout.withoutAll(FastList.newListWith(8, 9)));
-        Assert.assertSame(collWithout, collWithout.withoutAll(FastList.newList()));
+        Assert.assertSame(collWithout, collWithout.withoutAll(Lists.mutable.empty()));
     }
 }

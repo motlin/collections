@@ -33,7 +33,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Functions2;
 import org.eclipse.collections.impl.list.Interval;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -338,7 +337,7 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
     @Test(expected = UnsupportedOperationException.class)
     public void withAll()
     {
-        this.getCollection().withAll(FastList.newList());
+        this.getCollection().withAll(Lists.mutable.empty());
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -350,7 +349,7 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
     @Test(expected = UnsupportedOperationException.class)
     public void withoutAll()
     {
-        this.getCollection().withoutAll(FastList.newList());
+        this.getCollection().withoutAll(Lists.mutable.empty());
     }
 
     @Test

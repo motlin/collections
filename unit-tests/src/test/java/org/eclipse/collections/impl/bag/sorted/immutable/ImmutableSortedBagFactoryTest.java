@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.bag.sorted.immutable;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.factory.SortedBags;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -56,7 +57,7 @@ public class ImmutableSortedBagFactoryTest
     public void withElements()
     {
         Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.mutable.with(1, 1, 2)), SortedBags.immutable.with(1, 1, 2));
-        Verify.assertThrows(IllegalArgumentException.class, () -> new ImmutableSortedBagImpl<>(SortedBags.mutable.with(Comparators.reverseNaturalOrder(), FastList.newList().toArray())));
+        Verify.assertThrows(IllegalArgumentException.class, () -> new ImmutableSortedBagImpl<>(SortedBags.mutable.with(Comparators.reverseNaturalOrder(), Lists.mutable.empty().toArray())));
         Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.mutable.with(Comparators.reverseNaturalOrder(), 1, 1, 2)), SortedBags.immutable.with(Comparators.reverseNaturalOrder(), 1, 1, 2));
     }
 
