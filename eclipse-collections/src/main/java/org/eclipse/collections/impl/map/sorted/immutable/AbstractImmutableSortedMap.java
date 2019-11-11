@@ -35,6 +35,7 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
 import org.eclipse.collections.api.list.primitive.ImmutableByteList;
 import org.eclipse.collections.api.list.primitive.ImmutableCharList;
@@ -283,7 +284,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public <S> ImmutableList<S> selectInstancesOf(Class<S> clazz)
     {
-        FastList<S> result = FastList.newList(this.size());
+        MutableList<S> result = FastList.newList(this.size());
         this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result.toImmutable();
     }

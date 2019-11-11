@@ -690,7 +690,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         integers.addAll(0, FixedSizeSet.empty());
         Verify.assertSize(1, integers);
         Verify.assertStartsWith(integers, 5);
-        FastList<String> zeroSizedList = FastList.newList(0);
+        MutableList<String> zeroSizedList = FastList.newList(0);
         zeroSizedList.addAll(0, this.newWith("1", "2"));
     }
 
@@ -705,7 +705,7 @@ public class MultiReaderFastListTest extends AbstractListTestCase
         Verify.assertStartsWith(integers, 1, 2, 3, 4, 5, 6);
         integers.add(0, 0);
         Verify.assertStartsWith(integers, 0, 1, 2, 3, 4, 5, 6);
-        FastList<String> zeroSizedList = FastList.newList(0);
+        MutableList<String> zeroSizedList = FastList.newList(0);
         zeroSizedList.add(0, "1");
         Verify.assertStartsWith(zeroSizedList, "1");
         zeroSizedList.add(1, "3");

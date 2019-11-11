@@ -74,7 +74,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     {
         super.addAll();
 
-        TreeSortedSet<Integer> expected = TreeSortedSet.newSet(MutableList.of(1, 2, 3));
+        MutableSortedSet<Integer> expected = TreeSortedSet.newSet(MutableList.of(1, 2, 3));
         MutableSortedSet<Integer> collection = this.newWith();
 
         Assert.assertTrue(collection.addAll(MutableList.of(3, 2, 1)));
@@ -90,7 +90,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     {
         super.addAllIterable();
 
-        TreeSortedSet<Integer> expected = TreeSortedSet.newSet(MutableList.of(1, 2, 3));
+        MutableSortedSet<Integer> expected = TreeSortedSet.newSet(MutableList.of(1, 2, 3));
         MutableSortedSet<Integer> collection = this.newWith();
 
         Assert.assertTrue(collection.addAllIterable(MutableList.of(1, 2, 3)));
@@ -606,7 +606,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
         MutableSortedSet<SortedSetIterable<Integer>> intPowerSet = this.newWith(1, 2, 3).powerSet();
         MutableSortedSet<SortedSetIterable<Integer>> revPowerSet = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5, 6).powerSet();
 
-        MutableList<TreeSortedSet<Integer>> expectedSortedSet =
+        MutableList<MutableSortedSet<Integer>> expectedSortedSet =
                 MutableList.of(
                         TreeSortedSet.newSet(),
                         TreeSortedSet.newSetWith(1),

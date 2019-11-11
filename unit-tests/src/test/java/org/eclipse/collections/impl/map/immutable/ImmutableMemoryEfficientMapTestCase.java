@@ -441,7 +441,7 @@ public abstract class ImmutableMemoryEfficientMapTestCase extends ImmutableMapTe
     {
         ImmutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
         MutableSet<String> collect = map.collect(Functions.getToString()).toSet();
-        UnifiedSet<String> collectToTarget = map.collect(String::valueOf, UnifiedSet.newSet());
+        MutableSet<String> collectToTarget = map.collect(String::valueOf, UnifiedSet.newSet());
 
         switch (map.size())
         {
@@ -473,7 +473,7 @@ public abstract class ImmutableMemoryEfficientMapTestCase extends ImmutableMapTe
         ImmutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
 
         MutableSet<String> collect = map.collectIf(Integer.class::isInstance, String::valueOf).toSet();
-        UnifiedSet<String> collectToTarget = map.collectIf(Integer.class::isInstance, String::valueOf, UnifiedSet.newSet());
+        MutableSet<String> collectToTarget = map.collectIf(Integer.class::isInstance, String::valueOf, UnifiedSet.newSet());
 
         switch (map.size())
         {
@@ -944,7 +944,7 @@ public abstract class ImmutableMemoryEfficientMapTestCase extends ImmutableMapTe
         ImmutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4);
 
         MutableSet<Integer> rejected = map.reject(IntegerPredicates.isEven()).toSet();
-        UnifiedSet<Integer> rejectedIntoTarget = map.reject(IntegerPredicates.isEven(), UnifiedSet.newSet());
+        MutableSet<Integer> rejectedIntoTarget = map.reject(IntegerPredicates.isEven(), UnifiedSet.newSet());
 
         ImmutableSet<Integer> expected = this.expectReject(map.size());
         Assert.assertEquals(expected, rejected);
