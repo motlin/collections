@@ -713,9 +713,7 @@ public class TreeBag<T>
 
     public MutableSortedBag<T> with(T element1, T element2)
     {
-        this.add(element1);
-        this.add(element2);
-        return this;
+        return this.with(element1).with(element2);
     }
 
     @Override
@@ -729,10 +727,7 @@ public class TreeBag<T>
 
     public MutableSortedBag<T> with(T element1, T element2, T element3)
     {
-        this.add(element1);
-        this.add(element2);
-        this.add(element3);
-        return this;
+        return this.with(element1).with(element2).with(element3);
     }
 
     @Override
