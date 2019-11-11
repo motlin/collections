@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.set.MultiReaderSet;
 import org.eclipse.collections.impl.set.mutable.MultiReaderUnifiedSet;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
@@ -71,7 +72,7 @@ public class MultiReaderUnifiedSetTest implements MutableSetTestCase, MultiReade
     public void RichIterable_iterator_iterationOrder()
     {
         MutableCollection<Integer> iterationOrder = this.newMutableForFilter();
-        MultiReaderUnifiedSet<Integer> instanceUnderTest = this.newWith(4, 3, 2, 1);
+        MultiReaderSet<Integer> instanceUnderTest = this.newWith(4, 3, 2, 1);
         instanceUnderTest.withReadLockAndDelegate(delegate -> {
             Iterator<Integer> iterator = delegate.iterator();
             while (iterator.hasNext())
@@ -85,7 +86,7 @@ public class MultiReaderUnifiedSetTest implements MutableSetTestCase, MultiReade
     @Test
     public void MultiReaderUnifiedSet_next()
     {
-        MultiReaderUnifiedSet<Integer> iterable = this.newWith(3, 2, 1);
+        MultiReaderSet<Integer> iterable = this.newWith(3, 2, 1);
 
         MutableCollection<Integer> mutableCollection = this.newMutableForFilter();
 
@@ -105,16 +106,16 @@ public class MultiReaderUnifiedSetTest implements MutableSetTestCase, MultiReade
     @Test
     public void MultiReaderUnifiedSet_hasNext()
     {
-        MultiReaderUnifiedSet<Integer> iterable = this.newWith(3, 2, 1);
+        MultiReaderSet<Integer> iterable = this.newWith(3, 2, 1);
         iterable.withReadLockAndDelegate(delegate -> assertTrue(delegate.iterator().hasNext()));
-        MultiReaderUnifiedSet<?> emptyIterable = this.newWith();
+        MultiReaderSet<?> emptyIterable = this.newWith();
         emptyIterable.withReadLockAndDelegate(delegate -> assertFalse(delegate.iterator().hasNext()));
     }
 
     @Test
     public void MultiReaderUnifiedSet_next_throws_at_end()
     {
-        MultiReaderUnifiedSet<Integer> iterable = this.newWith(3, 2, 1);
+        MultiReaderSet<Integer> iterable = this.newWith(3, 2, 1);
         iterable.withReadLockAndDelegate(delegate -> {
             Iterator<Integer> iterator = delegate.iterator();
             assertTrue(iterator.hasNext());
@@ -131,7 +132,7 @@ public class MultiReaderUnifiedSetTest implements MutableSetTestCase, MultiReade
     @Test
     public void MultiReaderUnifiedSet_next_throws_on_empty()
     {
-        MultiReaderUnifiedSet<Object> iterable = this.newWith();
+        MultiReaderSet<Object> iterable = this.newWith();
         assertThrows(
                 NoSuchElementException.class,
                 () -> iterable.withReadLockAndDelegate(delegate -> delegate.iterator().next()));

@@ -1770,7 +1770,7 @@ public final class ConcurrentHashMap<K, V>
                 return false;
             }
             Map.Entry<K, V> e = (Map.Entry<K, V>) o;
-            Entry<K, V> candidate = ConcurrentHashMap.this.getEntry(e.getKey());
+            Map.Entry<K, V> candidate = ConcurrentHashMap.this.getEntry(e.getKey());
             return candidate != null && candidate.equals(e);
         }
 

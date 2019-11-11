@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.eclipse.collections.api.block.SerializableComparator;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.block.function.primitive.ByteFunction;
@@ -80,7 +79,7 @@ public class ComparatorsTest
     @Test
     public void safeNullsLow()
     {
-        SerializableComparator<Integer> comparator = Comparators.safeNullsLow(Comparators.byFunction(Functions.getIntegerPassThru()));
+        Comparator<Integer> comparator = Comparators.safeNullsLow(Comparators.byFunction(Functions.getIntegerPassThru()));
         Assert.assertEquals(-1, comparator.compare(null, 1));
         Assert.assertEquals(1, comparator.compare(1, null));
         Assert.assertEquals(0, comparator.compare(null, null));
@@ -90,7 +89,7 @@ public class ComparatorsTest
     @Test
     public void byBooleanFunction()
     {
-        SerializableComparator<Integer> comparator = Comparators.byBooleanFunction((BooleanFunction<Integer>) anObject -> anObject.intValue() % 2 == 0);
+        Comparator<Integer> comparator = Comparators.byBooleanFunction((BooleanFunction<Integer>) anObject -> anObject.intValue() % 2 == 0);
         Verify.assertPositive(comparator.compare(2, 1));
         Verify.assertZero(comparator.compare(1, 1));
         Verify.assertZero(comparator.compare(2, 2));
@@ -139,7 +138,7 @@ public class ComparatorsTest
         this.assertScalarFunctionParameter(Comparators.byShortFunction((ShortFunction<Integer>) Integer::shortValue));
     }
 
-    private void assertScalarFunctionParameter(SerializableComparator<Integer> comparator)
+    private void assertScalarFunctionParameter(Comparator<Integer> comparator)
     {
         Verify.assertPositive(comparator.compare(2, 1));
         Verify.assertPositive(comparator.compare(-1, -2));
@@ -153,7 +152,7 @@ public class ComparatorsTest
     @Test
     public void safeNullsHigh()
     {
-        SerializableComparator<Integer> comparator = Comparators.safeNullsHigh(Comparators.byFunction(Functions.getIntegerPassThru()));
+        Comparator<Integer> comparator = Comparators.safeNullsHigh(Comparators.byFunction(Functions.getIntegerPassThru()));
         Assert.assertEquals(1, comparator.compare(null, 1));
         Assert.assertEquals(-1, comparator.compare(1, null));
         Assert.assertEquals(0, comparator.compare(null, null));

@@ -20,7 +20,7 @@ public class HashBiMapInverseTest extends AbstractMutableBiMapTestCase
     @Override
     public MutableBiMap<Integer, Character> classUnderTest()
     {
-        HashBiMap<Character, Integer> biMap = HashBiMap.newMap();
+        MutableBiMap<Character, Integer> biMap = HashBiMap.newMap();
         biMap.put(null, 1);
         biMap.put('b', null);
         biMap.put('c', 3);

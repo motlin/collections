@@ -87,7 +87,7 @@ public class CodePointAdapter
         {
             return new CodePointAdapter(iterable.toString());
         }
-        StringBuilder builder = iterable.injectInto(new StringBuilder(), StringBuilder::appendCodePoint);
+        CharSequence builder = iterable.injectInto(new StringBuilder(), StringBuilder::appendCodePoint);
         return new CodePointAdapter(builder.toString());
     }
 
@@ -170,7 +170,7 @@ public class CodePointAdapter
     public CodePointAdapter distinct()
     {
         StringBuilder builder = new StringBuilder();
-        IntHashSet seenSoFar = new IntHashSet();
+        MutableIntSet seenSoFar = new IntHashSet();
 
         int length = this.adapted.length();
         for (int i = 0; i < length; )
@@ -493,7 +493,7 @@ public class CodePointAdapter
     @Override
     public MutableIntList toList()
     {
-        IntArrayList list = new IntArrayList(this.adapted.length());
+        MutableIntList list = new IntArrayList(this.adapted.length());
         for (int i = 0; i < this.adapted.length(); )
         {
             int codePoint = this.adapted.codePointAt(i);
@@ -506,7 +506,7 @@ public class CodePointAdapter
     @Override
     public MutableIntSet toSet()
     {
-        IntHashSet set = new IntHashSet(this.adapted.length());
+        MutableIntSet set = new IntHashSet(this.adapted.length());
         for (int i = 0; i < this.adapted.length(); )
         {
             int codePoint = this.adapted.codePointAt(i);
@@ -519,7 +519,7 @@ public class CodePointAdapter
     @Override
     public MutableIntBag toBag()
     {
-        IntHashBag bag = new IntHashBag(this.adapted.length());
+        MutableIntBag bag = new IntHashBag(this.adapted.length());
         for (int i = 0; i < this.adapted.length(); )
         {
             int codePoint = this.adapted.codePointAt(i);

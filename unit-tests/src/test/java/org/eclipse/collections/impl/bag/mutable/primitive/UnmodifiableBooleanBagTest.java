@@ -161,21 +161,21 @@ public class UnmodifiableBooleanBagTest extends AbstractMutableBooleanBagTestCas
     @Test
     public void containsAllArray()
     {
-        UnmodifiableBooleanBag collection = this.classUnderTest();
+        MutableBooleanBag collection = this.classUnderTest();
         Assert.assertTrue(collection.containsAll(true));
         Assert.assertTrue(collection.containsAll(true, false, true));
         Assert.assertTrue(collection.containsAll(true, false));
         Assert.assertTrue(collection.containsAll(true, true));
         Assert.assertTrue(collection.containsAll(false, false));
-        UnmodifiableBooleanBag emptyCollection = this.newWith();
+        MutableBooleanBag emptyCollection = this.newWith();
         Assert.assertFalse(emptyCollection.containsAll(true));
         Assert.assertFalse(emptyCollection.containsAll(false));
         Assert.assertFalse(emptyCollection.containsAll(false, true, false));
         Assert.assertFalse(this.newWith(true, true).containsAll(false, true, false));
 
-        UnmodifiableBooleanBag trueCollection = this.newWith(true, true, true, true);
+        MutableBooleanBag trueCollection = this.newWith(true, true, true, true);
         Assert.assertFalse(trueCollection.containsAll(true, false));
-        UnmodifiableBooleanBag falseCollection = this.newWith(false, false, false, false);
+        MutableBooleanBag falseCollection = this.newWith(false, false, false, false);
         Assert.assertFalse(falseCollection.containsAll(true, false));
     }
 
@@ -183,11 +183,11 @@ public class UnmodifiableBooleanBagTest extends AbstractMutableBooleanBagTestCas
     @Test
     public void containsAllIterable()
     {
-        UnmodifiableBooleanBag emptyCollection = this.newWith();
+        MutableBooleanBag emptyCollection = this.newWith();
         Assert.assertTrue(emptyCollection.containsAll(new BooleanArrayList()));
         Assert.assertFalse(emptyCollection.containsAll(BooleanArrayList.newListWith(true)));
         Assert.assertFalse(emptyCollection.containsAll(BooleanArrayList.newListWith(false)));
-        UnmodifiableBooleanBag collection = this.newWith(true, true, false, false, false);
+        MutableBooleanBag collection = this.newWith(true, true, false, false, false);
         Assert.assertTrue(collection.containsAll(BooleanArrayList.newListWith(true)));
         Assert.assertTrue(collection.containsAll(BooleanArrayList.newListWith(false)));
         Assert.assertTrue(collection.containsAll(BooleanArrayList.newListWith(true, false)));
@@ -196,9 +196,9 @@ public class UnmodifiableBooleanBagTest extends AbstractMutableBooleanBagTestCas
         Assert.assertTrue(collection.containsAll(BooleanArrayList.newListWith(true, false, true)));
         Assert.assertFalse(this.newWith(true, true).containsAll(BooleanArrayList.newListWith(false, true, false)));
 
-        UnmodifiableBooleanBag trueCollection = this.newWith(true, true, true, true);
+        MutableBooleanBag trueCollection = this.newWith(true, true, true, true);
         Assert.assertFalse(trueCollection.containsAll(BooleanArrayList.newListWith(true, false)));
-        UnmodifiableBooleanBag falseCollection = this.newWith(false, false, false, false);
+        MutableBooleanBag falseCollection = this.newWith(false, false, false, false);
         Assert.assertFalse(falseCollection.containsAll(BooleanArrayList.newListWith(true, false)));
     }
 

@@ -11,7 +11,9 @@
 package org.eclipse.collections.impl.block.predicate;
 
 import java.util.Map;
+import java.util.function.BiPredicate;
 
+import org.eclipse.collections.api.block.predicate.Predicate;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -41,7 +43,7 @@ public class MapEntryPredicateTest
     @Test
     public void accept()
     {
-        MapEntryPredicate<String, Integer> mapEntryPredicate = new MapEntryPredicate<String, Integer>()
+        Predicate<Map.Entry<String, Integer>> mapEntryPredicate = new MapEntryPredicate<String, Integer>()
         {
             @Override
             public boolean accept(String argument1, Integer argument2)

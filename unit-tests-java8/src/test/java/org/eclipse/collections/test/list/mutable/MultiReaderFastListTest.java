@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.MultiReaderList;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
@@ -50,7 +51,7 @@ public class MultiReaderFastListTest implements MutableListTestCase, MultiReader
     public void RichIterable_iterator_iterationOrder()
     {
         MutableCollection<Integer> iterationOrder = this.newMutableForFilter();
-        MultiReaderFastList<Integer> instanceUnderTest = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
+        MultiReaderList<Integer> instanceUnderTest = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         instanceUnderTest.withReadLockAndDelegate(delegate -> {
             Iterator<Integer> iterator = delegate.iterator();
             while (iterator.hasNext())
@@ -67,7 +68,7 @@ public class MultiReaderFastListTest implements MutableListTestCase, MultiReader
     {
         // Does not support iterator outside withReadLockAndDelegate
 
-        MultiReaderFastList<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
+        MultiReaderList<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
 
         MutableCollection<Integer> mutableCollection = this.newMutableForFilter();
 
@@ -87,16 +88,16 @@ public class MultiReaderFastListTest implements MutableListTestCase, MultiReader
     @Test
     public void MultiReaderFastList_hasNext()
     {
-        MultiReaderFastList<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
+        MultiReaderList<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
         iterable.withReadLockAndDelegate(delegate -> assertTrue(delegate.iterator().hasNext()));
-        MultiReaderFastList<?> emptyIterable = this.newWith();
+        MultiReaderList<?> emptyIterable = this.newWith();
         emptyIterable.withReadLockAndDelegate(delegate -> assertFalse(delegate.iterator().hasNext()));
     }
 
     @Test
     public void MultiReaderFastList_next_throws_at_end()
     {
-        MultiReaderFastList<Integer> iterable = this.newWith(3, 2, 1);
+        MultiReaderList<Integer> iterable = this.newWith(3, 2, 1);
         iterable.withReadLockAndDelegate(delegate -> {
             Iterator<Integer> iterator = delegate.iterator();
             assertTrue(iterator.hasNext());
@@ -113,7 +114,7 @@ public class MultiReaderFastListTest implements MutableListTestCase, MultiReader
     @Test
     public void MultiReaderFastList_next_throws_on_empty()
     {
-        MultiReaderFastList<Object> iterable = this.newWith();
+        MultiReaderList<Object> iterable = this.newWith();
         assertThrows(
                 NoSuchElementException.class,
                 () -> iterable.withReadLockAndDelegate(delegate -> delegate.iterator().next()));

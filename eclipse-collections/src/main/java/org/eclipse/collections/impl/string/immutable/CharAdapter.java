@@ -26,6 +26,7 @@ import org.eclipse.collections.api.block.function.primitive.ObjectCharToObjectFu
 import org.eclipse.collections.api.block.predicate.primitive.CharPredicate;
 import org.eclipse.collections.api.block.procedure.primitive.CharIntProcedure;
 import org.eclipse.collections.api.block.procedure.primitive.CharProcedure;
+import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
 import org.eclipse.collections.api.iterator.CharIterator;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
@@ -150,7 +151,7 @@ public class CharAdapter
     public CharAdapter distinct()
     {
         StringBuilder builder = new StringBuilder();
-        CharHashSet seenSoFar = new CharHashSet();
+        MutableCharCollection seenSoFar = new CharHashSet();
 
         int size = this.size();
         for (int i = 0; i < size; i++)
@@ -377,7 +378,7 @@ public class CharAdapter
     public MutableCharList toList()
     {
         int size = this.size();
-        CharArrayList list = new CharArrayList(size);
+        MutableCharList list = new CharArrayList(size);
         for (int i = 0; i < size; i++)
         {
             list.add(this.get(i));
@@ -389,7 +390,7 @@ public class CharAdapter
     public MutableCharSet toSet()
     {
         int size = this.size();
-        CharHashSet set = new CharHashSet(size);
+        MutableCharSet set = new CharHashSet(size);
         for (int i = 0; i < size; i++)
         {
             set.add(this.get(i));
@@ -401,7 +402,7 @@ public class CharAdapter
     public MutableCharBag toBag()
     {
         int size = this.size();
-        CharHashBag bag = new CharHashBag(size);
+        MutableCharBag bag = new CharHashBag(size);
         for (int i = 0; i < size; i++)
         {
             bag.add(this.get(i));

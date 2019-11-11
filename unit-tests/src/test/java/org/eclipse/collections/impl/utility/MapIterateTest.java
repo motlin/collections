@@ -18,9 +18,17 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
+import org.eclipse.collections.api.bag.primitive.MutableByteBag;
+import org.eclipse.collections.api.bag.primitive.MutableCharBag;
+import org.eclipse.collections.api.bag.primitive.MutableDoubleBag;
+import org.eclipse.collections.api.bag.primitive.MutableFloatBag;
+import org.eclipse.collections.api.bag.primitive.MutableIntBag;
+import org.eclipse.collections.api.bag.primitive.MutableLongBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableByteCollection;
 import org.eclipse.collections.api.collection.primitive.MutableCharCollection;
@@ -278,7 +286,7 @@ public class MapIterateTest
         MutableMap<String, Integer> map = UnifiedMap.newMap();
         map.putAll(UnifiedMap.newMap(this.getIntegerMap()));
         MutableMap<String, Integer> newMap = UnifiedMap.newMap();
-        MapPutProcedure<String, Integer> procedure = new MapPutProcedure<>(newMap);
+        Procedure2<String, Integer> procedure = new MapPutProcedure<>(newMap);
         MapIterate.forEachKeyValue(map, procedure);
         Verify.assertMapsEqual(map, newMap);
     }
@@ -583,7 +591,7 @@ public class MapIterateTest
     public void collectBooleanWithTarget()
     {
         BooleanHashBag target = new BooleanHashBag();
-        BooleanHashBag result = MapIterate.collectBoolean(MapIterateTest.newLittleMap(), PrimitiveFunctions.integerIsPositive(), target);
+        MutableBooleanBag result = MapIterate.collectBoolean(MapIterateTest.newLittleMap(), PrimitiveFunctions.integerIsPositive(), target);
         Assert.assertEquals(BooleanHashBag.newBagWith(true, true), result.toBag());
         Assert.assertSame("Target sent as parameter was not returned as result", target, result);
     }
@@ -599,7 +607,7 @@ public class MapIterateTest
     public void collectByteWithTarget()
     {
         ByteHashBag target = new ByteHashBag();
-        ByteHashBag result = MapIterate.collectByte(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToByte(), target);
+        MutableByteBag result = MapIterate.collectByte(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToByte(), target);
         Assert.assertEquals(ByteHashBag.newBagWith((byte) 1, (byte) 2), result.toBag());
         Assert.assertSame("Target sent as parameter was not returned as result", target, result);
     }
@@ -615,7 +623,7 @@ public class MapIterateTest
     public void collectCharWithTarget()
     {
         CharHashBag target = new CharHashBag();
-        CharHashBag result = MapIterate.collectChar(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToChar(), target);
+        MutableCharBag result = MapIterate.collectChar(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToChar(), target);
         Assert.assertEquals(CharHashBag.newBagWith((char) 1, (char) 2), result.toBag());
         Assert.assertSame("Target sent as parameter was not returned as result", target, result);
     }
@@ -631,7 +639,7 @@ public class MapIterateTest
     public void collectDoubleWithTarget()
     {
         DoubleHashBag target = new DoubleHashBag();
-        DoubleHashBag result = MapIterate.collectDouble(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToDouble(), target);
+        MutableDoubleBag result = MapIterate.collectDouble(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToDouble(), target);
         Assert.assertEquals(DoubleHashBag.newBagWith(1, 2), result.toBag());
         Assert.assertSame("Target sent as parameter was not returned as result", target, result);
     }
@@ -647,7 +655,7 @@ public class MapIterateTest
     public void collectFloatWithTarget()
     {
         FloatHashBag target = new FloatHashBag();
-        FloatHashBag result = MapIterate.collectFloat(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToFloat(), target);
+        MutableFloatBag result = MapIterate.collectFloat(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToFloat(), target);
         Assert.assertEquals(FloatHashBag.newBagWith(1, 2), result.toBag());
         Assert.assertSame("Target sent as parameter was not returned as result", target, result);
     }
@@ -663,7 +671,7 @@ public class MapIterateTest
     public void collectIntWithTarget()
     {
         IntHashBag target = new IntHashBag();
-        IntHashBag result = MapIterate.collectInt(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToInt(), target);
+        MutableIntBag result = MapIterate.collectInt(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToInt(), target);
         Assert.assertEquals(IntHashBag.newBagWith(1, 2), result.toBag());
         Assert.assertSame("Target sent as parameter was not returned as result", target, result);
     }
@@ -679,7 +687,7 @@ public class MapIterateTest
     public void collectLongWithTarget()
     {
         LongHashBag target = new LongHashBag();
-        LongHashBag result = MapIterate.collectLong(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToLong(), target);
+        MutableLongBag result = MapIterate.collectLong(MapIterateTest.newLittleMap(), PrimitiveFunctions.unboxIntegerToLong(), target);
         Assert.assertEquals(LongHashBag.newBagWith(1L, 2L), result.toBag());
         Assert.assertSame("Target sent as parameter was not returned as result", target, result);
     }

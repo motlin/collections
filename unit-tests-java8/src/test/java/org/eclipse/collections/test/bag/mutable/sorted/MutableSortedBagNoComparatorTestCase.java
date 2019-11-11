@@ -37,7 +37,7 @@ public interface MutableSortedBagNoComparatorTestCase extends SortedBagTestCase,
     @Override
     default <T> MutableSortedBag<T> newMutableForFilter(T... elements)
     {
-        TreeBag<T> result = new TreeBag<>();
+        MutableSortedBag<T> result = new TreeBag<>();
         addAllTo(elements, result);
         return result;
     }

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.MultiReaderSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.CollidingInt;
 import org.eclipse.collections.impl.block.factory.Procedures;
@@ -33,7 +34,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
     @Test
     public void testUnifiedSet()
     {
-        MultiReaderUnifiedSet<Integer> set = MultiReaderUnifiedSet.newSet();
+        MutableSet<Integer> set = MultiReaderUnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -68,7 +69,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
 
     private static void assertUnifiedSetClear(int shift)
     {
-        MultiReaderUnifiedSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
+        MutableSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -189,14 +190,14 @@ public class MultiReaderUnifiedSetAcceptanceTest
 
     private static void assertUnifiedSetAddAll(int shift)
     {
-        MultiReaderUnifiedSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
+        MutableSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
         {
             set.add(new CollidingInt(i, shift));
         }
-        MultiReaderUnifiedSet<CollidingInt> newSet = MultiReaderUnifiedSet.newSet(size);
+        MutableSet<CollidingInt> newSet = MultiReaderUnifiedSet.newSet(size);
         newSet.addAll(set);
 
         Verify.assertSize(size, newSet);
@@ -224,7 +225,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
         {
             set.add(new CollidingInt(i, shift));
         }
-        MultiReaderUnifiedSet<CollidingInt> newSet = MultiReaderUnifiedSet.newSet(size);
+        MutableSet<CollidingInt> newSet = MultiReaderUnifiedSet.newSet(size);
         newSet.addAll(set);
 
         Verify.assertSize(size, newSet);
@@ -233,7 +234,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
             Verify.assertContains(new CollidingInt(i, shift), newSet);
         }
 
-        MultiReaderUnifiedSet<CollidingInt> newSet2 = MultiReaderUnifiedSet.newSet();
+        MutableSet<CollidingInt> newSet2 = MultiReaderUnifiedSet.newSet();
         newSet2.addAll(set);
 
         Verify.assertSize(size, newSet2);
@@ -254,7 +255,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
 
     private static void assertUnifiedSetReplace(int shift)
     {
-        MultiReaderUnifiedSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
+        MutableSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -283,7 +284,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
 
     private static void runUnifiedSetRetainAllFromList(int shift)
     {
-        MultiReaderUnifiedSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
+        MutableSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
 
         MutableList<CollidingInt> toRetain = MutableList.empty();
 
@@ -323,7 +324,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
 
     private static void runUnifiedSetRetainAllFromSet(int shift)
     {
-        MultiReaderUnifiedSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
+        MutableSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
 
         Set<CollidingInt> toRetain = new HashSet<>();
 
@@ -363,7 +364,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
 
     private static void runUnifiedSetToArray(int shift)
     {
-        MultiReaderUnifiedSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
+        MutableSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -468,7 +469,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
 
     private static void runUnifiedSetRemoveAll(int shift)
     {
-        MultiReaderUnifiedSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
+        MutableSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
 
         List<CollidingInt> toRemove = new ArrayList<>();
 
@@ -507,7 +508,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
 
     private void assertUnifiedSetPutDoesNotReplace(int shift)
     {
-        MultiReaderUnifiedSet<CollidingIntWithFlag> set = MultiReaderUnifiedSet.newSet();
+        MultiReaderSet<CollidingIntWithFlag> set = MultiReaderUnifiedSet.newSet();
 
         for (int i = 0; i < 1000; i++)
         {

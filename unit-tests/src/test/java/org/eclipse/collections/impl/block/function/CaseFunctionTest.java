@@ -23,7 +23,7 @@ public class CaseFunctionTest
     @Test
     public void noopCase()
     {
-        CaseFunction<Integer, Integer> function = new CaseFunction<>();
+        Function<Integer, Integer> function = new CaseFunction<>();
         Assert.assertNull(function.valueOf(42));
     }
 

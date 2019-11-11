@@ -171,7 +171,7 @@ public class FJIterateAcceptanceTest
 
         //Testing divideByZero exception by passing 1 as batchSize
         IntegerSum sum4 = new IntegerSum(0);
-        UnifiedSet<Integer> set4 = UnifiedSet.newSet(Interval.oneTo(100));
+        MutableSet<Integer> set4 = UnifiedSet.newSet(Interval.oneTo(100));
         FJIterate.forEach(set4, new SumProcedure(sum4), new SumCombiner(sum4), 1);
         Assert.assertEquals(5050, sum4.getSum());
     }
@@ -291,7 +291,7 @@ public class FJIterateAcceptanceTest
     public void testForEachWithIndexToArrayUsingFastListSerialPath()
     {
         Integer[] array = new Integer[200];
-        FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
+        MutableList<Integer> list = Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
@@ -301,7 +301,7 @@ public class FJIterateAcceptanceTest
     public void testForEachWithIndexToArrayUsingFastList()
     {
         Integer[] array = new Integer[200];
-        FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
+        MutableList<Integer> list = Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         FJIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
@@ -384,10 +384,10 @@ public class FJIterateAcceptanceTest
         this.iterables.forEach(Procedures.cast(this::basicCount));
     }
 
-    private void basicCount(RichIterable<Integer> listIterable)
+    private void basicCount(Iterable<Integer> iterable)
     {
-        int actual1 = FJIterate.count(listIterable, Predicates.greaterThan(10000));
-        int actual2 = FJIterate.count(listIterable, Predicates.greaterThan(10000), 11, this.executor);
+        int actual1 = FJIterate.count(iterable, Predicates.greaterThan(10000));
+        int actual2 = FJIterate.count(iterable, Predicates.greaterThan(10000), 11, this.executor);
         Assert.assertEquals(10000, actual1);
         Assert.assertEquals(10000, actual2);
     }

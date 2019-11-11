@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.lazy;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -82,7 +83,7 @@ public class DropWhileIterableTest extends AbstractLazyIterableTestCase
     public void forEachWithIndex()
     {
         Sum sum = new IntegerSum(0);
-        FastList<Integer> indices = FastList.newList(5);
+        MutableList<Integer> indices = FastList.newList(5);
         ObjectIntProcedure<Integer> indexRecordingAndSumProcedure = (each, index) -> {
             indices.add(index);
             sum.add(each);

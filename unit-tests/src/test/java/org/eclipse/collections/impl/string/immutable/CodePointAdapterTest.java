@@ -50,7 +50,7 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     @Test
     public void subSequence()
     {
-        CodePointAdapter adapt = CodePointAdapter.adapt(UNICODE_STRING);
+        CharSequence adapt = CodePointAdapter.adapt(UNICODE_STRING);
         CharSequence sequence = adapt.subSequence(1, 3);
         Assert.assertEquals(UNICODE_STRING.subSequence(1, 3), sequence);
     }
@@ -365,12 +365,12 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     @Test
     public void newWithUnicode()
     {
-        CodePointAdapter codePointAdapter = CodePointAdapter.adapt("");
-        CodePointAdapter collection = codePointAdapter.newWith(12354);
-        CodePointAdapter collection0 = codePointAdapter.newWith(12354).newWith(131072);
-        CodePointAdapter collection1 = codePointAdapter.newWith(12354).newWith(131072).newWith(12356);
-        CodePointAdapter collection2 = codePointAdapter.newWith(12354).newWith(131072).newWith(12356).newWith(131075);
-        CodePointAdapter collection3 = codePointAdapter.newWith(12354).newWith(131072).newWith(12356).newWith(131075).newWith(12358);
+        ImmutableIntList codePointAdapter = CodePointAdapter.adapt("");
+        ImmutableIntList collection = codePointAdapter.newWith(12354);
+        ImmutableIntList collection0 = codePointAdapter.newWith(12354).newWith(131072);
+        ImmutableIntList collection1 = codePointAdapter.newWith(12354).newWith(131072).newWith(12356);
+        ImmutableIntList collection2 = codePointAdapter.newWith(12354).newWith(131072).newWith(12356).newWith(131075);
+        ImmutableIntList collection3 = codePointAdapter.newWith(12354).newWith(131072).newWith(12356).newWith(131075).newWith(12358);
         this.assertSizeAndContains(codePointAdapter);
         this.assertSizeAndContains(collection, 12354);
         this.assertSizeAndContains(collection0, 12354, 131072);
@@ -382,13 +382,13 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     @Test
     public void newWithoutUnicode()
     {
-        CodePointAdapter collection0 = CodePointAdapter.adapt("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046");
-        CodePointAdapter collection1 = collection0.newWithout(12358);
-        CodePointAdapter collection2 = collection1.newWithout(131075);
-        CodePointAdapter collection3 = collection2.newWithout(12356);
-        CodePointAdapter collection4 = collection3.newWithout(131072);
-        CodePointAdapter collection5 = collection4.newWithout(12354);
-        CodePointAdapter collection6 = collection5.newWithout(131078);
+        ImmutableIntList collection0 = CodePointAdapter.adapt("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046");
+        ImmutableIntList collection1 = collection0.newWithout(12358);
+        ImmutableIntList collection2 = collection1.newWithout(131075);
+        ImmutableIntList collection3 = collection2.newWithout(12356);
+        ImmutableIntList collection4 = collection3.newWithout(131072);
+        ImmutableIntList collection5 = collection4.newWithout(12354);
+        ImmutableIntList collection6 = collection5.newWithout(131078);
 
         this.assertSizeAndContains(collection6);
         this.assertSizeAndContains(collection5);
@@ -420,7 +420,7 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     @Test
     public void toImmutable()
     {
-        CodePointAdapter adapter = Strings.asCodePoints("123");
+        ImmutableIntList adapter = Strings.asCodePoints("123");
         ImmutableIntList immutable = adapter.toImmutable();
         Assert.assertSame(adapter, immutable);
     }
@@ -428,7 +428,7 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     @Test
     public void asReversed()
     {
-        CodePointAdapter adapter = Strings.asCodePoints("123");
+        ImmutableIntList adapter = Strings.asCodePoints("123");
         LazyIntIterable iterable = adapter.asReversed();
         String string = iterable.collectChar(each -> (char) each).makeString("");
         Assert.assertEquals("321", string);
@@ -437,7 +437,7 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     @Test
     public void dotProduct()
     {
-        CodePointAdapter adapter = Strings.asCodePoints("123");
+        ImmutableIntList adapter = Strings.asCodePoints("123");
         Verify.assertThrows(
                 UnsupportedOperationException.class,
                 () -> {
@@ -448,7 +448,7 @@ public class CodePointAdapterTest extends AbstractImmutableIntListTestCase
     @Test
     public void binarySearch()
     {
-        CodePointAdapter adapter = Strings.asCodePoints("123");
+        ImmutableIntList adapter = Strings.asCodePoints("123");
         Verify.assertThrows(
                 UnsupportedOperationException.class,
                 () -> {

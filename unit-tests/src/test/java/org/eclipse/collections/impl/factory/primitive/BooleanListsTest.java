@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.factory.primitive;
 
 import org.eclipse.collections.api.factory.list.primitive.ImmutableBooleanListFactory;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
+import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -98,7 +99,7 @@ public class BooleanListsTest
     public void newListWithList()
     {
         ImmutableBooleanList list = BooleanLists.immutable.of();
-        BooleanArrayList booleanArrayList = BooleanArrayList.newListWith(true);
+        MutableBooleanList booleanArrayList = BooleanArrayList.newListWith(true);
         Assert.assertEquals(list = list.newWith(true), booleanArrayList.toImmutable());
         Assert.assertEquals(list = list.newWith(false), booleanArrayList.with(false).toImmutable());
         Assert.assertEquals(list = list.newWith(true), booleanArrayList.with(true).toImmutable());

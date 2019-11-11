@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
+import org.eclipse.collections.api.set.Pool;
 import org.eclipse.collections.impl.CollidingInt;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -49,7 +50,7 @@ public class UnifiedSetAcceptanceTest
 
     private static void assertUnifiedSetWithCollisions(int shift, int removeStride)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         int size = 84000; // divisible by every integer between 2 and 8
         for (int i = 0; i < size; i++)
@@ -109,7 +110,7 @@ public class UnifiedSetAcceptanceTest
             Assert.assertTrue(set.add(new CollidingInt(i, shift)));
         }
         set.add(null);
-        UnifiedSet<CollidingInt> clone = set.clone();
+        MutableSet<CollidingInt> clone = set.clone();
         assertUnifiedSetWithCollisionsAndNullKey(shift, removeStride, clone, size);
         assertUnifiedSetWithCollisionsAndNullKey(shift, removeStride, set, size);
     }
@@ -117,7 +118,7 @@ public class UnifiedSetAcceptanceTest
     private static void assertUnifiedSetWithCollisionsAndNullKey(
             int shift,
             int removeStride,
-            UnifiedSet<CollidingInt> set,
+            Set<CollidingInt> set,
             int size)
     {
         Verify.assertSize(size + 1, set);
@@ -148,7 +149,7 @@ public class UnifiedSetAcceptanceTest
     @Test
     public void testUnifiedSet()
     {
-        UnifiedSet<Integer> set = UnifiedSet.newSet();
+        MutableSet<Integer> set = UnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -183,7 +184,7 @@ public class UnifiedSetAcceptanceTest
 
     private static void assertUnifiedSetClear(int shift)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -304,14 +305,14 @@ public class UnifiedSetAcceptanceTest
 
     private static void assertUnifiedSetAddAll(int shift)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
         {
             set.add(new CollidingInt(i, shift));
         }
-        UnifiedSet<CollidingInt> newSet = UnifiedSet.newSet(size);
+        MutableSet<CollidingInt> newSet = UnifiedSet.newSet(size);
         newSet.addAll(set);
 
         Verify.assertSize(size, newSet);
@@ -339,7 +340,7 @@ public class UnifiedSetAcceptanceTest
         {
             set.add(new CollidingInt(i, shift));
         }
-        UnifiedSet<CollidingInt> newSet = UnifiedSet.newSet(size);
+        MutableSet<CollidingInt> newSet = UnifiedSet.newSet(size);
         newSet.addAll(set);
 
         Verify.assertSize(size, newSet);
@@ -348,7 +349,7 @@ public class UnifiedSetAcceptanceTest
             Verify.assertContains(new CollidingInt(i, shift), newSet);
         }
 
-        UnifiedSet<CollidingInt> newSet2 = UnifiedSet.newSet();
+        MutableSet<CollidingInt> newSet2 = UnifiedSet.newSet();
         newSet2.addAll(set);
 
         Verify.assertSize(size, newSet2);
@@ -369,7 +370,7 @@ public class UnifiedSetAcceptanceTest
 
     private static void assertUnifiedSetReplace(int shift)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -398,7 +399,7 @@ public class UnifiedSetAcceptanceTest
 
     private static void runUnifiedSetRetainAllFromList(int shift)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         MutableList<CollidingInt> toRetain = MutableList.empty();
 
@@ -438,7 +439,7 @@ public class UnifiedSetAcceptanceTest
 
     private static void runUnifiedSetRetainAllFromSet(int shift)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         Set<CollidingInt> toRetain = new HashSet<>();
 
@@ -478,7 +479,7 @@ public class UnifiedSetAcceptanceTest
 
     private static void runUnifiedSetToArray(int shift)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -508,7 +509,7 @@ public class UnifiedSetAcceptanceTest
 
     private static void runUnifiedSetIterator(int shift)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -545,7 +546,7 @@ public class UnifiedSetAcceptanceTest
 
     private static void runUnifiedSetIteratorRemove(int shift, int removeStride)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -592,7 +593,7 @@ public class UnifiedSetAcceptanceTest
 
     private static void runUnifiedSetKeySetIteratorRemoveFlip(int shift, int removeStride)
     {
-        UnifiedSet<CollidingInt> set = UnifiedSet.newSet();
+        MutableSet<CollidingInt> set = UnifiedSet.newSet();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
@@ -756,7 +757,7 @@ public class UnifiedSetAcceptanceTest
 
     private void assertUnifiedSetPutDoesNotReplace(int shift)
     {
-        UnifiedSet<CollidingIntWithFlag> set = UnifiedSet.newSet();
+        MutableSet<CollidingIntWithFlag> set = UnifiedSet.newSet();
 
         for (int i = 0; i < 1000; i++)
         {
@@ -788,7 +789,7 @@ public class UnifiedSetAcceptanceTest
     {
         CollidingInt[] toPool = new CollidingInt[5000];
 
-        UnifiedSet<CollidingInt> set = new UnifiedSet<>();
+        Pool<CollidingInt> set = new UnifiedSet<>();
 
         for (int i = 0; i < toPool.length; i++)
         {
@@ -841,7 +842,7 @@ public class UnifiedSetAcceptanceTest
 
         toPool = shuffle(toPool);
 
-        UnifiedSet<CollidingInt> set = new UnifiedSet<>();
+        Pool<CollidingInt> set = new UnifiedSet<>();
         for (int i = 0; i < toPool.length; i++)
         {
             Assert.assertSame(toPool[i], set.put(toPool[i]));

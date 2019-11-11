@@ -58,7 +58,7 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
     @Test
     public void subSequence()
     {
-        CodePointList adapt = CodePointList.from(UNICODE_STRING);
+        CharSequence adapt = CodePointList.from(UNICODE_STRING);
         CharSequence sequence = adapt.subSequence(1, 3);
         Assert.assertEquals(UNICODE_STRING.subSequence(1, 3), sequence);
     }
@@ -350,12 +350,12 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
     @Test
     public void newWithUnicode()
     {
-        CodePointList codePointList = CodePointList.from("");
-        CodePointList collection = codePointList.newWith(12354);
-        CodePointList collection0 = codePointList.newWith(12354).newWith(131072);
-        CodePointList collection1 = codePointList.newWith(12354).newWith(131072).newWith(12356);
-        CodePointList collection2 = codePointList.newWith(12354).newWith(131072).newWith(12356).newWith(131075);
-        CodePointList collection3 = codePointList.newWith(12354).newWith(131072).newWith(12356).newWith(131075).newWith(12358);
+        ImmutableIntList codePointList = CodePointList.from("");
+        ImmutableIntList collection = codePointList.newWith(12354);
+        ImmutableIntList collection0 = codePointList.newWith(12354).newWith(131072);
+        ImmutableIntList collection1 = codePointList.newWith(12354).newWith(131072).newWith(12356);
+        ImmutableIntList collection2 = codePointList.newWith(12354).newWith(131072).newWith(12356).newWith(131075);
+        ImmutableIntList collection3 = codePointList.newWith(12354).newWith(131072).newWith(12356).newWith(131075).newWith(12358);
         this.assertSizeAndContains(codePointList);
         this.assertSizeAndContains(collection, 12354);
         this.assertSizeAndContains(collection0, 12354, 131072);
@@ -367,13 +367,13 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
     @Test
     public void newWithoutUnicode()
     {
-        CodePointList collection0 = CodePointList.from("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046");
-        CodePointList collection1 = collection0.newWithout(12358);
-        CodePointList collection2 = collection1.newWithout(131075);
-        CodePointList collection3 = collection2.newWithout(12356);
-        CodePointList collection4 = collection3.newWithout(131072);
-        CodePointList collection5 = collection4.newWithout(12354);
-        CodePointList collection6 = collection5.newWithout(131078);
+        ImmutableIntList collection0 = CodePointList.from("\u3042\uD840\uDC00\u3044\uD840\uDC03\u3046");
+        ImmutableIntList collection1 = collection0.newWithout(12358);
+        ImmutableIntList collection2 = collection1.newWithout(131075);
+        ImmutableIntList collection3 = collection2.newWithout(12356);
+        ImmutableIntList collection4 = collection3.newWithout(131072);
+        ImmutableIntList collection5 = collection4.newWithout(12354);
+        ImmutableIntList collection6 = collection5.newWithout(131078);
 
         this.assertSizeAndContains(collection6);
         this.assertSizeAndContains(collection5);
@@ -413,7 +413,7 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
     @Test
     public void toImmutable()
     {
-        CodePointList list = CodePointList.from("123");
+        ImmutableIntList list = CodePointList.from("123");
         ImmutableIntList immutable = list.toImmutable();
         Assert.assertSame(list, immutable);
     }
@@ -421,7 +421,7 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
     @Test
     public void asReversed()
     {
-        CodePointList list = CodePointList.from("123");
+        ImmutableIntList list = CodePointList.from("123");
         LazyIntIterable iterable = list.asReversed();
         String string = iterable.collectChar(each -> (char) each).makeString("");
         Assert.assertEquals("321", string);
@@ -430,7 +430,7 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
     @Test
     public void dotProduct()
     {
-        CodePointList list = CodePointList.from("123");
+        ImmutableIntList list = CodePointList.from("123");
         long actual = list.dotProduct(list);
         MutableIntList mutable = IntLists.mutable.with((int) '1', (int) '2', (int) '3');
         long expected = mutable.dotProduct(mutable);
@@ -440,7 +440,7 @@ public class CodePointListTest extends AbstractImmutableIntListTestCase
     @Test
     public void binarySearch()
     {
-        CodePointList list = CodePointList.from("123");
+        ImmutableIntList list = CodePointList.from("123");
         Assert.assertEquals(1, list.binarySearch((int) '2'));
     }
 

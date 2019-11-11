@@ -47,7 +47,7 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
     @Test
     public void subSequence()
     {
-        CharAdapter adapt = CharAdapter.adapt(UNICODE_STRING);
+        CharSequence adapt = CharAdapter.adapt(UNICODE_STRING);
         CharSequence sequence = adapt.subSequence(1, 3);
         Assert.assertEquals(UNICODE_STRING.subSequence(1, 3), sequence);
     }
@@ -130,7 +130,7 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
     @Test
     public void toImmutable()
     {
-        CharAdapter adapter = Strings.asChars("123");
+        ImmutableCharList adapter = Strings.asChars("123");
         ImmutableCharList immutable = adapter.toImmutable();
         Assert.assertSame(adapter, immutable);
     }
@@ -138,7 +138,7 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
     @Test
     public void asReversed()
     {
-        CharAdapter adapter = Strings.asChars("123");
+        ImmutableCharList adapter = Strings.asChars("123");
         LazyCharIterable iterable = adapter.asReversed();
         String string = iterable.makeString("");
         Assert.assertEquals("321", string);
@@ -147,7 +147,7 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
     @Test
     public void dotProduct()
     {
-        CharAdapter adapter = Strings.asChars("123");
+        ImmutableCharList adapter = Strings.asChars("123");
         Verify.assertThrows(
                 UnsupportedOperationException.class,
                 () -> {
@@ -158,7 +158,7 @@ public class CharAdapterTest extends AbstractImmutableCharListTestCase
     @Test
     public void binarySearch()
     {
-        CharAdapter adapter = Strings.asChars("123");
+        ImmutableCharList adapter = Strings.asChars("123");
         Verify.assertThrows(
                 UnsupportedOperationException.class,
                 () -> {

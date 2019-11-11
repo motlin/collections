@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.tuple;
 
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,14 +20,14 @@ public class AbstractImmutableEntryTest
     @Test
     public void getKeyFunction()
     {
-        ImmutableEntry<String, Integer> entry = new ImmutableEntry<>("foo", 2);
+        Map.Entry<String, Integer> entry = new ImmutableEntry<>("foo", 2);
         Assert.assertEquals("foo", AbstractImmutableEntry.<String>getKeyFunction().valueOf(entry));
     }
 
     @Test
     public void getValueFunction()
     {
-        ImmutableEntry<String, Integer> entry = new ImmutableEntry<>("foo", 2);
+        Map.Entry<String, Integer> entry = new ImmutableEntry<>("foo", 2);
         Assert.assertEquals(Integer.valueOf(2), AbstractImmutableEntry.<Integer>getValueFunction().valueOf(entry));
     }
 }

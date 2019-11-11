@@ -65,7 +65,7 @@ public final class Functions
     private static final Function<Iterable<?>, Integer> SIZE_FUNCTION = new SizeFunction();
     private static final FirstOfPairFunction<?> FIRST_OF_PAIR_FUNCTION = new FirstOfPairFunction<>();
     private static final SecondOfPairFunction<?> SECOND_OF_PAIR_FUNCTION = new SecondOfPairFunction<>();
-    private static final CheckedFunction<String, Class<?>> CLASS_FOR_NAME = new ClassForNameFunction();
+    private static final Function<String, Class<?>> CLASS_FOR_NAME = new ClassForNameFunction();
     private static final SwappedPairFunction<?, ?> SWAPPED_PAIR_FUNCTION = new SwappedPairFunction<>();
 
     private Functions()

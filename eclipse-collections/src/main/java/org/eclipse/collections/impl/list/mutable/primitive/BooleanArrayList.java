@@ -387,7 +387,7 @@ public final class BooleanArrayList
         {
             return false;
         }
-        BooleanHashSet set = BooleanHashSet.newSetWith(source);
+        MutableBooleanSet set = BooleanHashSet.newSetWith(source);
         if (set.size() == 2)
         {
             this.items = null;
@@ -748,7 +748,7 @@ public final class BooleanArrayList
     @Override
     public MutableBooleanList distinct()
     {
-        BooleanArrayList target = new BooleanArrayList();
+        MutableBooleanList target = new BooleanArrayList();
         MutableBooleanSet seenSoFar = new BooleanHashSet();
         for (int i = 0; i < this.size; i++)
         {

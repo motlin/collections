@@ -123,8 +123,8 @@ public class HashBagWithHashingStrategyTest extends MutableBagTestCase
     @Test
     public void equals_with_hashing_strategy()
     {
-        HashBagWithHashingStrategy<Person> bag1 = HashBagWithHashingStrategy.newBagWith(LAST_NAME_HASHING_STRATEGY, JOHNDOE, JANEDOE, JOHNSMITH, JANESMITH);
-        HashBagWithHashingStrategy<Person> bag2 = HashBagWithHashingStrategy.newBagWith(FIRST_NAME_HASHING_STRATEGY, JOHNDOE, JANEDOE, JOHNSMITH, JANESMITH);
+        MutableBag<Person> bag1 = HashBagWithHashingStrategy.newBagWith(LAST_NAME_HASHING_STRATEGY, JOHNDOE, JANEDOE, JOHNSMITH, JANESMITH);
+        MutableBag<Person> bag2 = HashBagWithHashingStrategy.newBagWith(FIRST_NAME_HASHING_STRATEGY, JOHNDOE, JANEDOE, JOHNSMITH, JANESMITH);
 
         Assert.assertEquals(bag1, bag2);
         Assert.assertEquals(bag2, bag1);
@@ -138,7 +138,7 @@ public class HashBagWithHashingStrategyTest extends MutableBagTestCase
         Verify.assertEqualsAndHashCode(bag3, bag4);
         Assert.assertTrue(bag3.equals(hashBag) && hashBag.equals(bag3) && bag3.hashCode() != hashBag.hashCode());
 
-        HashBag<Person> people = HashBag.newBagWith(
+        MutableBag<Person> people = HashBag.newBagWith(
                 JOHNDOE, JANEDOE, JANEDOE, JOHNSMITH, JOHNSMITH, JOHNSMITH, JANESMITH, JANESMITH, JANESMITH, JANESMITH);
         HashBagWithHashingStrategy<Person> bag5 = HashBagWithHashingStrategy.newBag(LAST_NAME_HASHING_STRATEGY, people);
         Assert.assertNotEquals(bag5, people);
@@ -165,7 +165,7 @@ public class HashBagWithHashingStrategyTest extends MutableBagTestCase
     @Test
     public void remove_with_hashing_strategy()
     {
-        HashBagWithHashingStrategy<Person> bag = HashBagWithHashingStrategy.newBagWith(
+        MutableBag<Person> bag = HashBagWithHashingStrategy.newBagWith(
                 LAST_NAME_HASHING_STRATEGY, JOHNDOE, JANEDOE, JANEDOE, JOHNSMITH, JOHNSMITH, JOHNSMITH, JANESMITH, JANESMITH, JANESMITH, JANESMITH);
 
         bag.removeOccurrences(JANEDOE, 3);
@@ -174,7 +174,7 @@ public class HashBagWithHashingStrategyTest extends MutableBagTestCase
 
         Verify.assertEmpty(bag);
 
-        HashBagWithHashingStrategy<Integer> bag2 = HashBagWithHashingStrategy.newBagWith(HashingStrategies.defaultStrategy(), 1, null, null, 3, 3, 3);
+        MutableBag<Integer> bag2 = HashBagWithHashingStrategy.newBagWith(HashingStrategies.defaultStrategy(), 1, null, null, 3, 3, 3);
         bag2.removeOccurrences(null, 2);
         Assert.assertEquals(HashBagWithHashingStrategy.newBagWith(HashingStrategies.defaultStrategy(), 1, 3, 3, 3), bag2);
     }

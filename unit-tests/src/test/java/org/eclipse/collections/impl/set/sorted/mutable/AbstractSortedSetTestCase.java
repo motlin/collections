@@ -390,7 +390,7 @@ public abstract class AbstractSortedSetTestCase extends AbstractCollectionTestCa
     {
         super.groupByEach();
         MutableSortedSet<Integer> set = this.newWith(Collections.reverseOrder(), 1, 2, 3, 4, 5, 6, 7);
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
+        Function<Integer, Iterable<Integer>> function = new NegativeIntervalFunction();
         MutableSortedSetMultimap<Integer, Integer> expected = this.newWith(Collections.<Integer>reverseOrder()).groupByEach(function);
         for (int i = 1; i < 8; i++)
         {

@@ -934,7 +934,7 @@ public class IterateTest
     public void forEachWithIndex()
     {
         this.iterables.each(each -> {
-            UnifiedSet<Integer> set = UnifiedSet.newSet();
+            MutableSet<Integer> set = UnifiedSet.newSet();
             Iterate.forEachWithIndex(each, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(set)));
             Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5), set);
         });

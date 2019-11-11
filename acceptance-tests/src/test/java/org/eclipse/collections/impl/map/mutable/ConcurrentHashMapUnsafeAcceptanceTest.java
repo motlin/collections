@@ -90,7 +90,7 @@ public class ConcurrentHashMapUnsafeAcceptanceTest
     @Test
     public void putAllInParallelSmallMap()
     {
-        ConcurrentHashMapUnsafe<Integer, Integer> source = ConcurrentHashMapUnsafe.newMap(Interval.oneTo(1000).toMap(Functions.getIntegerPassThru(), Functions.getIntegerPassThru()));
+        MutableMap<Integer, Integer> source = ConcurrentHashMapUnsafe.newMap(Interval.oneTo(1000).toMap(Functions.getIntegerPassThru(), Functions.getIntegerPassThru()));
         ConcurrentHashMapUnsafe<Integer, Integer> target = ConcurrentHashMapUnsafe.newMap();
         target.putAllInParallel(source, 10, this.executor);
         Verify.assertEqualsAndHashCode(source, target);
@@ -99,7 +99,7 @@ public class ConcurrentHashMapUnsafeAcceptanceTest
     @Test
     public void putAllInParallelLargeMap()
     {
-        ConcurrentHashMapUnsafe<Integer, Integer> source = ConcurrentHashMapUnsafe.newMap(Interval.oneTo(600000).toMap(Functions.getIntegerPassThru(), Functions.getIntegerPassThru()));
+        MutableMap<Integer, Integer> source = ConcurrentHashMapUnsafe.newMap(Interval.oneTo(600000).toMap(Functions.getIntegerPassThru(), Functions.getIntegerPassThru()));
         ConcurrentHashMapUnsafe<Integer, Integer> target = ConcurrentHashMapUnsafe.newMap();
         target.putAllInParallel(source, 10, this.executor);
         Verify.assertEqualsAndHashCode(source, target);
@@ -108,7 +108,7 @@ public class ConcurrentHashMapUnsafeAcceptanceTest
     @Test
     public void concurrentPutGetPutAllRemoveContainsKeyContainsValueGetIfAbsentPutTest()
     {
-        ConcurrentHashMapUnsafe<Integer, Integer> map1 = ConcurrentHashMapUnsafe.newMap();
+        MutableMap<Integer, Integer> map1 = ConcurrentHashMapUnsafe.newMap();
         ConcurrentHashMapUnsafe<Integer, Integer> map2 = ConcurrentHashMapUnsafe.newMap();
         ParallelIterate.forEach(Interval.oneTo(1000), each -> {
             map1.put(each, each);
@@ -137,7 +137,7 @@ public class ConcurrentHashMapUnsafeAcceptanceTest
     public void concurrentPutIfAbsentGetIfPresentPutTest()
     {
         ConcurrentHashMapUnsafe<Integer, Integer> map1 = ConcurrentHashMapUnsafe.newMap();
-        ConcurrentHashMapUnsafe<Integer, Integer> map2 = ConcurrentHashMapUnsafe.newMap();
+        MutableMap<Integer, Integer> map2 = ConcurrentHashMapUnsafe.newMap();
         ParallelIterate.forEach(Interval.oneTo(1000), each -> {
             map1.put(each, each);
             map1.put(each, each);
@@ -154,7 +154,7 @@ public class ConcurrentHashMapUnsafeAcceptanceTest
     @Test
     public void concurrentClear()
     {
-        ConcurrentHashMapUnsafe<Integer, Integer> map = ConcurrentHashMapUnsafe.newMap();
+        MutableMap<Integer, Integer> map = ConcurrentHashMapUnsafe.newMap();
         ParallelIterate.forEach(Interval.oneTo(1000), each -> {
             for (int i = 0; i < each; i++)
             {

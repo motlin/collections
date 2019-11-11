@@ -18,6 +18,7 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.set.UnsortedSetMultimap;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.lazy.parallel.set.AbstractParallelUnsortedSetIterable;
@@ -65,7 +66,7 @@ class ParallelDistinctListIterable<T> extends AbstractParallelUnsortedSetIterabl
     public void forEach(Procedure<? super T> procedure)
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
+        MutableMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         this.delegate.forEach(each -> {
             if (distinct.put(each, true) == null)
             {
@@ -130,7 +131,7 @@ class ParallelDistinctListIterable<T> extends AbstractParallelUnsortedSetIterabl
     private static final class DistinctAndPredicate<T> implements Predicate<T>
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        private final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
+        private final MutableMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         private final Predicate<? super T> predicate;
 
         private DistinctAndPredicate(Predicate<? super T> predicate)
@@ -148,7 +149,7 @@ class ParallelDistinctListIterable<T> extends AbstractParallelUnsortedSetIterabl
     private static final class DistinctOrPredicate<T> implements Predicate<T>
     {
         // TODO: Replace the map with a concurrent set once it's implemented
-        private final ConcurrentHashMap<T, Boolean> distinct = new ConcurrentHashMap<>();
+        private final MutableMap<T, Boolean> distinct = new ConcurrentHashMap<>();
         private final Predicate<? super T> predicate;
 
         private DistinctOrPredicate(Predicate<? super T> predicate)

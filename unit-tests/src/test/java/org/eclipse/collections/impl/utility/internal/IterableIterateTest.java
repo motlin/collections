@@ -306,8 +306,8 @@ public class IterableIterateTest
     {
         Collection<Integer> list = FastList.newListWith(2, 1, 3, 2, 1, 3);
         FastList<Integer> result = FastList.newList();
-        FastList<Integer> actualList = IterableIterate.distinct(list, result);
-        FastList<Integer> expectedList = FastList.newListWith(2, 1, 3);
+        MutableList<Integer> actualList = IterableIterate.distinct(list, result);
+        MutableList<Integer> expectedList = FastList.newListWith(2, 1, 3);
         Verify.assertListsEqual(expectedList, result);
         Verify.assertListsEqual(expectedList, actualList);
         Verify.assertSize(6, list);
@@ -590,7 +590,7 @@ public class IterableIterateTest
     public void forEach()
     {
         MutableList<Integer> newCollection = MutableList.empty();
-        IterableAdapter<Integer> iterable = new IterableAdapter<>(Interval.oneTo(10));
+        Iterable<Integer> iterable = new IterableAdapter<>(Interval.oneTo(10));
         Iterate.forEach(iterable, newCollection::add);
         Assert.assertEquals(Interval.oneTo(10), newCollection);
     }

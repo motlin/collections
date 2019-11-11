@@ -46,21 +46,21 @@ public class ArrayStackTest extends MutableStackTestCase
     @Test
     public void takeWhile()
     {
-        ArrayStack<Object> arrayStack = new ArrayStack<>();
+        MutableStack<Object> arrayStack = new ArrayStack<>();
         Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.takeWhile(null));
     }
 
     @Test
     public void dropWhile()
     {
-        ArrayStack<Object> arrayStack = new ArrayStack<>();
+        MutableStack<Object> arrayStack = new ArrayStack<>();
         Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.dropWhile(null));
     }
 
     @Test
     public void partitionWhile()
     {
-        ArrayStack<Object> arrayStack = new ArrayStack<>();
+        MutableStack<Object> arrayStack = new ArrayStack<>();
         Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.partitionWhile(null));
     }
 
@@ -95,14 +95,14 @@ public class ArrayStackTest extends MutableStackTestCase
     @Test
     public void forEach_exception()
     {
-        ArrayStack<Object> arrayStack = new ArrayStack<>();
+        MutableStack<Object> arrayStack = new ArrayStack<>();
         Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.forEach(0, 1, null));
     }
 
     @Test
     public void forEachWithIndex_exception()
     {
-        ArrayStack<Object> arrayStack = new ArrayStack<>();
+        MutableStack<Object> arrayStack = new ArrayStack<>();
         Verify.assertThrows(UnsupportedOperationException.class, () -> arrayStack.forEachWithIndex(0, 1, null));
     }
 

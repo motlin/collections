@@ -852,7 +852,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void groupByEach()
     {
         ImmutableSortedSet<Integer> undertest = this.classUnderTest(Collections.reverseOrder());
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
+        Function<Integer, Iterable<Integer>> function = new NegativeIntervalFunction();
         ImmutableSortedSetMultimap<Integer, Integer> actual = undertest.groupByEach(function);
         ImmutableSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupByEach(function).toImmutable();
         Assert.assertEquals(expected, actual);
@@ -871,7 +871,7 @@ public abstract class AbstractImmutableSortedSetTestCase
     public void groupByEachWithTarget()
     {
         ImmutableSortedSet<Integer> undertest = this.classUnderTest();
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
+        Function<Integer, Iterable<Integer>> function = new NegativeIntervalFunction();
         TreeSortedSetMultimap<Integer, Integer> actual = undertest.groupByEach(function, TreeSortedSetMultimap.newMultimap());
         MutableSortedSetMultimap<Integer, Integer> expected = TreeSortedSet.newSet(undertest).groupByEach(function);
         Assert.assertEquals(expected, actual);

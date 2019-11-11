@@ -11,6 +11,7 @@
 package org.eclipse.collections.impl.factory.primitive;
 
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
+import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.factory.bag.primitive.ImmutableBooleanBagFactory;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.test.Verify;
@@ -98,7 +99,7 @@ public class BooleanBagsTest
     public void newBagWithBag()
     {
         ImmutableBooleanBag bag = BooleanBags.immutable.of();
-        BooleanHashBag booleanHashBag = BooleanHashBag.newBagWith(true);
+        MutableBooleanBag booleanHashBag = BooleanHashBag.newBagWith(true);
         Assert.assertEquals(bag = bag.newWith(true), booleanHashBag.toImmutable());
         Assert.assertEquals(bag = bag.newWith(false), booleanHashBag.with(false).toImmutable());
         Assert.assertEquals(bag = bag.newWith(true), booleanHashBag.with(true).toImmutable());

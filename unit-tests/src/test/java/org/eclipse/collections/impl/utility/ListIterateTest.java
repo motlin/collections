@@ -61,12 +61,12 @@ public class ListIterateTest
     @Test
     public void toArray()
     {
-        LinkedList<Integer> notAnArrayList = new LinkedList<>(Interval.oneTo(10));
+        List<Integer> notAnArrayList = new LinkedList<>(Interval.oneTo(10));
         Integer[] target1 = {1, 2, null, null};
         ListIterate.toArray(notAnArrayList, target1, 2, 2);
         Assert.assertArrayEquals(target1, new Integer[]{1, 2, 1, 2});
 
-        ArrayList<Integer> arrayList = new ArrayList<>(Interval.oneTo(10));
+        List<Integer> arrayList = new ArrayList<>(Interval.oneTo(10));
         Integer[] target2 = {1, 2, null, null};
         ListIterate.toArray(arrayList, target2, 2, 2);
         Assert.assertArrayEquals(target2, new Integer[]{1, 2, 1, 2});
@@ -75,7 +75,7 @@ public class ListIterateTest
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void toArray_throws()
     {
-        LinkedList<Integer> notAnArrayList = new LinkedList<>(Interval.oneTo(10));
+        List<Integer> notAnArrayList = new LinkedList<>(Interval.oneTo(10));
         Integer[] target1 = {1, 2, null, null};
         ListIterate.toArray(notAnArrayList, target1, 2, 10);
     }

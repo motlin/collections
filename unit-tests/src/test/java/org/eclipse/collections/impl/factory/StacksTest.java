@@ -161,7 +161,7 @@ public class StacksTest
     @Test
     public void newStackWithWithStack()
     {
-        ArrayStack<Object> expected = ArrayStack.newStack();
+        MutableStack<Object> expected = ArrayStack.newStack();
         Assert.assertEquals(expected, MutableStack.ofAll(ArrayStack.newStack()));
         expected.push(1);
         Assert.assertEquals(ArrayStack.newStackWith(1), MutableStack.ofAll(expected));

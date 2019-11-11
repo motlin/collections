@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.block.function.primitive;
 
+import org.eclipse.collections.api.block.function.primitive.IntToObjectFunction;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -130,7 +131,7 @@ public class PrimitiveCaseFunctionSerializationTest
     @Test
     public void fizzBuzz()
     {
-        IntCaseFunction<String> function = new IntCaseFunction<>(e -> "")
+        IntToObjectFunction<String> function = new IntCaseFunction<>(e -> "")
                 .addCase(e -> e % 15 == 0, e -> "FizzBuzz")
                 .addCase(e -> e % 3 == 0, e -> "Fizz")
                 .addCase(e -> e % 5 == 0, e -> "Buzz");

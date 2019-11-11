@@ -14,7 +14,7 @@ import java.util.Iterator;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
-import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.MutableBagIterable;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableByteBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableCharBag;
@@ -101,7 +101,7 @@ public abstract class AbstractImmutableBag<T>
     {
         PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<>();
         this.forEachWithOccurrences((each, occurrences) -> {
-            MutableBag<T> bucket = predicate.accept(each)
+            MutableBagIterable<T> bucket = predicate.accept(each)
                     ? partitionMutableBag.getSelected()
                     : partitionMutableBag.getRejected();
             bucket.addOccurrences(each, occurrences);
@@ -114,7 +114,7 @@ public abstract class AbstractImmutableBag<T>
     {
         PartitionMutableBag<T> partitionMutableBag = new PartitionHashBag<>();
         this.forEachWithOccurrences((each, occurrences) -> {
-            MutableBag<T> bucket = predicate.accept(each, parameter)
+            MutableBagIterable<T> bucket = predicate.accept(each, parameter)
                     ? partitionMutableBag.getSelected()
                     : partitionMutableBag.getRejected();
             bucket.addOccurrences(each, occurrences);

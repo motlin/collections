@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.parallel;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -50,7 +51,7 @@ public class ParallelArrayIterateAcceptanceTest
     private class RecursiveProcedure implements Procedure<Integer>
     {
         private static final long serialVersionUID = 1L;
-        private final ExecutorService executorService = ParallelIterate.newPooledExecutor("ParallelArrayIterateAcceptanceTest", false);
+        private final Executor executorService = ParallelIterate.newPooledExecutor("ParallelArrayIterateAcceptanceTest", false);
 
         @Override
         public void value(Integer object)
@@ -75,7 +76,7 @@ public class ParallelArrayIterateAcceptanceTest
             }
         }
 
-        private void executeParallelIterate(int level, ExecutorService executorService)
+        private void executeParallelIterate(int level, Executor executorService)
         {
             MutableList<Integer> items = MutableList.empty();
             for (int i = 0; i < 20000; i++)

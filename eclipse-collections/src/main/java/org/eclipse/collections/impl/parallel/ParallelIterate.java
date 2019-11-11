@@ -36,11 +36,18 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.tuple.primitive.DoubleDoublePair;
 import org.eclipse.collections.impl.block.factory.Functions0;
+import org.eclipse.collections.impl.block.procedure.CountProcedure;
+import org.eclipse.collections.impl.block.procedure.FastListCollectIfProcedure;
+import org.eclipse.collections.impl.block.procedure.FastListCollectProcedure;
+import org.eclipse.collections.impl.block.procedure.FastListRejectProcedure;
+import org.eclipse.collections.impl.block.procedure.FastListSelectProcedure;
+import org.eclipse.collections.impl.block.procedure.FlatCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.MultimapPutProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
@@ -603,7 +610,7 @@ public final class ParallelIterate
             boolean allowReorderedResult)
     {
         FastListSelectProcedureCombiner<T> combiner = new FastListSelectProcedureCombiner<>(iterable, target, 10, allowReorderedResult);
-        FastListSelectProcedureFactory<T> procedureFactory = new FastListSelectProcedureFactory<>(predicate, batchSize);
+        ProcedureFactory<FastListSelectProcedure<T>> procedureFactory = new FastListSelectProcedureFactory<>(predicate, batchSize);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -696,7 +703,7 @@ public final class ParallelIterate
             boolean allowReorderedResult)
     {
         FastListRejectProcedureCombiner<T> combiner = new FastListRejectProcedureCombiner<>(iterable, target, 10, allowReorderedResult);
-        FastListRejectProcedureFactory<T> procedureFactory = new FastListRejectProcedureFactory<>(predicate, batchSize);
+        ProcedureFactory<FastListRejectProcedure<T>> procedureFactory = new FastListRejectProcedureFactory<>(predicate, batchSize);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -725,7 +732,7 @@ public final class ParallelIterate
     public static <T> int count(Iterable<T> iterable, Predicate<? super T> predicate, int batchSize, Executor executor)
     {
         CountCombiner<T> combiner = new CountCombiner<>();
-        CountProcedureFactory<T> procedureFactory = new CountProcedureFactory<>(predicate);
+        ProcedureFactory<CountProcedure<T>> procedureFactory = new CountProcedureFactory<>(predicate);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -802,7 +809,7 @@ public final class ParallelIterate
         int size = Iterate.sizeOf(iterable);
         FastListCollectProcedureCombiner<T, V> combiner = new FastListCollectProcedureCombiner<>(iterable, target, size, allowReorderedResult);
         int taskCount = ParallelIterate.calculateTaskCount(iterable, batchSize);
-        FastListCollectProcedureFactory<T, V> procedureFactory = new FastListCollectProcedureFactory<>(function, size / taskCount);
+        ProcedureFactory<FastListCollectProcedure<T, V>> procedureFactory = new FastListCollectProcedureFactory<>(function, size / taskCount);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -856,7 +863,7 @@ public final class ParallelIterate
         int taskSize = size / taskCount;
         FlatCollectProcedureCombiner<T, V> combiner =
                 new FlatCollectProcedureCombiner<>(iterable, target, size, allowReorderedResult);
-        FlatCollectProcedureFactory<T, V> procedureFactory = new FlatCollectProcedureFactory<>(function, taskSize);
+        ProcedureFactory<FlatCollectProcedure<T, V>> procedureFactory = new FlatCollectProcedureFactory<>(function, taskSize);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -937,7 +944,7 @@ public final class ParallelIterate
             boolean allowReorderedResult)
     {
         FastListCollectIfProcedureCombiner<T, V> combiner = new FastListCollectIfProcedureCombiner<>(iterable, target, 10, allowReorderedResult);
-        FastListCollectIfProcedureFactory<T, V> procedureFactory = new FastListCollectIfProcedureFactory<>(function, predicate, batchSize);
+        ProcedureFactory<FastListCollectIfProcedure<T, V>> procedureFactory = new FastListCollectIfProcedureFactory<>(function, predicate, batchSize);
         ParallelIterate.forEach(
                 iterable,
                 procedureFactory,
@@ -1416,7 +1423,7 @@ public final class ParallelIterate
     private static final class SumByDoubleCombiner<T, V> extends AbstractProcedureCombiner<SumByDoubleProcedure<T, V>>
     {
         private final ObjectDoubleHashMap<V> result;
-        private final ObjectDoubleHashMap<V> compensation = ObjectDoubleHashMap.newMap();
+        private final MutableObjectDoubleMap<V> compensation = ObjectDoubleHashMap.newMap();
 
         private SumByDoubleCombiner(ObjectDoubleHashMap<V> result)
         {
@@ -1490,7 +1497,7 @@ public final class ParallelIterate
     private static final class SumByFloatCombiner<T, V> extends AbstractProcedureCombiner<SumByFloatProcedure<T, V>>
     {
         private final ObjectDoubleHashMap<V> result;
-        private final ObjectDoubleHashMap<V> compensation = ObjectDoubleHashMap.newMap();
+        private final MutableObjectDoubleMap<V> compensation = ObjectDoubleHashMap.newMap();
 
         private SumByFloatCombiner(ObjectDoubleHashMap<V> result)
         {

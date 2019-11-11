@@ -427,7 +427,7 @@ public final class Multimaps
 
             public <K, V> MutableListMultimap<K, V> with(K key, V value)
             {
-                FastListMultimap<K, V> fastListMultimap = FastListMultimap.newMultimap();
+                MutableListMultimap<K, V> fastListMultimap = FastListMultimap.newMultimap();
                 fastListMultimap.put(key, value);
                 return fastListMultimap;
             }
@@ -439,7 +439,7 @@ public final class Multimaps
 
             public <K, V> MutableListMultimap<K, V> with(K key1, V value1, K key2, V value2)
             {
-                FastListMultimap<K, V> fastListMultimap = FastListMultimap.newMultimap();
+                MutableListMultimap<K, V> fastListMultimap = FastListMultimap.newMultimap();
                 fastListMultimap.put(key1, value1);
                 fastListMultimap.put(key2, value2);
                 return fastListMultimap;
@@ -452,7 +452,7 @@ public final class Multimaps
 
             public <K, V> MutableListMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
             {
-                FastListMultimap<K, V> fastListMultimap = FastListMultimap.newMultimap();
+                MutableListMultimap<K, V> fastListMultimap = FastListMultimap.newMultimap();
                 fastListMultimap.put(key1, value1);
                 fastListMultimap.put(key2, value2);
                 fastListMultimap.put(key3, value3);
@@ -493,7 +493,7 @@ public final class Multimaps
 
             public <K, V> MutableSetMultimap<K, V> with(K key, V value)
             {
-                UnifiedSetMultimap<K, V> unifiedSetMultimap = UnifiedSetMultimap.newMultimap();
+                MutableSetMultimap<K, V> unifiedSetMultimap = UnifiedSetMultimap.newMultimap();
                 unifiedSetMultimap.put(key, value);
                 return unifiedSetMultimap;
             }
@@ -505,7 +505,7 @@ public final class Multimaps
 
             public <K, V> MutableSetMultimap<K, V> with(K key1, V value1, K key2, V value2)
             {
-                UnifiedSetMultimap<K, V> unifiedSetMultimap = UnifiedSetMultimap.newMultimap();
+                MutableSetMultimap<K, V> unifiedSetMultimap = UnifiedSetMultimap.newMultimap();
                 unifiedSetMultimap.put(key1, value1);
                 unifiedSetMultimap.put(key2, value2);
                 return unifiedSetMultimap;
@@ -518,7 +518,7 @@ public final class Multimaps
 
             public <K, V> MutableSetMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
             {
-                UnifiedSetMultimap<K, V> unifiedSetMultimap = UnifiedSetMultimap.newMultimap();
+                MutableSetMultimap<K, V> unifiedSetMultimap = UnifiedSetMultimap.newMultimap();
                 unifiedSetMultimap.put(key1, value1);
                 unifiedSetMultimap.put(key2, value2);
                 unifiedSetMultimap.put(key3, value3);
@@ -554,7 +554,7 @@ public final class Multimaps
 
             public <K, V> MutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key, V value)
             {
-                TreeSortedSetMultimap<K, V> treeSortedSetMultimap = TreeSortedSetMultimap.newMultimap(comparator);
+                MutableSortedSetMultimap<K, V> treeSortedSetMultimap = TreeSortedSetMultimap.newMultimap(comparator);
                 treeSortedSetMultimap.put(key, value);
                 return treeSortedSetMultimap;
             }
@@ -566,7 +566,7 @@ public final class Multimaps
 
             public <K, V> MutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key1, V value1, K key2, V value2)
             {
-                TreeSortedSetMultimap<K, V> treeSortedSetMultimap = TreeSortedSetMultimap.newMultimap(comparator);
+                MutableSortedSetMultimap<K, V> treeSortedSetMultimap = TreeSortedSetMultimap.newMultimap(comparator);
                 treeSortedSetMultimap.put(key1, value1);
                 treeSortedSetMultimap.put(key2, value2);
                 return treeSortedSetMultimap;
@@ -579,7 +579,7 @@ public final class Multimaps
 
             public <K, V> MutableSortedSetMultimap<K, V> with(Comparator<V> comparator, K key1, V value1, K key2, V value2, K key3, V value3)
             {
-                TreeSortedSetMultimap<K, V> treeSortedSetMultimap = TreeSortedSetMultimap.newMultimap(comparator);
+                MutableSortedSetMultimap<K, V> treeSortedSetMultimap = TreeSortedSetMultimap.newMultimap(comparator);
                 treeSortedSetMultimap.put(key1, value1);
                 treeSortedSetMultimap.put(key2, value2);
                 treeSortedSetMultimap.put(key3, value3);
@@ -620,7 +620,7 @@ public final class Multimaps
 
             public <K, V> MutableBagMultimap<K, V> with(K key, V value)
             {
-                HashBagMultimap<K, V> hashBagMultimap = HashBagMultimap.newMultimap();
+                MutableBagMultimap<K, V> hashBagMultimap = HashBagMultimap.newMultimap();
                 hashBagMultimap.put(key, value);
                 return hashBagMultimap;
             }
@@ -632,7 +632,7 @@ public final class Multimaps
 
             public <K, V> MutableBagMultimap<K, V> with(K key1, V value1, K key2, V value2)
             {
-                HashBagMultimap<K, V> hashBagMultimap = HashBagMultimap.newMultimap();
+                MutableBagMultimap<K, V> hashBagMultimap = HashBagMultimap.newMultimap();
                 hashBagMultimap.put(key1, value1);
                 hashBagMultimap.put(key2, value2);
                 return hashBagMultimap;
@@ -645,7 +645,7 @@ public final class Multimaps
 
             public <K, V> MutableBagMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
             {
-                HashBagMultimap<K, V> hashBagMultimap = HashBagMultimap.newMultimap();
+                MutableBagMultimap<K, V> hashBagMultimap = HashBagMultimap.newMultimap();
                 hashBagMultimap.put(key1, value1);
                 hashBagMultimap.put(key2, value2);
                 hashBagMultimap.put(key3, value3);
@@ -676,14 +676,14 @@ public final class Multimaps
 
             public <K, V> MutableSortedBagMultimap<K, V> with(K key, V value)
             {
-                TreeBagMultimap<K, V> treeBagMultimap = TreeBagMultimap.newMultimap();
+                MutableSortedBagMultimap<K, V> treeBagMultimap = TreeBagMultimap.newMultimap();
                 treeBagMultimap.put(key, value);
                 return treeBagMultimap;
             }
 
             public <K, V> MutableSortedBagMultimap<K, V> with(K key1, V value1, K key2, V value2)
             {
-                TreeBagMultimap<K, V> treeBagMultimap = TreeBagMultimap.newMultimap();
+                MutableSortedBagMultimap<K, V> treeBagMultimap = TreeBagMultimap.newMultimap();
                 treeBagMultimap.put(key1, value1);
                 treeBagMultimap.put(key2, value2);
                 return treeBagMultimap;
@@ -691,7 +691,7 @@ public final class Multimaps
 
             public <K, V> MutableSortedBagMultimap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
             {
-                TreeBagMultimap<K, V> treeBagMultimap = TreeBagMultimap.newMultimap();
+                MutableSortedBagMultimap<K, V> treeBagMultimap = TreeBagMultimap.newMultimap();
                 treeBagMultimap.put(key1, value1);
                 treeBagMultimap.put(key2, value2);
                 treeBagMultimap.put(key3, value3);

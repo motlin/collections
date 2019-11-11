@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.lazy.primitive;
 
+import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
@@ -26,7 +27,7 @@ public class TapBooleanIterableTest
     public void booleanIterator()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         for (BooleanIterator iterator = iterable.booleanIterator(); iterator.hasNext(); )
         {
@@ -143,7 +144,7 @@ public class TapBooleanIterableTest
     public void collect()
     {
         StringBuilder concat = new StringBuilder();
-        TapBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
+        LazyBooleanIterable iterable = new TapBooleanIterable(this.list, concat::append);
 
         Assert.assertEquals(4L, iterable.collect(String::valueOf).size());
         Assert.assertEquals("truefalsefalsetrue", concat.toString());

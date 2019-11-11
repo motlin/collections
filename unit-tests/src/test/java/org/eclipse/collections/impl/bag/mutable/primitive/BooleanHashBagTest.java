@@ -83,7 +83,7 @@ public class BooleanHashBagTest extends AbstractMutableBooleanBagTestCase
     public void booleanIterator()
     {
         super.booleanIterator();
-        BooleanHashBag bag = this.newWith(true, false, false, true, true, true);
+        MutableBooleanBag bag = this.newWith(true, false, false, true, true, true);
         BooleanIterator iterator = bag.booleanIterator();
         Assert.assertTrue(iterator.hasNext());
         Assert.assertFalse(iterator.next());
@@ -108,7 +108,7 @@ public class BooleanHashBagTest extends AbstractMutableBooleanBagTestCase
     {
         super.appendString();
         StringBuilder appendable2 = new StringBuilder();
-        BooleanHashBag bag1 = this.newWith(false, false, true);
+        MutableBooleanBag bag1 = this.newWith(false, false, true);
         bag1.appendString(appendable2);
         Assert.assertEquals(appendable2.toString(), "false, false, true", appendable2.toString());
     }

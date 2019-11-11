@@ -14,6 +14,7 @@ import org.eclipse.collections.api.annotation.Beta;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.lazy.parallel.AbstractBatch;
 import org.eclipse.collections.impl.lazy.parallel.Batch;
 import org.eclipse.collections.impl.lazy.parallel.bag.CollectUnsortedBagBatch;
@@ -27,7 +28,7 @@ import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 public class DistinctBatch<T> extends AbstractBatch<T> implements UnsortedSetBatch<T>
 {
     private final Batch<T> batch;
-    private final ConcurrentHashMap<T, Boolean> distinct;
+    private final MutableMap<T, Boolean> distinct;
 
     public DistinctBatch(Batch<T> batch, ConcurrentHashMap<T, Boolean> distinct)
     {

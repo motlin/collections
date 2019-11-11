@@ -1300,7 +1300,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            PartitionFastList<T> partitionFastList = new PartitionFastList<>();
+            PartitionMutableList<T> partitionFastList = new PartitionFastList<>();
             MutableList<T> selected = partitionFastList.getSelected();
             MutableList<T> rejected = partitionFastList.getRejected();
 
@@ -1321,7 +1321,7 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            PartitionFastList<T> partitionFastList = new PartitionFastList<>();
+            PartitionMutableList<T> partitionFastList = new PartitionFastList<>();
             MutableList<T> selected = partitionFastList.getSelected();
             MutableList<T> rejected = partitionFastList.getRejected();
 

@@ -54,6 +54,8 @@ import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -638,7 +640,7 @@ public final class IterableIterate
             Function<? super T, ? extends V> groupBy,
             IntFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return IterableIterate.injectInto(result, iterable, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
@@ -647,7 +649,7 @@ public final class IterableIterate
             Function<? super T, ? extends V> groupBy,
             LongFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return IterableIterate.injectInto(result, iterable, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
@@ -656,7 +658,7 @@ public final class IterableIterate
             Function<? super T, ? extends V> groupBy,
             FloatFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return IterableIterate.injectInto(result, iterable, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
@@ -665,7 +667,7 @@ public final class IterableIterate
             Function<? super T, ? extends V> groupBy,
             DoubleFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return IterableIterate.injectInto(result, iterable, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 

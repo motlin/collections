@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.EmptyStackException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -934,7 +935,7 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
     public ImmutableStack<Pair<T, Integer>> zipWithIndex()
     {
         int maxIndex = this.delegate.size() - 1;
-        Interval indices = Interval.fromTo(0, maxIndex);
+        List<Integer> indices = Interval.fromTo(0, maxIndex);
 
         return ImmutableArrayStack.newStackFromTopToBottom(this.delegate.asReversed().zip(indices).toList());
     }

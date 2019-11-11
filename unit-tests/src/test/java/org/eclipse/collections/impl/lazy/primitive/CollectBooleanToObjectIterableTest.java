@@ -30,7 +30,7 @@ public class CollectBooleanToObjectIterableTest
     @Test
     public void forEach()
     {
-        InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
+        LazyIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
         Appendable builder = new StringBuilder();
         Procedure<Boolean> appendProcedure = Procedures.append(builder);
         select.forEach(appendProcedure);
@@ -40,7 +40,7 @@ public class CollectBooleanToObjectIterableTest
     @Test
     public void forEachWithIndex()
     {
-        InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
+        LazyIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
         StringBuilder builder = new StringBuilder("");
         select.forEachWithIndex((object, index) -> {
             builder.append(object);
@@ -52,7 +52,7 @@ public class CollectBooleanToObjectIterableTest
     @Test
     public void iterator()
     {
-        InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
+        LazyIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
         StringBuilder builder = new StringBuilder("");
         for (Boolean each : select)
         {
@@ -64,7 +64,7 @@ public class CollectBooleanToObjectIterableTest
     @Test
     public void forEachWith()
     {
-        InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
+        LazyIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
         StringBuilder builder = new StringBuilder("");
         select.forEachWith((each, aBuilder) -> aBuilder.append(each), builder);
         Assert.assertEquals("truefalsetruefalsetrue", builder.toString());

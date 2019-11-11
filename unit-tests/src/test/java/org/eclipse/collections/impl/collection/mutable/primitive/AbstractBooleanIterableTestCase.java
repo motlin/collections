@@ -18,6 +18,7 @@ import org.eclipse.collections.api.LazyBooleanIterable;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -181,7 +182,7 @@ public abstract class AbstractBooleanIterableTestCase
     @Test
     public void booleanIterator()
     {
-        BooleanArrayList list = BooleanArrayList.newListWith(true, false, true);
+        MutableBooleanList list = BooleanArrayList.newListWith(true, false, true);
         BooleanIterator iterator = this.classUnderTest().booleanIterator();
         for (int i = 0; i < 3; i++)
         {

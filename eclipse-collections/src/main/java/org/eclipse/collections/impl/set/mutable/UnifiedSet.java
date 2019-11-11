@@ -1527,7 +1527,7 @@ public class UnifiedSet<T>
         }
     }
 
-    private void addIfFoundFromChain(ChainedBucket bucket, T key, UnifiedSet<T> other)
+    private void addIfFoundFromChain(ChainedBucket bucket, T key, MutableSet<T> other)
     {
         do
         {

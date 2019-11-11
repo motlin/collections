@@ -21,7 +21,6 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bimap.MutableBiMap;
-import org.eclipse.collections.api.block.SerializableComparator;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -327,28 +326,28 @@ public abstract class AbstractCollectionAdapter<T>
     @Override
     public <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByIntFunction(groupBy, function));
     }
 
     @Override
     public <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByFloatFunction(groupBy, function));
     }
 
     @Override
     public <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByLongFunction(groupBy, function));
     }
 
     @Override
     public <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         return this.injectInto(result, PrimitiveFunctions.sumByDoubleFunction(groupBy, function));
     }
 
@@ -840,7 +839,7 @@ public abstract class AbstractCollectionAdapter<T>
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        SerializableComparator<K> comparator = Comparators.byFunction(sortBy);
+        Comparator<K> comparator = Comparators.byFunction(sortBy);
         return TreeSortedMap.<K, V>newMap(comparator).collectKeysAndValues(this.getDelegate(), keyFunction, valueFunction);
     }
 
