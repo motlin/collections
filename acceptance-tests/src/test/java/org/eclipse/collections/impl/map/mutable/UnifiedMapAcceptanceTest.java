@@ -421,14 +421,14 @@ public class UnifiedMapAcceptanceTest
 
     private static void assertUnifiedMapPutAll(int shift)
     {
-        UnifiedMap<CollidingInt, String> map = UnifiedMap.newMap();
+        MutableMap<CollidingInt, String> map = UnifiedMap.newMap();
 
         int size = 100000;
         for (int i = 0; i < size; i++)
         {
             map.put(new CollidingInt(i, shift), UnifiedMapAcceptanceTest.createVal(i));
         }
-        UnifiedMap<CollidingInt, String> newMap = UnifiedMap.newMap(size);
+        MutableMap<CollidingInt, String> newMap = UnifiedMap.newMap(size);
         newMap.putAll(map);
 
         Verify.assertSize(size, newMap);
@@ -457,7 +457,7 @@ public class UnifiedMapAcceptanceTest
         {
             map.put(new CollidingInt(i, shift), UnifiedMapAcceptanceTest.createVal(i));
         }
-        UnifiedMap<CollidingInt, String> newMap = UnifiedMap.newMap(size);
+        MutableMap<CollidingInt, String> newMap = UnifiedMap.newMap(size);
         newMap.putAll(map);
 
         Verify.assertSize(size, newMap);
@@ -508,7 +508,7 @@ public class UnifiedMapAcceptanceTest
 
     private static void runUnifiedMapContainsValue(int shift)
     {
-        UnifiedMap<CollidingInt, String> map = UnifiedMap.newMap();
+        MutableMap<CollidingInt, String> map = UnifiedMap.newMap();
 
         int size = 1000;
         for (int i = 0; i < size; i++)

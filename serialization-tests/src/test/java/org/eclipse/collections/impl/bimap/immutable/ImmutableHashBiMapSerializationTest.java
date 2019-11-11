@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.bimap.immutable;
 
+import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class ImmutableHashBiMapSerializationTest
     @Test
     public void inverse()
     {
-        ImmutableHashBiMap<Character, Integer> biMap = new ImmutableHashBiMap<>(
+        ImmutableBiMap<Character, Integer> biMap = new ImmutableHashBiMap<>(
                 Maps.immutable.with('a', 1),
                 Maps.immutable.with(1, 'a'));
 

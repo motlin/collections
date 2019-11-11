@@ -22,6 +22,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.After;
@@ -110,7 +111,7 @@ public class ParallelMapIteratePutAcceptanceTest
                 futures[t] = executorService.submit(new PutRunner1(map, contents, currentPos));
             }
             int count = 0;
-            UnifiedSet<Integer> setToAdd = UnifiedSet.newSet(constContents.length);
+            MutableSet<Integer> setToAdd = UnifiedSet.newSet(constContents.length);
             for (Integer next : map.keySet())
             {
                 setToRemove.remove(next);

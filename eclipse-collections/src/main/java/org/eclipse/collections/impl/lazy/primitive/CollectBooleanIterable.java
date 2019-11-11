@@ -34,7 +34,7 @@ public class CollectBooleanIterable<T>
 {
     private final LazyIterable<T> iterable;
     private final BooleanFunction<? super T> function;
-    private final BooleanFunctionToProcedure<T> booleanFunctionToProcedure;
+    private final Procedure2<T, BooleanProcedure> booleanFunctionToProcedure;
 
     public CollectBooleanIterable(LazyIterable<T> adapted, BooleanFunction<? super T> function)
     {

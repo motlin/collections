@@ -441,7 +441,7 @@ public class ImmutableEmptySortedBagTest extends AbstractImmutableSortedBagTestC
     public void toMapOfItemToCount()
     {
         ImmutableSortedBag<Integer> bag = this.classUnderTest(Comparators.reverseNaturalOrder());
-        TreeSortedMap<Object, Object> expectedMap = TreeSortedMap.newMap(Comparators.reverseNaturalOrder());
+        MutableSortedMap<Object, Object> expectedMap = TreeSortedMap.newMap(Comparators.reverseNaturalOrder());
         MutableSortedMap<Integer, Integer> actualMap = bag.toMapOfItemToCount();
         Verify.assertSortedMapsEqual(expectedMap, actualMap);
         Assert.assertSame(expectedMap.comparator(), actualMap.comparator());

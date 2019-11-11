@@ -93,7 +93,7 @@ public abstract class AbstractMutableBiMapValuesTestCase
         MutableBiMap<Float, Integer> map = this.newMapWithKeysValues(1.0f, null, 2.0f, 2, 3.0f, 3);
         Collection<Integer> values = map.values();
         Assert.assertFalse(values.isEmpty());
-        HashBiMap<Float, Integer> map1 = HashBiMap.newMap();
+        MutableBiMap<Float, Integer> map1 = HashBiMap.newMap();
         Collection<Integer> values1 = map1.values();
         Assert.assertTrue(values1.isEmpty());
         map1.put(1.0f, 1);
@@ -111,7 +111,7 @@ public abstract class AbstractMutableBiMapValuesTestCase
         map.put(5.0f, 5);
         Verify.assertSize(4, values);
 
-        HashBiMap<Float, Integer> map1 = HashBiMap.newMap();
+        MutableBiMap<Float, Integer> map1 = HashBiMap.newMap();
         Collection<Integer> keySet1 = map1.values();
         Verify.assertSize(0, keySet1);
         map1.put(1.0f, null);

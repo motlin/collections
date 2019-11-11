@@ -81,7 +81,7 @@ public abstract class AbstractMutableBiMapKeySetTestCase
         MutableBiMap<String, Integer> map = this.newMapWithKeysValues("One", 1, "Two", 2, "Three", 3, null, 4);
         Set<String> keySet = map.keySet();
         Assert.assertFalse(keySet.isEmpty());
-        HashBiMap<String, Integer> map1 = HashBiMap.newMap();
+        MutableBiMap<String, Integer> map1 = HashBiMap.newMap();
         Set<String> keySet1 = map1.keySet();
         Assert.assertTrue(keySet1.isEmpty());
         map1.put("One", 1);
@@ -99,7 +99,7 @@ public abstract class AbstractMutableBiMapKeySetTestCase
         map.put("Five", 5);
         Verify.assertSize(4, keySet);
 
-        HashBiMap<String, Integer> map1 = HashBiMap.newMap();
+        MutableBiMap<String, Integer> map1 = HashBiMap.newMap();
         Set<String> keySet1 = map1.keySet();
         Verify.assertSize(0, keySet1);
         map1.put(null, 1);

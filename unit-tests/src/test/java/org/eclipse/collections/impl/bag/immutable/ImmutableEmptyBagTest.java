@@ -20,6 +20,7 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
+import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -487,7 +488,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void collectBooleanWithTarget()
     {
         BooleanHashBag target = new BooleanHashBag();
-        BooleanHashBag result = this.newBag().collectBoolean("4"::equals, target);
+        MutableBooleanBag result = this.newBag().collectBoolean("4"::equals, target);
         Assert.assertSame("Target sent as parameter not returned", target, result);
         Assert.assertEquals(0, result.sizeDistinct());
         Assert.assertEquals(0, result.occurrencesOf(true));
@@ -613,7 +614,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     {
         ImmutableBag<String> immutableBag = this.newBag();
         MutableSortedBag<String> sortedBag = immutableBag.toSortedBagBy(String::valueOf);
-        TreeBag<Object> expectedBag = TreeBag.newBag(Comparators.byFunction(String::valueOf));
+        MutableSortedBag<Object> expectedBag = TreeBag.newBag(Comparators.byFunction(String::valueOf));
 
         Verify.assertSortedBagsEqual(expectedBag, sortedBag);
     }

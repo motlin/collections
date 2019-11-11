@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -177,7 +178,7 @@ public class ParallelIterateAcceptanceTest
 
         //Testing divideByZero exception by passing 1 as batchSize
         IntegerSum sum4 = new IntegerSum(0);
-        UnifiedSet<Integer> set4 = UnifiedSet.newSet(Interval.oneTo(100));
+        MutableSet<Integer> set4 = UnifiedSet.newSet(Interval.oneTo(100));
         ParallelIterate.forEach(set4, new SumProcedure(sum4), new SumCombiner(sum4), 1);
         Assert.assertEquals(5050, sum4.getSum());
     }
@@ -297,7 +298,7 @@ public class ParallelIterateAcceptanceTest
     public void testForEachWithIndexToArrayUsingFastListSerialPath()
     {
         Integer[] array = new Integer[200];
-        FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
+        MutableList<Integer> list = Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
@@ -307,7 +308,7 @@ public class ParallelIterateAcceptanceTest
     public void testForEachWithIndexToArrayUsingFastList()
     {
         Integer[] array = new Integer[200];
-        FastList<Integer> list = (FastList<Integer>) Interval.oneTo(200).toList();
+        MutableList<Integer> list = Interval.oneTo(200).toList();
         Assert.assertTrue(ArrayIterate.allSatisfy(array, Predicates.isNull()));
         ParallelIterate.forEachWithIndex(list, (each, index) -> array[index] = each, 10, 10);
         Assert.assertArrayEquals(array, list.toArray(new Integer[]{}));
@@ -390,10 +391,10 @@ public class ParallelIterateAcceptanceTest
         this.iterables.forEach(Procedures.cast(this::basicCount));
     }
 
-    private void basicCount(RichIterable<Integer> listIterable)
+    private void basicCount(Iterable<Integer> iterable)
     {
-        int actual1 = ParallelIterate.count(listIterable, Predicates.greaterThan(10000));
-        int actual2 = ParallelIterate.count(listIterable, Predicates.greaterThan(10000), 11, this.executor);
+        int actual1 = ParallelIterate.count(iterable, Predicates.greaterThan(10000));
+        int actual2 = ParallelIterate.count(iterable, Predicates.greaterThan(10000), 11, this.executor);
         Assert.assertEquals(10000, actual1);
         Assert.assertEquals(10000, actual2);
     }
@@ -571,7 +572,7 @@ public class ParallelIterateAcceptanceTest
     private class RecursiveProcedure implements Procedure<Integer>
     {
         private static final long serialVersionUID = 1L;
-        private final ExecutorService executorService = ParallelIterate.newPooledExecutor("ParallelIterateTest", false);
+        private final Executor executorService = ParallelIterate.newPooledExecutor("ParallelIterateTest", false);
 
         @Override
         public void value(Integer level)
@@ -595,7 +596,7 @@ public class ParallelIterateAcceptanceTest
             }
         }
 
-        private void executeParallelIterate(int level, ExecutorService executorService)
+        private void executeParallelIterate(int level, Executor executorService)
         {
             MutableList<Integer> items = Lists.mutable.of();
             for (int i = 0; i < 20000; i++)

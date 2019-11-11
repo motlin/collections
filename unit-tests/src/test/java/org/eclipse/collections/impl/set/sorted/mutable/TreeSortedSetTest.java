@@ -72,7 +72,7 @@ public class TreeSortedSetTest extends AbstractSortedSetTestCase
     public void iterableConstructor()
     {
         LazyIterable<Integer> integerLazyIterable = FastList.newListWith(2, 4, 1, 3).asLazy();
-        TreeSortedSet<Integer> sortedSet = TreeSortedSet.newSet(integerLazyIterable);
+        MutableSortedSet<Integer> sortedSet = TreeSortedSet.newSet(integerLazyIterable);
         Verify.assertSortedSetsEqual(TreeSortedSet.newSetWith(1, 2, 3, 4), sortedSet);
     }
 

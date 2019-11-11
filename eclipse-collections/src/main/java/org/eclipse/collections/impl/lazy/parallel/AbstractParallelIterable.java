@@ -499,7 +499,7 @@ public abstract class AbstractParallelIterable<T, B extends Batch<T>> implements
     @Override
     public MutableSet<T> toSet()
     {
-        ConcurrentHashMapUnsafe<T, Boolean> map = ConcurrentHashMapUnsafe.newMap();
+        MutableMap<T, Boolean> map = ConcurrentHashMapUnsafe.newMap();
         Set<T> result = Collections.newSetFromMap(map);
         this.forEach(CollectionAddProcedure.on(result));
         return SetAdapter.adapt(map.keySet());

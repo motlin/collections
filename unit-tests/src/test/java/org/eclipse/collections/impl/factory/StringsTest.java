@@ -10,6 +10,8 @@
 
 package org.eclipse.collections.impl.factory;
 
+import org.eclipse.collections.api.list.primitive.ImmutableCharList;
+import org.eclipse.collections.api.list.primitive.ImmutableIntList;
 import org.eclipse.collections.impl.string.immutable.CharAdapter;
 import org.eclipse.collections.impl.string.immutable.CodePointAdapter;
 import org.junit.Assert;
@@ -20,28 +22,28 @@ public class StringsTest
     @Test
     public void asChars()
     {
-        CharAdapter adapter = Strings.asChars("The quick brown fox jumps over the lazy dog.");
+        ImmutableCharList adapter = Strings.asChars("The quick brown fox jumps over the lazy dog.");
         Assert.assertTrue(adapter.contains('T'));
     }
 
     @Test
     public void toChars()
     {
-        CharAdapter adapter = Strings.toChars('H', 'e', 'l', 'l', 'o');
+        ImmutableCharList adapter = Strings.toChars('H', 'e', 'l', 'l', 'o');
         Assert.assertEquals(2, adapter.count(c -> c == 'l'));
     }
 
     @Test
     public void asCodePoints()
     {
-        CodePointAdapter adapter = Strings.asCodePoints("The quick brown fox jumps over the lazy dog.");
+        ImmutableIntList adapter = Strings.asCodePoints("The quick brown fox jumps over the lazy dog.");
         Assert.assertTrue(adapter.contains((int) 'T'));
     }
 
     @Test
     public void toCodePoints()
     {
-        CodePointAdapter adapter = Strings.toCodePoints((int) 'H', (int) 'e', (int) 'l', (int) 'l', (int) 'o');
+        ImmutableIntList adapter = Strings.toCodePoints((int) 'H', (int) 'e', (int) 'l', (int) 'l', (int) 'o');
         Assert.assertEquals(2, adapter.count(i -> i == (int) 'l'));
     }
 }

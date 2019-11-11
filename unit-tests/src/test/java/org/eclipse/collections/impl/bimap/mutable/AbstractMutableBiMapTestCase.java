@@ -101,7 +101,7 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
         Assert.assertEquals(Character.valueOf('d'), biMap.forcePut(4, 'e'));
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(4, 'e', null, 'b', 3, 'c'), biMap);
 
-        HashBiMap<Integer, Character> actual = HashBiMap.newMap();
+        MutableBiMap<Integer, Character> actual = HashBiMap.newMap();
         actual.forcePut(1, null);
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, null), actual);
     }
@@ -127,7 +127,7 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
         Verify.assertThrows(IllegalArgumentException.class, () -> biMap.put(4, 'e'));
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, 'e', null, 'b', 3, 'c', 4, 'd'), biMap);
 
-        HashBiMap<Integer, Character> actual = HashBiMap.newMap();
+        MutableBiMap<Integer, Character> actual = HashBiMap.newMap();
         actual.put(1, null);
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, null), actual);
     }
@@ -303,7 +303,7 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
         AbstractMutableBiMapTestCase.assertBiMapsEqual(HashBiMap.newWithKeysValues(1, null, null, 'b', 3, 'c'), biMap);
 
         biMap.putAll(UnifiedMap.newWithKeysValues(1, null, null, 'b', 3, 'c'));
-        HashBiMap<Integer, Character> expected = HashBiMap.newWithKeysValues(1, null, null, 'b', 3, 'c');
+        MutableBiMap<Integer, Character> expected = HashBiMap.newWithKeysValues(1, null, null, 'b', 3, 'c');
         Assert.assertEquals(expected, biMap);
 
         biMap.putAll(UnifiedMap.newWithKeysValues(4, 'd', 5, 'e', 6, 'f'));

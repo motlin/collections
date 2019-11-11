@@ -64,6 +64,8 @@ import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.map.primitive.ObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.ObjectLongMap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -1076,7 +1078,7 @@ public final class RandomAccessListIterate
 
     public static <T> PartitionMutableList<T> partition(List<T> list, Predicate<? super T> predicate)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
+        PartitionMutableList<T> partitionFastList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)
@@ -1092,7 +1094,7 @@ public final class RandomAccessListIterate
 
     public static <T, P> PartitionMutableList<T> partitionWith(List<T> list, Predicate2<? super T, ? super P> predicate, P parameter)
     {
-        PartitionFastList<T> partitionFastList = new PartitionFastList<>();
+        PartitionMutableList<T> partitionFastList = new PartitionFastList<>();
 
         int size = list.size();
         for (int i = 0; i < size; i++)
@@ -1737,7 +1739,7 @@ public final class RandomAccessListIterate
             Function<? super T, ? extends V> groupBy,
             IntFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         for (int i = 0; i < list.size(); i++)
         {
             T item = list.get(i);
@@ -1751,7 +1753,7 @@ public final class RandomAccessListIterate
             Function<? super T, ? extends V> groupBy,
             LongFunction<? super T> function)
     {
-        ObjectLongHashMap<V> result = ObjectLongHashMap.newMap();
+        MutableObjectLongMap<V> result = ObjectLongHashMap.newMap();
         for (int i = 0; i < list.size(); i++)
         {
             T item = list.get(i);
@@ -1765,7 +1767,7 @@ public final class RandomAccessListIterate
             Function<? super T, ? extends V> groupBy,
             FloatFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         for (int i = 0; i < list.size(); i++)
         {
             T item = list.get(i);
@@ -1779,7 +1781,7 @@ public final class RandomAccessListIterate
             Function<? super T, ? extends V> groupBy,
             DoubleFunction<? super T> function)
     {
-        ObjectDoubleHashMap<V> result = ObjectDoubleHashMap.newMap();
+        MutableObjectDoubleMap<V> result = ObjectDoubleHashMap.newMap();
         for (int i = 0; i < list.size(); i++)
         {
             T item = list.get(i);

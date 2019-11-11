@@ -35,7 +35,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void forEach()
     {
-        InternalIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
+        LazyIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
         Sum sum = new IntegerSum(0);
         select.forEach(new SumProcedure<>(sum));
         Assert.assertEquals(9, sum.getValue().intValue());
@@ -44,7 +44,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void forEachWithIndex()
     {
-        InternalIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
+        LazyIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
         Sum sum = new IntegerSum(0);
         select.forEachWithIndex((object, index) -> {
             sum.add(object);
@@ -59,7 +59,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void iterator()
     {
-        InternalIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
+        LazyIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
         Sum sum = new IntegerSum(0);
         for (Integer each : select)
         {
@@ -71,7 +71,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void forEachWith()
     {
-        InternalIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
+        LazyIterable<Integer> select = new SelectInstancesOfIterable<>(FastList.newListWith(1, 2.0, 3, 4.0, 5), Integer.class);
         Sum sum = new IntegerSum(0);
         select.forEachWith((each, aSum) -> aSum.add(each), sum);
         Assert.assertEquals(9, sum.getValue().intValue());
@@ -114,7 +114,7 @@ public class SelectInstancesOfIterableTest extends AbstractLazyIterableTestCase
     public void distinct()
     {
         super.distinct();
-        SelectInstancesOfIterable<Double> iterable = new SelectInstancesOfIterable<>(FastList.newListWith(3.0, 2.0, 3, 2.0, 4.0, 5, 1.0, 3.0, 1.0, 5.0), Double.class);
+        LazyIterable<Double> iterable = new SelectInstancesOfIterable<>(FastList.newListWith(3.0, 2.0, 3, 2.0, 4.0, 5, 1.0, 3.0, 1.0, 5.0), Double.class);
         Assert.assertEquals(
                 FastList.newListWith(3.0, 2.0, 4.0, 1.0, 5.0),
                 iterable.distinct().toList());

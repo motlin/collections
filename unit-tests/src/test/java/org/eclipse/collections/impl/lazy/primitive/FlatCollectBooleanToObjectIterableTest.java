@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.lazy.primitive;
 
-import org.eclipse.collections.api.InternalIterable;
+import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -33,7 +33,7 @@ public class FlatCollectBooleanToObjectIterableTest
     @Test
     public void forEach()
     {
-        InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
+        LazyIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
         Appendable builder = new StringBuilder();
         Procedure<Boolean> appendProcedure = Procedures.append(builder);
         select.forEach(appendProcedure);
@@ -43,7 +43,7 @@ public class FlatCollectBooleanToObjectIterableTest
     @Test
     public void forEachWithIndex()
     {
-        InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
+        LazyIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
         StringBuilder builder = new StringBuilder("");
         select.forEachWithIndex((object, index) -> {
             builder.append(object);
@@ -55,7 +55,7 @@ public class FlatCollectBooleanToObjectIterableTest
     @Test
     public void iterator()
     {
-        InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
+        LazyIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
         StringBuilder builder = new StringBuilder("");
         for (Boolean each : select)
         {
@@ -67,7 +67,7 @@ public class FlatCollectBooleanToObjectIterableTest
     @Test
     public void forEachWith()
     {
-        InternalIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
+        LazyIterable<Boolean> select = this.newPrimitiveWith(true, false, true, false, true);
         StringBuilder builder = new StringBuilder("");
         select.forEachWith((each, aBuilder) -> aBuilder.append(each), builder);
         Assert.assertEquals("truefalsetruefalsetrue", builder.toString());

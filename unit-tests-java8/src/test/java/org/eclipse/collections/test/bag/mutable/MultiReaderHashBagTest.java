@@ -13,6 +13,7 @@ package org.eclipse.collections.test.bag.mutable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.bag.MultiReaderBag;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.impl.bag.mutable.MultiReaderHashBag;
 import org.eclipse.collections.impl.block.factory.Procedures;
@@ -70,7 +71,7 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
     public void RichIterable_iterator_iterationOrder()
     {
         MutableCollection<Integer> iterationOrder = this.newMutableForFilter();
-        MultiReaderHashBag<Integer> instanceUnderTest = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
+        MultiReaderBag<Integer> instanceUnderTest = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
 
         MutableCollection<Integer> expectedIterationOrder = this.newMutableForFilter();
         instanceUnderTest.forEach(Procedures.cast(expectedIterationOrder::add));
@@ -91,7 +92,7 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
     @Test
     public void MultiReaderHashBag_next()
     {
-        MultiReaderHashBag<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
+        MultiReaderBag<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
 
         MutableCollection<Integer> mutableCollection = this.newMutableForFilter();
 
@@ -111,16 +112,16 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
     @Test
     public void MultiReaderHashBag_hasNext()
     {
-        MultiReaderHashBag<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
+        MultiReaderBag<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
         iterable.withReadLockAndDelegate(delegate -> assertTrue(delegate.iterator().hasNext()));
-        MultiReaderHashBag<?> emptyIterable = this.newWith();
+        MultiReaderBag<?> emptyIterable = this.newWith();
         emptyIterable.withReadLockAndDelegate(delegate -> assertFalse(delegate.iterator().hasNext()));
     }
 
     @Test
     public void MultiReaderHashBag_next_throws_at_end()
     {
-        MultiReaderHashBag<Integer> iterable = this.newWith(3, 2, 1);
+        MultiReaderBag<Integer> iterable = this.newWith(3, 2, 1);
         iterable.withReadLockAndDelegate(delegate -> {
             Iterator<Integer> iterator = delegate.iterator();
             assertTrue(iterator.hasNext());
@@ -137,7 +138,7 @@ public class MultiReaderHashBagTest implements MutableBagTestCase, MultiReaderMu
     @Test
     public void MultiReaderHashBag_next_throws_on_empty()
     {
-        MultiReaderHashBag<Object> iterable = this.newWith();
+        MultiReaderBag<Object> iterable = this.newWith();
         assertThrows(
                 NoSuchElementException.class,
                 () -> iterable.withReadLockAndDelegate(delegate -> delegate.iterator().next()));

@@ -416,7 +416,7 @@ public class ListsTest
     public void newListWithList()
     {
         ImmutableList<String> list = Lists.immutable.of();
-        FastList<String> fastList = FastList.newListWith("1");
+        MutableList<String> fastList = FastList.newListWith("1");
         Assert.assertEquals(list = list.newWith("1"), fastList.toImmutable());
         Assert.assertEquals(list = list.newWith("2"), fastList.with("2").toImmutable());
         Assert.assertEquals(list = list.newWith("3"), fastList.with("3").toImmutable());

@@ -138,7 +138,7 @@ public class ProceduresTest
     public void caseDefault()
     {
         Procedure<Object> defaultBlock = each -> { throw new BlockCalledException(); };
-        CaseProcedure<Object> undertest = Procedures.caseDefault(defaultBlock);
+        Procedure<Object> undertest = Procedures.caseDefault(defaultBlock);
         Verify.assertThrows(BlockCalledException.class, () -> undertest.value(1));
     }
 
@@ -146,7 +146,7 @@ public class ProceduresTest
     public void caseDefaultWithACase()
     {
         Procedure<Object> caseBlock = each -> { throw new BlockCalledException(); };
-        CaseProcedure<Object> undertest = Procedures.caseDefault(DoNothingProcedure.DO_NOTHING, ignored -> true, caseBlock);
+        Procedure<Object> undertest = Procedures.caseDefault(DoNothingProcedure.DO_NOTHING, ignored -> true, caseBlock);
         Verify.assertThrows(BlockCalledException.class, () -> undertest.value(1));
     }
 

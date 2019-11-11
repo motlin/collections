@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -94,7 +95,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     @Test
     default void MapIterable_forEachKey()
     {
-        UnifiedSet<Integer> result = UnifiedSet.newSet();
+        MutableSet<Integer> result = UnifiedSet.newSet();
         MapIterable<Integer, String> map = this.newWithKeysValues(3, "3", 2, "2", 1, "1");
         map.forEachKey(CollectionAddProcedure.on(result));
         Verify.assertSetsEqual(UnifiedSet.newSetWith(1, 2, 3), result);
@@ -103,7 +104,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     @Test
     default void MapIterable_forEachValue()
     {
-        UnifiedSet<String> result = UnifiedSet.newSet();
+        MutableSet<String> result = UnifiedSet.newSet();
         MapIterable<Integer, String> map = this.newWithKeysValues(3, "3", 2, "2", 1, "1");
         map.forEachValue(CollectionAddProcedure.on(result));
         Verify.assertSetsEqual(UnifiedSet.newSetWith("1", "2", "3"), result);

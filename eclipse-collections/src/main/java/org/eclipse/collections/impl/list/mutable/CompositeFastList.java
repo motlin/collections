@@ -59,7 +59,7 @@ public final class CompositeFastList<E>
     private static final Procedure<FastList<?>> REVERSE_LIST_PROCEDURE = FastList::reverseThis;
 
     private static final long serialVersionUID = 2L;
-    private final MutableList<FastList<E>> lists = FastList.newList();
+    private final FastList<FastList<E>> lists = FastList.newList();
     private int size;
 
     @Override

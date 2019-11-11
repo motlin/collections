@@ -86,7 +86,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
     @Test
     public void testNewBag()
     {
-        ImmutableHashBag<Object> immutableHashBag = ImmutableHashBag.newBagWith(HashBag.newBag().with(1, 2, 3, 4));
+        ImmutableBag<Object> immutableHashBag = ImmutableHashBag.newBagWith(HashBag.newBag().with(1, 2, 3, 4));
         Verify.assertSize(4, immutableHashBag);
         Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), immutableHashBag.toSortedList());
     }

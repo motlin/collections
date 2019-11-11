@@ -19,6 +19,7 @@ import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
+import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
@@ -86,7 +87,7 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
     public void equalsAndHashCode()
     {
         super.equalsAndHashCode();
-        ImmutableSingletonBag<Integer> immutable = new ImmutableSingletonBag<>(1);
+        ImmutableBag<Integer> immutable = new ImmutableSingletonBag<>(1);
         Bag<Integer> mutable = Bags.mutable.of(1);
         Verify.assertEqualsAndHashCode(immutable, mutable);
         Assert.assertNotEquals(immutable, FastList.newList(mutable));
@@ -657,7 +658,7 @@ public class ImmutableSingletonBagTest extends ImmutableBagTestCase
     public void collectBooleanWithTarget()
     {
         BooleanHashBag target = new BooleanHashBag();
-        BooleanHashBag result = this.newBag().collectBoolean("4"::equals, target);
+        MutableBooleanBag result = this.newBag().collectBoolean("4"::equals, target);
         Assert.assertSame("Target sent as parameter not returned", target, result);
         Assert.assertEquals(1, result.sizeDistinct());
         Assert.assertEquals(0, result.occurrencesOf(true));

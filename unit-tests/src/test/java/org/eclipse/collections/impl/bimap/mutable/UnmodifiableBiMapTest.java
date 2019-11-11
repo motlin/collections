@@ -35,7 +35,7 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     @Override
     public MutableBiMap<Integer, Character> classUnderTest()
     {
-        HashBiMap<Integer, Character> map = HashBiMap.newMap();
+        MutableBiMap<Integer, Character> map = HashBiMap.newMap();
         map.put(1, null);
         map.put(null, 'b');
         map.put(3, 'c');

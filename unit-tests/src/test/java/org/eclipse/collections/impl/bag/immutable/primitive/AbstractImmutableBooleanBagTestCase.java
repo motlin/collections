@@ -85,7 +85,7 @@ public abstract class AbstractImmutableBooleanBagTestCase extends AbstractImmuta
     @Test
     public void booleanIterator()
     {
-        BooleanHashBag bag = BooleanHashBag.newBagWith();
+        MutableBooleanBag bag = BooleanHashBag.newBagWith();
         BooleanIterator iterator = this.classUnderTest().booleanIterator();
         for (int i = 0; i < this.classUnderTest().size(); i++)
         {

@@ -1888,7 +1888,7 @@ public class ConcurrentHashMapUnsafe<K, V>
                 return false;
             }
             Map.Entry<K, V> e = (Map.Entry<K, V>) o;
-            Entry<K, V> candidate = ConcurrentHashMapUnsafe.this.getEntry(e.getKey());
+            Map.Entry<K, V> candidate = ConcurrentHashMapUnsafe.this.getEntry(e.getKey());
             return candidate != null && candidate.equals(e);
         }
 

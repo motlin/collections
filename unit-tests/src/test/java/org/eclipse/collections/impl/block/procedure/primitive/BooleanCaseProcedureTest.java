@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.block.procedure.primitive;
 
+import org.eclipse.collections.api.block.procedure.primitive.BooleanProcedure;
 import org.eclipse.collections.api.list.primitive.BooleanList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
@@ -39,7 +40,7 @@ public class BooleanCaseProcedureTest
         MutableBooleanList ifOneList = BooleanLists.mutable.empty();
         MutableBooleanList defaultList = BooleanLists.mutable.empty();
         MutableBooleanList list = BooleanLists.mutable.with(true, false);
-        BooleanCaseProcedure procedure =
+        BooleanProcedure procedure =
                 new BooleanCaseProcedure(defaultList::add)
                         .addCase(value -> value, ifOneList::add);
         list.each(procedure);
@@ -70,7 +71,7 @@ public class BooleanCaseProcedureTest
         MutableBooleanList ifTwoList = BooleanLists.mutable.empty();
         MutableBooleanList defaultList = BooleanLists.mutable.empty();
         MutableBooleanList list = BooleanLists.mutable.with(true, true, false, false);
-        BooleanCaseProcedure procedure =
+        BooleanProcedure procedure =
                 new BooleanCaseProcedure(defaultList::add)
                         .addCase(value -> value, ifOneList::add)
                         .addCase(value -> !value, ifTwoList::add);

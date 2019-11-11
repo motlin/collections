@@ -195,7 +195,7 @@ public final class ArrayAdapter<T>
     @Override
     public FixedSizeList<T> toReversed()
     {
-        ArrayAdapter<T> result = this.clone();
+        FixedSizeList<T> result = this.clone();
         result.reverseThis();
         return result;
     }

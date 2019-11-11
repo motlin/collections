@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.block.procedure.primitive;
 
+import org.eclipse.collections.api.block.procedure.primitive.IntProcedure;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.test.Verify;
@@ -135,7 +136,7 @@ public class PrimitiveCaseProcedureSerializationTest
         MutableIntList ifOneList = IntLists.mutable.empty();
         MutableIntList defaultList = IntLists.mutable.empty();
         MutableIntList list = IntLists.mutable.with(1, 2);
-        IntCaseProcedure procedure =
+        IntProcedure procedure =
                 new IntCaseProcedure(defaultList::add)
                         .addCase(value -> value == 1, ifOneList::add);
 

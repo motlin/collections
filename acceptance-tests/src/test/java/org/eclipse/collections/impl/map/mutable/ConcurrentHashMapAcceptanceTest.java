@@ -90,7 +90,7 @@ public class ConcurrentHashMapAcceptanceTest
     @Test
     public void putAllInParallelSmallMap()
     {
-        ConcurrentHashMap<Integer, Integer> source = ConcurrentHashMap.newMap(Interval.oneTo(1000).toMap(Functions.getIntegerPassThru(), Functions.getIntegerPassThru()));
+        MutableMap<Integer, Integer> source = ConcurrentHashMap.newMap(Interval.oneTo(1000).toMap(Functions.getIntegerPassThru(), Functions.getIntegerPassThru()));
         ConcurrentHashMap<Integer, Integer> target = ConcurrentHashMap.newMap();
         target.putAllInParallel(source, 10, this.executor);
         Verify.assertEqualsAndHashCode(source, target);
@@ -99,7 +99,7 @@ public class ConcurrentHashMapAcceptanceTest
     @Test
     public void putAllInParallelLargeMap()
     {
-        ConcurrentHashMap<Integer, Integer> source = ConcurrentHashMap.newMap(Interval.oneTo(60000).toMap(Functions.getIntegerPassThru(), Functions.getIntegerPassThru()));
+        MutableMap<Integer, Integer> source = ConcurrentHashMap.newMap(Interval.oneTo(60000).toMap(Functions.getIntegerPassThru(), Functions.getIntegerPassThru()));
         ConcurrentHashMap<Integer, Integer> target = ConcurrentHashMap.newMap();
         target.putAllInParallel(source, 10, this.executor);
         Verify.assertEqualsAndHashCode(source, target);
@@ -108,7 +108,7 @@ public class ConcurrentHashMapAcceptanceTest
     @Test
     public void concurrentPutGetPutAllRemoveContainsKeyContainsValueGetIfAbsentPutTest()
     {
-        ConcurrentHashMap<Integer, Integer> map1 = ConcurrentHashMap.newMap();
+        MutableMap<Integer, Integer> map1 = ConcurrentHashMap.newMap();
         ConcurrentHashMap<Integer, Integer> map2 = ConcurrentHashMap.newMap();
         ParallelIterate.forEach(Interval.oneTo(1000), each -> {
             map1.put(each, each);
@@ -137,7 +137,7 @@ public class ConcurrentHashMapAcceptanceTest
     public void concurrentPutIfAbsentGetIfPresentPutTest()
     {
         ConcurrentHashMap<Integer, Integer> map1 = ConcurrentHashMap.newMap();
-        ConcurrentHashMap<Integer, Integer> map2 = ConcurrentHashMap.newMap();
+        MutableMap<Integer, Integer> map2 = ConcurrentHashMap.newMap();
         ParallelIterate.forEach(Interval.oneTo(1000), each -> {
             map1.put(each, each);
             map1.put(each, each);
@@ -154,7 +154,7 @@ public class ConcurrentHashMapAcceptanceTest
     @Test
     public void concurrentClear()
     {
-        ConcurrentHashMap<Integer, Integer> map = ConcurrentHashMap.newMap();
+        MutableMap<Integer, Integer> map = ConcurrentHashMap.newMap();
         ParallelIterate.forEach(Interval.oneTo(1000), each -> {
             for (int i = 0; i < each; i++)
             {

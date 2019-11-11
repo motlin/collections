@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.factory.set.primitive.ImmutableBooleanSetFactory;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
+import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
@@ -105,7 +106,7 @@ public class BooleanSetsTest
     public void newSetWithSet()
     {
         ImmutableBooleanSet set = BooleanSets.immutable.with();
-        BooleanHashSet booleanHashSet = BooleanHashSet.newSetWith(true);
+        MutableBooleanSet booleanHashSet = BooleanHashSet.newSetWith(true);
         Assert.assertEquals(set = set.newWith(true), booleanHashSet.toImmutable());
         Assert.assertEquals(set = set.newWith(false), booleanHashSet.with(false).toImmutable());
         Assert.assertEquals(set = set.newWith(true), booleanHashSet.with(true).toImmutable());

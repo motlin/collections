@@ -147,7 +147,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     {
         super.addAll();
 
-        TreeBag<Integer> expected = TreeBag.newBag(Comparators.reverseNaturalOrder(), FastList.newListWith(1, 1, 2, 3));
+        MutableSortedBag<Integer> expected = TreeBag.newBag(Comparators.reverseNaturalOrder(), FastList.newListWith(1, 1, 2, 3));
         MutableSortedBag<Integer> collection = this.newWith(Comparators.reverseNaturalOrder());
 
         Assert.assertTrue(collection.addAll(FastList.newListWith(3, 2, 1, 1)));
@@ -160,7 +160,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     {
         super.addAllIterable();
 
-        TreeBag<Integer> expected = TreeBag.newBag(Collections.reverseOrder(), FastList.newListWith(2, 1, 2, 3));
+        MutableSortedBag<Integer> expected = TreeBag.newBag(Collections.reverseOrder(), FastList.newListWith(2, 1, 2, 3));
         MutableSortedBag<Integer> collection = this.newWith(Collections.reverseOrder());
 
         Assert.assertTrue(collection.addAllIterable(FastList.newListWith(3, 2, 1, 2)));
@@ -561,7 +561,7 @@ public abstract class AbstractMutableSortedBagTestCase extends MutableBagTestCas
     {
         super.groupByEach();
         MutableSortedBag<Integer> bag = this.newWith(Collections.reverseOrder(), 1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9);
-        NegativeIntervalFunction function = new NegativeIntervalFunction();
+        Function<Integer, Iterable<Integer>> function = new NegativeIntervalFunction();
         MutableSortedBagMultimap<Integer, Integer> expected =
                 this.newWith(Collections.<Integer>reverseOrder()).groupByEach(function);
 

@@ -204,7 +204,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
         // Not important since it uses writeReplace()
         private static final long serialVersionUID = 1L;
 
-        protected SubList(AbstractMutableList<T> list, int fromIndex, int toIndex)
+        protected SubList(MutableList<T> list, int fromIndex, int toIndex)
         {
             super(list, fromIndex, toIndex);
         }
