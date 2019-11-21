@@ -36,7 +36,6 @@ import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.set.primitive.BooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
 import org.eclipse.collections.impl.lazy.primitive.ReverseBooleanIterable;
@@ -579,7 +578,7 @@ public final class BooleanArrayList
         {
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
-        MutableList<BooleanIterable> result = Lists.mutable.empty();
+        MutableList<BooleanIterable> result = MutableList.empty();
         if (this.notEmpty())
         {
             if (this.size() <= size)

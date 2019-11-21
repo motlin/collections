@@ -31,8 +31,6 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.SortedMaps;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
@@ -245,7 +243,7 @@ public class ImmutableTreeMap<K, V>
     public Set<Entry<K, V>> entrySet()
     {
         int length = this.keys.length;
-        MutableSortedSet<Entry<K, V>> entrySet = SortedSets.mutable.with(new EntryComparator<>(this.comparator));
+        MutableSortedSet<Entry<K, V>> entrySet = MutableSortedSet.of(new EntryComparator<>(this.comparator));
         for (int index = 0; index < length; index++)
         {
             entrySet.add(ImmutableEntry.of(this.keys[index], this.values[index]));
@@ -267,14 +265,14 @@ public class ImmutableTreeMap<K, V>
         }
         if (count == 0)
         {
-            return SortedMaps.immutable.of(this.comparator());
+            return ImmutableSortedMap.of(this.comparator());
         }
         if (count >= this.size())
         {
             return this;
         }
 
-        MutableSortedMap<K, V> output = SortedMaps.mutable.of(this.comparator());
+        MutableSortedMap<K, V> output = MutableSortedMap.of(this.comparator());
         for (int i = 0; i < count; i++)
         {
             output.put(this.keys[i], this.values[i]);
@@ -296,10 +294,10 @@ public class ImmutableTreeMap<K, V>
         }
         if (count >= this.size())
         {
-            return SortedMaps.immutable.of(this.comparator());
+            return ImmutableSortedMap.of(this.comparator());
         }
 
-        MutableSortedMap<K, V> output = SortedMaps.mutable.of(this.comparator());
+        MutableSortedMap<K, V> output = MutableSortedMap.of(this.comparator());
         for (int i = 0; i < this.size(); i++)
         {
             if (i >= count)

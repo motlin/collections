@@ -15,7 +15,6 @@ import java.util.EmptyStackException;
 import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
 import org.eclipse.collections.api.stack.MutableStack;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.stack.StackIterableTestCase;
 import org.eclipse.collections.impl.test.Verify;
@@ -64,11 +63,11 @@ public abstract class MutableStackTestCase extends StackIterableTestCase
         Assert.assertEquals(this.newStackFromTopToBottom(3, 2, 1), stack2);
         Assert.assertEquals(FastList.newListWith(3, 2), stack2.peek(2));
 
-        MutableStack<Integer> stack3 = Stacks.mutable.ofReversed(1, 2, 3);
+        MutableStack<Integer> stack3 = MutableStack.ofReversed(1, 2, 3);
         Assert.assertEquals(this.newStackFromTopToBottom(1, 2, 3), stack3);
 
-        MutableStack<Integer> stack4 = Stacks.mutable.ofAll(FastList.newListWith(1, 2, 3));
-        MutableStack<Integer> stack5 = Stacks.mutable.ofAllReversed(FastList.newListWith(1, 2, 3));
+        MutableStack<Integer> stack4 = MutableStack.ofAll(FastList.newListWith(1, 2, 3));
+        MutableStack<Integer> stack5 = MutableStack.ofAllReversed(FastList.newListWith(1, 2, 3));
 
         Assert.assertEquals(this.newStackFromTopToBottom(3, 2, 1), stack4);
         Assert.assertEquals(this.newStackFromTopToBottom(1, 2, 3), stack5);

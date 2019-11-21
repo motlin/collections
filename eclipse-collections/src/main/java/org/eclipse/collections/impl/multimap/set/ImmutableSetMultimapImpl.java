@@ -25,8 +25,6 @@ import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimap;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimap;
 import org.eclipse.collections.impl.multimap.ImmutableMultimapSerializationProxy;
@@ -57,13 +55,13 @@ public final class ImmutableSetMultimapImpl<K, V>
     @Override
     protected ImmutableSet<V> createCollection()
     {
-        return Sets.immutable.empty();
+        return ImmutableSet.empty();
     }
 
     @Override
     public ImmutableSetMultimap<K, V> newEmpty()
     {
-        return new ImmutableSetMultimapImpl<>(Maps.immutable.with());
+        return new ImmutableSetMultimapImpl<>(ImmutableMap.empty());
     }
 
     @Override

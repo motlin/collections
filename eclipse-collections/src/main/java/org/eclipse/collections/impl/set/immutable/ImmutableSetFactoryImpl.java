@@ -136,7 +136,7 @@ public class ImmutableSetFactoryImpl implements ImmutableSetFactory
     {
         if (items == null || items.length == 0)
         {
-            return this.of();
+            return this.empty();
         }
 
         switch (items.length)

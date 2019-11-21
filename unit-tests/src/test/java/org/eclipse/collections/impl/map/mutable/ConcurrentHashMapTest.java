@@ -23,11 +23,11 @@ import org.eclipse.collections.api.map.ConcurrentMutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.parallel.ParallelIterate;
@@ -36,8 +36,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
 
 /**
  * JUnit test for {@link ConcurrentHashMap}.
@@ -218,8 +216,8 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
                 "C", 3,
                 "D", 4);
         PartitionIterable<Integer> partition = map.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iSet(2, 4), partition.getSelected().toSet());
-        Assert.assertEquals(iSet(1, 3), partition.getRejected().toSet());
+        Assert.assertEquals(ImmutableSet.of(2, 4), partition.getSelected().toSet());
+        Assert.assertEquals(ImmutableSet.of(1, 3), partition.getRejected().toSet());
     }
 
     @Override
@@ -232,8 +230,8 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
                 "C", 3,
                 "D", 4);
         PartitionIterable<Integer> partition = map.partitionWith(Predicates2.in(), map.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iSet(2, 4), partition.getSelected().toSet());
-        Assert.assertEquals(iSet(1, 3), partition.getRejected().toSet());
+        Assert.assertEquals(ImmutableSet.of(2, 4), partition.getSelected().toSet());
+        Assert.assertEquals(ImmutableSet.of(1, 3), partition.getRejected().toSet());
     }
 
     @Test
@@ -292,9 +290,9 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
         ParallelIterate.forEach(Interval.oneTo(100), each -> {
             map1.put(each, each);
             Assert.assertEquals(each, map1.get(each));
-            map2.putAll(Maps.mutable.of(each, each));
+            map2.putAll(MutableMap.of(each, each));
             map1.remove(each);
-            map1.putAll(Maps.mutable.of(each, each));
+            map1.putAll(MutableMap.of(each, each));
             Assert.assertEquals(each, map2.get(each));
             map2.remove(each);
             Assert.assertNull(map2.get(each));
@@ -321,8 +319,8 @@ public class ConcurrentHashMapTest extends ConcurrentHashMapTestCase
             map1.put(each, each);
             map1.put(each, each);
             Assert.assertEquals(each, map1.get(each));
-            map2.putAll(Maps.mutable.of(each, each));
-            map2.putAll(Maps.mutable.of(each, each));
+            map2.putAll(MutableMap.of(each, each));
+            map2.putAll(MutableMap.of(each, each));
             map1.remove(each);
             Assert.assertNull(map1.putIfAbsentGetIfPresent(each, new KeyTransformer(), new ValueFactory(), null, null));
             Assert.assertEquals(each, map1.putIfAbsentGetIfPresent(each, new KeyTransformer(), new ValueFactory(), null, null));

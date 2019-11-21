@@ -13,7 +13,6 @@ package org.eclipse.collections.test.set.immutable.sorted;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.IterableTestCase;
 import org.junit.runner.RunWith;
@@ -25,7 +24,7 @@ public class ImmutableTreeSetTest implements ImmutableSortedSetIterableTestCase
     @Override
     public final <T> ImmutableSortedSet<T> newWith(T... elements)
     {
-        MutableSortedSet<T> result = SortedSets.mutable.with(Comparators.reverseNaturalOrder());
+        MutableSortedSet<T> result = MutableSortedSet.of(Comparators.reverseNaturalOrder());
         IterableTestCase.addAllTo(elements, result);
         return result.toImmutable();
     }

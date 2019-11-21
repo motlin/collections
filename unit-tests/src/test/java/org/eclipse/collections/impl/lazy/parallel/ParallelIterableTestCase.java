@@ -46,7 +46,6 @@ import org.eclipse.collections.impl.block.function.checked.CheckedFunction;
 import org.eclipse.collections.impl.block.predicate.checked.CheckedPredicate;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -57,7 +56,7 @@ import org.junit.Test;
 
 public abstract class ParallelIterableTestCase
 {
-    private static final ImmutableList<Integer> BATCH_SIZES = Lists.immutable.with(2, 5, 10, 100, 1000, 10000, 50000);
+    private static final ImmutableList<Integer> BATCH_SIZES = ImmutableList.of(2, 5, 10, 100, 1000, 10000, 50000);
     protected ExecutorService executorService;
     protected int batchSize = 2;
 

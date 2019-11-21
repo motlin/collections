@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.lazy.parallel.set;
 
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Sets;
 import org.junit.Test;
 
 public class ImmutableUnifiedSetParallelSetIterableTest extends ParallelUnsortedSetIterableTestCase
@@ -26,24 +26,24 @@ public class ImmutableUnifiedSetParallelSetIterableTest extends ParallelUnsorted
     @Override
     protected ParallelUnsortedSetIterable<Integer> newWith(Integer... littleElements)
     {
-        return Sets.immutable.with(littleElements).asParallel(this.executorService, this.batchSize);
+        return ImmutableSet.of(littleElements).asParallel(this.executorService, this.batchSize);
     }
 
     @Override
     protected MutableSet<Integer> getExpectedWith(Integer... littleElements)
     {
-        return Sets.immutable.with(littleElements).toSet();
+        return ImmutableSet.of(littleElements).toSet();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void asParallel_small_batch()
     {
-        Sets.immutable.with(1, 2, 3, 4).asParallel(this.executorService, 0);
+        ImmutableSet.of(1, 2, 3, 4).asParallel(this.executorService, 0);
     }
 
     @Test(expected = NullPointerException.class)
     public void asParallel_null_executorService()
     {
-        Sets.immutable.with(1, 2, 3, 4).asParallel(null, 2);
+        ImmutableSet.of(1, 2, 3, 4).asParallel(null, 2);
     }
 }

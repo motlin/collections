@@ -42,8 +42,6 @@ import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -136,7 +134,7 @@ public abstract class AbstractMutableCollection<T>
         }
 
         Iterator<T> iterator = this.iterator();
-        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        MutableList<RichIterable<T>> result = MutableList.empty();
         while (iterator.hasNext())
         {
             MutableCollection<T> batch = this.newEmpty();
@@ -259,7 +257,7 @@ public abstract class AbstractMutableCollection<T>
     @Override
     public <V> MutableBag<V> countBy(Function<? super T, ? extends V> function)
     {
-        return this.countBy(function, Bags.mutable.empty());
+        return this.countBy(function, MutableBag.empty());
     }
 
     /**
@@ -268,7 +266,7 @@ public abstract class AbstractMutableCollection<T>
     @Override
     public <V, P> MutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.countByWith(function, parameter, Bags.mutable.empty());
+        return this.countByWith(function, parameter, MutableBag.empty());
     }
 
     /**
@@ -277,6 +275,6 @@ public abstract class AbstractMutableCollection<T>
     @Override
     public <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.countByEach(function, Bags.mutable.empty());
+        return this.countByEach(function, MutableBag.empty());
     }
 }

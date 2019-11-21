@@ -14,11 +14,11 @@ import java.util.Iterator;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
 import org.eclipse.collections.test.UnorderedIterableTestCase;
 import org.junit.Test;
@@ -35,13 +35,13 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
     @Override
     default <T> UnsortedSetIterable<T> getExpectedFiltered(T... elements)
     {
-        return Sets.immutable.with(elements);
+        return ImmutableSet.of(elements);
     }
 
     @Override
     default <T> MutableSet<T> newMutableForFilter(T... elements)
     {
-        return Sets.mutable.with(elements);
+        return MutableSet.of(elements);
     }
 
     @Override
@@ -162,14 +162,14 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
     {
         RichIterable<Integer> iterable = this.newWith(3, 2, 1);
         assertThat(iterable.toList(), isOneOf(
-                Lists.immutable.with(3, 2, 1),
-                Lists.immutable.with(3, 1, 2),
-                Lists.immutable.with(2, 3, 1),
-                Lists.immutable.with(2, 1, 3),
-                Lists.immutable.with(1, 3, 2),
-                Lists.immutable.with(1, 2, 3)));
+                ImmutableList.of(3, 2, 1),
+                ImmutableList.of(3, 1, 2),
+                ImmutableList.of(2, 3, 1),
+                ImmutableList.of(2, 1, 3),
+                ImmutableList.of(1, 3, 2),
+                ImmutableList.of(1, 2, 3)));
 
-        MutableList<Integer> target = Lists.mutable.empty();
+        MutableList<Integer> target = MutableList.empty();
         iterable.each(target::add);
         assertEquals(
                 target,
@@ -180,12 +180,12 @@ public interface UnsortedSetLikeTestTrait extends RichIterableUniqueTestCase, Un
     @Test
     default void RichIterable_into()
     {
-        assertThat(this.newWith(3, 2, 1).into(Lists.mutable.empty()), isOneOf(
-                Lists.immutable.with(3, 2, 1),
-                Lists.immutable.with(3, 1, 2),
-                Lists.immutable.with(2, 3, 1),
-                Lists.immutable.with(2, 1, 3),
-                Lists.immutable.with(1, 3, 2),
-                Lists.immutable.with(1, 2, 3)));
+        assertThat(this.newWith(3, 2, 1).into(MutableList.empty()), isOneOf(
+                ImmutableList.of(3, 2, 1),
+                ImmutableList.of(3, 1, 2),
+                ImmutableList.of(2, 3, 1),
+                ImmutableList.of(2, 1, 3),
+                ImmutableList.of(1, 3, 2),
+                ImmutableList.of(1, 2, 3)));
     }
 }

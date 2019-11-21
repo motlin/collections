@@ -16,8 +16,10 @@ import java.util.Iterator;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.HashingStrategy;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.Pool;
@@ -26,8 +28,6 @@ import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.IntegerSum;
@@ -78,8 +78,8 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
     private static final Person JANESMITH = new Person("Jane", "Smith");
     private static final Person JOHNDOE = new Person("John", "Doe");
     private static final Person JANEDOE = new Person("Jane", "Doe");
-    private static final ImmutableList<Person> PEOPLE = Lists.immutable.of(JOHNSMITH, JANESMITH, JOHNDOE, JANEDOE);
-    private static final ImmutableSet<Person> LAST_NAME_HASHED_SET = Sets.immutable.of(JOHNSMITH, JOHNDOE);
+    private static final ImmutableList<Person> PEOPLE = ImmutableList.of(JOHNSMITH, JANESMITH, JOHNDOE, JANEDOE);
+    private static final ImmutableSet<Person> LAST_NAME_HASHED_SET = ImmutableSet.of(JOHNSMITH, JOHNDOE);
 
     @Override
     protected <T> MutableSet<T> newWith(T... littleElements)
@@ -101,7 +101,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
     {
         super.tap();
 
-        MutableList<Person> tapResult = Lists.mutable.of();
+        MutableList<Person> tapResult = MutableList.empty();
         UnifiedSetWithHashingStrategy<Person> people = UnifiedSetWithHashingStrategy.newSet(LAST_NAME_HASHING_STRATEGY).withAll(PEOPLE.castToList());
         Assert.assertSame(people, people.tap(tapResult::add));
         Assert.assertEquals(people.toList(), tapResult);
@@ -196,9 +196,9 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
                 UnifiedSetWithHashingStrategy.newSet(STRING_HASHING_STRATEGY).with("1", "2", "3", "4"));
 
         MutableSet<String> list = UnifiedSetWithHashingStrategy.newSet(STRING_HASHING_STRATEGY).with("A")
-                .withAll(Lists.fixedSize.of("1", "2"))
-                .withAll(Lists.fixedSize.of())
-                .withAll(Sets.fixedSize.of("3", "4"));
+                .withAll(FixedSizeList.of("1", "2"))
+                .withAll(FixedSizeList.empty())
+                .withAll(FixedSizeSet.of("3", "4"));
         Verify.assertEqualsAndHashCode(UnifiedSetWithHashingStrategy.newSetWith(
                 STRING_HASHING_STRATEGY, "A", "1", "2", "3", "4"), list);
     }
@@ -1104,7 +1104,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
     {
         UnifiedSetWithHashingStrategy<String> set = UnifiedSetWithHashingStrategy.newSet(HashingStrategies.defaultStrategy());
 
-        MutableSet<String> expected = Sets.mutable.empty();
+        MutableSet<String> expected = MutableSet.empty();
 
         Interval integers = Interval.fromTo(0, 250);
         integers.each(each ->
@@ -1121,7 +1121,7 @@ public class UnifiedSetWithHashingStrategyTest extends AbstractUnifiedSetTestCas
         Assert.assertEquals(expected, set);
         Assert.assertEquals(261, set.size());
 
-        MutableList<Integer> toRemove = Lists.mutable.withAll(Interval.evensFromTo(0, 20));
+        MutableList<Integer> toRemove = MutableList.ofAll(Interval.evensFromTo(0, 20));
 
         toRemove.addAll(Interval.oddsFromTo(35, 55));
         toRemove.each(each ->

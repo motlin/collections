@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -25,6 +25,6 @@ public class SynchronizedRichIterableSerializationTest
                         + "AHhwc3IAMm9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwubGlzdC5tdXRhYmxlLkZhc3RMaXN0\n"
                         + "AAAAAAAAAAEMAAB4cHcEAAAAAXNyABFqYXZhLmxhbmcuSW50ZWdlchLioKT3gYc4AgABSQAFdmFs\n"
                         + "dWV4cgAQamF2YS5sYW5nLk51bWJlcoaslR0LlOCLAgAAeHAAAAABeHg=",
-                SynchronizedRichIterable.of(Lists.mutable.with(1)));
+                SynchronizedRichIterable.of(MutableList.of(1)));
     }
 }

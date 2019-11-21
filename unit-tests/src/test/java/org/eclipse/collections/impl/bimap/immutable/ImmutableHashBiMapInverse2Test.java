@@ -11,11 +11,10 @@
 package org.eclipse.collections.impl.bimap.immutable;
 
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.impl.IntegerWithCast;
-import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.map.MapIterableTestCase;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -27,31 +26,31 @@ public class ImmutableHashBiMapInverse2Test extends MapIterableTestCase
     @Override
     protected <K, V> ImmutableBiMap<K, V> newMap()
     {
-        return BiMaps.immutable.<V, K>empty().inverse();
+        return ImmutableBiMap.<V, K>empty().inverse();
     }
 
     @Override
     protected <K, V> MapIterable<K, V> newMapWithKeyValue(K key1, V value1)
     {
-        return BiMaps.immutable.withAll(Maps.immutable.with(value1, key1)).inverse();
+        return ImmutableBiMap.ofAll(ImmutableMap.of(value1, key1)).inverse();
     }
 
     @Override
     protected <K, V> ImmutableBiMap<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2)
     {
-        return BiMaps.immutable.withAll(Maps.immutable.with(value1, key1, value2, key2)).inverse();
+        return ImmutableBiMap.ofAll(ImmutableMap.of(value1, key1, value2, key2)).inverse();
     }
 
     @Override
     protected <K, V> ImmutableBiMap<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        return BiMaps.immutable.withAll(Maps.immutable.with(value1, key1, value2, key2, value3, key3)).inverse();
+        return ImmutableBiMap.ofAll(ImmutableMap.of(value1, key1, value2, key2, value3, key3)).inverse();
     }
 
     @Override
     protected <K, V> ImmutableBiMap<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
-        return BiMaps.immutable.withAll(Maps.immutable.with(value1, key1, value2, key2, value3, key3, value4, key4)).inverse();
+        return ImmutableBiMap.ofAll(ImmutableMap.of(value1, key1, value2, key2, value3, key3, value4, key4)).inverse();
     }
 
     @Override

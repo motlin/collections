@@ -87,7 +87,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProced
 import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.map.AbstractMapIterable;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
@@ -496,7 +495,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public <V1> ImmutableBag<V1> countBy(Function<? super V, ? extends V1> function)
     {
-        return this.collect(function, Bags.mutable.<V1>empty()).toImmutable();
+        return this.collect(function, MutableBag.<V1>empty()).toImmutable();
     }
 
     /**
@@ -505,7 +504,7 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public <V1, P> ImmutableBag<V1> countByWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
     {
-        return this.collectWith(function, parameter, Bags.mutable.<V1>empty()).toImmutable();
+        return this.collectWith(function, parameter, MutableBag.<V1>empty()).toImmutable();
     }
 
     /**
@@ -514,6 +513,6 @@ public abstract class AbstractImmutableMap<K, V>
     @Override
     public <V1> ImmutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
     {
-        return this.countByEach(function, Bags.mutable.empty()).toImmutable();
+        return this.countByEach(function, MutableBag.empty()).toImmutable();
     }
 }

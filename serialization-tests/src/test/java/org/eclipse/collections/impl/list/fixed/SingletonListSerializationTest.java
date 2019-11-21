@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.list.fixed;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.impl.list.mutable.FastListSerializationTest;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class SingletonListSerializationTest
                 1L,
                 "rO0ABXNyADVvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxpc3QuZml4ZWQuU2luZ2xldG9u\n"
                         + "TGlzdAAAAAAAAAABDAAAeHBweA==",
-                Lists.fixedSize.of((Object) null));
+                FixedSizeList.of((Object) null));
     }
 
     @Test
@@ -33,6 +33,6 @@ public class SingletonListSerializationTest
         Verify.assertSerializedForm(
                 1L,
                 FastListSerializationTest.FAST_LIST_WITH_ONE_NULL,
-                Lists.fixedSize.of((Object) null).subList(0, 1));
+                FixedSizeList.of((Object) null).subList(0, 1));
     }
 }

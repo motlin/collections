@@ -56,7 +56,6 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedCollectionSerializationProxy;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.lazy.parallel.set.sorted.SynchronizedParallelSortedSetIterable;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 
@@ -593,7 +592,7 @@ public class SynchronizedSortedSet<T>
     {
         synchronized (this.getLock())
         {
-            return SortedSets.immutable.withSortedSet(this.getDelegate());
+            return ImmutableSortedSet.ofSortedSet(this.getDelegate());
         }
     }
 

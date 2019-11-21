@@ -29,14 +29,14 @@ import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
-import org.eclipse.collections.impl.factory.Lists;
 
 /**
- * This class is a memory efficient list with no elements. It is created by calling Lists.fixedSize.of() which
+ * This class is a memory efficient list with no elements. It is created by calling FixedSizeList.empty() which
  * actually returns a singleton instance.
  */
 final class EmptyList<T>
@@ -47,7 +47,7 @@ final class EmptyList<T>
 
     private Object readResolve()
     {
-        return Lists.fixedSize.empty();
+        return FixedSizeList.empty();
     }
 
     @Override
@@ -258,18 +258,18 @@ final class EmptyList<T>
     @Override
     public <S> MutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return Lists.fixedSize.empty();
+        return FixedSizeList.empty();
     }
 
     @Override
     public MutableList<Pair<T, Integer>> zipWithIndex()
     {
-        return Lists.fixedSize.empty();
+        return FixedSizeList.empty();
     }
 
     @Override
     public ImmutableList<T> toImmutable()
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 }

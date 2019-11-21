@@ -22,7 +22,6 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.AbstractMutableList;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -157,7 +156,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
     @Override
     public FixedSizeList<T> toReversed()
     {
-        FixedSizeList<T> result = Lists.fixedSize.withAll(this);
+        FixedSizeList<T> result = FixedSizeList.ofAll(this);
         result.reverseThis();
         return result;
     }
@@ -173,7 +172,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
     {
         if (this.contains(element))
         {
-            return Lists.fixedSize.ofAll(this.toList().without(element));
+            return FixedSizeList.ofAll(this.toList().without(element));
         }
         return this;
     }
@@ -185,7 +184,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
         {
             return this;
         }
-        return Lists.fixedSize.ofAll(this.toList().withAll(elements));
+        return FixedSizeList.ofAll(this.toList().withAll(elements));
     }
 
     @Override
@@ -195,7 +194,7 @@ public abstract class AbstractMemoryEfficientMutableList<T>
         {
             return this;
         }
-        return Lists.fixedSize.ofAll(this.toList().withoutAll(elements));
+        return FixedSizeList.ofAll(this.toList().withoutAll(elements));
     }
 
     private static class SubList<T>

@@ -40,10 +40,7 @@ import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Multimaps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.IntHashSet;
@@ -61,7 +58,7 @@ public class PersonAndPetKataTest
     @Before
     public void setUp()
     {
-        this.people = Lists.mutable.with(
+        this.people = MutableList.of(
                 new Person("Mary", "Smith").addPet(PetType.CAT, "Tabby", 2),
                 new Person("Bob", "Smith")
                         .addPet(PetType.CAT, "Dolly", 3)
@@ -320,7 +317,7 @@ public class PersonAndPetKataTest
                 this.people.detectWith(Person::named, "Bob Smith");
         MutableList<String> names =
                 personEager.getPets().collect(Pet::getName);
-        Assert.assertEquals(Lists.mutable.with("Dolly", "Spot"), names);
+        Assert.assertEquals(MutableList.of("Dolly", "Spot"), names);
         Assert.assertEquals(
                 "Dolly & Spot",
                 names.makeString(" & "));
@@ -337,7 +334,7 @@ public class PersonAndPetKataTest
                 personStream.getPets().stream()
                         .map(Pet::getName)
                         .collect(Collectors.toList());
-        Assert.assertEquals(Lists.mutable.with("Dolly", "Spot"), names);
+        Assert.assertEquals(MutableList.of("Dolly", "Spot"), names);
         Assert.assertEquals("Dolly & Spot",
                 names.stream().collect(Collectors.joining(" & ")));
     }
@@ -352,7 +349,7 @@ public class PersonAndPetKataTest
                 allPetTypesEager);
 
         MutableSet<PetType> allPetTypesEagerTarget =
-                this.people.flatCollect(Person::getPetTypes, Sets.mutable.empty());
+                this.people.flatCollect(Person::getPetTypes, MutableSet.empty());
         Assert.assertEquals(
                 UnifiedSet.newSetWith(PetType.values()),
                 allPetTypesEagerTarget);
@@ -364,7 +361,7 @@ public class PersonAndPetKataTest
                 allPetTypesLazy);
 
         MutableSet<PetType> allPetTypesLazyTarget =
-                this.people.asLazy().flatCollect(Person::getPetTypes, Sets.mutable.empty());
+                this.people.asLazy().flatCollect(Person::getPetTypes, MutableSet.empty());
         Assert.assertEquals(
                 UnifiedSet.newSetWith(PetType.values()),
                 allPetTypesLazyTarget);
@@ -412,7 +409,7 @@ public class PersonAndPetKataTest
 
         Map<String, MutableBag<Person>> byLastNameStreamTargetBag =
                 this.people.stream().collect(
-                        Collectors.groupingBy(Person::getLastName, Collectors.toCollection(Bags.mutable::empty)));
+                        Collectors.groupingBy(Person::getLastName, Collectors.toCollection(MutableBag::empty)));
         Verify.assertIterableSize(3, byLastNameStreamTargetBag.get("Smith"));
     }
 
@@ -530,7 +527,7 @@ public class PersonAndPetKataTest
         Set<Integer> uniqueAges = new HashSet<>(agesStream);
         IntSummaryStatistics stats = agesStream.stream().collect(
                 Collectors.summarizingInt(i -> i));
-        Assert.assertEquals(Sets.mutable.with(1, 2, 3, 4), uniqueAges);
+        Assert.assertEquals(MutableSet.of(1, 2, 3, 4), uniqueAges);
         Assert.assertEquals(stats.getMin(), agesStream.stream().mapToInt(i -> i).min().getAsInt());
         Assert.assertEquals(stats.getMax(), agesStream.stream().mapToInt(i -> i).max().getAsInt());
         Assert.assertEquals(stats.getSum(), agesStream.stream().mapToInt(i -> i).sum());

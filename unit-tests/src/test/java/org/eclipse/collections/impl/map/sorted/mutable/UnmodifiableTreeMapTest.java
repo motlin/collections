@@ -12,10 +12,10 @@ package org.eclipse.collections.impl.map.sorted.mutable;
 
 import java.util.Comparator;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
@@ -190,7 +190,7 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     public void retainAllFromKeySet()
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        map.keySet().retainAll(Lists.mutable.of());
+        map.keySet().retainAll(MutableList.empty());
     }
 
     @Override
@@ -230,7 +230,7 @@ public class UnmodifiableTreeMapTest extends MutableSortedMapTestCase
     public void retainAllFromValues()
     {
         MutableSortedMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        map.values().retainAll(Lists.mutable.of());
+        map.values().retainAll(MutableList.empty());
     }
 
     @Override

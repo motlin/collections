@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.list.MutableList;
@@ -26,11 +27,8 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
-import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.factory.Multimaps;
-import org.eclipse.collections.impl.factory.SortedMaps;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.factory.primitive.IntBags;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -476,7 +474,7 @@ public final class Collectors2Test
     public void toStack()
     {
         Assert.assertEquals(
-                Stacks.mutable.ofAll(SMALL_INTERVAL),
+                MutableStack.ofAll(SMALL_INTERVAL),
                 this.smallData.stream().collect(Collectors2.toStack()));
         Assert.assertEquals(
                 SMALL_INTERVAL.reduceInPlace(Collectors2.toStack()),
@@ -490,7 +488,7 @@ public final class Collectors2Test
     public void toStackParallel()
     {
         Assert.assertEquals(
-                Stacks.mutable.ofAll(LARGE_INTERVAL),
+                MutableStack.ofAll(LARGE_INTERVAL),
                 this.bigData.parallelStream().collect(Collectors2.toStack()));
         Assert.assertEquals(
                 LARGE_INTERVAL.reduceInPlace(Collectors2.toStack()),
@@ -501,7 +499,7 @@ public final class Collectors2Test
     public void toImmutableStack()
     {
         Assert.assertEquals(
-                Stacks.mutable.ofAll(SMALL_INTERVAL),
+                MutableStack.ofAll(SMALL_INTERVAL),
                 this.smallData.stream().collect(Collectors2.toImmutableStack()));
         Assert.assertEquals(
                 SMALL_INTERVAL.reduceInPlace(Collectors2.toStack()),
@@ -515,7 +513,7 @@ public final class Collectors2Test
     public void toImmutableStackParallel()
     {
         Assert.assertEquals(
-                Stacks.mutable.ofAll(LARGE_INTERVAL),
+                MutableStack.ofAll(LARGE_INTERVAL),
                 this.bigData.parallelStream().collect(Collectors2.toImmutableStack()));
         Assert.assertEquals(
                 LARGE_INTERVAL.reduceInPlace(Collectors2.toStack()),
@@ -576,7 +574,7 @@ public final class Collectors2Test
     public void toBiMap()
     {
         Assert.assertEquals(
-                SMALL_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
+                SMALL_INTERVAL.injectInto(MutableBiMap.empty(), (mbm, e) ->
                 {
                     mbm.put(e.toString(), e);
                     return mbm;
@@ -591,7 +589,7 @@ public final class Collectors2Test
     public void toBiMapParallel()
     {
         Assert.assertEquals(
-                LARGE_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
+                LARGE_INTERVAL.injectInto(MutableBiMap.empty(), (mbm, e) ->
                 {
                     mbm.put(e.toString(), e);
                     return mbm;
@@ -606,7 +604,7 @@ public final class Collectors2Test
     public void toImmutableBiMap()
     {
         Assert.assertEquals(
-                SMALL_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
+                SMALL_INTERVAL.injectInto(MutableBiMap.empty(), (mbm, e) ->
                 {
                     mbm.put(e.toString(), e);
                     return mbm;
@@ -621,7 +619,7 @@ public final class Collectors2Test
     public void toImmutableBiMapParallel()
     {
         Assert.assertEquals(
-                LARGE_INTERVAL.injectInto(BiMaps.mutable.empty(), (mbm, e) ->
+                LARGE_INTERVAL.injectInto(MutableBiMap.empty(), (mbm, e) ->
                 {
                     mbm.put(e.toString(), e);
                     return mbm;
@@ -1177,42 +1175,42 @@ public final class Collectors2Test
     @Test
     public void groupByUniqueKey()
     {
-        MutableMap<Integer, Integer> expectedMap = SMALL_INTERVAL.groupByUniqueKey(id -> id, Maps.mutable.empty());
-        MutableMap<Integer, Integer> actualMap = SMALL_INTERVAL.stream().collect(Collectors2.groupByUniqueKey(id -> id, Maps.mutable::empty));
+        MutableMap<Integer, Integer> expectedMap = SMALL_INTERVAL.groupByUniqueKey(id -> id, MutableMap.empty());
+        MutableMap<Integer, Integer> actualMap = SMALL_INTERVAL.stream().collect(Collectors2.groupByUniqueKey(id -> id, MutableMap::empty));
         Assert.assertEquals(expectedMap, actualMap);
     }
 
     @Test(expected = IllegalStateException.class)
     public void groupByUniqueKey_throws_for_duplicate()
     {
-        SMALL_INTERVAL.stream().collect(Collectors2.groupByUniqueKey(id -> 1, Maps.mutable::empty));
+        SMALL_INTERVAL.stream().collect(Collectors2.groupByUniqueKey(id -> 1, MutableMap::empty));
     }
 
     @Test
     public void groupByUniqueKey_parallelStream()
     {
-        MutableMap<Integer, Integer> expectedMap = LARGE_INTERVAL.groupByUniqueKey(id -> id, Maps.mutable.empty());
-        MutableMap<Integer, Integer> actualMap = LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> id, Maps.mutable::empty));
+        MutableMap<Integer, Integer> expectedMap = LARGE_INTERVAL.groupByUniqueKey(id -> id, MutableMap.empty());
+        MutableMap<Integer, Integer> actualMap = LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> id, MutableMap::empty));
         Assert.assertEquals(expectedMap, actualMap);
     }
 
     @Test(expected = IllegalStateException.class)
     public void groupByUniqueKey_parallelStream_throws_for_duplicate()
     {
-        LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> 1, Maps.mutable::empty));
+        LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> 1, MutableMap::empty));
     }
 
     @Test(expected = IllegalStateException.class)
     public void groupByUniqueKey_parallelStream_duplicate_from_combiner()
     {
-        LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> id == 15000 ? 1 : id, Maps.mutable::empty));
+        LARGE_INTERVAL.parallelStream().collect(Collectors2.groupByUniqueKey(id -> id == 15000 ? 1 : id, MutableMap::empty));
     }
 
     @Test
     public void aggregateBy()
     {
         MutableMap<Integer, Integer> expectedMap = SMALL_INTERVAL.toList().aggregateBy(each -> each % 2, () -> 0, Integer::sum);
-        MutableMap<Integer, Integer> actualMap = SMALL_INTERVAL.stream().collect(Collectors2.aggregateBy(each -> each % 2, () -> 0, Integer::sum, Maps.mutable::empty));
+        MutableMap<Integer, Integer> actualMap = SMALL_INTERVAL.stream().collect(Collectors2.aggregateBy(each -> each % 2, () -> 0, Integer::sum, MutableMap::empty));
         Assert.assertEquals(expectedMap, actualMap);
     }
 
@@ -1220,19 +1218,19 @@ public final class Collectors2Test
     public void aggregateBy_parallelStream()
     {
         MutableMap<Integer, Integer> expectedMap = LARGE_INTERVAL.toList().aggregateBy(each -> each % 2, () -> 0, Integer::sum);
-        MutableMap<Integer, Integer> actualMap = LARGE_INTERVAL.parallelStream().collect(Collectors2.aggregateBy(each -> each % 2, () -> 0, Integer::sum, Maps.mutable::empty));
+        MutableMap<Integer, Integer> actualMap = LARGE_INTERVAL.parallelStream().collect(Collectors2.aggregateBy(each -> each % 2, () -> 0, Integer::sum, MutableMap::empty));
         Assert.assertEquals(expectedMap, actualMap);
     }
 
     @Test
     public void aggregateBy_mutableSortedMap()
     {
-        Verify.assertInstanceOf(MutableSortedMap.class, SMALL_INTERVAL.stream().collect(Collectors2.aggregateBy(each -> each % 2, () -> 0, Integer::sum, SortedMaps.mutable::empty)));
+        Verify.assertInstanceOf(MutableSortedMap.class, SMALL_INTERVAL.stream().collect(Collectors2.aggregateBy(each -> each % 2, () -> 0, Integer::sum, MutableSortedMap::empty)));
     }
 
     @Test
     public void aggregateBy_parallelStream_mutableSortedMap()
     {
-        Verify.assertInstanceOf(MutableSortedMap.class, LARGE_INTERVAL.parallelStream().collect(Collectors2.aggregateBy(each -> each % 2, () -> 0, Integer::sum, SortedMaps.mutable::empty)));
+        Verify.assertInstanceOf(MutableSortedMap.class, LARGE_INTERVAL.parallelStream().collect(Collectors2.aggregateBy(each -> each % 2, () -> 0, Integer::sum, MutableSortedMap::empty)));
     }
 }

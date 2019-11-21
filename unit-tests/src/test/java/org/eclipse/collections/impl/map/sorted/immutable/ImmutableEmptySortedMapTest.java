@@ -14,6 +14,8 @@ import java.util.Comparator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
@@ -21,8 +23,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -38,43 +38,43 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     @Override
     protected ImmutableSortedMap<Integer, String> classUnderTest()
     {
-        return SortedMaps.immutable.of();
+        return ImmutableSortedMap.of();
     }
 
     @Override
     protected ImmutableSortedMap<Integer, String> classUnderTest(Comparator<? super Integer> comparator)
     {
-        return SortedMaps.immutable.of(comparator);
+        return ImmutableSortedMap.of(comparator);
     }
 
     @Override
     protected <K, V> MapIterable<K, V> newMap()
     {
-        return SortedMaps.immutable.of();
+        return ImmutableSortedMap.of();
     }
 
     @Override
     protected <K, V> MapIterable<K, V> newMapWithKeyValue(K key1, V value1)
     {
-        return SortedMaps.immutable.of(key1, value1);
+        return ImmutableSortedMap.of(key1, value1);
     }
 
     @Override
     protected <K, V> MapIterable<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2)
     {
-        return SortedMaps.immutable.of(key1, value1, key2, value2);
+        return ImmutableSortedMap.of(key1, value1, key2, value2);
     }
 
     @Override
     protected <K, V> MapIterable<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        return SortedMaps.immutable.of(key1, value1, key2, value2, key3, value3);
+        return ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3);
     }
 
     @Override
     protected <K, V> MapIterable<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
-        return SortedMaps.immutable.of(key1, value1, key2, value2, key3, value3, key4, value4);
+        return ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     @Override
@@ -308,7 +308,7 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     {
         ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
         Assert.assertEquals(
-                Lists.mutable.empty(),
+                MutableList.empty(),
                 integers.collectWithIndex(PrimitiveTuples::pair));
     }
 
@@ -321,8 +321,8 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
     {
         ImmutableSortedMap<Integer, String> integers = this.classUnderTest();
         Assert.assertEquals(
-                Lists.mutable.empty(),
-                integers.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
+                MutableList.empty(),
+                integers.collectWithIndex(PrimitiveTuples::pair, MutableList.empty()));
     }
 
     @Override
@@ -356,11 +356,11 @@ public class ImmutableEmptySortedMapTest extends ImmutableSortedMapTestCase
                 this.classUnderTest(Comparators.reverseNaturalOrder());
 
         Verify.assertEmpty(map.values());
-        Assert.assertSame(Lists.immutable.of(), map.values());
+        Assert.assertSame(ImmutableList.empty(), map.values());
 
         Verify.assertEmpty(revMap.values());
 
-        Assert.assertSame(Lists.immutable.of(), revMap.values());
+        Assert.assertSame(ImmutableList.empty(), revMap.values());
     }
 
     @Override

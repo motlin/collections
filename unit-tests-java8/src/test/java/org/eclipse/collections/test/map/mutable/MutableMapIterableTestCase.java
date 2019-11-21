@@ -14,11 +14,11 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.test.map.MapIterableTestCase;
@@ -229,7 +229,7 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase
         list.each(each -> map2.updateValue(each % 1000, () -> 0, integer -> integer + 1));
         assertEquals(Interval.zeroTo(999).toSet(), map2.keySet());
         assertIterablesEqual(
-                Bags.mutable.withAll(map2.values()).toStringOfItemToCount(),
+                MutableBag.ofAll(map2.values()).toStringOfItemToCount(),
                 Collections.nCopies(1000, 2),
                 map2.values());
 
@@ -248,7 +248,7 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase
         list2.each(each -> map4.updateValueWith(each % 1000, () -> 0, increment, "test"));
         assertEquals(Interval.zeroTo(999).toSet(), map4.keySet());
         assertIterablesEqual(
-                Bags.mutable.withAll(map4.values()).toStringOfItemToCount(),
+                MutableBag.ofAll(map4.values()).toStringOfItemToCount(),
                 Collections.nCopies(1000, 2),
                 map4.values());
     }

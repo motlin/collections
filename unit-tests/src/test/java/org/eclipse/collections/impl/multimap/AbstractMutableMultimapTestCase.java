@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.multimap;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -22,9 +23,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
@@ -114,7 +112,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     @Test
     public void forEachKey()
     {
-        MutableBag<Integer> collection = Bags.mutable.of();
+        MutableBag<Integer> collection = MutableBag.empty();
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
         multimap.forEachKey(CollectionAddProcedure.on(collection));
         Assert.assertEquals(HashBag.newBagWith(1, 2, 3), collection);
@@ -138,7 +136,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     public void putAllPairs()
     {
         MutableMultimap<Integer, String> multimap1 = this.newMultimapWithKeysValues(1, "One", 2, "2");
-        MutableList<Pair<Integer, String>> pairs1 = Lists.mutable.of(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(3, "Three"));
+        MutableList<Pair<Integer, String>> pairs1 = MutableList.of(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(3, "Three"));
         Assert.assertTrue(multimap1.putAllPairs(pairs1));
         MutableMultimap<Integer, String> expected1 = this.newMultimap();
         expected1.put(1, "One");
@@ -149,7 +147,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         Assert.assertEquals(expected1, multimap1);
 
         MutableMultimap<Integer, String> multimap2 = this.newMultimapWithKeysValues(1, "One", 2, "2");
-        ImmutableList<Pair<Integer, String>> pairs2 = Lists.immutable.of(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(3, "Three"));
+        ImmutableList<Pair<Integer, String>> pairs2 = ImmutableList.of(Tuples.pair(1, "One"), Tuples.pair(2, "Two"), Tuples.pair(3, "Three"));
         Assert.assertTrue(multimap2.putAllPairs(pairs2));
         MutableMultimap<Integer, String> expected2 = this.newMultimap();
         expected2.put(1, "One");
@@ -160,7 +158,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         Assert.assertEquals(expected2, multimap2);
 
         MutableMultimap<String, Integer> multimap3 = this.newMultimapWithKeysValues("One", 1, "Two", 2);
-        MutableSet<Pair<String, Integer>> pairs3 = Sets.mutable.of(Tuples.pair("One", 1), Tuples.pair("Two", 2), Tuples.pair("Three", 3));
+        MutableSet<Pair<String, Integer>> pairs3 = MutableSet.of(Tuples.pair("One", 1), Tuples.pair("Two", 2), Tuples.pair("Three", 3));
         Assert.assertTrue(multimap3.putAllPairs(pairs3));
         MutableMultimap<String, Integer> expected3 = this.newMultimap();
         expected3.put("One", 1);
@@ -171,8 +169,8 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         Assert.assertEquals(expected3, multimap3);
 
         MutableMultimap<Number, String> multimap4 = this.newMultimap();
-        MutableList<Pair<Integer, String>> intPairs4 = Lists.mutable.of(Tuples.pair(1, "Integer1"), Tuples.pair(2, "Integer2"));
-        MutableList<Pair<Long, String>> longPairs4 = Lists.mutable.of(Tuples.pair(1L, "Long1"), Tuples.pair(2L, "Long2"));
+        MutableList<Pair<Integer, String>> intPairs4 = MutableList.of(Tuples.pair(1, "Integer1"), Tuples.pair(2, "Integer2"));
+        MutableList<Pair<Long, String>> longPairs4 = MutableList.of(Tuples.pair(1L, "Long1"), Tuples.pair(2L, "Long2"));
         multimap4.putAllPairs(intPairs4);
         multimap4.putAllPairs(longPairs4);
         MutableMultimap<Number, String> expected4 = this.newMultimapWithKeysValues(1, "Integer1", 2, "Integer2", 1L, "Long1", 2L, "Long2");
@@ -183,7 +181,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     public void putAllFromCollection()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "Two");
-        Assert.assertTrue(multimap.putAll(1, Lists.fixedSize.of("Three", "Four")));
+        Assert.assertTrue(multimap.putAll(1, FixedSizeList.of("Three", "Four")));
         Assert.assertEquals(this.newMultimapWithKeysValues(1, "One", 2, "Two", 1, "Three", 1, "Four"), multimap);
         Assert.assertFalse(multimap.putAll(1, UnifiedSet.newSet()));
         Assert.assertEquals(this.newMultimapWithKeysValues(1, "One", 2, "Two", 1, "Three", 1, "Four"), multimap);
@@ -193,7 +191,7 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
     public void putAllFromIterable()
     {
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "Two");
-        Assert.assertTrue(multimap.putAll(1, Lists.fixedSize.of("Three", "Four").asLazy()));
+        Assert.assertTrue(multimap.putAll(1, FixedSizeList.of("Three", "Four").asLazy()));
         Assert.assertEquals(this.newMultimapWithKeysValues(1, "One", 2, "Two", 1, "Three", 1, "Four"), multimap);
     }
 
@@ -204,24 +202,24 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         Assert.assertFalse(multimap.containsKey(1));
         Assert.assertEquals(0, multimap.size());
 
-        Assert.assertEquals(this.createCollection(), multimap.getIfAbsentPutAll(1, Lists.mutable.with()));
+        Assert.assertEquals(this.createCollection(), multimap.getIfAbsentPutAll(1, MutableList.empty()));
         Assert.assertFalse(multimap.containsKey(1));
         Assert.assertEquals(0, multimap.size());
 
-        Assert.assertEquals(this.createCollection(1), multimap.getIfAbsentPutAll(1, Lists.mutable.with(1)));
-        Verify.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(1, Lists.mutable.with(1)).add(1));
+        Assert.assertEquals(this.createCollection(1), multimap.getIfAbsentPutAll(1, MutableList.of(1)));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(1, MutableList.of(1)).add(1));
 
-        multimap.putAll(2, Lists.mutable.with(2, 2));
-        multimap.putAll(3, Lists.mutable.with(3, 3, 3));
-        Assert.assertEquals(this.createCollection(1), multimap.getIfAbsentPutAll(1, Lists.mutable.empty()));
-        Assert.assertEquals(this.createCollection(2, 2), multimap.getIfAbsentPutAll(2, Lists.mutable.empty()));
-        Assert.assertEquals(this.createCollection(3, 3, 3), multimap.getIfAbsentPutAll(3, Lists.mutable.empty()));
-        Assert.assertEquals(this.createCollection(4, 4, 4, 4), multimap.getIfAbsentPutAll(4, Lists.mutable.with(4, 4, 4, 4)));
+        multimap.putAll(2, MutableList.of(2, 2));
+        multimap.putAll(3, MutableList.of(3, 3, 3));
+        Assert.assertEquals(this.createCollection(1), multimap.getIfAbsentPutAll(1, MutableList.empty()));
+        Assert.assertEquals(this.createCollection(2, 2), multimap.getIfAbsentPutAll(2, MutableList.empty()));
+        Assert.assertEquals(this.createCollection(3, 3, 3), multimap.getIfAbsentPutAll(3, MutableList.empty()));
+        Assert.assertEquals(this.createCollection(4, 4, 4, 4), multimap.getIfAbsentPutAll(4, MutableList.of(4, 4, 4, 4)));
         Assert.assertEquals(4, multimap.sizeDistinct());
         int multimapSize = this.createCollection(1).size() + this.createCollection(2, 2).size() + this.createCollection(3, 3, 3).size() + this.createCollection(4, 4, 4, 4).size();
         Assert.assertEquals(multimapSize, multimap.size());
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(5, Lists.mutable.with(5)).add(5));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> multimap.getIfAbsentPutAll(5, MutableList.of(5)).add(5));
     }
 
     @Test
@@ -275,11 +273,11 @@ public abstract class AbstractMutableMultimapTestCase extends AbstractMultimapTe
         MutableMultimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "Two", 2, "Three", 3);
         RichIterable<Integer> oldValues2 = multimap.replaceValues("Two", UnifiedSet.newSetWith(4));
-        Assert.assertEquals(Bags.mutable.of(2), oldValues2.toBag());
+        Assert.assertEquals(MutableBag.of(2), oldValues2.toBag());
         Verify.assertEqualsAndHashCode(this.newMultimapWithKeysValues("One", 1, "Two", 4, "Three", 3), multimap);
 
         RichIterable<Integer> oldValues3 = multimap.replaceValues("Three", UnifiedSet.newSet());
-        Assert.assertEquals(Bags.mutable.of(3), oldValues3.toBag());
+        Assert.assertEquals(MutableBag.of(3), oldValues3.toBag());
         Verify.assertEqualsAndHashCode(this.newMultimapWithKeysValues("One", 1, "Two", 4), multimap);
     }
 

@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.multimap.bag.strategy;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
@@ -19,8 +20,6 @@ import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy;
 import org.eclipse.collections.impl.multimap.bag.AbstractMutableBagMultimapTestCase;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -100,7 +99,7 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
     @Override
     protected final <V> MutableBag<V> createCollection(V... args)
     {
-        return Bags.mutable.of(args);
+        return MutableBag.of(args);
     }
 
     @Override
@@ -170,7 +169,7 @@ public class HashBagMultimapWithHashingStrategyTest extends AbstractMutableBagMu
         HashBagMultimapWithHashingStrategy<Integer, Integer> multimapWithIdentity = HashBagMultimapWithHashingStrategy.newMultimap(HashingStrategies.identityStrategy());
 
         multimapWithIdentity.put(new Integer(1), 1);
-        multimapWithIdentity.putAll(new Integer(1), Lists.fixedSize.of(2, 20, 1));
+        multimapWithIdentity.putAll(new Integer(1), FixedSizeList.of(2, 20, 1));
         multimapWithIdentity.put(new Integer(1), 3);
 
         Assert.assertEquals(3, multimapWithIdentity.sizeDistinct());

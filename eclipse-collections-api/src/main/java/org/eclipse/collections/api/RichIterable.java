@@ -56,7 +56,6 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
-import org.eclipse.collections.api.factory.Bags;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -287,7 +286,7 @@ public interface RichIterable<T>
      * Example using a Java 8 lambda expression:
      * <pre>
      * MutableList&lt;Person&gt; selected =
-     *     people.select(person -&gt; person.person.getLastName().equals("Smith"), Lists.mutable.empty());
+     *     people.select(person -&gt; person.person.getLastName().equals("Smith"), MutableList.empty());
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -299,7 +298,7 @@ public interface RichIterable<T>
      *         {
      *             return person.person.getLastName().equals("Smith");
      *         }
-     *     }, Lists.mutable.empty());
+     *     }, MutableList.empty());
      * </pre>
      * <p>
      *
@@ -349,7 +348,7 @@ public interface RichIterable<T>
      * Example using a Java 8 lambda expression:
      * <pre>
      * MutableList&lt;Person&gt; selected =
-     *     people.selectWith((Person person, Integer age) -&gt; person.getAge()&gt;= age, Integer.valueOf(18), Lists.mutable.empty());
+     *     people.selectWith((Person person, Integer age) -&gt; person.getAge()&gt;= age, Integer.valueOf(18), MutableList.empty());
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -361,7 +360,7 @@ public interface RichIterable<T>
      *         {
      *             return person.getAge()&gt;= age;
      *         }
-     *     }, Integer.valueOf(18), Lists.mutable.empty());
+     *     }, Integer.valueOf(18), MutableList.empty());
      * </pre>
      *
      * @param predicate        a {@link Predicate2} to use as the select criteria
@@ -441,7 +440,7 @@ public interface RichIterable<T>
      * Example using a Java 8 lambda expression:
      * <pre>
      * MutableList&lt;Person&gt; rejected =
-     *     people.reject(person -&gt; person.person.getLastName().equals("Smith"), Lists.mutable.empty());
+     *     people.reject(person -&gt; person.person.getLastName().equals("Smith"), MutableList.empty());
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -453,7 +452,7 @@ public interface RichIterable<T>
      *         {
      *             return person.person.getLastName().equals("Smith");
      *         }
-     *     }, Lists.mutable.empty());
+     *     }, MutableList.empty());
      * </pre>
      *
      * @param predicate a {@link Predicate} to use as the reject criteria
@@ -471,7 +470,7 @@ public interface RichIterable<T>
      * Example using a Java 8 lambda expression:
      * <pre>
      * MutableList&lt;Person&gt; rejected =
-     *     people.rejectWith((Person person, Integer age) -&gt; person.getAge() &lt; age, Integer.valueOf(18), Lists.mutable.empty());
+     *     people.rejectWith((Person person, Integer age) -&gt; person.getAge() &lt; age, Integer.valueOf(18), MutableList.empty());
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -483,7 +482,7 @@ public interface RichIterable<T>
      *         {
      *             return person.getAge() &lt; age;
      *         }
-     *     }, Integer.valueOf(18), Lists.mutable.empty());
+     *     }, Integer.valueOf(18), MutableList.empty());
      * </pre>
      *
      * @param predicate        a {@link Predicate2} to use as the reject criteria
@@ -554,7 +553,7 @@ public interface RichIterable<T>
      * <p>
      * <pre>
      * RichIterable&lt;Integer&gt; integers =
-     *     List.mutable.with(new Integer(0), new Long(0L), new Double(0.0)).selectInstancesOf(Integer.class);
+     *     MutableList.of(new Integer(0), new Long(0L), new Double(0.0)).selectInstancesOf(Integer.class);
      * </pre>
      *
      * @since 2.0
@@ -594,7 +593,7 @@ public interface RichIterable<T>
      * Example using a Java 8 lambda expression:
      * <pre>
      * MutableList&lt;String&gt; names =
-     *     people.collect(person -&gt; person.getFirstName() + " " + person.getLastName(), Lists.mutable.empty());
+     *     people.collect(person -&gt; person.getFirstName() + " " + person.getLastName(), MutableList.empty());
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -606,7 +605,7 @@ public interface RichIterable<T>
      *         {
      *             return person.getFirstName() + " " + person.getLastName();
      *         }
-     *     }, Lists.mutable.empty());
+     *     }, MutableList.empty());
      * </pre>
      *
      * @param function a {@link Function} to use as the collect transformation function
@@ -1063,7 +1062,7 @@ public interface RichIterable<T>
      * Example using a Java 8 lambda expression:
      * <pre>
      * RichIterable&lt;Integer&gt; integers =
-     *     Lists.mutable.with(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1));
+     *     MutableList.of(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1));
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -1077,7 +1076,7 @@ public interface RichIterable<T>
      *         }
      *     };
      * RichIterable&lt;Integer&gt; integers =
-     *     Lists.mutable.with(1, 2, 3).collectWith(addParameterFunction, Integer.valueOf(1));
+     *     MutableList.of(1, 2, 3).collectWith(addParameterFunction, Integer.valueOf(1));
      * </pre>
      *
      * @param function  A {@link Function2} to use as the collect transformation function
@@ -1094,7 +1093,7 @@ public interface RichIterable<T>
      * Example using a Java 8 lambda expression:
      * <pre>
      * MutableSet&lt;Integer&gt; integers =
-     *     Lists.mutable.with(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1), Sets.mutable.empty());
+     *     MutableList.of(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1), MutableSet.empty());
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -1108,7 +1107,7 @@ public interface RichIterable<T>
      *         }
      *     };
      * MutableSet&lt;Integer&gt; integers =
-     *     Lists.mutable.with(1, 2, 3).collectWith(addParameterFunction, Integer.valueOf(1), Sets.mutable.empty());
+     *     MutableList.of(1, 2, 3).collectWith(addParameterFunction, Integer.valueOf(1), MutableSet.empty());
      * </pre>
      *
      * @param function         a {@link Function2} to use as the collect transformation function
@@ -1129,12 +1128,12 @@ public interface RichIterable<T>
      * <p>
      * Example using a Java 8 lambda and method reference:
      * <pre>
-     * RichIterable&lt;String&gt; strings = Lists.mutable.with(1, 2, 3).collectIf(e -&gt; e != null, Object::toString);
+     * RichIterable&lt;String&gt; strings = MutableList.of(1, 2, 3).collectIf(e -&gt; e != null, Object::toString);
      * </pre>
      * <p>
      * Example using Predicates factory:
      * <pre>
-     * RichIterable&lt;String&gt; strings = Lists.mutable.with(1, 2, 3).collectIf(Predicates.notNull(), Functions.getToString());
+     * RichIterable&lt;String&gt; strings = MutableList.of(1, 2, 3).collectIf(Predicates.notNull(), Functions.getToString());
      * </pre>
      *
      * @since 1.0
@@ -1825,7 +1824,7 @@ public interface RichIterable<T>
      * <p>
      * <pre>
      * IntSummaryStatistics stats =
-     *     Lists.mutable.with(1, 2, 3).summarizeInt(Integer::intValue);
+     *     MutableList.of(1, 2, 3).summarizeInt(Integer::intValue);
      * </pre>
      *
      * @since 8.0
@@ -1843,7 +1842,7 @@ public interface RichIterable<T>
      * <p>
      * <pre>
      * DoubleSummaryStatistics stats =
-     *     Lists.mutable.with(1, 2, 3).summarizeFloat(Integer::floatValue);
+     *     MutableList.of(1, 2, 3).summarizeFloat(Integer::floatValue);
      * </pre>
      *
      * @since 8.0
@@ -1861,7 +1860,7 @@ public interface RichIterable<T>
      * <p>
      * <pre>
      * LongSummaryStatistics stats =
-     *     Lists.mutable.with(1, 2, 3).summarizeLong(Integer::longValue);
+     *     MutableList.of(1, 2, 3).summarizeLong(Integer::longValue);
      * </pre>
      *
      * @since 8.0
@@ -1879,7 +1878,7 @@ public interface RichIterable<T>
      * <p>
      * <pre>
      * DoubleSummaryStatistics stats =
-     *     Lists.mutable.with(1, 2, 3).summarizeDouble(Integer::doubleValue);
+     *     MutableList.of(1, 2, 3).summarizeDouble(Integer::doubleValue);
      * </pre>
      *
      * @since 8.0
@@ -1896,7 +1895,7 @@ public interface RichIterable<T>
      * <p>
      * <pre>
      * MutableObjectLongMap&lt;Integer&gt; map2 =
-     *     Lists.mutable.with(1, 2, 3, 4, 5).reduceInPlace(Collectors2.sumByInt(i -&gt; Integer.valueOf(i % 2), Integer::intValue));
+     *     MutableList.of(1, 2, 3, 4, 5).reduceInPlace(Collectors2.sumByInt(i -&gt; Integer.valueOf(i % 2), Integer::intValue));
      * </pre>
      *
      * @since 8.0
@@ -2077,7 +2076,7 @@ public interface RichIterable<T>
      */
     default <V> Bag<V> countBy(Function<? super T, ? extends V> function)
     {
-        return this.countBy(function, Bags.mutable.empty());
+        return this.countBy(function, MutableBag.empty());
     }
 
     /**
@@ -2099,7 +2098,7 @@ public interface RichIterable<T>
      */
     default <V, P> Bag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.countByWith(function, parameter, Bags.mutable.empty());
+        return this.countByWith(function, parameter, MutableBag.empty());
     }
 
     /**
@@ -2207,9 +2206,9 @@ public interface RichIterable<T>
      * enclosed in square brackets.
      * <p>
      * <pre>
-     * Assert.assertEquals("[]", Lists.mutable.empty().toString());
-     * Assert.assertEquals("[1]", Lists.mutable.with(1).toString());
-     * Assert.assertEquals("[1, 2, 3]", Lists.mutable.with(1, 2, 3).toString());
+     * Assert.assertEquals("[]", MutableList.empty().toString());
+     * Assert.assertEquals("[1]", MutableList.of(1).toString());
+     * Assert.assertEquals("[1, 2, 3]", MutableList.of(1, 2, 3).toString());
      * </pre>
      *
      * @return a string representation of this RichIterable

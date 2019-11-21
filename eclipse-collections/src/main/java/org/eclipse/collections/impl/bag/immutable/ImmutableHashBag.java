@@ -50,7 +50,6 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.utility.Iterate;
 
 /**
@@ -66,7 +65,7 @@ public class ImmutableHashBag<T>
 
     public ImmutableHashBag()
     {
-        this.delegate = Bags.mutable.empty();
+        this.delegate = MutableBag.empty();
     }
 
     public ImmutableHashBag(Iterable<? extends T> source)

@@ -16,7 +16,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -55,7 +54,7 @@ public class ImmutableQuadrupletonMapTest extends ImmutableMemoryEfficientMapTes
     public void forEachValue()
     {
         super.forEachValue();
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         this.classUnderTest().forEachValue(CollectionAddProcedure.on(collection));
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4"), collection);
     }
@@ -65,7 +64,7 @@ public class ImmutableQuadrupletonMapTest extends ImmutableMemoryEfficientMapTes
     public void forEachKey()
     {
         super.forEachKey();
-        MutableList<Integer> collection = Lists.mutable.of();
+        MutableList<Integer> collection = MutableList.empty();
         this.classUnderTest().forEachKey(CollectionAddProcedure.on(collection));
         Assert.assertEquals(FastList.newListWith(1, 2, 3, 4), collection);
     }
@@ -118,7 +117,7 @@ public class ImmutableQuadrupletonMapTest extends ImmutableMemoryEfficientMapTes
     public void forEachWith()
     {
         super.forEachWith();
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableMap<Integer, Integer> map = new ImmutableQuadrupletonMap<>(1, 1, 2, 2, 3, 3, 4, 4);
         map.forEachWith((argument1, argument2) -> result.add(argument1 + argument2), 10);
         Assert.assertEquals(FastList.newListWith(11, 12, 13, 14), result);
@@ -129,7 +128,7 @@ public class ImmutableQuadrupletonMapTest extends ImmutableMemoryEfficientMapTes
     public void forEachWithIndex()
     {
         super.forEachWithIndex();
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         ImmutableMap<Integer, String> map = new ImmutableQuadrupletonMap<>(1, "One", 2, "Two", 3, "Three", 4, "Four");
         map.forEachWithIndex((value, index) -> {
             result.add(value);
@@ -143,7 +142,7 @@ public class ImmutableQuadrupletonMapTest extends ImmutableMemoryEfficientMapTes
     public void keyValuesView()
     {
         super.keyValuesView();
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         ImmutableMap<Integer, String> map = new ImmutableQuadrupletonMap<>(1, "One", 2, "Two", 3, "Three", 4, "Four");
         for (Pair<Integer, String> keyValue : map.keyValuesView())
         {
@@ -157,7 +156,7 @@ public class ImmutableQuadrupletonMapTest extends ImmutableMemoryEfficientMapTes
     public void valuesView()
     {
         super.valuesView();
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         ImmutableMap<Integer, String> map = new ImmutableQuadrupletonMap<>(1, "One", 2, "Two", 3, "Three", 4, "Four");
         for (String value : map.valuesView())
         {
@@ -171,7 +170,7 @@ public class ImmutableQuadrupletonMapTest extends ImmutableMemoryEfficientMapTes
     public void keysView()
     {
         super.keysView();
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableMap<Integer, String> map = new ImmutableQuadrupletonMap<>(1, "One", 2, "Two", 3, "Three", 4, "Four");
         for (Integer key : map.keysView())
         {

@@ -19,11 +19,11 @@ import java.util.Set;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
@@ -114,10 +114,10 @@ public class PredicatesTest
     @Test
     public void bind()
     {
-        MutableList<Integer> list = Lists.mutable.of(1, 2, 3);
+        MutableList<Integer> list = MutableList.of(1, 2, 3);
 
         Predicate<Integer> predicate = Predicates.bind((element, parameter) -> (element + parameter) % 2 == 0, 1);
-        Verify.assertListsEqual(Lists.mutable.of(1, 3), list.select(predicate));
+        Verify.assertListsEqual(MutableList.of(1, 3), list.select(predicate));
         PredicatesTest.assertToString(predicate);
     }
 
@@ -180,15 +180,15 @@ public class PredicatesTest
     public void collectionOr()
     {
         MutableList<Predicate<Object>> predicates =
-                Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysFalse(), null);
+                FixedSizeList.of(Predicates.alwaysTrue(), Predicates.alwaysFalse(), null);
         PredicatesTest.assertAccepts(Predicates.or(predicates), new Object());
 
         MutableList<Predicate<Object>> falsePredicates =
-                Lists.fixedSize.of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
+                FixedSizeList.of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
         PredicatesTest.assertRejects(Predicates.or(falsePredicates), new Object());
 
         MutableList<Predicate<Object>> truePredicates =
-                Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
+                FixedSizeList.of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
         PredicatesTest.assertAccepts(Predicates.or(truePredicates), new Object());
 
         PredicatesTest.assertToString(Predicates.or(truePredicates));
@@ -228,15 +228,15 @@ public class PredicatesTest
     public void collectionAnd()
     {
         MutableList<Predicate<Object>> predicates =
-                Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
+                FixedSizeList.of(Predicates.alwaysTrue(), Predicates.alwaysTrue());
         PredicatesTest.assertAccepts(Predicates.and(predicates), new Object());
 
         MutableList<Predicate<Object>> tfPredicates =
-                Lists.fixedSize.of(Predicates.alwaysTrue(), Predicates.alwaysFalse());
+                FixedSizeList.of(Predicates.alwaysTrue(), Predicates.alwaysFalse());
         PredicatesTest.assertRejects(Predicates.and(tfPredicates), new Object());
 
         MutableList<Predicate<Object>> falsePredicates =
-                Lists.fixedSize.of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
+                FixedSizeList.of(Predicates.alwaysFalse(), Predicates.alwaysFalse());
         PredicatesTest.assertRejects(Predicates.and(falsePredicates), new Object());
 
         PredicatesTest.assertToString(Predicates.and(predicates));
@@ -317,19 +317,19 @@ public class PredicatesTest
     @Test
     public void collectionNoneOf()
     {
-        MutableList<Predicate<Object>> trueNorTrue = Lists.fixedSize.of(
+        MutableList<Predicate<Object>> trueNorTrue = FixedSizeList.of(
                 Predicates.alwaysTrue(),
                 Predicates.alwaysTrue(),
                 Predicates.alwaysTrue());
         PredicatesTest.assertRejects(Predicates.noneOf(trueNorTrue), new Object());
 
-        MutableList<Predicate<Object>> trueNorFalse = Lists.fixedSize.of(
+        MutableList<Predicate<Object>> trueNorFalse = FixedSizeList.of(
                 Predicates.alwaysTrue(),
                 Predicates.alwaysTrue(),
                 Predicates.alwaysFalse());
         PredicatesTest.assertRejects(Predicates.noneOf(trueNorFalse), new Object());
 
-        MutableList<Predicate<Object>> falseNorFalse = Lists.fixedSize.of(
+        MutableList<Predicate<Object>> falseNorFalse = FixedSizeList.of(
                 Predicates.alwaysFalse(),
                 Predicates.alwaysFalse(),
                 Predicates.alwaysFalse());
@@ -413,7 +413,7 @@ public class PredicatesTest
 
     private static void assertIf(Predicate<List<Object>> predicate, boolean bool)
     {
-        Assert.assertEquals(bool, predicate.accept(Lists.fixedSize.of()));
+        Assert.assertEquals(bool, predicate.accept(FixedSizeList.empty()));
         Assert.assertEquals(!bool, predicate.accept(FastList.newListWith((Object) null)));
         PredicatesTest.assertToString(predicate);
     }
@@ -567,7 +567,7 @@ public class PredicatesTest
     @Test
     public void in_SetIterable()
     {
-        Predicate<Object> predicate = Predicates.in(Sets.immutable.with(1, 2, 3));
+        Predicate<Object> predicate = Predicates.in(ImmutableSet.of(1, 2, 3));
         PredicatesTest.assertAccepts(predicate, 1, 2, 3);
         PredicatesTest.assertRejects(predicate, 0, 4, null);
     }
@@ -575,7 +575,7 @@ public class PredicatesTest
     @Test
     public void notIn_SetIterable()
     {
-        Predicate<Object> predicate = Predicates.notIn(Sets.immutable.with(1, 2, 3));
+        Predicate<Object> predicate = Predicates.notIn(ImmutableSet.of(1, 2, 3));
         PredicatesTest.assertAccepts(predicate, 0, 4, null);
         PredicatesTest.assertRejects(predicate, 1, 2, 3);
     }
@@ -605,7 +605,7 @@ public class PredicatesTest
     @Test
     public void in_Collection()
     {
-        Predicate<Object> predicate = Predicates.in(Lists.mutable.with(1, 2, 3));
+        Predicate<Object> predicate = Predicates.in(MutableList.of(1, 2, 3));
         PredicatesTest.assertAccepts(predicate, 1, 2, 3);
         PredicatesTest.assertRejects(predicate, 0, 4, null);
     }
@@ -613,7 +613,7 @@ public class PredicatesTest
     @Test
     public void notIn_Collection()
     {
-        Predicate<Object> predicate = Predicates.notIn(Lists.mutable.with(1, 2, 3));
+        Predicate<Object> predicate = Predicates.notIn(MutableList.of(1, 2, 3));
         PredicatesTest.assertAccepts(predicate, 0, 4, null);
         PredicatesTest.assertRejects(predicate, 1, 2, 3);
     }
@@ -621,18 +621,18 @@ public class PredicatesTest
     @Test
     public void in()
     {
-        MutableList<String> list1 = Lists.fixedSize.of("1", "3");
+        MutableList<String> list1 = FixedSizeList.of("1", "3");
         Predicate<Object> inList = Predicates.in(list1);
         PredicatesTest.assertAccepts(inList, "1");
         PredicatesTest.assertRejects(inList, "2");
         PredicatesTest.assertAccepts(Predicates.in(list1.toArray()), "1");
         PredicatesTest.assertRejects(Predicates.in(list1.toArray()), "2");
-        Object[] array = Lists.mutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10").toArray();
+        Object[] array = MutableList.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10").toArray();
         Predicates<Object> predicate = Predicates.in(array);
         PredicatesTest.assertAccepts(predicate, "1");
         PredicatesTest.assertRejects(predicate, "0");
 
-        Assert.assertEquals(FastList.newListWith("1"), ListIterate.select(Lists.fixedSize.of("1", "2"), inList));
+        Assert.assertEquals(FastList.newListWith("1"), ListIterate.select(FixedSizeList.of("1", "2"), inList));
         PredicatesTest.assertToString(inList);
         Assert.assertTrue(inList.toString().contains(list1.toString()));
         PredicatesTest.assertToString(predicate);
@@ -648,26 +648,26 @@ public class PredicatesTest
     @Test
     public void attributeIn()
     {
-        MutableList<String> upperList = Lists.fixedSize.of("A", "B");
+        MutableList<String> upperList = FixedSizeList.of("A", "B");
         Predicate<String> in = Predicates.attributeIn(StringFunctions.toUpperCase(), upperList);
         PredicatesTest.assertAccepts(in, "a");
         PredicatesTest.assertRejects(in, "c");
 
-        Assert.assertEquals(FastList.newListWith("a"), ListIterate.select(Lists.fixedSize.of("a", "c"), in));
+        Assert.assertEquals(FastList.newListWith("a"), ListIterate.select(FixedSizeList.of("a", "c"), in));
         PredicatesTest.assertToString(in);
     }
 
     @Test
     public void notIn()
     {
-        MutableList<String> odds = Lists.fixedSize.of("1", "3");
+        MutableList<String> odds = FixedSizeList.of("1", "3");
         Predicate<Object> predicate1 = Predicates.notIn(odds);
         PredicatesTest.assertAccepts(predicate1, "2");
         PredicatesTest.assertRejects(predicate1, "1");
         PredicatesTest.assertAccepts(Predicates.notIn(odds.toArray()), "2");
         PredicatesTest.assertRejects(Predicates.notIn(odds.toArray()), "1");
 
-        MutableList<String> list = Lists.mutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+        MutableList<String> list = MutableList.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
         PredicatesTest.assertAccepts(Predicates.notIn(list), "0");
         PredicatesTest.assertRejects(Predicates.notIn(list), "1");
 
@@ -675,7 +675,7 @@ public class PredicatesTest
         PredicatesTest.assertAccepts(predicate2, "0");
         PredicatesTest.assertRejects(predicate2, "1");
 
-        Assert.assertEquals(FastList.newListWith("2"), ListIterate.select(Lists.fixedSize.of("1", "2"), predicate1));
+        Assert.assertEquals(FastList.newListWith("2"), ListIterate.select(FixedSizeList.of("1", "2"), predicate1));
         PredicatesTest.assertToString(predicate1);
         PredicatesTest.assertToString(predicate2);
         Assert.assertTrue(predicate1.toString().contains(odds.toString()));
@@ -691,12 +691,12 @@ public class PredicatesTest
     @Test
     public void attributeNotIn()
     {
-        MutableList<String> lowerList = Lists.fixedSize.of("a", "b");
+        MutableList<String> lowerList = FixedSizeList.of("a", "b");
         Predicate<String> out = Predicates.attributeNotIn(StringFunctions.toLowerCase(), lowerList);
         PredicatesTest.assertAccepts(out, "C");
         PredicatesTest.assertRejects(out, "A");
 
-        Assert.assertEquals(FastList.newListWith("A"), ListIterate.reject(Lists.fixedSize.of("A", "C"), out));
+        Assert.assertEquals(FastList.newListWith("A"), ListIterate.reject(FixedSizeList.of("A", "C"), out));
         PredicatesTest.assertToString(out);
     }
 
@@ -923,7 +923,7 @@ public class PredicatesTest
         public static final Function<Employee, MutableList<Address>> TO_ADDRESSES = employee -> employee.addresses;
         public static final Function<Employee, MutableList<Dependent>> TO_DEPENEDENTS = employee -> employee.dependents;
         private final MutableList<Address> addresses;
-        private final MutableList<Dependent> dependents = Lists.mutable.of();
+        private final MutableList<Dependent> dependents = MutableList.empty();
 
         private Employee(Address addr)
         {

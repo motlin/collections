@@ -24,13 +24,13 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.ordered.SortedIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -345,10 +345,10 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         assertEquals(
-                Lists.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
+                ImmutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
                 iterable.toList());
 
-        MutableList<Integer> target = Lists.mutable.empty();
+        MutableList<Integer> target = MutableList.empty();
         iterable.each(target::add);
         assertEquals(
                 target,
@@ -360,8 +360,8 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     default void RichIterable_into()
     {
         assertEquals(
-                Lists.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
-                this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).into(Lists.mutable.empty()));
+                ImmutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
+                this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).into(MutableList.empty()));
     }
 
     @Override
@@ -397,7 +397,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     {
         OrderedIterable<Integer> iterable = (OrderedIterable<Integer>) this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         Assert.assertEquals(
-                Lists.immutable.with(
+                ImmutableList.of(
                         PrimitiveTuples.pair(Integer.valueOf(1), 0),
                         PrimitiveTuples.pair(Integer.valueOf(2), 1),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
@@ -420,7 +420,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     {
         OrderedIterable<Integer> iterable = (OrderedIterable<Integer>) this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         Assert.assertEquals(
-                Lists.immutable.with(
+                ImmutableList.of(
                         PrimitiveTuples.pair(Integer.valueOf(1), 0),
                         PrimitiveTuples.pair(Integer.valueOf(2), 1),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
@@ -431,7 +431,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
                         PrimitiveTuples.pair(Integer.valueOf(4), 7),
                         PrimitiveTuples.pair(Integer.valueOf(4), 8),
                         PrimitiveTuples.pair(Integer.valueOf(4), 9)),
-                iterable.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
+                iterable.collectWithIndex(PrimitiveTuples::pair, MutableList.empty()));
     }
 
     @Override
@@ -440,7 +440,7 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         Assert.assertEquals(
-                Lists.immutable.with(
+                ImmutableList.of(
                         Tuples.pair(1, 0),
                         Tuples.pair(2, 1),
                         Tuples.pair(2, 2),
@@ -459,10 +459,10 @@ public interface SortedNaturalOrderTestCase extends OrderedIterableTestCase
     default void OrderedIterable_zipWithIndex_target()
     {
         RichIterable<Integer> iterable = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
-        MutableList<Pair<Integer, Integer>> target = Lists.mutable.empty();
+        MutableList<Pair<Integer, Integer>> target = MutableList.empty();
         MutableList<Pair<Integer, Integer>> result = iterable.zipWithIndex(target);
         Assert.assertEquals(
-                Lists.immutable.with(
+                ImmutableList.of(
                         Tuples.pair(1, 0),
                         Tuples.pair(2, 1),
                         Tuples.pair(2, 2),

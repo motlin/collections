@@ -15,7 +15,6 @@ import java.util.RandomAccess;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.factory.Lists;
 
 /**
  * This is a seven element immutable List which is created by calling
@@ -97,7 +96,7 @@ final class ImmutableSeptupletonList<T>
     @Override
     public ImmutableList<T> newWith(T newItem)
     {
-        return Lists.immutable.with(
+        return ImmutableList.of(
                 this.element1,
                 this.element2,
                 this.element3,

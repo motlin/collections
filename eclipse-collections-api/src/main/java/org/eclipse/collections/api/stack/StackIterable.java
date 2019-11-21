@@ -91,7 +91,7 @@ public interface StackIterable<T> extends OrderedIterable<T>
      * Follows the same rules as {@link java.util.AbstractCollection#toString()} except it processes the elements
      * in the same order as {@code forEach()}.
      * <pre>
-     * Assert.assertEquals("[3, 2, 1]", Stacks.mutable.with(1, 2, 3).toString());
+     * Assert.assertEquals("[3, 2, 1]", MutableStack.with(1, 2, 3).toString());
      * </pre>
      */
     @Override

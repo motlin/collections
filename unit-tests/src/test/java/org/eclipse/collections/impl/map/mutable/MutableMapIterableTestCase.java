@@ -18,17 +18,17 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.ImmutableMapIterable;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.IntegerWithCast;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.AbstractSynchronizedMapIterable;
@@ -41,9 +41,6 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iMap;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
  * Abstract JUnit TestCase for {@link MutableMapIterable}s.
@@ -70,7 +67,7 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
     {
         MutableMapIterable<Integer, String> map = this.newMapWithKeyValue(1, "One");
         ImmutableMapIterable<Integer, String> immutable = map.toImmutable();
-        Assert.assertEquals(Maps.immutable.with(1, "One"), immutable);
+        Assert.assertEquals(ImmutableMap.of(1, "One"), immutable);
     }
 
     @Test
@@ -146,8 +143,8 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
 
         MutableMapIterable<Integer, Integer> integers = this.newMapWithKeysValues(1, 1, 2, 2, 3, 3);
         Integer copy = new Integer(1);
-        Assert.assertTrue(integers.entrySet().retainAll(mList(ImmutableEntry.of(copy, copy))));
-        Assert.assertEquals(iMap(copy, copy), integers);
+        Assert.assertTrue(integers.entrySet().retainAll(MutableList.of(ImmutableEntry.of(copy, copy))));
+        Assert.assertEquals(ImmutableMap.of(copy, copy), integers);
         Assert.assertNotSame(copy, Iterate.getOnly(integers.entrySet()).getKey());
         Assert.assertNotSame(copy, Iterate.getOnly(integers.entrySet()).getValue());
     }
@@ -296,8 +293,8 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
         Assert.assertNull(map.put(3, "Three"));
         Assert.assertEquals(UnifiedMap.newWithKeysValues(1, "One", 2, "Two", 3, "Three"), map);
 
-        ImmutableList<Integer> key1 = Lists.immutable.with(null);
-        ImmutableList<Integer> key2 = Lists.immutable.with(null);
+        ImmutableList<Integer> key1 = ImmutableList.of(null);
+        ImmutableList<Integer> key2 = ImmutableList.of(null);
         Object value1 = new Object();
         Object value2 = new Object();
         MutableMapIterable<ImmutableList<Integer>, Object> map2 = this.newMapWithKeyValue(key1, value1);
@@ -346,20 +343,20 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
         MutableMapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two", 3, "Three");
 
         Verify.assertThrows(NullPointerException.class, () -> map.removeAllKeys(null));
-        Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4)));
-        Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4, 5, 6)));
-        Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4, 5, 6, 7, 8, 9)));
+        Assert.assertFalse(map.removeAllKeys(MutableSet.of(4)));
+        Assert.assertFalse(map.removeAllKeys(MutableSet.of(4, 5, 6)));
+        Assert.assertFalse(map.removeAllKeys(MutableSet.of(4, 5, 6, 7, 8, 9)));
 
-        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(1)));
+        Assert.assertTrue(map.removeAllKeys(MutableSet.of(1)));
         Verify.denyContainsKey(1, map);
-        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(3, 4, 5, 6, 7)));
+        Assert.assertTrue(map.removeAllKeys(MutableSet.of(3, 4, 5, 6, 7)));
         Verify.denyContainsKey(3, map);
 
-        map.putAll(Maps.mutable.with(4, "Four", 5, "Five", 6, "Six", 7, "Seven"));
-        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(2, 3, 9, 10)));
+        map.putAll(MutableMap.of(4, "Four", 5, "Five", 6, "Six", 7, "Seven"));
+        Assert.assertTrue(map.removeAllKeys(MutableSet.of(2, 3, 9, 10)));
         Verify.denyContainsKey(2, map);
-        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(5, 3, 7, 8, 9)));
-        Assert.assertEquals(Maps.mutable.with(4, "Four", 6, "Six"), map);
+        Assert.assertTrue(map.removeAllKeys(MutableSet.of(5, 3, 7, 8, 9)));
+        Assert.assertEquals(MutableMap.of(4, "Four", 6, "Six"), map);
     }
 
     @Test
@@ -372,8 +369,8 @@ public abstract class MutableMapIterableTestCase extends MapIterableTestCase
         Assert.assertTrue(map.removeIf(Predicates2.alwaysTrue()));
         Verify.assertEmpty(map);
 
-        map.putAll(Maps.mutable.with(1, "One", 2, "TWO", 3, "THREE", 4, "four"));
-        map.putAll(Maps.mutable.with(5, "Five", 6, "Six", 7, "Seven", 8, "Eight"));
+        map.putAll(MutableMap.of(1, "One", 2, "TWO", 3, "THREE", 4, "four"));
+        map.putAll(MutableMap.of(5, "Five", 6, "Six", 7, "Seven", 8, "Eight"));
         Assert.assertTrue(map.removeIf((each, value) -> each % 2 == 0 && value.length() < 4));
         Verify.denyContainsKey(2, map);
         Verify.denyContainsKey(6, map);

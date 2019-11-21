@@ -29,25 +29,25 @@ import org.eclipse.collections.impl.list.mutable.MutableListFactoryImpl;
  * Mutable Examples:
  *
  * <pre>
- * MutableList&lt;String&gt; emptyList = Lists.mutable.empty();
- * MutableList&lt;String&gt; listWith = Lists.mutable.with("a", "b", "c");
- * MutableList&lt;String&gt; listOf = Lists.mutable.of("a", "b", "c");
+ * MutableList&lt;String&gt; emptyList = MutableList.empty();
+ * MutableList&lt;String&gt; listWith = MutableList.of("a", "b", "c");
+ * MutableList&lt;String&gt; listOf = MutableList.of("a", "b", "c");
  * </pre>
  *
  * Immutable Examples:
  *
  * <pre>
- * ImmutableList&lt;String&gt; emptyList = Lists.immutable.empty();
- * ImmutableList&lt;String&gt; listWith = Lists.immutable.with("a", "b", "c");
- * ImmutableList&lt;String&gt; listOf = Lists.immutable.of("a", "b", "c");
+ * ImmutableList&lt;String&gt; emptyList = ImmutableList.empty();
+ * ImmutableList&lt;String&gt; listWith = ImmutableList.of("a", "b", "c");
+ * ImmutableList&lt;String&gt; listOf = ImmutableList.of("a", "b", "c");
  * </pre>
  *
  * FixedSize Examples:
  *
  * <pre>
- * FixedSizeList&lt;String&gt; emptyList = Lists.fixedSize.empty();
- * FixedSizeList&lt;String&gt; listWith = Lists.fixedSize.with("a", "b", "c");
- * FixedSizeList&lt;String&gt; listOf = Lists.fixedSize.of("a", "b", "c");
+ * FixedSizeList&lt;String&gt; emptyList = FixedSizeList.empty();
+ * FixedSizeList&lt;String&gt; listWith = FixedSizeList.of("a", "b", "c");
+ * FixedSizeList&lt;String&gt; listOf = FixedSizeList.of("a", "b", "c");
  * </pre>
  */
 @SuppressWarnings("ConstantNamingConvention")

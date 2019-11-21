@@ -20,7 +20,6 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.parallel.ParallelIterate;
 import org.eclipse.collections.impl.test.Verify;
@@ -282,9 +281,9 @@ public class CompositeFastListTest extends AbstractListTestCase
         super.toArray();
         MutableList<String> list = new CompositeFastList<>();
         list.addAll(FastList.newListWith("1", "2", "3", "4"));
-        list.addAll(Lists.mutable.of());
+        list.addAll(MutableList.empty());
         list.addAll(FastList.newListWith("3", "B", "3", "B"));
-        list.addAll(Lists.mutable.of());
+        list.addAll(MutableList.empty());
         Assert.assertArrayEquals(new String[]{"1", "2", "3", "4", "3", "B", "3", "B"}, list.toArray());
     }
 
@@ -561,8 +560,8 @@ public class CompositeFastListTest extends AbstractListTestCase
         compositeFastList.addAll(integers2);
         compositeFastList.addAll(integers3);
 
-        List<Integer> result = Lists.mutable.empty();
+        List<Integer> result = MutableList.empty();
         compositeFastList.reverseForEachWithIndex((each, index) -> result.add(each + index));
-        Assert.assertEquals(Lists.mutable.with(21, 19, 17, 15, 13, 11, 9, 7, 5, 3, 1), result);
+        Assert.assertEquals(MutableList.of(21, 19, 17, 15, 13, 11, 9, 7, 5, 3, 1), result);
     }
 }

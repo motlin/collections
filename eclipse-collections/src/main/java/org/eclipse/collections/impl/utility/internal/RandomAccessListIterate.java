@@ -75,7 +75,6 @@ import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -1063,8 +1062,8 @@ public final class RandomAccessListIterate
             Predicate2<? super T, ? super IV> predicate,
             IV injectedValue)
     {
-        MutableList<T> positiveResult = Lists.mutable.empty();
-        MutableList<T> negativeResult = Lists.mutable.empty();
+        MutableList<T> positiveResult = MutableList.empty();
+        MutableList<T> negativeResult = MutableList.empty();
         int size = list.size();
         for (int i = 0; i < size; i++)
         {

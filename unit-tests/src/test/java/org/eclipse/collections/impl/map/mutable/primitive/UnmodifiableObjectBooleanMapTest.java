@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.map.mutable.primitive;
 
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
-import org.eclipse.collections.impl.factory.Iterables;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
@@ -106,7 +106,7 @@ public class UnmodifiableObjectBooleanMapTest extends AbstractMutableObjectBoole
     @Test(expected = UnsupportedOperationException.class)
     public void withAllKeyValues()
     {
-        this.map.withAllKeyValues(Iterables.iList(PrimitiveTuples.pair("1", true)));
+        this.map.withAllKeyValues(ImmutableList.of(PrimitiveTuples.pair("1", true)));
     }
 
     @Override

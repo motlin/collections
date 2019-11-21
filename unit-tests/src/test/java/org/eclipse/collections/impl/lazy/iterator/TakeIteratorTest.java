@@ -13,7 +13,7 @@ package org.eclipse.collections.impl.lazy.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -41,7 +41,7 @@ public class TakeIteratorTest
         Iterator<Integer> iterator4 = new TakeIterator<>(list, 0);
         assertElements(iterator4, 0);
 
-        Iterator<Integer> iterator5 = new TakeIterator<>(Lists.fixedSize.of(), 0);
+        Iterator<Integer> iterator5 = new TakeIterator<>(FixedSizeList.empty(), 0);
         assertElements(iterator5, 0);
     }
 
@@ -58,14 +58,14 @@ public class TakeIteratorTest
     @Test
     public void remove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> new TakeIterator<>(Lists.fixedSize.<Integer>of(), 0).remove());
+        Verify.assertThrows(UnsupportedOperationException.class, () -> new TakeIterator<>(FixedSizeList.<Integer>empty(), 0).remove());
     }
 
     @Test
     public void noSuchElementException()
     {
-        Verify.assertThrows(NoSuchElementException.class, () -> new TakeIterator<>(Lists.fixedSize.<Integer>of(), 0).next());
+        Verify.assertThrows(NoSuchElementException.class, () -> new TakeIterator<>(FixedSizeList.<Integer>empty(), 0).next());
 
-        Verify.assertThrows(NoSuchElementException.class, () -> new TakeIterator<>(Lists.fixedSize.of(1, 2, 3), 0).next());
+        Verify.assertThrows(NoSuchElementException.class, () -> new TakeIterator<>(FixedSizeList.of(1, 2, 3), 0).next());
     }
 }

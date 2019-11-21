@@ -27,7 +27,6 @@ import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.ThrowingAppendable;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;
 import org.eclipse.collections.impl.factory.primitive.CharLists;
@@ -253,21 +252,21 @@ public class IntIntervalTest
     public void chunk()
     {
         IntInterval interval1 = IntInterval.fromToBy(0, 5, 1);
-        MutableList<IntInterval> expected1 = Lists.mutable.with(
+        MutableList<IntInterval> expected1 = MutableList.of(
                 IntInterval.fromToBy(0, 1, 1),
                 IntInterval.fromToBy(2, 3, 1),
                 IntInterval.fromToBy(4, 5, 1));
         Assert.assertEquals(expected1, interval1.chunk(2));
 
         IntInterval interval2 = IntInterval.fromToBy(0, -5, -1);
-        MutableList<IntInterval> expected2 = Lists.mutable.with(
+        MutableList<IntInterval> expected2 = MutableList.of(
                 IntInterval.fromToBy(0, -1, -1),
                 IntInterval.fromToBy(-2, -3, -1),
                 IntInterval.fromToBy(-4, -5, -1));
         Assert.assertEquals(expected2, interval2.chunk(2));
 
         IntInterval interval3 = IntInterval.fromToBy(0, 6, 1);
-        MutableList<IntInterval> expected3 = Lists.mutable.with(
+        MutableList<IntInterval> expected3 = MutableList.of(
                 IntInterval.fromToBy(0, 1, 1),
                 IntInterval.fromToBy(2, 3, 1),
                 IntInterval.fromToBy(4, 5, 1),
@@ -275,7 +274,7 @@ public class IntIntervalTest
         Assert.assertEquals(expected3, interval3.chunk(2));
 
         IntInterval interval4 = IntInterval.fromToBy(0, -6, -1);
-        MutableList<IntInterval> expected4 = Lists.mutable.with(
+        MutableList<IntInterval> expected4 = MutableList.of(
                 IntInterval.fromToBy(0, -1, -1),
                 IntInterval.fromToBy(-2, -3, -1),
                 IntInterval.fromToBy(-4, -5, -1),
@@ -284,39 +283,39 @@ public class IntIntervalTest
         Assert.assertEquals(expected4, actual4);
 
         IntInterval interval5 = IntInterval.fromToBy(0, 6, 1);
-        MutableList<IntInterval> expected5 = Lists.mutable.with(IntInterval.fromToBy(0, 6, 1));
+        MutableList<IntInterval> expected5 = MutableList.of(IntInterval.fromToBy(0, 6, 1));
         Assert.assertEquals(expected5, interval5.chunk(7));
 
         IntInterval interval6 = IntInterval.fromToBy(0, -6, -1);
-        MutableList<IntInterval> expected6 = Lists.mutable.with(IntInterval.fromToBy(0, -6, -1));
+        MutableList<IntInterval> expected6 = MutableList.of(IntInterval.fromToBy(0, -6, -1));
         Assert.assertEquals(expected6, interval6.chunk(7));
 
         IntInterval interval7 = IntInterval.fromToBy(0, 6, 1);
-        MutableList<IntInterval> expected7 = Lists.mutable.with(IntInterval.fromToBy(0, 6, 1));
+        MutableList<IntInterval> expected7 = MutableList.of(IntInterval.fromToBy(0, 6, 1));
         Assert.assertEquals(expected7, interval7.chunk(8));
 
         IntInterval interval8 = IntInterval.fromToBy(0, -6, -1);
-        MutableList<IntInterval> expected8 = Lists.mutable.with(IntInterval.fromToBy(0, -6, -1));
+        MutableList<IntInterval> expected8 = MutableList.of(IntInterval.fromToBy(0, -6, -1));
         Assert.assertEquals(expected8, interval8.chunk(8));
 
         IntInterval interval9 = IntInterval.fromToBy(0, 9, 4);
-        MutableList<IntIterable> expected9 = Lists.mutable.with(
+        MutableList<IntIterable> expected9 = MutableList.of(
                 IntLists.mutable.with(0, 4),
                 IntLists.mutable.with(8));
         Assert.assertEquals(expected9, interval9.chunk(2));
 
         IntInterval interval10 = IntInterval.fromToBy(0, -9, -4);
-        MutableList<IntIterable> expected10 = Lists.mutable.with(
+        MutableList<IntIterable> expected10 = MutableList.of(
                 IntLists.mutable.with(0, -4),
                 IntLists.mutable.with(-8));
         Assert.assertEquals(expected10, interval10.chunk(2));
 
         IntInterval interval11 = IntInterval.fromToBy(0, 5, 3);
-        MutableList<IntIterable> expected11 = Lists.mutable.with(IntLists.mutable.with(0, 3));
+        MutableList<IntIterable> expected11 = MutableList.of(IntLists.mutable.with(0, 3));
         Assert.assertEquals(expected11, interval11.chunk(3));
 
         IntInterval interval12 = IntInterval.fromToBy(0, -5, -3);
-        MutableList<IntIterable> expected12 = Lists.mutable.with(IntLists.mutable.with(0, -3));
+        MutableList<IntIterable> expected12 = MutableList.of(IntLists.mutable.with(0, -3));
         Assert.assertEquals(expected12, interval12.chunk(3));
 
         Verify.assertThrows(IllegalArgumentException.class, () -> interval12.chunk(0));
@@ -1085,14 +1084,14 @@ public class IntIntervalTest
         IntInterval interval = IntInterval.oneTo(3);
         ImmutableList<IntObjectPair<String>> zipped = interval.zip(interval.collect(Integer::toString));
         ImmutableList<IntObjectPair<String>> zippedLazy = interval.zip(interval.asLazy().collect(Integer::toString));
-        ImmutableList<IntObjectPair<String>> expected = Lists.immutable.with(
+        ImmutableList<IntObjectPair<String>> expected = ImmutableList.of(
                 PrimitiveTuples.pair(1, "1"),
                 PrimitiveTuples.pair(2, "2"),
                 PrimitiveTuples.pair(3, "3"));
         Assert.assertEquals(expected, zipped);
         Assert.assertEquals(expected, zippedLazy);
-        Verify.assertEmpty(interval.zip(Lists.mutable.empty()));
-        Assert.assertEquals(Lists.immutable.with(PrimitiveTuples.pair(1, "1")), interval.zip(Lists.mutable.with("1")));
+        Verify.assertEmpty(interval.zip(MutableList.empty()));
+        Assert.assertEquals(ImmutableList.of(PrimitiveTuples.pair(1, "1")), interval.zip(MutableList.of("1")));
     }
 
     @Test
@@ -1101,35 +1100,35 @@ public class IntIntervalTest
         IntInterval interval = IntInterval.oneTo(3);
         ImmutableList<IntIntPair> zipped = interval.zipInt(interval.toReversed());
         ImmutableList<IntIntPair> zippedLazy = interval.zipInt(interval.asReversed());
-        ImmutableList<IntIntPair> expected = Lists.immutable.with(
+        ImmutableList<IntIntPair> expected = ImmutableList.of(
                 PrimitiveTuples.pair(1, 3),
                 PrimitiveTuples.pair(2, 2),
                 PrimitiveTuples.pair(3, 1));
         Assert.assertEquals(expected, zipped);
         Assert.assertEquals(expected, zippedLazy);
         Verify.assertEmpty(interval.zipInt(IntLists.mutable.empty()));
-        Assert.assertEquals(Lists.immutable.with(PrimitiveTuples.pair(1, 3)), interval.zipInt(IntLists.mutable.with(3)));
+        Assert.assertEquals(ImmutableList.of(PrimitiveTuples.pair(1, 3)), interval.zipInt(IntLists.mutable.with(3)));
     }
 
     @Test
     public void primitiveStream()
     {
-        Assert.assertEquals(Lists.mutable.of(1, 2, 3, 4), IntInterval.oneTo(4).primitiveStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Lists.mutable.of(0, 2, 4), IntInterval.fromToBy(0, 5, 2).primitiveStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Lists.mutable.of(5, 3, 1), IntInterval.fromToBy(5, 0, -2).primitiveStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Lists.mutable.of(10, 15, 20, 25, 30), IntInterval.fromToBy(10, 30, 5).primitiveStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Lists.mutable.of(30, 25, 20, 15, 10), IntInterval.fromToBy(30, 10, -5).primitiveStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(1, 2, 3, 4), IntInterval.oneTo(4).primitiveStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(0, 2, 4), IntInterval.fromToBy(0, 5, 2).primitiveStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(5, 3, 1), IntInterval.fromToBy(5, 0, -2).primitiveStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(10, 15, 20, 25, 30), IntInterval.fromToBy(10, 30, 5).primitiveStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(30, 25, 20, 15, 10), IntInterval.fromToBy(30, 10, -5).primitiveStream().boxed().collect(Collectors.toList()));
     }
 
     @Test
     public void primitiveParallelStream()
     {
-        Assert.assertEquals(Lists.mutable.of(1, 2, 3, 4), IntInterval.oneTo(4).primitiveParallelStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Lists.mutable.of(0, 2, 4), IntInterval.fromToBy(0, 5, 2).primitiveParallelStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Lists.mutable.of(5, 3, 1, -1, -3), IntInterval.fromToBy(5, -4, -2).primitiveParallelStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Lists.mutable.of(10, 15, 20, 25, 30), IntInterval.fromToBy(10, 30, 5).primitiveParallelStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Lists.mutable.of(30, 25, 20, 15, 10), IntInterval.fromToBy(30, 10, -5).primitiveParallelStream().boxed().collect(Collectors.toList()));
-        Assert.assertEquals(Lists.mutable.of(-1, 10, 21, 32, 43, 54, 65, 76, 87, 98), IntInterval.fromToBy(-1, 100, 11).primitiveParallelStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(1, 2, 3, 4), IntInterval.oneTo(4).primitiveParallelStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(0, 2, 4), IntInterval.fromToBy(0, 5, 2).primitiveParallelStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(5, 3, 1, -1, -3), IntInterval.fromToBy(5, -4, -2).primitiveParallelStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(10, 15, 20, 25, 30), IntInterval.fromToBy(10, 30, 5).primitiveParallelStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(30, 25, 20, 15, 10), IntInterval.fromToBy(30, 10, -5).primitiveParallelStream().boxed().collect(Collectors.toList()));
+        Assert.assertEquals(MutableList.of(-1, 10, 21, 32, 43, 54, 65, 76, 87, 98), IntInterval.fromToBy(-1, 100, 11).primitiveParallelStream().boxed().collect(Collectors.toList()));
     }
 
     @Test

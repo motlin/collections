@@ -32,7 +32,6 @@ import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.SynchronizedBooleanCollection;
 import org.eclipse.collections.impl.collection.mutable.primitive.UnmodifiableBooleanCollection;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
@@ -196,7 +195,7 @@ public abstract class AbstractMutableBooleanValuesMap extends AbstractBooleanIte
         {
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
-        MutableList<BooleanIterable> result = Lists.mutable.empty();
+        MutableList<BooleanIterable> result = MutableList.empty();
         if (this.notEmpty())
         {
             BooleanIterator iterator = this.booleanIterator();

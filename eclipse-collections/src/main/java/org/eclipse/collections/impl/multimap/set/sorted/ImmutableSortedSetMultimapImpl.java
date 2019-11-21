@@ -31,8 +31,6 @@ import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimap;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimap;
 import org.eclipse.collections.impl.multimap.ImmutableMultimapSerializationProxy;
@@ -79,13 +77,13 @@ public final class ImmutableSortedSetMultimapImpl<K, V>
     @Override
     protected ImmutableSortedSet<V> createCollection()
     {
-        return SortedSets.immutable.with(this.comparator());
+        return ImmutableSortedSet.of(this.comparator());
     }
 
     @Override
     public ImmutableSortedSetMultimap<K, V> newEmpty()
     {
-        return new ImmutableSortedSetMultimapImpl<>(Maps.immutable.with(), this.comparator());
+        return new ImmutableSortedSetMultimapImpl<>(ImmutableMap.empty(), this.comparator());
     }
 
     @Override

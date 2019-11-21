@@ -14,10 +14,10 @@ import java.util.Set;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.factory.set.primitive.ImmutableBooleanSetFactory;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.api.tuple.primitive.BooleanBooleanPair;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -145,15 +145,15 @@ public class BooleanSetsTest
     @Test
     public void ofAllIterable()
     {
-        Assert.assertEquals(new BooleanHashSet(), BooleanSets.immutable.ofAll(Lists.mutable.empty()));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.immutable.ofAll(Lists.mutable.with(true)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.immutable.ofAll(Lists.mutable.with(true, false)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.immutable.ofAll(Lists.mutable.with(true, false, true)));
+        Assert.assertEquals(new BooleanHashSet(), BooleanSets.immutable.ofAll(MutableList.empty()));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.immutable.ofAll(MutableList.of(true)));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.immutable.ofAll(MutableList.of(true, false)));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.immutable.ofAll(MutableList.of(true, false, true)));
 
-        Assert.assertEquals(new BooleanHashSet(), BooleanSets.mutable.ofAll(Lists.mutable.empty()));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.mutable.ofAll(Lists.mutable.with(true)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.mutable.ofAll(Lists.mutable.with(true, false)));
-        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.mutable.ofAll(Lists.mutable.with(true, false, true)));
+        Assert.assertEquals(new BooleanHashSet(), BooleanSets.mutable.ofAll(MutableList.empty()));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true), BooleanSets.mutable.ofAll(MutableList.of(true)));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false), BooleanSets.mutable.ofAll(MutableList.of(true, false)));
+        Assert.assertEquals(BooleanHashSet.newSetWith(true, false, true), BooleanSets.mutable.ofAll(MutableList.of(true, false, true)));
     }
 
     @Test
@@ -170,7 +170,7 @@ public class BooleanSetsTest
                         BooleanSets.mutable.with(true, false),
                         BooleanSets.mutable.with(true, false));
 
-        Set<BooleanBooleanPair> expected = Sets.mutable.with(
+        Set<BooleanBooleanPair> expected = MutableSet.of(
                 PrimitiveTuples.pair(true, false),
                 PrimitiveTuples.pair(true, true),
                 PrimitiveTuples.pair(false, true),

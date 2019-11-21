@@ -30,7 +30,6 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.list.mutable.ArrayListAdapter;
@@ -44,8 +43,6 @@ import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 /**
  * JUnit test for {@link CollectionAdapter}.
@@ -78,7 +75,7 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
     @Test
     public void asSynchronized()
     {
-        MutableCollection<String> collection = CollectionAdapter.adapt(Maps.mutable.of("1", "1").values());
+        MutableCollection<String> collection = CollectionAdapter.adapt(MutableMap.of("1", "1").values());
         MutableCollection<String> asSynchronized = collection.asSynchronized();
         Verify.assertInstanceOf(AbstractSynchronizedMutableCollection.class, asSynchronized);
         Verify.assertInstanceOf(SynchronizedMutableCollection.class, asSynchronized);
@@ -293,8 +290,8 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
     {
         MutableCollection<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         PartitionMutableCollection<Integer> result = integers.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        Assert.assertEquals(ImmutableList.of(-2, 0, 2, 4, 6, 8), result.getSelected());
+        Assert.assertEquals(ImmutableList.of(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
     @Override
@@ -303,7 +300,7 @@ public class CollectionAdapterTest extends AbstractCollectionTestCase
     {
         MutableCollection<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         PartitionMutableCollection<Integer> result = integers.partitionWith(Predicates2.in(), integers.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        Assert.assertEquals(ImmutableList.of(-2, 0, 2, 4, 6, 8), result.getSelected());
+        Assert.assertEquals(ImmutableList.of(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 }

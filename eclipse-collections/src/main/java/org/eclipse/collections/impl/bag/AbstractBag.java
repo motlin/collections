@@ -61,7 +61,6 @@ import org.eclipse.collections.impl.AbstractRichIterable;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -697,7 +696,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSortedSet<T> toSortedSet()
     {
-        MutableSortedSet<T> result = SortedSets.mutable.empty();
+        MutableSortedSet<T> result = MutableSortedSet.empty();
         this.forEachWithOccurrences((each, occurrences) -> result.add(each));
         return result;
     }
@@ -705,7 +704,7 @@ public abstract class AbstractBag<T>
     @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
-        MutableSortedSet<T> result = SortedSets.mutable.with(comparator);
+        MutableSortedSet<T> result = MutableSortedSet.of(comparator);
         this.forEachWithOccurrences((each, occurrences) -> result.add(each));
         return result;
     }

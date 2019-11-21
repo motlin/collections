@@ -17,8 +17,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-
 public class ImmutableDecapletonListTest extends AbstractImmutableListTestCase
 {
     @Override
@@ -41,7 +39,7 @@ public class ImmutableDecapletonListTest extends AbstractImmutableListTestCase
     {
         ImmutableList<Number> numbers = new ImmutableDecapletonList<>(1, 2.0, 3, 4.0, 5, 6.0, 7, 8.0, 9, 10.0);
         Assert.assertEquals(
-                iList(1, 3, 5, 7, 9),
+                ImmutableList.of(1, 3, 5, 7, 9),
                 numbers.selectInstancesOf(Integer.class));
     }
 

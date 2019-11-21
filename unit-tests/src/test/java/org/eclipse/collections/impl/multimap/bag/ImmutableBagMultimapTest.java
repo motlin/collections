@@ -10,13 +10,14 @@
 
 package org.eclipse.collections.impl.multimap.bag;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimapTestCase;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -37,7 +38,7 @@ public class ImmutableBagMultimapTest extends AbstractImmutableMultimapTestCase
     @Override
     protected MutableCollection<String> mutableCollection()
     {
-        return Bags.mutable.of();
+        return MutableBag.empty();
     }
 
     @Override
@@ -69,8 +70,8 @@ public class ImmutableBagMultimapTest extends AbstractImmutableMultimapTestCase
                 .newWith("Less than 3", 2)
                 .newWith("Less than 3", 2);
         ImmutableBagMultimap<Integer, String> flipped = multimap.flip();
-        Assert.assertEquals(Bags.immutable.with("Less than 3", "Less than 3"), flipped.get(2));
-        Assert.assertEquals(Bags.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
+        Assert.assertEquals(ImmutableBag.of("Less than 3", "Less than 3"), flipped.get(2));
+        Assert.assertEquals(ImmutableBag.of("Less than 2", "Less than 3"), flipped.get(1));
     }
 
     @Override

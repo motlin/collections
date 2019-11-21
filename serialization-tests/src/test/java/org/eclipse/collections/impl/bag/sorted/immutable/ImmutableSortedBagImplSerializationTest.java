@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.bag.sorted.immutable;
 
+import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class ImmutableSortedBagImplSerializationTest
                         + "c3IAEWphdmEubGFuZy5JbnRlZ2VyEuKgpPeBhzgCAAFJAAV2YWx1ZXhyABBqYXZhLmxhbmcuTnVt\n"
                         + "YmVyhqyVHQuU4IsCAAB4cAAAAAF3BAAAAAFzcQB+AAIAAAACdwQAAAABc3EAfgACAAAAA3cEAAAA\n"
                         + "AXg=",
-                SortedBags.immutable.with(1, 2, 3));
+                ImmutableSortedBag.of(1, 2, 3));
     }
 
     @Test
@@ -43,6 +43,6 @@ public class ImmutableSortedBagImplSerializationTest
                         + "eS5Db21wYXJhdG9ycyROYXR1cmFsT3JkZXJDb21wYXJhdG9yAAAAAAAAAAECAAB4cHNyABFqYXZh\n"
                         + "LmxhbmcuSW50ZWdlchLioKT3gYc4AgABSQAFdmFsdWV4cgAQamF2YS5sYW5nLk51bWJlcoaslR0L\n"
                         + "lOCLAgAAeHAAAAADdwQAAAABc3EAfgAHAAAAAncEAAAAAXNxAH4ABwAAAAF3BAAAAAF4",
-                SortedBags.immutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3));
+                ImmutableSortedBag.of(Comparators.reverseNaturalOrder(), 1, 2, 3));
     }
 }

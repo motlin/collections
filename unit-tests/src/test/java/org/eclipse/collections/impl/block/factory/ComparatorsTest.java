@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.function.primitive.FloatFunction;
 import org.eclipse.collections.api.block.function.primitive.IntFunction;
 import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.list.Interval;
@@ -38,9 +39,6 @@ import org.eclipse.collections.impl.test.domain.Person;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 public class ComparatorsTest
 {
@@ -176,10 +174,10 @@ public class ComparatorsTest
         Person sheila12 = new Person("Sheila", "Smith", 12);
         Person sheila14 = new Person("Sheila", "Smith", 14);
 
-        MutableList<Person> people = mList(jim16, fred10, sheila14, sheila12, fred10, jim10);
+        MutableList<Person> people = MutableList.of(jim16, fred10, sheila14, sheila12, fred10, jim10);
 
-        MutableList<Person> expectedNameThenAgeOrder = mList(fred10, fred10, jim10, jim16, sheila12, sheila14);
-        MutableList<Person> expectedAgeThenNameOrder = mList(fred10, fred10, jim10, sheila12, sheila14, jim16);
+        MutableList<Person> expectedNameThenAgeOrder = MutableList.of(fred10, fred10, jim10, jim16, sheila12, sheila14);
+        MutableList<Person> expectedAgeThenNameOrder = MutableList.of(fred10, fred10, jim10, sheila12, sheila14, jim16);
 
         Verify.assertListsEqual(expectedNameThenAgeOrder, people.sortThis(Comparators.chain(byName, byAge)));
         Verify.assertListsEqual(expectedAgeThenNameOrder, people.sortThis(Comparators.chain(byAge, byName)));
@@ -309,8 +307,8 @@ public class ComparatorsTest
         Comparator<OneOfEach> comparator = Comparators.byFunction(OneOfEach.TO_DATE_VALUE, new FancyDateComparator());
 
         Assert.assertEquals(
-                iList(april, december, february),
-                iList(february, april, december).toSortedList(comparator));
+                ImmutableList.of(april, december, february),
+                ImmutableList.of(february, april, december).toSortedList(comparator));
     }
 
     public static class OneOfEach

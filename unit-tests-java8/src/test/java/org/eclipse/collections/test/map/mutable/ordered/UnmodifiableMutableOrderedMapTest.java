@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.MutableOrderedMap;
-import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.map.ordered.mutable.UnmodifiableMutableOrderedMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
@@ -73,7 +73,7 @@ public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestC
     public void MutableOrderedMap_removeAllKeys()
     {
         MutableMapIterable<Object, Object> map = this.newWith();
-        assertThrows(UnsupportedOperationException.class, () -> map.removeAllKeys(Sets.mutable.empty()));
+        assertThrows(UnsupportedOperationException.class, () -> map.removeAllKeys(MutableSet.empty()));
     }
 
     @Override

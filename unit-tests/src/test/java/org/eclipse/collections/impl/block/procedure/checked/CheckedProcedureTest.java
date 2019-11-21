@@ -17,8 +17,8 @@ import java.util.Map;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -50,7 +50,7 @@ public class CheckedProcedureTest
                 Verify.assertNotEmpty(collection);
             }
         };
-        procedure.value(Lists.fixedSize.of("1"));
+        procedure.value(FixedSizeList.of("1"));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class CheckedProcedureTest
                 Verify.assertContainsKey("1", map);
             }
         };
-        procedure.value(Maps.fixedSize.of("1", "1"));
+        procedure.value(FixedSizeMap.of("1", "1"));
     }
 
     @Test

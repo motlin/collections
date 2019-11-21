@@ -34,7 +34,6 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -68,7 +67,7 @@ public class ImmutableArrayBag<T>
 
     public static <T> ImmutableArrayBag<T> newBagWith(T... elements)
     {
-        return ImmutableArrayBag.copyFrom(Bags.mutable.with(elements));
+        return ImmutableArrayBag.copyFrom(MutableBag.of(elements));
     }
 
     public static <T> ImmutableArrayBag<T> copyFrom(Bag<? extends T> bag)
@@ -195,7 +194,7 @@ public class ImmutableArrayBag<T>
     @Override
     public ImmutableBag<T> newWithAll(Iterable<? extends T> elements)
     {
-        return Bags.immutable.withAll(Iterate.addAllTo(elements, HashBag.newBag(this)));
+        return ImmutableBag.ofAll(Iterate.addAllTo(elements, HashBag.newBag(this)));
     }
 
     @Override

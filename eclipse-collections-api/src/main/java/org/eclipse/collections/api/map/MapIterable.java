@@ -249,7 +249,7 @@ public interface MapIterable<K, V> extends RichIterable<V>
      * enclosed in curly braces. Each key and value is separated by an equals sign.
      * <p>
      * <pre>
-     * Assert.assertEquals("{1=1, 2=2, 3=3}", Maps.mutable.with(1, 1, 2, 2, 3, 3).toString());
+     * Assert.assertEquals("{1=1, 2=2, 3=3}", MutableMap.of(1, 1, 2, 2, 3, 3).toString());
      * </pre>
      *
      * @return a string representation of this MapIterable

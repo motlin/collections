@@ -35,7 +35,6 @@ import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.set.primitive.MutableIntSet;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.primitive.AbstractIntIterable;
@@ -468,7 +467,7 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
     {
         int size = this.size();
         int othersize = iterable.size();
-        MutableList<IntIntPair> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        MutableList<IntIntPair> target = MutableList.ofInitialCapacity(Math.min(size, othersize));
         IntIterator iterator = iterable.intIterator();
         for (int i = 0; i < size && i < othersize; i++)
         {
@@ -485,7 +484,7 @@ public class CodePointList extends AbstractIntIterable implements CharSequence, 
     {
         int size = this.size();
         int othersize = Iterate.sizeOf(iterable);
-        MutableList<IntObjectPair<T>> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        MutableList<IntObjectPair<T>> target = MutableList.ofInitialCapacity(Math.min(size, othersize));
         Iterator<T> iterator = iterable.iterator();
         for (int i = 0; i < size && i < othersize; i++)
         {

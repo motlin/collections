@@ -108,8 +108,8 @@ public class ListsTest
     @Test
     public void immutableWithListTest()
     {
-        Assert.assertEquals(Lists.mutable.of(), Lists.mutable.of().toImmutable());
-        Assert.assertEquals(Lists.mutable.of(1).without(1), Lists.mutable.of(1).without(1).toImmutable());
+        Assert.assertEquals(MutableList.empty(), MutableList.empty().toImmutable());
+        Assert.assertEquals(MutableList.of(1).without(1), MutableList.of(1).without(1).toImmutable());
         for (int i = 0; i < 12; i++)
         {
             MutableList<Integer> integers = Interval.fromTo(0, i).toList();
@@ -175,9 +175,9 @@ public class ListsTest
     @Test
     public void castToList()
     {
-        List<Object> list = Lists.immutable.of().castToList();
+        List<Object> list = ImmutableList.empty().castToList();
         Assert.assertNotNull(list);
-        Assert.assertSame(Lists.immutable.of(), list);
+        Assert.assertSame(ImmutableList.empty(), list);
     }
 
     @Test
@@ -186,7 +186,7 @@ public class ListsTest
         for (int i = 1; i <= 11; i++)
         {
             Interval interval = Interval.oneTo(i);
-            Verify.assertEqualsAndHashCode(interval, Lists.immutable.ofAll(interval));
+            Verify.assertEqualsAndHashCode(interval, ImmutableList.ofAll(interval));
         }
     }
 
@@ -196,9 +196,9 @@ public class ListsTest
         for (int i = 1; i <= 11; i++)
         {
             Interval interval = Interval.oneTo(i);
-            Verify.assertEqualsAndHashCode(interval, Lists.mutable.ofAll(interval));
+            Verify.assertEqualsAndHashCode(interval, MutableList.ofAll(interval));
             Stream<Integer> stream = IntStream.rangeClosed(1, i).boxed();
-            Verify.assertEqualsAndHashCode(interval, Lists.mutable.fromStream(stream));
+            Verify.assertEqualsAndHashCode(interval, MutableList.fromStream(stream));
         }
     }
 
@@ -208,73 +208,73 @@ public class ListsTest
         for (int i = 1; i <= 11; i++)
         {
             Interval interval = Interval.oneTo(i);
-            Verify.assertEqualsAndHashCode(interval, Lists.fixedSize.ofAll(interval));
+            Verify.assertEqualsAndHashCode(interval, FixedSizeList.ofAll(interval));
             Stream<Integer> stream = IntStream.rangeClosed(1, i).boxed();
-            Verify.assertEqualsAndHashCode(interval, Lists.fixedSize.fromStream(stream));
+            Verify.assertEqualsAndHashCode(interval, FixedSizeList.fromStream(stream));
         }
     }
 
     @Test
     public void copyList()
     {
-        Verify.assertInstanceOf(ImmutableList.class, Lists.immutable.ofAll(Lists.fixedSize.of()));
-        MutableList<Integer> list = Lists.fixedSize.of(1);
+        Verify.assertInstanceOf(ImmutableList.class, ImmutableList.ofAll(FixedSizeList.empty()));
+        MutableList<Integer> list = FixedSizeList.of(1);
         ImmutableList<Integer> immutableList = list.toImmutable();
-        Verify.assertInstanceOf(ImmutableList.class, Lists.immutable.ofAll(list));
-        Assert.assertSame(Lists.immutable.ofAll(immutableList.castToList()), immutableList);
+        Verify.assertInstanceOf(ImmutableList.class, ImmutableList.ofAll(list));
+        Assert.assertSame(ImmutableList.ofAll(immutableList.castToList()), immutableList);
     }
 
     @Test
     public void emptyList()
     {
-        Assert.assertTrue(Lists.immutable.of().isEmpty());
-        Assert.assertSame(Lists.immutable.of(), Lists.immutable.of());
-        Verify.assertPostSerializedIdentity(Lists.immutable.of());
+        Assert.assertTrue(ImmutableList.empty().isEmpty());
+        Assert.assertSame(ImmutableList.empty(), ImmutableList.empty());
+        Verify.assertPostSerializedIdentity(ImmutableList.empty());
     }
 
     @Test
     public void ofInitialCapacity()
     {
-        MutableList<String> list1 = Lists.mutable.ofInitialCapacity(0);
+        MutableList<String> list1 = MutableList.ofInitialCapacity(0);
         this.assertPresizedListEquals(0, (FastList<String>) list1);
 
-        MutableList<String> list2 = Lists.mutable.ofInitialCapacity(5);
+        MutableList<String> list2 = MutableList.ofInitialCapacity(5);
         this.assertPresizedListEquals(5, (FastList<String>) list2);
 
-        MutableList<String> list3 = Lists.mutable.ofInitialCapacity(20);
+        MutableList<String> list3 = MutableList.ofInitialCapacity(20);
         this.assertPresizedListEquals(20, (FastList<String>) list3);
 
-        MutableList<String> list4 = Lists.mutable.ofInitialCapacity(60);
+        MutableList<String> list4 = MutableList.ofInitialCapacity(60);
         this.assertPresizedListEquals(60, (FastList<String>) list4);
 
-        MutableList<String> list5 = Lists.mutable.ofInitialCapacity(64);
+        MutableList<String> list5 = MutableList.ofInitialCapacity(64);
         this.assertPresizedListEquals(64, (FastList<String>) list5);
 
-        MutableList<String> list6 = Lists.mutable.ofInitialCapacity(65);
+        MutableList<String> list6 = MutableList.ofInitialCapacity(65);
         this.assertPresizedListEquals(65, (FastList<String>) list6);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Lists.mutable.ofInitialCapacity(-12));
+        Verify.assertThrows(IllegalArgumentException.class, () -> MutableList.ofInitialCapacity(-12));
     }
 
     @Test
     public void withInitialCapacity()
     {
-        MutableList<String> list1 = Lists.mutable.withInitialCapacity(0);
+        MutableList<String> list1 = MutableList.ofInitialCapacity(0);
         this.assertPresizedListEquals(0, (FastList<String>) list1);
 
-        MutableList<String> list2 = Lists.mutable.withInitialCapacity(14);
+        MutableList<String> list2 = MutableList.ofInitialCapacity(14);
         this.assertPresizedListEquals(14, (FastList<String>) list2);
 
-        MutableList<String> list3 = Lists.mutable.withInitialCapacity(17);
+        MutableList<String> list3 = MutableList.ofInitialCapacity(17);
         this.assertPresizedListEquals(17, (FastList<String>) list3);
 
-        MutableList<String> list4 = Lists.mutable.withInitialCapacity(25);
+        MutableList<String> list4 = MutableList.ofInitialCapacity(25);
         this.assertPresizedListEquals(25, (FastList<String>) list4);
 
-        MutableList<String> list5 = Lists.mutable.withInitialCapacity(32);
+        MutableList<String> list5 = MutableList.ofInitialCapacity(32);
         this.assertPresizedListEquals(32, (FastList<String>) list5);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Lists.mutable.withInitialCapacity(-6));
+        Verify.assertThrows(IllegalArgumentException.class, () -> MutableList.ofInitialCapacity(-6));
     }
 
     private void assertPresizedListEquals(int initialCapacity, FastList<String> list)
@@ -351,7 +351,7 @@ public class ListsTest
         ImmutableList<Integer> expected =
                 IntInterval.oneTo(10).collect(each -> new Integer(1));
         MutableList<Integer> mutable =
-                Lists.mutable.withNValues(10, () -> new Integer(1));
+                MutableList.withNValues(10, () -> new Integer(1));
         MutableList<Integer> multiReader =
                 Lists.multiReader.withNValues(10, () -> new Integer(1));
         Assert.assertEquals(expected, mutable);
@@ -379,43 +379,43 @@ public class ListsTest
     @Test
     public void newListWith()
     {
-        ImmutableList<String> list = Lists.immutable.of();
-        Assert.assertEquals(list, Lists.immutable.of(list.toArray()));
-        Assert.assertEquals(list = list.newWith("1"), Lists.immutable.of("1"));
-        Assert.assertEquals(list = list.newWith("2"), Lists.immutable.of("1", "2"));
-        Assert.assertEquals(list = list.newWith("3"), Lists.immutable.of("1", "2", "3"));
-        Assert.assertEquals(list = list.newWith("4"), Lists.immutable.of("1", "2", "3", "4"));
-        Assert.assertEquals(list = list.newWith("5"), Lists.immutable.of("1", "2", "3", "4", "5"));
-        Assert.assertEquals(list = list.newWith("6"), Lists.immutable.of("1", "2", "3", "4", "5", "6"));
-        Assert.assertEquals(list = list.newWith("7"), Lists.immutable.of("1", "2", "3", "4", "5", "6", "7"));
-        Assert.assertEquals(list = list.newWith("8"), Lists.immutable.of("1", "2", "3", "4", "5", "6", "7", "8"));
-        Assert.assertEquals(list = list.newWith("9"), Lists.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
-        Assert.assertEquals(list = list.newWith("10"), Lists.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-        Assert.assertEquals(list = list.newWith("11"), Lists.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
-        Assert.assertEquals(list = list.newWith("12"), Lists.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
+        ImmutableList<String> list = ImmutableList.empty();
+        Assert.assertEquals(list, ImmutableList.of(list.toArray()));
+        Assert.assertEquals(list = list.newWith("1"), ImmutableList.of("1"));
+        Assert.assertEquals(list = list.newWith("2"), ImmutableList.of("1", "2"));
+        Assert.assertEquals(list = list.newWith("3"), ImmutableList.of("1", "2", "3"));
+        Assert.assertEquals(list = list.newWith("4"), ImmutableList.of("1", "2", "3", "4"));
+        Assert.assertEquals(list = list.newWith("5"), ImmutableList.of("1", "2", "3", "4", "5"));
+        Assert.assertEquals(list = list.newWith("6"), ImmutableList.of("1", "2", "3", "4", "5", "6"));
+        Assert.assertEquals(list = list.newWith("7"), ImmutableList.of("1", "2", "3", "4", "5", "6", "7"));
+        Assert.assertEquals(list = list.newWith("8"), ImmutableList.of("1", "2", "3", "4", "5", "6", "7", "8"));
+        Assert.assertEquals(list = list.newWith("9"), ImmutableList.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        Assert.assertEquals(list = list.newWith("10"), ImmutableList.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        Assert.assertEquals(list = list.newWith("11"), ImmutableList.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+        Assert.assertEquals(list = list.newWith("12"), ImmutableList.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
     }
 
     @Test
     public void newListWithArray()
     {
-        ImmutableList<String> list = Lists.immutable.of();
-        Assert.assertEquals(list = list.newWith("1"), Lists.immutable.of(new String[]{"1"}));
-        Assert.assertEquals(list = list.newWith("2"), Lists.immutable.of(new String[]{"1", "2"}));
-        Assert.assertEquals(list = list.newWith("3"), Lists.immutable.of(new String[]{"1", "2", "3"}));
-        Assert.assertEquals(list = list.newWith("4"), Lists.immutable.of(new String[]{"1", "2", "3", "4"}));
-        Assert.assertEquals(list = list.newWith("5"), Lists.immutable.of(new String[]{"1", "2", "3", "4", "5"}));
-        Assert.assertEquals(list = list.newWith("6"), Lists.immutable.of(new String[]{"1", "2", "3", "4", "5", "6"}));
-        Assert.assertEquals(list = list.newWith("7"), Lists.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7"}));
-        Assert.assertEquals(list = list.newWith("8"), Lists.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8"}));
-        Assert.assertEquals(list = list.newWith("9"), Lists.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
-        Assert.assertEquals(list = list.newWith("10"), Lists.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-        Assert.assertEquals(list = list.newWith("11"), Lists.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+        ImmutableList<String> list = ImmutableList.empty();
+        Assert.assertEquals(list = list.newWith("1"), ImmutableList.of(new String[]{"1"}));
+        Assert.assertEquals(list = list.newWith("2"), ImmutableList.of(new String[]{"1", "2"}));
+        Assert.assertEquals(list = list.newWith("3"), ImmutableList.of(new String[]{"1", "2", "3"}));
+        Assert.assertEquals(list = list.newWith("4"), ImmutableList.of(new String[]{"1", "2", "3", "4"}));
+        Assert.assertEquals(list = list.newWith("5"), ImmutableList.of(new String[]{"1", "2", "3", "4", "5"}));
+        Assert.assertEquals(list = list.newWith("6"), ImmutableList.of(new String[]{"1", "2", "3", "4", "5", "6"}));
+        Assert.assertEquals(list = list.newWith("7"), ImmutableList.of(new String[]{"1", "2", "3", "4", "5", "6", "7"}));
+        Assert.assertEquals(list = list.newWith("8"), ImmutableList.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8"}));
+        Assert.assertEquals(list = list.newWith("9"), ImmutableList.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+        Assert.assertEquals(list = list.newWith("10"), ImmutableList.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+        Assert.assertEquals(list = list.newWith("11"), ImmutableList.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
     }
 
     @Test
     public void newListWithList()
     {
-        ImmutableList<String> list = Lists.immutable.of();
+        ImmutableList<String> list = ImmutableList.empty();
         FastList<String> fastList = FastList.newListWith("1");
         Assert.assertEquals(list = list.newWith("1"), fastList.toImmutable());
         Assert.assertEquals(list = list.newWith("2"), fastList.with("2").toImmutable());
@@ -433,11 +433,11 @@ public class ListsTest
     @Test
     public void newListWithWithList()
     {
-        Assert.assertEquals(FastList.newList(), Lists.immutable.ofAll(FastList.newList()));
+        Assert.assertEquals(FastList.newList(), ImmutableList.ofAll(FastList.newList()));
         for (int i = 0; i < 12; i++)
         {
             List<Integer> list = Interval.fromTo(0, i);
-            Assert.assertEquals(list, Lists.immutable.ofAll(list));
+            Assert.assertEquals(list, ImmutableList.ofAll(list));
         }
     }
 

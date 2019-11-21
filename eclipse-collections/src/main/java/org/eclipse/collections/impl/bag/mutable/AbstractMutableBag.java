@@ -52,7 +52,6 @@ import org.eclipse.collections.impl.bag.mutable.primitive.FloatHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.lazy.parallel.bag.NonParallelUnsortedBag;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -65,7 +64,7 @@ public abstract class AbstractMutableBag<T>
     @Override
     public ImmutableBag<T> toImmutable()
     {
-        return Bags.immutable.withAll(this);
+        return ImmutableBag.ofAll(this);
     }
 
     @Override
@@ -176,7 +175,7 @@ public abstract class AbstractMutableBag<T>
     @Override
     public <V> MutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        return this.collectWithOccurrences(function, Bags.mutable.empty());
+        return this.collectWithOccurrences(function, MutableBag.empty());
     }
 
     @Override

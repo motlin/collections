@@ -17,6 +17,7 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.api.set.ImmutableSet;
@@ -28,7 +29,6 @@ import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.collection.immutable.AbstractImmutableCollectionTestCase;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -165,7 +165,7 @@ public abstract class AbstractImmutableSetTestCase extends AbstractImmutableColl
     @Test
     public void flatCollectWithTarget()
     {
-        MutableCollection<String> actual = this.classUnderTest().flatCollect(integer -> Lists.fixedSize.of(String.valueOf(integer)), UnifiedSet.newSet());
+        MutableCollection<String> actual = this.classUnderTest().flatCollect(integer -> FixedSizeList.of(String.valueOf(integer)), UnifiedSet.newSet());
 
         ImmutableCollection<String> expected = this.classUnderTest().collect(String::valueOf);
 

@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.lazy.parallel.set.sorted;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.lazy.parallel.list.ParallelListIterableTestCase;
 import org.eclipse.collections.impl.list.mutable.FastList;
 
@@ -29,7 +29,7 @@ public class ParallelCollectSortedSetIterableTest extends ParallelListIterableTe
     @Override
     protected ParallelListIterable<Integer> newWith(Integer... littleElements)
     {
-        return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), littleElements)
+        return ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), littleElements)
                 .asParallel(this.executorService, this.batchSize)
                 .collect(i -> i / 10);
     }
@@ -43,7 +43,7 @@ public class ParallelCollectSortedSetIterableTest extends ParallelListIterableTe
     @Override
     protected ListIterable<Integer> getExpectedWith(Integer... littleElements)
     {
-        return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), littleElements)
+        return ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), littleElements)
                 .collect(i -> i / 10);
     }
 }

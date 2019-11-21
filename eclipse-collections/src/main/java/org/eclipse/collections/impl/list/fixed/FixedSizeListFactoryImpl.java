@@ -124,7 +124,7 @@ public class FixedSizeListFactoryImpl implements FixedSizeListFactory
         switch (items.length)
         {
             case 0:
-                return this.of();
+                return this.empty();
             case 1:
                 return this.of(items[0]);
             case 2:

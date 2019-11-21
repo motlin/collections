@@ -60,8 +60,6 @@ import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
@@ -230,7 +228,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     public <K2, V2> ImmutableBiMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         ImmutableMap<K2, V2> result = this.delegate.collect(function);
-        return BiMaps.immutable.withAll(result);
+        return ImmutableBiMap.ofAll(result);
     }
 
     @Override
@@ -243,7 +241,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     public <R> ImmutableBiMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
         ImmutableMap<K, R> result = this.delegate.collectValues(function);
-        return BiMaps.immutable.withAll(result);
+        return ImmutableBiMap.ofAll(result);
     }
 
     @Override
@@ -328,13 +326,13 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Override
     public ImmutableSet<V> select(Predicate<? super V> predicate)
     {
-        return this.delegate.select(predicate, Sets.mutable.empty()).toImmutable();
+        return this.delegate.select(predicate, MutableSet.empty()).toImmutable();
     }
 
     @Override
     public <P> ImmutableSet<V> selectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        return this.delegate.selectWith(predicate, parameter, Sets.mutable.empty()).toImmutable();
+        return this.delegate.selectWith(predicate, parameter, MutableSet.empty()).toImmutable();
     }
 
     @Override
@@ -346,13 +344,13 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Override
     public ImmutableSet<V> reject(Predicate<? super V> predicate)
     {
-        return this.delegate.reject(predicate, Sets.mutable.empty()).toImmutable();
+        return this.delegate.reject(predicate, MutableSet.empty()).toImmutable();
     }
 
     @Override
     public <P> ImmutableSet<V> rejectWith(Predicate2<? super V, ? super P> predicate, P parameter)
     {
-        return this.delegate.rejectWith(predicate, parameter, Sets.mutable.empty()).toImmutable();
+        return this.delegate.rejectWith(predicate, parameter, MutableSet.empty()).toImmutable();
     }
 
     @Override
@@ -438,7 +436,7 @@ public abstract class AbstractImmutableBiMap<K, V> extends AbstractBiMap<K, V> i
     @Override
     public <VV> ImmutableBiMap<VV, V> groupByUniqueKey(Function<? super V, ? extends VV> function)
     {
-        return BiMaps.immutable.withAll(this.delegate.groupByUniqueKey(function));
+        return ImmutableBiMap.ofAll(this.delegate.groupByUniqueKey(function));
     }
 
     @Override

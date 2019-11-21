@@ -37,7 +37,6 @@ import org.eclipse.collections.api.set.primitive.BooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.api.tuple.primitive.BooleanIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
@@ -526,28 +525,28 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
             {
                 if (this.trueCount == this.falseCount)
                 {
-                    return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
+                    return MutableList.of(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
                 }
                 if (this.trueCount > this.falseCount)
                 {
-                    return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
+                    return MutableList.of(PrimitiveTuples.pair(true, this.trueCount));
                 }
-                return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
+                return MutableList.of(PrimitiveTuples.pair(false, this.falseCount));
             }
             if (count > 1)
             {
                 if (this.trueCount >= this.falseCount)
                 {
-                    return Lists.mutable.with(
+                    return MutableList.of(
                             PrimitiveTuples.pair(true, this.trueCount),
                             PrimitiveTuples.pair(false, this.falseCount));
                 }
-                return Lists.mutable.with(
+                return MutableList.of(
                         PrimitiveTuples.pair(false, this.falseCount),
                         PrimitiveTuples.pair(true, this.trueCount));
             }
         }
-        return Lists.mutable.empty();
+        return MutableList.empty();
     }
 
     @Override
@@ -563,28 +562,28 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
             {
                 if (this.trueCount == this.falseCount)
                 {
-                    return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
+                    return MutableList.of(PrimitiveTuples.pair(true, this.trueCount), PrimitiveTuples.pair(false, this.falseCount));
                 }
                 if (this.trueCount < this.falseCount)
                 {
-                    return Lists.mutable.with(PrimitiveTuples.pair(true, this.trueCount));
+                    return MutableList.of(PrimitiveTuples.pair(true, this.trueCount));
                 }
-                return Lists.mutable.with(PrimitiveTuples.pair(false, this.falseCount));
+                return MutableList.of(PrimitiveTuples.pair(false, this.falseCount));
             }
             if (count > 1)
             {
                 if (this.trueCount <= this.falseCount)
                 {
-                    return Lists.mutable.with(
+                    return MutableList.of(
                             PrimitiveTuples.pair(true, this.trueCount),
                             PrimitiveTuples.pair(false, this.falseCount));
                 }
-                return Lists.mutable.with(
+                return MutableList.of(
                         PrimitiveTuples.pair(false, this.falseCount),
                         PrimitiveTuples.pair(true, this.trueCount));
             }
         }
-        return Lists.mutable.empty();
+        return MutableList.empty();
     }
 
     @Override
@@ -620,7 +619,7 @@ public final class BooleanHashBag implements MutableBooleanBag, Externalizable
         {
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
-        MutableList<BooleanIterable> result = Lists.mutable.empty();
+        MutableList<BooleanIterable> result = MutableList.empty();
         if (this.notEmpty())
         {
             if (this.size() <= size)

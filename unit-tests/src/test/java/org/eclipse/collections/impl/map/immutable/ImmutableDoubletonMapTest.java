@@ -18,7 +18,6 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -57,7 +56,7 @@ public class ImmutableDoubletonMapTest extends ImmutableMemoryEfficientMapTestCa
     public void forEachValue()
     {
         super.forEachValue();
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         ImmutableMap<Integer, String> map = this.classUnderTest();
         map.forEachValue(CollectionAddProcedure.on(collection));
         Assert.assertEquals(FastList.newListWith("1", "2"), collection);
@@ -68,7 +67,7 @@ public class ImmutableDoubletonMapTest extends ImmutableMemoryEfficientMapTestCa
     public void forEachKey()
     {
         super.forEachKey();
-        MutableList<Integer> collection = Lists.mutable.of();
+        MutableList<Integer> collection = MutableList.empty();
         ImmutableMap<Integer, String> map = this.classUnderTest();
         map.forEachKey(CollectionAddProcedure.on(collection));
         Assert.assertEquals(FastList.newListWith(1, 2), collection);
@@ -120,7 +119,7 @@ public class ImmutableDoubletonMapTest extends ImmutableMemoryEfficientMapTestCa
     public void forEachWith()
     {
         super.forEachWith();
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableMap<Integer, Integer> map = new ImmutableDoubletonMap<>(1, 1, 2, 2);
         map.forEachWith((argument1, argument2) -> result.add(argument1 + argument2), 10);
         Assert.assertEquals(FastList.newListWith(11, 12), result);
@@ -131,7 +130,7 @@ public class ImmutableDoubletonMapTest extends ImmutableMemoryEfficientMapTestCa
     public void forEachWithIndex()
     {
         super.forEachWithIndex();
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         ImmutableMap<Integer, String> map = new ImmutableDoubletonMap<>(1, "One", 2, "Two");
         map.forEachWithIndex((value, index) -> {
             result.add(value);
@@ -145,7 +144,7 @@ public class ImmutableDoubletonMapTest extends ImmutableMemoryEfficientMapTestCa
     public void keyValuesView()
     {
         super.keyValuesView();
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         ImmutableMap<Integer, String> map = new ImmutableDoubletonMap<>(1, "One", 2, "Two");
         for (Pair<Integer, String> entry : map.keyValuesView())
         {
@@ -159,7 +158,7 @@ public class ImmutableDoubletonMapTest extends ImmutableMemoryEfficientMapTestCa
     public void valuesView()
     {
         super.valuesView();
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         ImmutableMap<Integer, String> map = new ImmutableDoubletonMap<>(1, "One", 2, "Two");
         for (String value : map.valuesView())
         {
@@ -173,7 +172,7 @@ public class ImmutableDoubletonMapTest extends ImmutableMemoryEfficientMapTestCa
     public void keysView()
     {
         super.keysView();
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableMap<Integer, String> map = new ImmutableDoubletonMap<>(1, "One", 2, "Two");
         for (Integer key : map.keysView())
         {

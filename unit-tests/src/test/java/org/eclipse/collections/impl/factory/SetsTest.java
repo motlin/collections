@@ -43,60 +43,58 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
-
 public class SetsTest
 {
     private final MutableList<UnifiedSet<String>> uniqueSets =
-            Lists.mutable.with(
+            MutableList.of(
                     this.newUnsortedSet("Tom", "Dick", "Harry", null),
                     this.newUnsortedSet("Jane", "Sarah", "Mary"),
                     this.newUnsortedSet("Fido", "Spike", "Spuds"));
 
     private final MutableList<UnifiedSet<String>> overlappingSets =
-            Lists.mutable.with(
+            MutableList.of(
                     this.newUnsortedSet("Tom", "Dick", "Harry"),
                     this.newUnsortedSet("Larry", "Tom", "Dick"),
                     this.newUnsortedSet("Dick", "Larry", "Paul", null));
 
     private final MutableList<UnifiedSet<String>> identicalSets =
-            Lists.mutable.with(
+            MutableList.of(
                     this.newUnsortedSet("Tom", null, "Dick", "Harry"),
                     this.newUnsortedSet(null, "Harry", "Tom", "Dick"),
                     this.newUnsortedSet("Dick", "Harry", "Tom", null));
 
     private final MutableList<TreeSet<String>> uniqueSortedSets =
-            Lists.mutable.with(
+            MutableList.of(
                     this.newSortedSet("Tom", "Dick", "Harry"),
                     this.newSortedSet("Jane", "Sarah", "Mary"),
                     this.newSortedSet("Fido", "Spike", "Spuds"));
 
     private final MutableList<TreeSet<String>> overlappingSortedSets =
-            Lists.mutable.with(
+            MutableList.of(
                     this.newSortedSet("Tom", "Dick", "Harry"),
                     this.newSortedSet("Larry", "Tom", "Dick"),
                     this.newSortedSet("Dick", "Larry", "Paul"));
 
     private final MutableList<TreeSet<String>> identicalSortedSets =
-            Lists.mutable.with(
+            MutableList.of(
                     this.newSortedSet("Tom", "Dick", "Harry"),
                     this.newSortedSet("Harry", "Tom", "Dick"),
                     this.newSortedSet("Dick", "Harry", "Tom"));
 
     private final MutableList<TreeSet<String>> uniqueReverseSortedSets =
-            Lists.mutable.with(
+            MutableList.of(
                     this.newReverseSortedSet("Tom", "Dick", "Harry"),
                     this.newReverseSortedSet("Jane", "Sarah", "Mary"),
                     this.newReverseSortedSet("Fido", "Spike", "Spuds"));
 
     private final MutableList<TreeSet<String>> overlappingReverseSortedSets =
-            Lists.mutable.with(
+            MutableList.of(
                     this.newReverseSortedSet("Tom", "Dick", "Harry"),
                     this.newReverseSortedSet("Larry", "Tom", "Dick"),
                     this.newReverseSortedSet("Dick", "Larry", "Paul"));
 
     private final MutableList<TreeSet<String>> identicalReverseSortedSets =
-            Lists.mutable.with(
+            MutableList.of(
                     this.newReverseSortedSet("Tom", "Dick", "Harry"),
                     this.newReverseSortedSet("Harry", "Tom", "Dick"),
                     this.newReverseSortedSet("Dick", "Harry", "Tom"));
@@ -521,8 +519,8 @@ public class SetsTest
     @Test
     public void subsetEmpty()
     {
-        MutableSet<String> emptySet = mSet();
-        MutableSet<String> singletonSet = mSet("Bertha");
+        MutableSet<String> emptySet = MutableSet.empty();
+        MutableSet<String> singletonSet = MutableSet.of("Bertha");
         Assert.assertTrue(Sets.isSubsetOf(emptySet, singletonSet));
         Assert.assertFalse(Sets.isSubsetOf(singletonSet, emptySet));
     }
@@ -548,7 +546,7 @@ public class SetsTest
     @Test
     public void properSubsetEmpty()
     {
-        MutableSet<String> emptySet = mSet();
+        MutableSet<String> emptySet = MutableSet.empty();
         MutableSet<String> singletonSet = UnifiedSet.newSetWith("Bertha");
         Assert.assertTrue(Sets.isProperSubsetOf(emptySet, singletonSet));
         Assert.assertFalse(Sets.isProperSubsetOf(singletonSet, emptySet));
@@ -617,7 +615,7 @@ public class SetsTest
         Set<E> bXcXa = function.value(function.value(setB, setC), setA);
         Set<E> cXaXb = function.value(function.value(setC, setA), setB);
         Set<E> cXbXa = function.value(function.value(setC, setB), setA);
-        this.assertAllContainExactly(setContainsProcedure, Lists.mutable.with(aXbXc, aXcXb, bXaXc, bXcXa, cXaXb, cXbXa), elements);
+        this.assertAllContainExactly(setContainsProcedure, MutableList.of(aXbXc, aXcXb, bXaXc, bXcXa, cXaXb, cXbXa), elements);
     }
 
     private <E> void assertAssociativeProperty(
@@ -675,7 +673,7 @@ public class SetsTest
     {
         Verify.assertSetsEqual(setA, setB);
         Object[] expectedItems = setB.toArray((E[]) new Object[setB.size()]);
-        Assert.assertEquals(Lists.mutable.with(expectedItems), FastList.newList(setA));
+        Assert.assertEquals(MutableList.of(expectedItems), FastList.newList(setA));
     }
 
     private <E> void assertForwardAndBackward(
@@ -699,7 +697,7 @@ public class SetsTest
 
     private <E> Procedure2<Set<E>, E[]> containsExactlyInOrderProcedure()
     {
-        return (set, elements) -> Assert.assertEquals(Lists.mutable.with((Object[]) elements), FastList.newList(set));
+        return (set, elements) -> Assert.assertEquals(MutableList.of((Object[]) elements), FastList.newList(set));
     }
 
     @Test
@@ -768,8 +766,8 @@ public class SetsTest
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1, 2, 3));
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.of(1, 2, 3, 4));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.of(1, 2, 3, 4));
-        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.ofAll(Sets.mutable.of(1, 2, 3, 4)));
-        Verify.assertInstanceOf(FixedSizeSet.class, setFactory.ofAll(Sets.mutable.of(1, 2, 3, 4)));
+        Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.ofAll(MutableSet.of(1, 2, 3, 4)));
+        Verify.assertInstanceOf(FixedSizeSet.class, setFactory.ofAll(MutableSet.of(1, 2, 3, 4)));
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4), setFactory.fromStream(Stream.of(1, 2, 3, 4)));
         Verify.assertInstanceOf(FixedSizeSet.class, setFactory.fromStream(Stream.of(1, 2, 3, 4)));
     }
@@ -820,9 +818,9 @@ public class SetsTest
     @Test
     public void cartesianProduct()
     {
-        MutableSet<Integer> set1 = Sets.mutable.with(1, 2);
-        MutableSet<Integer> set2 = Sets.mutable.with(2, 3, 4);
-        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct1 = Bags.mutable.of(
+        MutableSet<Integer> set1 = MutableSet.of(1, 2);
+        MutableSet<Integer> set2 = MutableSet.of(2, 3, 4);
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct1 = MutableBag.of(
                 Tuples.pair(1, 2),
                 Tuples.pair(2, 2),
                 Tuples.pair(1, 3),
@@ -830,7 +828,7 @@ public class SetsTest
                 Tuples.pair(1, 4),
                 Tuples.pair(2, 4));
         Assert.assertEquals(expectedCartesianProduct1, Sets.cartesianProduct(set1, set2).toBag());
-        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct2 = Bags.mutable.of(
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct2 = MutableBag.of(
                 Tuples.pair(2, 1),
                 Tuples.pair(3, 1),
                 Tuples.pair(4, 1),
@@ -843,9 +841,9 @@ public class SetsTest
     @Test
     public void cartesianProductSameElements()
     {
-        MutableSet<Integer> set1 = Sets.mutable.with(1, 2);
-        MutableSet<Integer> set2 = Sets.mutable.with(1, 2);
-        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct = Bags.mutable.of(
+        MutableSet<Integer> set1 = MutableSet.of(1, 2);
+        MutableSet<Integer> set2 = MutableSet.of(1, 2);
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct = MutableBag.of(
                 Tuples.pair(1, 1),
                 Tuples.pair(1, 2),
                 Tuples.pair(2, 1),
@@ -856,9 +854,9 @@ public class SetsTest
     @Test
     public void cartesianProductWithFunction()
     {
-        MutableSet<Integer> set1 = Sets.mutable.with(1, 2);
-        MutableSet<Integer> set2 = Sets.mutable.with(2, 3, 4);
-        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct = Bags.mutable.of(
+        MutableSet<Integer> set1 = MutableSet.of(1, 2);
+        MutableSet<Integer> set2 = MutableSet.of(2, 3, 4);
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct = MutableBag.of(
                 Tuples.pair(1, 2),
                 Tuples.pair(2, 2),
                 Tuples.pair(1, 3),
@@ -866,45 +864,45 @@ public class SetsTest
                 Tuples.pair(1, 4),
                 Tuples.pair(2, 4));
         Assert.assertEquals(expectedCartesianProduct, Sets.cartesianProduct(set1, set2, Tuples::pair).toBag());
-        MutableBag<List<Integer>> expectedCartesianProduct2 = Bags.mutable.of(
-                Lists.mutable.with(2, 1),
-                Lists.mutable.with(3, 1),
-                Lists.mutable.with(4, 1),
-                Lists.mutable.with(2, 2),
-                Lists.mutable.with(3, 2),
-                Lists.mutable.with(4, 2));
+        MutableBag<List<Integer>> expectedCartesianProduct2 = MutableBag.of(
+                MutableList.of(2, 1),
+                MutableList.of(3, 1),
+                MutableList.of(4, 1),
+                MutableList.of(2, 2),
+                MutableList.of(3, 2),
+                MutableList.of(4, 2));
         Assert.assertEquals(
                 expectedCartesianProduct2,
-                Sets.cartesianProduct(set2, set1, (one, two) -> Lists.mutable.with(one, two)).toBag());
+                Sets.cartesianProduct(set2, set1, (one, two) -> MutableList.of(one, two)).toBag());
     }
 
     @Test
     public void cartesianProduct_empty()
     {
         Assert.assertEquals(
-                Bags.mutable.of(),
+                MutableBag.empty(),
                 HashBag.newBag(Sets.cartesianProduct(
-                        Sets.mutable.with(1, 2),
+                        MutableSet.of(1, 2),
                         UnifiedSet.newSet())));
     }
 
     @Test
     public void castToSet()
     {
-        Set<Object> set = Sets.immutable.of().castToSet();
+        Set<Object> set = ImmutableSet.empty().castToSet();
         Assert.assertNotNull(set);
-        Assert.assertSame(Sets.immutable.of(), set);
+        Assert.assertSame(ImmutableSet.empty(), set);
     }
 
     @Test
     public void copySet()
     {
-        Verify.assertInstanceOf(ImmutableSet.class, Sets.immutable.ofAll(Sets.fixedSize.of()));
-        MutableSet<Integer> set = Sets.fixedSize.of(1);
+        Verify.assertInstanceOf(ImmutableSet.class, ImmutableSet.ofAll(FixedSizeSet.empty()));
+        MutableSet<Integer> set = FixedSizeSet.of(1);
         ImmutableSet<Integer> immutableSet = set.toImmutable();
-        Verify.assertInstanceOf(ImmutableSet.class, Sets.immutable.ofAll(set));
-        Verify.assertInstanceOf(ImmutableSet.class, Sets.immutable.ofAll(Sets.mutable.with(1, 2, 3, 4, 5)));
-        Assert.assertSame(Sets.immutable.ofAll(immutableSet.castToSet()), immutableSet);
+        Verify.assertInstanceOf(ImmutableSet.class, ImmutableSet.ofAll(set));
+        Verify.assertInstanceOf(ImmutableSet.class, ImmutableSet.ofAll(MutableSet.of(1, 2, 3, 4, 5)));
+        Assert.assertSame(ImmutableSet.ofAll(immutableSet.castToSet()), immutableSet);
     }
 
     @Test
@@ -913,7 +911,7 @@ public class SetsTest
         for (int i = 1; i <= 5; i++)
         {
             Interval interval = Interval.oneTo(i);
-            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.immutable.ofAll(interval));
+            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), ImmutableSet.ofAll(interval));
         }
     }
 
@@ -923,9 +921,9 @@ public class SetsTest
         for (int i = 1; i <= 5; i++)
         {
             Interval interval = Interval.oneTo(i);
-            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.mutable.ofAll(interval));
+            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), MutableSet.ofAll(interval));
             Stream<Integer> stream = IntStream.rangeClosed(1, i).boxed();
-            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.mutable.fromStream(stream));
+            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), MutableSet.fromStream(stream));
         }
     }
 
@@ -935,50 +933,50 @@ public class SetsTest
         for (int i = 1; i <= 5; i++)
         {
             Interval interval = Interval.oneTo(i);
-            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.fixedSize.ofAll(interval));
+            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), FixedSizeSet.ofAll(interval));
             Stream<Integer> stream = IntStream.rangeClosed(1, i).boxed();
-            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), Sets.fixedSize.fromStream(stream));
+            Verify.assertEqualsAndHashCode(UnifiedSet.newSet(interval), FixedSizeSet.fromStream(stream));
         }
     }
 
     @Test
     public void emptySet()
     {
-        Assert.assertTrue(Sets.immutable.empty().isEmpty());
-        Assert.assertSame(Sets.immutable.empty(), Sets.immutable.empty());
-        Verify.assertPostSerializedIdentity(Sets.immutable.empty());
+        Assert.assertTrue(ImmutableSet.empty().isEmpty());
+        Assert.assertSame(ImmutableSet.empty(), ImmutableSet.empty());
+        Verify.assertPostSerializedIdentity(ImmutableSet.empty());
     }
 
     @Test
     public void newSetWith()
     {
-        Assert.assertSame(Sets.immutable.empty(), Sets.immutable.of(Sets.immutable.empty().toArray()));
-        Verify.assertSize(1, Sets.immutable.of(1).castToSet());
-        Verify.assertSize(1, Sets.immutable.of(1, 1).castToSet());
-        Verify.assertSize(1, Sets.immutable.of(1, 1, 1).castToSet());
-        Verify.assertSize(1, Sets.immutable.of(1, 1, 1, 1).castToSet());
-        Verify.assertSize(1, Sets.immutable.of(1, 1, 1, 1, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 1, 1, 1, 2).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(2, 1, 1, 1, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 2, 1, 1, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 1, 2, 1, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 1, 1, 2, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 1, 1, 2).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(2, 1, 1, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 2, 1, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 1, 2, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 1, 2).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(2, 1, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 2, 1).castToSet());
-        Verify.assertSize(2, Sets.immutable.of(1, 2).castToSet());
-        Verify.assertSize(3, Sets.immutable.of(1, 2, 3).castToSet());
-        Verify.assertSize(3, Sets.immutable.of(1, 2, 3, 1).castToSet());
-        Verify.assertSize(3, Sets.immutable.of(2, 1, 3, 1).castToSet());
-        Verify.assertSize(3, Sets.immutable.of(2, 3, 1, 1).castToSet());
-        Verify.assertSize(3, Sets.immutable.of(2, 1, 1, 3).castToSet());
-        Verify.assertSize(3, Sets.immutable.of(1, 1, 2, 3).castToSet());
-        Verify.assertSize(4, Sets.immutable.of(1, 2, 3, 4).castToSet());
-        Verify.assertSize(4, Sets.immutable.of(1, 2, 3, 4, 1).castToSet());
+        Assert.assertSame(ImmutableSet.empty(), ImmutableSet.of(ImmutableSet.empty().toArray()));
+        Verify.assertSize(1, ImmutableSet.of(1).castToSet());
+        Verify.assertSize(1, ImmutableSet.of(1, 1).castToSet());
+        Verify.assertSize(1, ImmutableSet.of(1, 1, 1).castToSet());
+        Verify.assertSize(1, ImmutableSet.of(1, 1, 1, 1).castToSet());
+        Verify.assertSize(1, ImmutableSet.of(1, 1, 1, 1, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 1, 1, 1, 2).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(2, 1, 1, 1, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 2, 1, 1, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 1, 2, 1, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 1, 1, 2, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 1, 1, 2).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(2, 1, 1, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 2, 1, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 1, 2, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 1, 2).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(2, 1, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 2, 1).castToSet());
+        Verify.assertSize(2, ImmutableSet.of(1, 2).castToSet());
+        Verify.assertSize(3, ImmutableSet.of(1, 2, 3).castToSet());
+        Verify.assertSize(3, ImmutableSet.of(1, 2, 3, 1).castToSet());
+        Verify.assertSize(3, ImmutableSet.of(2, 1, 3, 1).castToSet());
+        Verify.assertSize(3, ImmutableSet.of(2, 3, 1, 1).castToSet());
+        Verify.assertSize(3, ImmutableSet.of(2, 1, 1, 3).castToSet());
+        Verify.assertSize(3, ImmutableSet.of(1, 1, 2, 3).castToSet());
+        Verify.assertSize(4, ImmutableSet.of(1, 2, 3, 4).castToSet());
+        Verify.assertSize(4, ImmutableSet.of(1, 2, 3, 4, 1).castToSet());
     }
 
     @Test
@@ -987,35 +985,35 @@ public class SetsTest
         Key key = new Key("key");
 
         Key duplicateKey1 = new Key("key");
-        ImmutableSet<Key> set1 = Sets.immutable.of(key, duplicateKey1);
+        ImmutableSet<Key> set1 = ImmutableSet.of(key, duplicateKey1);
         Verify.assertSize(1, set1);
         Verify.assertContains(key, set1);
         Assert.assertSame(key, set1.getFirst());
 
         Key duplicateKey2 = new Key("key");
-        ImmutableSet<Key> set2 = Sets.immutable.of(key, duplicateKey1, duplicateKey2);
+        ImmutableSet<Key> set2 = ImmutableSet.of(key, duplicateKey1, duplicateKey2);
         Verify.assertSize(1, set2);
         Verify.assertContains(key, set2);
         Assert.assertSame(key, set2.getFirst());
 
         Key duplicateKey3 = new Key("key");
-        ImmutableSet<Key> set3 = Sets.immutable.of(key, new Key("not a dupe"), duplicateKey3);
+        ImmutableSet<Key> set3 = ImmutableSet.of(key, new Key("not a dupe"), duplicateKey3);
         Verify.assertSize(2, set3);
         Verify.assertContainsAll("immutable set", set3, key, new Key("not a dupe"));
         Assert.assertSame(key, set3.detect(key::equals));
 
         Key duplicateKey4 = new Key("key");
-        ImmutableSet<Key> set4 = Sets.immutable.of(key, new Key("not a dupe"), duplicateKey3, duplicateKey4);
+        ImmutableSet<Key> set4 = ImmutableSet.of(key, new Key("not a dupe"), duplicateKey3, duplicateKey4);
         Verify.assertSize(2, set4);
         Verify.assertContainsAll("immutable set", set4, key, new Key("not a dupe"));
         Assert.assertSame(key, set4.detect(key::equals));
 
-        ImmutableSet<Key> set5 = Sets.immutable.of(key, new Key("not a dupe"), new Key("me neither"), duplicateKey4);
+        ImmutableSet<Key> set5 = ImmutableSet.of(key, new Key("not a dupe"), new Key("me neither"), duplicateKey4);
         Verify.assertSize(3, set5);
         Verify.assertContainsAll("immutable set", set5, key, new Key("not a dupe"), new Key("me neither"));
         Assert.assertSame(key, set5.detect(key::equals));
 
-        ImmutableSet<Key> set6 = Sets.immutable.of(key, duplicateKey2, duplicateKey3, duplicateKey4);
+        ImmutableSet<Key> set6 = ImmutableSet.of(key, duplicateKey2, duplicateKey3, duplicateKey4);
         Verify.assertSize(1, set6);
         Verify.assertContains(key, set6);
         Assert.assertSame(key, set6.detect(key::equals));
@@ -1030,46 +1028,46 @@ public class SetsTest
     @Test
     public void ofInitialCapacity()
     {
-        MutableSet<String> set1 = Sets.mutable.ofInitialCapacity(0);
+        MutableSet<String> set1 = MutableSet.ofInitialCapacity(0);
         this.assertPresizedSetSizeEquals(0, (UnifiedSet<String>) set1);
 
-        MutableSet<String> set2 = Sets.mutable.ofInitialCapacity(5);
+        MutableSet<String> set2 = MutableSet.ofInitialCapacity(5);
         this.assertPresizedSetSizeEquals(5, (UnifiedSet<String>) set2);
 
-        MutableSet<String> set3 = Sets.mutable.ofInitialCapacity(20);
+        MutableSet<String> set3 = MutableSet.ofInitialCapacity(20);
         this.assertPresizedSetSizeEquals(20, (UnifiedSet<String>) set3);
 
-        MutableSet<String> set4 = Sets.mutable.ofInitialCapacity(60);
+        MutableSet<String> set4 = MutableSet.ofInitialCapacity(60);
         this.assertPresizedSetSizeEquals(60, (UnifiedSet<String>) set4);
 
-        MutableSet<String> set5 = Sets.mutable.ofInitialCapacity(64);
+        MutableSet<String> set5 = MutableSet.ofInitialCapacity(64);
         this.assertPresizedSetSizeEquals(60, (UnifiedSet<String>) set5);
 
-        MutableSet<String> set6 = Sets.mutable.ofInitialCapacity(65);
+        MutableSet<String> set6 = MutableSet.ofInitialCapacity(65);
         this.assertPresizedSetSizeEquals(65, (UnifiedSet<String>) set6);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.ofInitialCapacity(-12));
+        Verify.assertThrows(IllegalArgumentException.class, () -> MutableSet.ofInitialCapacity(-12));
     }
 
     @Test
     public void withInitialCapacity()
     {
-        MutableSet<String> set1 = Sets.mutable.withInitialCapacity(0);
+        MutableSet<String> set1 = MutableSet.ofInitialCapacity(0);
         this.assertPresizedSetSizeEquals(0, (UnifiedSet<String>) set1);
 
-        MutableSet<String> set2 = Sets.mutable.withInitialCapacity(14);
+        MutableSet<String> set2 = MutableSet.ofInitialCapacity(14);
         this.assertPresizedSetSizeEquals(14, (UnifiedSet<String>) set2);
 
-        MutableSet<String> set3 = Sets.mutable.withInitialCapacity(17);
+        MutableSet<String> set3 = MutableSet.ofInitialCapacity(17);
         this.assertPresizedSetSizeEquals(17, (UnifiedSet<String>) set3);
 
-        MutableSet<String> set4 = Sets.mutable.withInitialCapacity(25);
+        MutableSet<String> set4 = MutableSet.ofInitialCapacity(25);
         this.assertPresizedSetSizeEquals(25, (UnifiedSet<String>) set4);
 
-        MutableSet<String> set5 = Sets.mutable.withInitialCapacity(32);
+        MutableSet<String> set5 = MutableSet.ofInitialCapacity(32);
         this.assertPresizedSetSizeEquals(32, (UnifiedSet<String>) set5);
 
-        Verify.assertThrows(IllegalArgumentException.class, () -> Sets.mutable.withInitialCapacity(-6));
+        Verify.assertThrows(IllegalArgumentException.class, () -> MutableSet.ofInitialCapacity(-6));
     }
 
     private void assertPresizedSetSizeEquals(int initialCapacity, UnifiedSet<String> set)

@@ -24,11 +24,10 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.immutable.AbstractImmutableMap;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
@@ -94,13 +93,13 @@ final class ImmutableEmptyMapWithHashingStrategy<K, V>
     @Override
     public Set<K> keySet()
     {
-        return Sets.immutable.<K>of().castToSet();
+        return ImmutableSet.<K>empty().castToSet();
     }
 
     @Override
     public Collection<V> values()
     {
-        return Lists.immutable.<V>empty().castToList();
+        return ImmutableList.<V>empty().castToList();
     }
 
     @Override
@@ -129,7 +128,7 @@ final class ImmutableEmptyMapWithHashingStrategy<K, V>
     @Override
     public ImmutableMap<V, K> flipUniqueValues()
     {
-        return Maps.immutable.with();
+        return ImmutableMap.empty();
     }
 
     @Override
@@ -199,7 +198,7 @@ final class ImmutableEmptyMapWithHashingStrategy<K, V>
     @Override
     public <K2, V2> ImmutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return Maps.immutable.empty();
+        return ImmutableMap.empty();
     }
 
     @Override

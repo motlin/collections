@@ -31,7 +31,6 @@ import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.parallel.list.NonParallelListIterable;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.ArrayIterate;
@@ -90,7 +89,7 @@ public final class ListAdapter<T>
     @Override
     public ImmutableList<T> toImmutable()
     {
-        return Lists.immutable.withAll(this.delegate);
+        return ImmutableList.ofAll(this.delegate);
     }
 
     @Override

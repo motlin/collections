@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.bag.mutable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionTestCase;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -76,7 +75,7 @@ public class MultiReaderHashBagAsWriteUntouchableTest extends AbstractCollection
     public void selectUnique()
     {
         MutableBag<String> bag = this.newWith("0", "1", "1", "1", "1", "2", "2", "2", "3", "3", "4", "5");
-        MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
+        MutableSet<String> expected = MutableSet.of("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
     }

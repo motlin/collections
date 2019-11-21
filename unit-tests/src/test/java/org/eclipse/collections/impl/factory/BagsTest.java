@@ -93,50 +93,50 @@ public class BagsTest
     @Test
     public void emptyBag()
     {
-        Assert.assertTrue(Bags.immutable.of().isEmpty());
+        Assert.assertTrue(ImmutableBag.empty().isEmpty());
     }
 
     @Test
     public void newBagWith()
     {
-        ImmutableBag<String> bag = Bags.immutable.of();
-        Assert.assertEquals(bag, Bags.immutable.of(bag.toArray()));
-        Assert.assertEquals(bag = bag.newWith("1"), Bags.immutable.of("1"));
-        Assert.assertEquals(bag = bag.newWith("2"), Bags.immutable.of("1", "2"));
-        Assert.assertEquals(bag = bag.newWith("3"), Bags.immutable.of("1", "2", "3"));
-        Assert.assertEquals(bag = bag.newWith("4"), Bags.immutable.of("1", "2", "3", "4"));
-        Assert.assertEquals(bag = bag.newWith("5"), Bags.immutable.of("1", "2", "3", "4", "5"));
-        Assert.assertEquals(bag = bag.newWith("6"), Bags.immutable.of("1", "2", "3", "4", "5", "6"));
-        Assert.assertEquals(bag = bag.newWith("7"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7"));
-        Assert.assertEquals(bag = bag.newWith("8"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8"));
-        Assert.assertEquals(bag = bag.newWith("9"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
-        Assert.assertEquals(bag = bag.newWith("10"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-        Assert.assertEquals(bag = bag.newWith("11"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
-        Assert.assertEquals(bag = bag.newWith("12"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
+        ImmutableBag<String> bag = ImmutableBag.empty();
+        Assert.assertEquals(bag, ImmutableBag.of(bag.toArray()));
+        Assert.assertEquals(bag = bag.newWith("1"), ImmutableBag.of("1"));
+        Assert.assertEquals(bag = bag.newWith("2"), ImmutableBag.of("1", "2"));
+        Assert.assertEquals(bag = bag.newWith("3"), ImmutableBag.of("1", "2", "3"));
+        Assert.assertEquals(bag = bag.newWith("4"), ImmutableBag.of("1", "2", "3", "4"));
+        Assert.assertEquals(bag = bag.newWith("5"), ImmutableBag.of("1", "2", "3", "4", "5"));
+        Assert.assertEquals(bag = bag.newWith("6"), ImmutableBag.of("1", "2", "3", "4", "5", "6"));
+        Assert.assertEquals(bag = bag.newWith("7"), ImmutableBag.of("1", "2", "3", "4", "5", "6", "7"));
+        Assert.assertEquals(bag = bag.newWith("8"), ImmutableBag.of("1", "2", "3", "4", "5", "6", "7", "8"));
+        Assert.assertEquals(bag = bag.newWith("9"), ImmutableBag.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        Assert.assertEquals(bag = bag.newWith("10"), ImmutableBag.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        Assert.assertEquals(bag = bag.newWith("11"), ImmutableBag.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+        Assert.assertEquals(bag = bag.newWith("12"), ImmutableBag.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
     }
 
     @SuppressWarnings("RedundantArrayCreation")
     @Test
     public void newBagWithArray()
     {
-        ImmutableBag<String> bag = Bags.immutable.of();
-        Assert.assertEquals(bag = bag.newWith("1"), Bags.immutable.of(new String[]{"1"}));
-        Assert.assertEquals(bag = bag.newWith("2"), Bags.immutable.of(new String[]{"1", "2"}));
-        Assert.assertEquals(bag = bag.newWith("3"), Bags.immutable.of(new String[]{"1", "2", "3"}));
-        Assert.assertEquals(bag = bag.newWith("4"), Bags.immutable.of(new String[]{"1", "2", "3", "4"}));
-        Assert.assertEquals(bag = bag.newWith("5"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5"}));
-        Assert.assertEquals(bag = bag.newWith("6"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6"}));
-        Assert.assertEquals(bag = bag.newWith("7"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7"}));
-        Assert.assertEquals(bag = bag.newWith("8"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8"}));
-        Assert.assertEquals(bag = bag.newWith("9"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
-        Assert.assertEquals(bag = bag.newWith("10"), Bags.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-        Assert.assertEquals(bag = bag.newWith("11"), Bags.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+        ImmutableBag<String> bag = ImmutableBag.empty();
+        Assert.assertEquals(bag = bag.newWith("1"), ImmutableBag.of(new String[]{"1"}));
+        Assert.assertEquals(bag = bag.newWith("2"), ImmutableBag.of(new String[]{"1", "2"}));
+        Assert.assertEquals(bag = bag.newWith("3"), ImmutableBag.of(new String[]{"1", "2", "3"}));
+        Assert.assertEquals(bag = bag.newWith("4"), ImmutableBag.of(new String[]{"1", "2", "3", "4"}));
+        Assert.assertEquals(bag = bag.newWith("5"), ImmutableBag.of(new String[]{"1", "2", "3", "4", "5"}));
+        Assert.assertEquals(bag = bag.newWith("6"), ImmutableBag.of(new String[]{"1", "2", "3", "4", "5", "6"}));
+        Assert.assertEquals(bag = bag.newWith("7"), ImmutableBag.of(new String[]{"1", "2", "3", "4", "5", "6", "7"}));
+        Assert.assertEquals(bag = bag.newWith("8"), ImmutableBag.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8"}));
+        Assert.assertEquals(bag = bag.newWith("9"), ImmutableBag.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+        Assert.assertEquals(bag = bag.newWith("10"), ImmutableBag.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+        Assert.assertEquals(bag = bag.newWith("11"), ImmutableBag.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
     }
 
     @Test
     public void newBagWithBag()
     {
-        ImmutableBag<String> bag = Bags.immutable.of();
+        ImmutableBag<String> bag = ImmutableBag.empty();
         HashBag<String> hashBag = HashBag.newBagWith("1");
         Assert.assertEquals(bag = bag.newWith("1"), hashBag.toImmutable());
         hashBag.add("2");

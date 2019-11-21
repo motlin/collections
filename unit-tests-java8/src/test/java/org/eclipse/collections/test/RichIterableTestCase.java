@@ -51,6 +51,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
@@ -58,6 +59,8 @@ import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
@@ -78,11 +81,7 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.collector.Collectors2;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Multimaps;
-import org.eclipse.collections.impl.factory.Sets;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.list.Interval;
@@ -344,41 +343,41 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable3 = this.newWith(3, 2, 1);
 
-        assertTrue(iterable3.containsAllIterable(Lists.immutable.of(3)));
-        assertTrue(iterable3.containsAllIterable(Lists.immutable.of(3, 2, 1)));
-        assertTrue(iterable3.containsAllIterable(Lists.immutable.of(3, 3, 3)));
-        assertTrue(iterable3.containsAllIterable(Lists.immutable.of(3, 3, 3, 3, 2, 2, 2, 1, 1)));
-        assertFalse(iterable3.containsAllIterable(Lists.immutable.of(4)));
-        assertFalse(iterable3.containsAllIterable(Lists.immutable.of(4, 4, 5)));
-        assertFalse(iterable3.containsAllIterable(Lists.immutable.of(3, 2, 1, 0)));
-        assertTrue(iterable3.containsAllIterable(Lists.immutable.empty()));
+        assertTrue(iterable3.containsAllIterable(ImmutableList.of(3)));
+        assertTrue(iterable3.containsAllIterable(ImmutableList.of(3, 2, 1)));
+        assertTrue(iterable3.containsAllIterable(ImmutableList.of(3, 3, 3)));
+        assertTrue(iterable3.containsAllIterable(ImmutableList.of(3, 3, 3, 3, 2, 2, 2, 1, 1)));
+        assertFalse(iterable3.containsAllIterable(ImmutableList.of(4)));
+        assertFalse(iterable3.containsAllIterable(ImmutableList.of(4, 4, 5)));
+        assertFalse(iterable3.containsAllIterable(ImmutableList.of(3, 2, 1, 0)));
+        assertTrue(iterable3.containsAllIterable(ImmutableList.empty()));
 
         RichIterable<Integer> iterable2 = this.newWith(2, 1);
 
-        assertTrue(iterable2.containsAllIterable(Lists.immutable.of(2)));
-        assertTrue(iterable2.containsAllIterable(Lists.immutable.of(2, 1)));
-        assertTrue(iterable2.containsAllIterable(Lists.immutable.of(2, 2, 2)));
-        assertTrue(iterable2.containsAllIterable(Lists.immutable.of(2, 2, 2, 1, 1)));
-        assertFalse(iterable2.containsAllIterable(Lists.immutable.of(4)));
-        assertFalse(iterable2.containsAllIterable(Lists.immutable.of(4, 4, 5)));
-        assertFalse(iterable2.containsAllIterable(Lists.immutable.of(2, 1, 0)));
-        assertTrue(iterable2.containsAllIterable(Lists.immutable.empty()));
+        assertTrue(iterable2.containsAllIterable(ImmutableList.of(2)));
+        assertTrue(iterable2.containsAllIterable(ImmutableList.of(2, 1)));
+        assertTrue(iterable2.containsAllIterable(ImmutableList.of(2, 2, 2)));
+        assertTrue(iterable2.containsAllIterable(ImmutableList.of(2, 2, 2, 1, 1)));
+        assertFalse(iterable2.containsAllIterable(ImmutableList.of(4)));
+        assertFalse(iterable2.containsAllIterable(ImmutableList.of(4, 4, 5)));
+        assertFalse(iterable2.containsAllIterable(ImmutableList.of(2, 1, 0)));
+        assertTrue(iterable2.containsAllIterable(ImmutableList.empty()));
 
         RichIterable<Integer> iterable1 = this.newWith(1);
 
-        assertTrue(iterable1.containsAllIterable(Lists.immutable.of(1)));
-        assertTrue(iterable1.containsAllIterable(Lists.immutable.of(1, 1, 1)));
-        assertFalse(iterable1.containsAllIterable(Lists.immutable.of(4)));
-        assertFalse(iterable1.containsAllIterable(Lists.immutable.of(4, 4, 5)));
-        assertFalse(iterable1.containsAllIterable(Lists.immutable.of(2, 1, 0)));
-        assertTrue(iterable1.containsAllIterable(Lists.immutable.empty()));
+        assertTrue(iterable1.containsAllIterable(ImmutableList.of(1)));
+        assertTrue(iterable1.containsAllIterable(ImmutableList.of(1, 1, 1)));
+        assertFalse(iterable1.containsAllIterable(ImmutableList.of(4)));
+        assertFalse(iterable1.containsAllIterable(ImmutableList.of(4, 4, 5)));
+        assertFalse(iterable1.containsAllIterable(ImmutableList.of(2, 1, 0)));
+        assertTrue(iterable1.containsAllIterable(ImmutableList.empty()));
 
         RichIterable<Integer> iterable0 = this.newWith();
 
-        assertFalse(iterable0.containsAllIterable(Lists.immutable.of(1)));
-        assertFalse(iterable0.containsAllIterable(Lists.immutable.of(1, 1, 1)));
-        assertFalse(iterable0.containsAllIterable(Lists.immutable.of(4, 4, 5)));
-        assertTrue(iterable0.containsAllIterable(Lists.immutable.empty()));
+        assertFalse(iterable0.containsAllIterable(ImmutableList.of(1)));
+        assertFalse(iterable0.containsAllIterable(ImmutableList.of(1, 1, 1)));
+        assertFalse(iterable0.containsAllIterable(ImmutableList.of(4, 4, 5)));
+        assertTrue(iterable0.containsAllIterable(ImmutableList.empty()));
     }
 
     @Test
@@ -386,41 +385,41 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable3 = this.newWith(3, 2, 1);
 
-        assertTrue(iterable3.containsAll(Lists.mutable.of(3)));
-        assertTrue(iterable3.containsAll(Lists.mutable.of(3, 2, 1)));
-        assertTrue(iterable3.containsAll(Lists.mutable.of(3, 3, 3)));
-        assertTrue(iterable3.containsAll(Lists.mutable.of(3, 3, 3, 3, 2, 2, 2, 1, 1)));
-        assertFalse(iterable3.containsAll(Lists.mutable.of(4)));
-        assertFalse(iterable3.containsAll(Lists.mutable.of(4, 4, 5)));
-        assertFalse(iterable3.containsAll(Lists.mutable.of(3, 2, 1, 0)));
-        assertTrue(iterable3.containsAll(Lists.mutable.empty()));
+        assertTrue(iterable3.containsAll(MutableList.of(3)));
+        assertTrue(iterable3.containsAll(MutableList.of(3, 2, 1)));
+        assertTrue(iterable3.containsAll(MutableList.of(3, 3, 3)));
+        assertTrue(iterable3.containsAll(MutableList.of(3, 3, 3, 3, 2, 2, 2, 1, 1)));
+        assertFalse(iterable3.containsAll(MutableList.of(4)));
+        assertFalse(iterable3.containsAll(MutableList.of(4, 4, 5)));
+        assertFalse(iterable3.containsAll(MutableList.of(3, 2, 1, 0)));
+        assertTrue(iterable3.containsAll(MutableList.empty()));
 
         RichIterable<Integer> iterable2 = this.newWith(2, 1);
 
-        assertTrue(iterable2.containsAll(Lists.mutable.of(2)));
-        assertTrue(iterable2.containsAll(Lists.mutable.of(2, 1)));
-        assertTrue(iterable2.containsAll(Lists.mutable.of(2, 2, 2)));
-        assertTrue(iterable2.containsAll(Lists.mutable.of(2, 2, 2, 1, 1)));
-        assertFalse(iterable2.containsAll(Lists.mutable.of(4)));
-        assertFalse(iterable2.containsAll(Lists.mutable.of(4, 4, 5)));
-        assertFalse(iterable2.containsAll(Lists.mutable.of(2, 1, 0)));
-        assertTrue(iterable2.containsAll(Lists.mutable.empty()));
+        assertTrue(iterable2.containsAll(MutableList.of(2)));
+        assertTrue(iterable2.containsAll(MutableList.of(2, 1)));
+        assertTrue(iterable2.containsAll(MutableList.of(2, 2, 2)));
+        assertTrue(iterable2.containsAll(MutableList.of(2, 2, 2, 1, 1)));
+        assertFalse(iterable2.containsAll(MutableList.of(4)));
+        assertFalse(iterable2.containsAll(MutableList.of(4, 4, 5)));
+        assertFalse(iterable2.containsAll(MutableList.of(2, 1, 0)));
+        assertTrue(iterable2.containsAll(MutableList.empty()));
 
         RichIterable<Integer> iterable1 = this.newWith(1);
 
-        assertTrue(iterable1.containsAll(Lists.mutable.of(1)));
-        assertTrue(iterable1.containsAll(Lists.mutable.of(1, 1, 1)));
-        assertFalse(iterable1.containsAll(Lists.mutable.of(4)));
-        assertFalse(iterable1.containsAll(Lists.mutable.of(4, 4, 5)));
-        assertFalse(iterable1.containsAll(Lists.mutable.of(2, 1, 0)));
-        assertTrue(iterable1.containsAll(Lists.mutable.empty()));
+        assertTrue(iterable1.containsAll(MutableList.of(1)));
+        assertTrue(iterable1.containsAll(MutableList.of(1, 1, 1)));
+        assertFalse(iterable1.containsAll(MutableList.of(4)));
+        assertFalse(iterable1.containsAll(MutableList.of(4, 4, 5)));
+        assertFalse(iterable1.containsAll(MutableList.of(2, 1, 0)));
+        assertTrue(iterable1.containsAll(MutableList.empty()));
 
         RichIterable<Integer> iterable0 = this.newWith();
 
-        assertFalse(iterable0.containsAll(Lists.mutable.of(1)));
-        assertFalse(iterable0.containsAll(Lists.mutable.of(1, 1, 1)));
-        assertFalse(iterable0.containsAll(Lists.mutable.of(4, 4, 5)));
-        assertTrue(iterable0.containsAll(Lists.mutable.empty()));
+        assertFalse(iterable0.containsAll(MutableList.of(1)));
+        assertFalse(iterable0.containsAll(MutableList.of(1, 1, 1)));
+        assertFalse(iterable0.containsAll(MutableList.of(4, 4, 5)));
+        assertTrue(iterable0.containsAll(MutableList.empty()));
     }
 
     @Test
@@ -688,11 +687,11 @@ public interface RichIterableTestCase extends IterableTestCase
         assertEquals(expectedIterationOrder, collectShortTargetIterationOrder);
 
         MutableCollection<Integer> flatCollectIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().flatCollect(each -> Lists.immutable.with(flatCollectIterationOrder.add(each))).forEach(noop);
+        this.getInstanceUnderTest().flatCollect(each -> ImmutableList.of(flatCollectIterationOrder.add(each))).forEach(noop);
         assertEquals(expectedIterationOrder, flatCollectIterationOrder);
 
         MutableCollection<Integer> flatCollectTargetIterationOrder = this.newMutableForFilter();
-        this.getInstanceUnderTest().flatCollect(each -> Lists.immutable.with(flatCollectTargetIterationOrder.add(each)), new HashBag<>());
+        this.getInstanceUnderTest().flatCollect(each -> ImmutableList.of(flatCollectTargetIterationOrder.add(each)), new HashBag<>());
         assertEquals(expectedIterationOrder, flatCollectTargetIterationOrder);
 
         MutableCollection<Integer> countIterationOrder = this.newMutableForFilter();
@@ -814,14 +813,14 @@ public interface RichIterableTestCase extends IterableTestCase
         MutableCollection<Integer> groupByEachIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().groupByEach(each -> {
             groupByEachIterationOrder.add(each);
-            return Lists.immutable.with(each);
+            return ImmutableList.of(each);
         });
         assertEquals(expectedIterationOrder, groupByEachIterationOrder);
 
         MutableCollection<Integer> groupByEachTargetIterationOrder = this.newMutableForFilter();
         this.getInstanceUnderTest().groupByEach(each -> {
             groupByEachTargetIterationOrder.add(each);
-            return Lists.immutable.with(each);
+            return ImmutableList.of(each);
         }, new HashBagMultimap<>());
         assertEquals(expectedIterationOrder, groupByEachTargetIterationOrder);
 
@@ -1613,7 +1612,7 @@ public interface RichIterableTestCase extends IterableTestCase
         Bag<Integer> evensAndOdds = integers.countBy(each -> Integer.valueOf(each % 2));
         Assert.assertEquals(3, evensAndOdds.occurrencesOf(1));
         Assert.assertEquals(3, evensAndOdds.occurrencesOf(0));
-        Bag<Integer> evensAndOdds2 = integers.countBy(each -> Integer.valueOf(each % 2), Bags.mutable.empty());
+        Bag<Integer> evensAndOdds2 = integers.countBy(each -> Integer.valueOf(each % 2), MutableBag.empty());
         Assert.assertEquals(3, evensAndOdds2.occurrencesOf(1));
         Assert.assertEquals(3, evensAndOdds2.occurrencesOf(0));
     }
@@ -1628,7 +1627,7 @@ public interface RichIterableTestCase extends IterableTestCase
         Bag<Integer> evensAndOdds = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2);
         Assert.assertEquals(3, evensAndOdds.occurrencesOf(1));
         Assert.assertEquals(3, evensAndOdds.occurrencesOf(0));
-        Bag<Integer> evensAndOdds2 = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2, Bags.mutable.empty());
+        Bag<Integer> evensAndOdds2 = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2, MutableBag.empty());
         Assert.assertEquals(3, evensAndOdds2.occurrencesOf(1));
         Assert.assertEquals(3, evensAndOdds2.occurrencesOf(0));
     }
@@ -1646,7 +1645,7 @@ public interface RichIterableTestCase extends IterableTestCase
         assertEquals(3, integerBag1.occurrencesOf(4));
         assertEquals(2, integerBag1.occurrencesOf(8));
         assertEquals(1, integerBag1.occurrencesOf(12));
-        Bag<Integer> integerBag2 = integerList.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i), Bags.mutable.empty());
+        Bag<Integer> integerBag2 = integerList.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i), MutableBag.empty());
         assertEquals(1, integerBag2.occurrencesOf(1));
         assertEquals(2, integerBag2.occurrencesOf(2));
         assertEquals(3, integerBag2.occurrencesOf(4));
@@ -1735,12 +1734,12 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> littleIterable = this.newWith(1, 2, 3, 1, 2, 3);
         MutableBag<Integer> result =
-                littleIterable.reduceInPlace(Collectors.toCollection(Bags.mutable::empty));
-        Assert.assertEquals(Bags.immutable.with(1, 1, 2, 2, 3, 3), result);
+                littleIterable.reduceInPlace(Collectors.toCollection(MutableBag::empty));
+        Assert.assertEquals(ImmutableBag.of(1, 1, 2, 2, 3, 3), result);
 
         RichIterable<Integer> bigIterable = this.newWith(Interval.oneTo(20).toArray());
         MutableBag<Integer> bigResult =
-                bigIterable.reduceInPlace(Collectors.toCollection(Bags.mutable::empty));
+                bigIterable.reduceInPlace(Collectors.toCollection(MutableBag::empty));
         Assert.assertEquals(Interval.oneTo(20).toBag(), bigResult);
 
         String joining =
@@ -1774,12 +1773,12 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> littleIterable = this.newWith(1, 2, 3, 1, 2, 3);
         MutableBag<Integer> result =
-                littleIterable.reduceInPlace(Bags.mutable::empty, MutableBag::add);
-        Assert.assertEquals(Bags.immutable.with(1, 1, 2, 2, 3, 3), result);
+                littleIterable.reduceInPlace(MutableBag::empty, MutableBag::add);
+        Assert.assertEquals(ImmutableBag.of(1, 1, 2, 2, 3, 3), result);
 
         RichIterable<Integer> bigIterable = this.newWith(Interval.oneTo(20).toArray());
         MutableBag<Integer> bigResult =
-                bigIterable.reduceInPlace(Bags.mutable::empty, MutableBag::add);
+                bigIterable.reduceInPlace(MutableBag::empty, MutableBag::add);
         Assert.assertEquals(Interval.oneTo(20).toBag(), bigResult);
 
         String joining =
@@ -1914,10 +1913,10 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         assertEquals(
-                Lists.immutable.with(4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
+                ImmutableList.of(4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
                 iterable.toList());
 
-        MutableList<Integer> target = Lists.mutable.empty();
+        MutableList<Integer> target = MutableList.empty();
         iterable.each(target::add);
         assertEquals(
                 target,
@@ -1928,8 +1927,8 @@ public interface RichIterableTestCase extends IterableTestCase
     default void RichIterable_into()
     {
         assertEquals(
-                Lists.immutable.with(0, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
-                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).into(Lists.mutable.with(0)));
+                ImmutableList.of(0, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
+                this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).into(MutableList.of(0)));
     }
 
     @Test
@@ -1938,19 +1937,19 @@ public interface RichIterableTestCase extends IterableTestCase
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
 
         assertEquals(
-                Lists.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
+                ImmutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
                 iterable.toSortedList());
 
         assertEquals(
-                Lists.immutable.with(4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
+                ImmutableList.of(4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
                 iterable.toSortedList(Comparators.reverseNaturalOrder()));
 
         assertEquals(
-                Lists.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
+                ImmutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4),
                 iterable.toSortedListBy(Functions.identity()));
 
         assertEquals(
-                Lists.immutable.with(4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
+                ImmutableList.of(4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
                 iterable.toSortedListBy(each -> each * -1));
     }
 
@@ -1958,7 +1957,7 @@ public interface RichIterableTestCase extends IterableTestCase
     default void RichIterable_toSet()
     {
         assertEquals(
-                Sets.immutable.with(4, 3, 2, 1),
+                ImmutableSet.of(4, 3, 2, 1),
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toSet());
     }
 
@@ -1968,19 +1967,19 @@ public interface RichIterableTestCase extends IterableTestCase
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
 
         assertEquals(
-                SortedSets.immutable.with(1, 2, 3, 4),
+                ImmutableSortedSet.of(1, 2, 3, 4),
                 iterable.toSortedSet());
 
         assertEquals(
-                SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 4, 3, 2, 1),
+                ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), 4, 3, 2, 1),
                 iterable.toSortedSet(Comparators.reverseNaturalOrder()));
 
         assertEquals(
-                SortedSets.immutable.with(Comparators.byFunction(Functions.identity()), 1, 2, 3, 4),
+                ImmutableSortedSet.of(Comparators.byFunction(Functions.identity()), 1, 2, 3, 4),
                 iterable.toSortedSetBy(Functions.identity()));
 
         assertEquals(
-                SortedSets.immutable.with(Comparators.byFunction((Integer each) -> each * -1), 4, 3, 2, 1),
+                ImmutableSortedSet.of(Comparators.byFunction((Integer each) -> each * -1), 4, 3, 2, 1),
                 iterable.toSortedSetBy(each -> each * -1));
     }
 
@@ -1988,7 +1987,7 @@ public interface RichIterableTestCase extends IterableTestCase
     default void RichIterable_toBag()
     {
         assertEquals(
-                Bags.immutable.with(4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
+                ImmutableBag.of(4, 4, 4, 4, 3, 3, 3, 2, 2, 1),
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toBag());
     }
 
@@ -2083,7 +2082,7 @@ public interface RichIterableTestCase extends IterableTestCase
     default void RichIterable_toArray()
     {
         Object[] array = this.newWith(3, 3, 3, 2, 2, 1).toArray();
-        assertEquals(Bags.immutable.with(3, 3, 3, 2, 2, 1), HashBag.newBagWith(array));
+        assertEquals(ImmutableBag.of(3, 3, 3, 2, 2, 1), HashBag.newBagWith(array));
     }
 
     @Test

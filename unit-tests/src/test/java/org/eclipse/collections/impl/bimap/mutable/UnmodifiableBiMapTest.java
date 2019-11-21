@@ -16,11 +16,10 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -57,7 +56,7 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     @Override
     protected <K, V> MutableBiMap<K, V> newMapWithKeyValue(K key, V value)
     {
-        return UnmodifiableBiMap.of(Maps.mutable.of(key, value));
+        return UnmodifiableBiMap.of(MutableMap.of(key, value));
     }
 
     @Override
@@ -348,7 +347,7 @@ public class UnmodifiableBiMapTest extends AbstractMutableBiMapTestCase
     @Test
     public void removeAllKeys()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeAllKeys(Sets.mutable.empty()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.newMapWithKeysValues(1, "1", 2, "Two").removeAllKeys(MutableSet.empty()));
     }
 
     @Override

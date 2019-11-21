@@ -12,16 +12,18 @@ package org.eclipse.collections.impl.collection.mutable;
 
 import java.util.Collections;
 
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.AbstractRichIterableTestCase;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.collector.Collectors2;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
 import org.eclipse.collections.impl.list.Interval;
@@ -30,9 +32,6 @@ import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
 
 /**
  * Abstract JUnit test for {@link MutableCollection}s.
@@ -153,11 +152,11 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3);
         Assert.assertTrue(objects.removeAll(FastList.newListWith(1, 2, 4)));
-        Assert.assertEquals(Bags.mutable.of(3), objects.toBag());
+        Assert.assertEquals(MutableBag.of(3), objects.toBag());
 
         MutableCollection<Integer> objects2 = this.newWith(1, 2, 3);
         Assert.assertFalse(objects2.removeAll(FastList.newListWith(4, 5)));
-        Assert.assertEquals(Bags.mutable.of(1, 2, 3), objects2.toBag());
+        Assert.assertEquals(MutableBag.of(1, 2, 3), objects2.toBag());
     }
 
     @Test
@@ -165,29 +164,29 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3);
         Assert.assertTrue(objects.removeAllIterable(FastList.newListWith(1, 2, 4)));
-        Assert.assertEquals(Bags.mutable.of(3), objects.toBag());
+        Assert.assertEquals(MutableBag.of(3), objects.toBag());
 
         MutableCollection<Integer> objects2 = this.newWith(1, 2, 3);
         Assert.assertFalse(objects2.removeAllIterable(FastList.newListWith(4, 5)));
-        Assert.assertEquals(Bags.mutable.of(1, 2, 3), objects2.toBag());
+        Assert.assertEquals(MutableBag.of(1, 2, 3), objects2.toBag());
     }
 
     @Test
     public void retainAll()
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3);
-        Assert.assertTrue(objects.retainAll(mSet(1, 2)));
+        Assert.assertTrue(objects.retainAll(MutableSet.of(1, 2)));
         Verify.assertSize(2, objects);
         Verify.assertContainsAll(objects, 1, 2);
 
         MutableCollection<Integer> integers1 = this.newWith(0);
         Assert.assertFalse(integers1.retainAll(FastList.newListWith(1, 0)));
-        Assert.assertEquals(Bags.mutable.of(0), integers1.toBag());
+        Assert.assertEquals(MutableBag.of(0), integers1.toBag());
 
         MutableCollection<Integer> integers2 = this.newWith(1, 2, 3);
         Integer copy = new Integer(1);
         Assert.assertTrue(integers2.retainAll(FastList.newListWith(copy)));
-        Assert.assertEquals(Bags.mutable.of(1), integers2.toBag());
+        Assert.assertEquals(MutableBag.of(1), integers2.toBag());
         Assert.assertNotSame(copy, integers2.getFirst());
     }
 
@@ -195,13 +194,13 @@ public abstract class AbstractCollectionTestCase extends AbstractRichIterableTes
     public void retainAllIterable()
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3);
-        Assert.assertTrue(objects.retainAllIterable(iList(1, 2)));
+        Assert.assertTrue(objects.retainAllIterable(ImmutableList.of(1, 2)));
         Verify.assertSize(2, objects);
         Verify.assertContainsAll(objects, 1, 2);
 
         MutableCollection<Integer> integers = this.newWith(0);
         Assert.assertFalse(integers.retainAllIterable(FastList.newListWith(1, 0)));
-        Assert.assertEquals(Bags.mutable.of(0), integers.toBag());
+        Assert.assertEquals(MutableBag.of(0), integers.toBag());
     }
 
     @Test

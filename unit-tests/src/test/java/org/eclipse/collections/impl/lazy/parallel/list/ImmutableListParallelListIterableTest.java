@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.lazy.parallel.list;
 
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Test;
 
 public class ImmutableListParallelListIterableTest extends ParallelListIterableTestCase
@@ -25,18 +25,18 @@ public class ImmutableListParallelListIterableTest extends ParallelListIterableT
     @Override
     protected ParallelListIterable<Integer> newWith(Integer... littleElements)
     {
-        return Lists.immutable.with(littleElements).asParallel(this.executorService, this.batchSize);
+        return ImmutableList.of(littleElements).asParallel(this.executorService, this.batchSize);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void asParallel_small_batch()
     {
-        Lists.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(this.executorService, 0);
+        ImmutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(this.executorService, 0);
     }
 
     @Test(expected = NullPointerException.class)
     public void asParallel_null_executorService()
     {
-        Lists.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2);
+        ImmutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2);
     }
 }

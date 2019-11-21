@@ -34,112 +34,112 @@ public final class Iterables
 
     public static <T> MutableList<T> mList()
     {
-        return Lists.mutable.empty();
+        return MutableList.empty();
     }
 
     public static <T> MutableList<T> mList(T... elements)
     {
-        return Lists.mutable.with(elements);
+        return MutableList.of(elements);
     }
 
     public static <T> MutableSet<T> mSet()
     {
-        return Sets.mutable.empty();
+        return MutableSet.empty();
     }
 
     public static <T> MutableSet<T> mSet(T... elements)
     {
-        return Sets.mutable.with(elements);
+        return MutableSet.of(elements);
     }
 
     public static <T> MutableBag<T> mBag()
     {
-        return Bags.mutable.empty();
+        return MutableBag.empty();
     }
 
     public static <T> MutableBag<T> mBag(T... elements)
     {
-        return Bags.mutable.with(elements);
+        return MutableBag.of(elements);
     }
 
     public static <K, V> MutableMap<K, V> mMap()
     {
-        return Maps.mutable.empty();
+        return MutableMap.empty();
     }
 
     public static <K, V> MutableMap<K, V> mMap(K key, V value)
     {
-        return Maps.mutable.with(key, value);
+        return MutableMap.of(key, value);
     }
 
     public static <K, V> MutableMap<K, V> mMap(K key1, V value1, K key2, V value2)
     {
-        return Maps.mutable.with(key1, value1, key2, value2);
+        return MutableMap.of(key1, value1, key2, value2);
     }
 
     public static <K, V> MutableMap<K, V> mMap(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        return Maps.mutable.with(key1, value1, key2, value2, key3, value3);
+        return MutableMap.of(key1, value1, key2, value2, key3, value3);
     }
 
     public static <K, V> MutableMap<K, V> mMap(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
-        return Maps.mutable.with(key1, value1, key2, value2, key3, value3, key4, value4);
+        return MutableMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     public static <T> MutableSortedSet<T> mSortedSet()
     {
-        return SortedSets.mutable.empty();
+        return MutableSortedSet.empty();
     }
 
     public static <T> MutableSortedSet<T> mSortedSet(T... elements)
     {
-        return SortedSets.mutable.with(elements);
+        return MutableSortedSet.of(elements);
     }
 
     public static <T> MutableSortedSet<T> mSortedSet(Comparator<? super T> comparator)
     {
-        return SortedSets.mutable.with(comparator);
+        return MutableSortedSet.of(comparator);
     }
 
     public static <T> MutableSortedSet<T> mSortedSet(Comparator<? super T> comparator, T... elements)
     {
-        return SortedSets.mutable.with(comparator, elements);
+        return MutableSortedSet.of(comparator, elements);
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap()
     {
-        return SortedMaps.mutable.empty();
+        return MutableSortedMap.empty();
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap(K key, V value)
     {
-        return SortedMaps.mutable.with(key, value);
+        return MutableSortedMap.of(key, value);
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap(K key1, V value1, K key2, V value2)
     {
-        return SortedMaps.mutable.with(key1, value1, key2, value2);
+        return MutableSortedMap.of(key1, value1, key2, value2);
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        return SortedMaps.mutable.with(key1, value1, key2, value2, key3, value3);
+        return MutableSortedMap.of(key1, value1, key2, value2, key3, value3);
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
-        return SortedMaps.mutable.with(key1, value1, key2, value2, key3, value3, key4, value4);
+        return MutableSortedMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap(Comparator<? super K> comparator)
     {
-        return SortedMaps.mutable.with(comparator);
+        return MutableSortedMap.of(comparator);
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap(Comparator<? super K> comparator, K key, V value)
     {
-        return SortedMaps.mutable.with(comparator, key, value);
+        return MutableSortedMap.of(comparator, key, value);
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap(
@@ -147,7 +147,7 @@ public final class Iterables
             K key1, V value1,
             K key2, V value2)
     {
-        return SortedMaps.mutable.with(comparator, key1, value1, key2, value2);
+        return MutableSortedMap.of(comparator, key1, value1, key2, value2);
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap(
@@ -156,7 +156,7 @@ public final class Iterables
             K key2, V value2,
             K key3, V value3)
     {
-        return SortedMaps.mutable.with(comparator, key1, value1, key2, value2, key3, value3);
+        return MutableSortedMap.of(comparator, key1, value1, key2, value2, key3, value3);
     }
 
     public static <K, V> MutableSortedMap<K, V> mSortedMap(
@@ -166,192 +166,192 @@ public final class Iterables
             K key3, V value3,
             K key4, V value4)
     {
-        return SortedMaps.mutable.with(comparator, key1, value1, key2, value2, key3, value3, key4, value4);
+        return MutableSortedMap.of(comparator, key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     public static <T> ImmutableList<T> iList()
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 
     public static <T> ImmutableList<T> iList(T one)
     {
-        return Lists.immutable.with(one);
+        return ImmutableList.of(one);
     }
 
     public static <T> ImmutableList<T> iList(T one, T two)
     {
-        return Lists.immutable.with(one, two);
+        return ImmutableList.of(one, two);
     }
 
     public static <T> ImmutableList<T> iList(T one, T two, T three)
     {
-        return Lists.immutable.with(one, two, three);
+        return ImmutableList.of(one, two, three);
     }
 
     public static <T> ImmutableList<T> iList(T one, T two, T three, T four)
     {
-        return Lists.immutable.with(one, two, three, four);
+        return ImmutableList.of(one, two, three, four);
     }
 
     public static <T> ImmutableList<T> iList(T one, T two, T three, T four, T five)
     {
-        return Lists.immutable.with(one, two, three, four, five);
+        return ImmutableList.of(one, two, three, four, five);
     }
 
     public static <T> ImmutableList<T> iList(T one, T two, T three, T four, T five, T six)
     {
-        return Lists.immutable.with(one, two, three, four, five, six);
+        return ImmutableList.of(one, two, three, four, five, six);
     }
 
     public static <T> ImmutableList<T> iList(T one, T two, T three, T four, T five, T six, T seven)
     {
-        return Lists.immutable.with(one, two, three, four, five, six, seven);
+        return ImmutableList.of(one, two, three, four, five, six, seven);
     }
 
     public static <T> ImmutableList<T> iList(T one, T two, T three, T four, T five, T six, T seven, T eight)
     {
-        return Lists.immutable.with(one, two, three, four, five, six, seven, eight);
+        return ImmutableList.of(one, two, three, four, five, six, seven, eight);
     }
 
     public static <T> ImmutableList<T> iList(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine)
     {
-        return Lists.immutable.with(one, two, three, four, five, six, seven, eight, nine);
+        return ImmutableList.of(one, two, three, four, five, six, seven, eight, nine);
     }
 
     public static <T> ImmutableList<T> iList(T one, T two, T three, T four, T five, T six, T seven, T eight, T nine, T ten)
     {
-        return Lists.immutable.with(one, two, three, four, five, six, seven, eight, nine, ten);
+        return ImmutableList.of(one, two, three, four, five, six, seven, eight, nine, ten);
     }
 
     public static <T> ImmutableList<T> iList(T... elements)
     {
-        return Lists.immutable.with(elements);
+        return ImmutableList.of(elements);
     }
 
     public static <T> ImmutableSet<T> iSet()
     {
-        return Sets.immutable.empty();
+        return ImmutableSet.empty();
     }
 
     public static <T> ImmutableSet<T> iSet(T one)
     {
-        return Sets.immutable.with(one);
+        return ImmutableSet.of(one);
     }
 
     public static <T> ImmutableSet<T> iSet(T one, T two)
     {
-        return Sets.immutable.with(one, two);
+        return ImmutableSet.of(one, two);
     }
 
     public static <T> ImmutableSet<T> iSet(T one, T two, T three)
     {
-        return Sets.immutable.with(one, two, three);
+        return ImmutableSet.of(one, two, three);
     }
 
     public static <T> ImmutableSet<T> iSet(T one, T two, T three, T four)
     {
-        return Sets.immutable.with(one, two, three, four);
+        return ImmutableSet.of(one, two, three, four);
     }
 
     public static <T> ImmutableSet<T> iSet(T... elements)
     {
-        return Sets.immutable.with(elements);
+        return ImmutableSet.of(elements);
     }
 
     public static <T> ImmutableBag<T> iBag()
     {
-        return Bags.immutable.empty();
+        return ImmutableBag.empty();
     }
 
     public static <T> ImmutableBag<T> iBag(T one)
     {
-        return Bags.immutable.with(one);
+        return ImmutableBag.of(one);
     }
 
     public static <T> ImmutableBag<T> iBag(T... elements)
     {
-        return Bags.immutable.with(elements);
+        return ImmutableBag.of(elements);
     }
 
     public static <K, V> ImmutableMap<K, V> iMap()
     {
-        return Maps.immutable.empty();
+        return ImmutableMap.empty();
     }
 
     public static <K, V> ImmutableMap<K, V> iMap(K key, V value)
     {
-        return Maps.immutable.with(key, value);
+        return ImmutableMap.of(key, value);
     }
 
     public static <K, V> ImmutableMap<K, V> iMap(K key1, V value1, K key2, V value2)
     {
-        return Maps.immutable.with(key1, value1, key2, value2);
+        return ImmutableMap.of(key1, value1, key2, value2);
     }
 
     public static <K, V> ImmutableMap<K, V> iMap(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        return Maps.immutable.with(key1, value1, key2, value2, key3, value3);
+        return ImmutableMap.of(key1, value1, key2, value2, key3, value3);
     }
 
     public static <K, V> ImmutableMap<K, V> iMap(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
-        return Maps.immutable.with(key1, value1, key2, value2, key3, value3, key4, value4);
+        return ImmutableMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     public static <T> ImmutableSortedSet<T> iSortedSet()
     {
-        return SortedSets.immutable.empty();
+        return ImmutableSortedSet.empty();
     }
 
     public static <T> ImmutableSortedSet<T> iSortedSet(T... elements)
     {
-        return SortedSets.immutable.with(elements);
+        return ImmutableSortedSet.of(elements);
     }
 
     public static <T> ImmutableSortedSet<T> iSortedSet(Comparator<? super T> comparator)
     {
-        return SortedSets.immutable.with(comparator);
+        return ImmutableSortedSet.of(comparator);
     }
 
     public static <T> ImmutableSortedSet<T> iSortedSet(Comparator<? super T> comparator, T... elements)
     {
-        return SortedSets.immutable.with(comparator, elements);
+        return ImmutableSortedSet.of(comparator, elements);
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap()
     {
-        return SortedMaps.immutable.empty();
+        return ImmutableSortedMap.empty();
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap(K key, V value)
     {
-        return SortedMaps.immutable.with(key, value);
+        return ImmutableSortedMap.of(key, value);
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap(K key1, V value1, K key2, V value2)
     {
-        return SortedMaps.immutable.with(key1, value1, key2, value2);
+        return ImmutableSortedMap.of(key1, value1, key2, value2);
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        return SortedMaps.immutable.with(key1, value1, key2, value2, key3, value3);
+        return ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3);
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
-        return SortedMaps.immutable.with(key1, value1, key2, value2, key3, value3, key4, value4);
+        return ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap(Comparator<? super K> comparator)
     {
-        return SortedMaps.immutable.with(comparator);
+        return ImmutableSortedMap.of(comparator);
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap(Comparator<? super K> comparator, K key, V value)
     {
-        return SortedMaps.immutable.with(comparator, key, value);
+        return ImmutableSortedMap.of(comparator, key, value);
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap(
@@ -359,7 +359,7 @@ public final class Iterables
             K key1, V value1,
             K key2, V value2)
     {
-        return SortedMaps.immutable.with(comparator, key1, value1, key2, value2);
+        return ImmutableSortedMap.of(comparator, key1, value1, key2, value2);
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap(
@@ -368,7 +368,7 @@ public final class Iterables
             K key2, V value2,
             K key3, V value3)
     {
-        return SortedMaps.immutable.with(comparator, key1, value1, key2, value2, key3, value3);
+        return ImmutableSortedMap.of(comparator, key1, value1, key2, value2, key3, value3);
     }
 
     public static <K, V> ImmutableSortedMap<K, V> iSortedMap(
@@ -378,6 +378,6 @@ public final class Iterables
             K key3, V value3,
             K key4, V value4)
     {
-        return SortedMaps.immutable.with(comparator, key1, value1, key2, value2, key3, value3, key4, value4);
+        return ImmutableSortedMap.of(comparator, key1, value1, key2, value2, key3, value3, key4, value4);
     }
 }

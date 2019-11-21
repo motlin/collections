@@ -20,6 +20,7 @@ import java.util.stream.StreamSupport;
 
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.ImmutableBagIterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -39,7 +40,6 @@ import org.eclipse.collections.impl.bag.AbstractBag;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
@@ -165,7 +165,7 @@ public abstract class AbstractImmutableBagIterable<T>
     @Override
     public <V> ImmutableBag<V> countBy(Function<? super T, ? extends V> function)
     {
-        return this.countBy(function, Bags.mutable.<V>empty()).toImmutable();
+        return this.countBy(function, MutableBag.<V>empty()).toImmutable();
     }
 
     /**
@@ -174,7 +174,7 @@ public abstract class AbstractImmutableBagIterable<T>
     @Override
     public <V, P> ImmutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.countByWith(function, parameter, Bags.mutable.<V>empty()).toImmutable();
+        return this.countByWith(function, parameter, MutableBag.<V>empty()).toImmutable();
     }
 
     /**
@@ -183,7 +183,7 @@ public abstract class AbstractImmutableBagIterable<T>
     @Override
     public <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.countByEach(function, Bags.mutable.empty()).toImmutable();
+        return this.countByEach(function, MutableBag.empty()).toImmutable();
     }
 
     /**

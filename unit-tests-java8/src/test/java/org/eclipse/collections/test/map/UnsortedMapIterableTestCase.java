@@ -14,12 +14,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.UnsortedBag;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.UnsortedMapIterable;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.UnorderedIterableTestCase;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
 import org.junit.Assert;
@@ -37,13 +37,13 @@ public interface UnsortedMapIterableTestCase extends MapIterableTestCase, Unorde
     @Override
     default <T> UnsortedBag<T> getExpectedFiltered(T... elements)
     {
-        return Bags.immutable.with(elements);
+        return ImmutableBag.of(elements);
     }
 
     @Override
     default <T> MutableBag<T> newMutableForFilter(T... elements)
     {
-        return Bags.mutable.with(elements);
+        return MutableBag.of(elements);
     }
 
     @Override
@@ -80,8 +80,8 @@ public interface UnsortedMapIterableTestCase extends MapIterableTestCase, Unorde
         Assert.assertTrue(string, matcher.matches());
 
         assertEquals(
-                Bags.immutable.with("1", "2", "2"),
-                Bags.immutable.with(
+                ImmutableBag.of("1", "2", "2"),
+                ImmutableBag.of(
                         matcher.group(2),
                         matcher.group(4),
                         matcher.group(6)));
@@ -95,11 +95,11 @@ public interface UnsortedMapIterableTestCase extends MapIterableTestCase, Unorde
         assertThat(
                 iterable.toList(),
                 isOneOf(
-                        Lists.immutable.with(2, 2, 1),
-                        Lists.immutable.with(1, 2, 2),
-                        Lists.immutable.with(2, 1, 2)));
+                        ImmutableList.of(2, 2, 1),
+                        ImmutableList.of(1, 2, 2),
+                        ImmutableList.of(2, 1, 2)));
 
-        MutableList<Integer> target = Lists.mutable.empty();
+        MutableList<Integer> target = MutableList.empty();
         iterable.each(target::add);
         assertEquals(
                 target,
@@ -111,10 +111,10 @@ public interface UnsortedMapIterableTestCase extends MapIterableTestCase, Unorde
     default void RichIterable_into()
     {
         assertThat(
-                this.newWith(2, 2, 1).into(Lists.mutable.empty()),
+                this.newWith(2, 2, 1).into(MutableList.empty()),
                 isOneOf(
-                        Lists.immutable.with(2, 2, 1),
-                        Lists.immutable.with(1, 2, 2),
-                        Lists.immutable.with(2, 1, 2)));
+                        ImmutableList.of(2, 2, 1),
+                        ImmutableList.of(1, 2, 2),
+                        ImmutableList.of(2, 1, 2)));
     }
 }

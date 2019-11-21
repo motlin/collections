@@ -12,12 +12,12 @@ package org.eclipse.collections.impl.multimap;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -88,7 +88,7 @@ public abstract class AbstractImmutableMultimapTestCase
                 .newWith("Two", 2)
                 .newWith("Three", 3);
         Verify.assertInstanceOf(UnmodifiableMutableSet.class, multimap.keySet());
-        Assert.assertEquals(Sets.mutable.of("One", "Two", "Three"), multimap.keySet());
+        Assert.assertEquals(MutableSet.of("One", "Two", "Three"), multimap.keySet());
     }
 
     @Test
@@ -213,14 +213,14 @@ public abstract class AbstractImmutableMultimapTestCase
     public void collectKeyMultiValues()
     {
         Multimap<Integer, String> multimap = this.<Integer, String>classUnderTest()
-                .newWithAll(1, Lists.mutable.with("1", "2", "3"))
-                .newWithAll(2, Lists.mutable.with("2", "3", "4"))
-                .newWithAll(3, Lists.mutable.with("2", "3", "4", "7", "8", "9"));
+                .newWithAll(1, MutableList.of("1", "2", "3"))
+                .newWithAll(2, MutableList.of("2", "3", "4"))
+                .newWithAll(3, MutableList.of("2", "3", "4", "7", "8", "9"));
         Multimap<String, Integer> collectedMultimap = multimap.collectKeyMultiValues(key -> key % 2 == 0 ? "Evens" : "Odds",
                 value -> Integer.valueOf(value) + 1);
         MutableBagMultimap<String, Integer> expectedMultimap = HashBagMultimap.newMultimap();
-        expectedMultimap.putAll("Odds", Lists.mutable.with(2, 3, 4, 3, 4, 5, 8, 9, 10));
-        expectedMultimap.putAll("Evens", Lists.mutable.with(3, 4, 5));
+        expectedMultimap.putAll("Odds", MutableList.of(2, 3, 4, 3, 4, 5, 8, 9, 10));
+        expectedMultimap.putAll("Evens", MutableList.of(3, 4, 5));
         ImmutableBagMultimap<String, Integer> expectedImmutableMultimap = expectedMultimap.toImmutable();
 
         Assert.assertEquals(expectedImmutableMultimap, collectedMultimap);

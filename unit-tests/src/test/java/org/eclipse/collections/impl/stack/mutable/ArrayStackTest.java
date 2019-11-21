@@ -11,7 +11,6 @@
 package org.eclipse.collections.impl.stack.mutable;
 
 import org.eclipse.collections.api.stack.MutableStack;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -23,25 +22,25 @@ public class ArrayStackTest extends MutableStackTestCase
     @Override
     protected <T> MutableStack<T> newStackWith(T... elements)
     {
-        return Stacks.mutable.of(elements);
+        return MutableStack.of(elements);
     }
 
     @Override
     protected <T> MutableStack<T> newStackFromTopToBottom(T... elements)
     {
-        return Stacks.mutable.ofReversed(elements);
+        return MutableStack.ofReversed(elements);
     }
 
     @Override
     protected <T> MutableStack<T> newStackFromTopToBottom(Iterable<T> elements)
     {
-        return Stacks.mutable.ofAllReversed(elements);
+        return MutableStack.ofAllReversed(elements);
     }
 
     @Override
     protected <T> MutableStack<T> newStack(Iterable<T> elements)
     {
-        return Stacks.mutable.ofAll(elements);
+        return MutableStack.ofAll(elements);
     }
 
     @Test

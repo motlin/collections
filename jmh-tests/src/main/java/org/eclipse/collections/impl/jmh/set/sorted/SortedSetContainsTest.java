@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.Interval;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -30,8 +29,8 @@ public class SortedSetContainsTest
 {
     private static final int SIZE = 2_000_000;
 
-    private final MutableSortedSet<Integer> ecMutable = SortedSets.mutable.withAll(Interval.zeroToBy(SIZE, 2));
-    private final ImmutableSortedSet<Integer> ecImmutable = SortedSets.immutable.withAll(Interval.zeroToBy(SIZE, 2));
+    private final MutableSortedSet<Integer> ecMutable = MutableSortedSet.ofAll(Interval.zeroToBy(SIZE, 2));
+    private final ImmutableSortedSet<Integer> ecImmutable = ImmutableSortedSet.ofAll(Interval.zeroToBy(SIZE, 2));
 
     @Benchmark
     public void contains_mutable_ec()

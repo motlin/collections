@@ -68,7 +68,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedur
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionAdapter;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.lazy.parallel.set.sorted.NonParallelSortedSetIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -134,7 +133,7 @@ public final class SortedSetAdapter<T>
     @Override
     public ImmutableSortedSet<T> toImmutable()
     {
-        return SortedSets.immutable.withSortedSet(this.delegate);
+        return ImmutableSortedSet.ofSortedSet(this.delegate);
     }
 
     @Override

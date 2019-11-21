@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectBooleanMap;
 import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.ObjectBooleanMaps;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMap;
 import org.junit.Assert;
@@ -46,7 +46,7 @@ public class ObjectBooleanMapFactoryTest
     @Test
     public void from()
     {
-        Iterable<String> iterable = Lists.mutable.with("1", "2", "3");
+        Iterable<String> iterable = MutableList.of("1", "2", "3");
         Assert.assertEquals(
                 ObjectBooleanHashMap.newWithKeysValues("1", false, "2", true, "3", false),
                 ObjectBooleanMaps.mutable.from(iterable, each -> each, each -> Integer.valueOf(each) % 2 == 0));

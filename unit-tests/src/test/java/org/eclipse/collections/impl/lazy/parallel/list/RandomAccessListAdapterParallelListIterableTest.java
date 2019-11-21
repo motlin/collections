@@ -11,8 +11,8 @@
 package org.eclipse.collections.impl.lazy.parallel.list;
 
 import org.eclipse.collections.api.list.ListIterable;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
 import org.eclipse.collections.impl.list.mutable.RandomAccessListAdapter;
 import org.junit.Test;
@@ -28,24 +28,24 @@ public class RandomAccessListAdapterParallelListIterableTest extends ParallelLis
     @Override
     protected ParallelListIterable<Integer> newWith(Integer... littleElements)
     {
-        return RandomAccessListAdapter.adapt(Lists.mutable.of(littleElements)).asParallel(this.executorService, this.batchSize);
+        return RandomAccessListAdapter.adapt(MutableList.of(littleElements)).asParallel(this.executorService, this.batchSize);
     }
 
     @Override
     protected ListIterable<Integer> getExpectedWith(Integer... littleElements)
     {
-        return RandomAccessListAdapter.adapt(Lists.mutable.of(littleElements));
+        return RandomAccessListAdapter.adapt(MutableList.of(littleElements));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void asParallel_small_batch()
     {
-        ListAdapter.adapt(Lists.mutable.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4)).asParallel(this.executorService, 0);
+        ListAdapter.adapt(MutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4)).asParallel(this.executorService, 0);
     }
 
     @Test(expected = NullPointerException.class)
     public void asParallel_null_executorService()
     {
-        ListAdapter.adapt(Lists.mutable.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4)).asParallel(null, 2);
+        ListAdapter.adapt(MutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4)).asParallel(null, 2);
     }
 }

@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.lazy;
 
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class ZipWithIndexIterableTest
     @Before
     public void setUp()
     {
-        this.iterableUnderTest = new ZipWithIndexIterable<>(Lists.immutable.of(1, 2, 3, 4));
+        this.iterableUnderTest = new ZipWithIndexIterable<>(ImmutableList.of(1, 2, 3, 4));
     }
 
     private void assertBufferContains(String expected)

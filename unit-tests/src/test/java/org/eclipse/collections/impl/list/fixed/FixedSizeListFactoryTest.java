@@ -14,10 +14,10 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -31,8 +31,8 @@ public class FixedSizeListFactoryTest
     @Test
     public void createEmpty()
     {
-        MutableList<String> list = Lists.fixedSize.of();
-        Assert.assertSame(list, Lists.fixedSize.of());
+        MutableList<String> list = FixedSizeList.empty();
+        Assert.assertSame(list, FixedSizeList.empty());
         Verify.assertInstanceOf(EmptyList.class, list);
         Verify.assertSize(0, list);
         Assert.assertTrue(list.isEmpty());
@@ -46,7 +46,7 @@ public class FixedSizeListFactoryTest
     @Test
     public void withExtra()
     {
-        MutableList<String> list0 = Lists.fixedSize.of();
+        MutableList<String> list0 = FixedSizeList.empty();
         Verify.assertEmpty(list0);
 
         MutableList<String> list1 = list0.with("1");
@@ -85,7 +85,7 @@ public class FixedSizeListFactoryTest
     @Test
     public void create1()
     {
-        MutableList<String> list = Lists.fixedSize.of("1");
+        MutableList<String> list = FixedSizeList.of("1");
         Verify.assertSize(1, list);
         Verify.assertItemAtIndex("1", 0, list);
     }
@@ -93,7 +93,7 @@ public class FixedSizeListFactoryTest
     @Test
     public void create2()
     {
-        MutableList<String> list = Lists.fixedSize.of("1", "2");
+        MutableList<String> list = FixedSizeList.of("1", "2");
         Verify.assertSize(2, list);
         Verify.assertStartsWith(list, "1", "2");
     }
@@ -101,7 +101,7 @@ public class FixedSizeListFactoryTest
     @Test
     public void create3()
     {
-        MutableList<String> list = Lists.fixedSize.of("1", "2", "3");
+        MutableList<String> list = FixedSizeList.of("1", "2", "3");
         Verify.assertSize(3, list);
         Verify.assertStartsWith(list, "1", "2", "3");
     }
@@ -109,7 +109,7 @@ public class FixedSizeListFactoryTest
     @Test
     public void create4()
     {
-        MutableList<String> list = Lists.fixedSize.of("1", "2", "3", "4");
+        MutableList<String> list = FixedSizeList.of("1", "2", "3", "4");
         Verify.assertSize(4, list);
         Verify.assertStartsWith(list, "1", "2", "3", "4");
     }
@@ -117,8 +117,8 @@ public class FixedSizeListFactoryTest
     @Test
     public void createList_singleton()
     {
-        Verify.assertEmpty(Lists.fixedSize.of());
-        Assert.assertSame(Lists.fixedSize.of(), Lists.fixedSize.of());
+        Verify.assertEmpty(FixedSizeList.empty());
+        Assert.assertSame(FixedSizeList.empty(), FixedSizeList.empty());
     }
 
     @Test
@@ -126,35 +126,35 @@ public class FixedSizeListFactoryTest
     {
         String[] content = {"one", "two"};
 
-        //List<Object>   list1 = Lists.fixedSize.of(content);  // incompatible types: List<Object> vs List<String>
-        //List<String[]> list2 = Lists.fixedSize.of(content);  // incompatible types: List<String[]> vs List<String>
-        List<String[]> list3 = Lists.fixedSize.<String[]>of(content);  // correct!
+        //List<Object>   list1 = FixedSizeList.of(content);  // incompatible types: List<Object> vs List<String>
+        //List<String[]> list2 = FixedSizeList.of(content);  // incompatible types: List<String[]> vs List<String>
+        List<String[]> list3 = FixedSizeList.<String[]>of(content);  // correct!
         Verify.assertSize(1, list3);
 
-        MutableList<String> list4 = Lists.fixedSize.of(content);
+        MutableList<String> list4 = FixedSizeList.of(content);
         Verify.assertSize(2, list4);
     }
 
     @Test
     public void equalsAndHashCode()
     {
-        MutableList<String> empty = Lists.fixedSize.of();
-        MutableList<String> emptyA = Lists.mutable.of();
+        MutableList<String> empty = FixedSizeList.empty();
+        MutableList<String> emptyA = MutableList.empty();
         Verify.assertEqualsAndHashCode(empty, emptyA);
 
-        MutableList<String> one = Lists.fixedSize.of("1");
-        MutableList<String> oneA = Lists.mutable.of();
+        MutableList<String> one = FixedSizeList.of("1");
+        MutableList<String> oneA = MutableList.empty();
         oneA.add("1");
         Verify.assertEqualsAndHashCode(one, oneA);
 
-        MutableList<String> two = Lists.fixedSize.of("1", "2");
-        MutableList<String> twoA = Lists.mutable.of();
+        MutableList<String> two = FixedSizeList.of("1", "2");
+        MutableList<String> twoA = MutableList.empty();
         twoA.add("1");
         twoA.add("2");
         Verify.assertEqualsAndHashCode(two, twoA);
 
-        MutableList<String> three = Lists.fixedSize.of("1", "2", "3");
-        MutableList<String> threeA = Lists.mutable.of();
+        MutableList<String> three = FixedSizeList.of("1", "2", "3");
+        MutableList<String> threeA = MutableList.empty();
         threeA.add("1");
         threeA.add("2");
         threeA.add("3");
@@ -163,7 +163,7 @@ public class FixedSizeListFactoryTest
         Assert.assertNotEquals(three, twoA);
         Assert.assertNotEquals(twoA, three);
 
-        MutableList<String> differentThree = Lists.mutable.of();
+        MutableList<String> differentThree = MutableList.empty();
         differentThree.add("1");
         differentThree.add("Two");
         differentThree.add("3");
@@ -179,8 +179,8 @@ public class FixedSizeListFactoryTest
     @Test
     public void serializationOfEmptyList()
     {
-        Serializable list = (Serializable) Lists.fixedSize.of();
-        Serializable list2 = (Serializable) Lists.fixedSize.of();
+        Serializable list = (Serializable) FixedSizeList.empty();
+        Serializable list2 = (Serializable) FixedSizeList.empty();
         Assert.assertSame(list, list2);
         Verify.assertPostSerializedIdentity(list);
     }
@@ -188,8 +188,8 @@ public class FixedSizeListFactoryTest
     @Test
     public void forEach()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> result = MutableList.empty();
+        MutableList<String> source = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         source.forEach(CollectionAddProcedure.on(result));
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5", "6"), result);
     }
@@ -198,8 +198,8 @@ public class FixedSizeListFactoryTest
     public void forEachWithIndex()
     {
         int[] indexSum = new int[1];
-        MutableList<String> result = Lists.mutable.of();
-        MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> result = MutableList.empty();
+        MutableList<String> source = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         source.forEachWithIndex((each, index) -> {
             result.add(each);
             indexSum[0] += index;
@@ -211,8 +211,8 @@ public class FixedSizeListFactoryTest
     @Test
     public void forEachWith()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> result = MutableList.empty();
+        MutableList<String> source = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         source.forEachWith(Procedures2.fromProcedure(result::add), null);
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5", "6"), result);
     }
@@ -220,22 +220,22 @@ public class FixedSizeListFactoryTest
     @Test
     public void getFirstGetLast()
     {
-        MutableList<String> list1 = Lists.fixedSize.of("1");
+        MutableList<String> list1 = FixedSizeList.of("1");
         Assert.assertEquals("1", list1.getFirst());
         Assert.assertEquals("1", list1.getLast());
-        MutableList<String> list2 = Lists.fixedSize.of("1", "2");
+        MutableList<String> list2 = FixedSizeList.of("1", "2");
         Assert.assertEquals("1", list2.getFirst());
         Assert.assertEquals("2", list2.getLast());
-        MutableList<String> list3 = Lists.fixedSize.of("1", "2", "3");
+        MutableList<String> list3 = FixedSizeList.of("1", "2", "3");
         Assert.assertEquals("1", list3.getFirst());
         Assert.assertEquals("3", list3.getLast());
-        MutableList<String> list4 = Lists.fixedSize.of("1", "2", "3", "4");
+        MutableList<String> list4 = FixedSizeList.of("1", "2", "3", "4");
         Assert.assertEquals("1", list4.getFirst());
         Assert.assertEquals("4", list4.getLast());
-        MutableList<String> list5 = Lists.fixedSize.of("1", "2", "3", "4", "5");
+        MutableList<String> list5 = FixedSizeList.of("1", "2", "3", "4", "5");
         Assert.assertEquals("1", list5.getFirst());
         Assert.assertEquals("5", list5.getLast());
-        MutableList<String> list6 = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> list6 = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         Assert.assertEquals("1", list6.getFirst());
         Assert.assertEquals("6", list6.getLast());
     }

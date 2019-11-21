@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
@@ -34,6 +35,8 @@ import org.eclipse.collections.api.collection.primitive.ImmutableFloatCollection
 import org.eclipse.collections.api.collection.primitive.ImmutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableShortCollection;
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.primitive.ImmutableObjectDoubleMap;
@@ -51,9 +54,7 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.collector.Collectors2;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
@@ -61,8 +62,6 @@ import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 public abstract class AbstractImmutableCollectionTestCase
 {
@@ -91,7 +90,7 @@ public abstract class AbstractImmutableCollectionTestCase
         Assert.assertEquals(
                 this.classUnderTest().stream().collect(Collectors2.toBag()),
                 this.classUnderTest().reduceInPlace(Collectors2.toBag()));
-        Supplier<MutableBag<Integer>> supplier = Bags.mutable::empty;
+        Supplier<MutableBag<Integer>> supplier = MutableBag::empty;
         Assert.assertEquals(
                 this.classUnderTest().stream().collect(supplier, MutableBag::add, MutableBag::withAll),
                 this.classUnderTest().reduceInPlace(supplier, MutableBag::add));
@@ -122,7 +121,7 @@ public abstract class AbstractImmutableCollectionTestCase
         Assert.assertEquals(
                 this.classUnderTest().parallelStream().collect(Collectors2.toBag()),
                 this.classUnderTest().reduceInPlace(Collectors2.toBag()));
-        Supplier<MutableBag<Integer>> supplier = Bags.mutable::empty;
+        Supplier<MutableBag<Integer>> supplier = MutableBag::empty;
         Assert.assertEquals(
                 this.classUnderTest().parallelStream().collect(supplier, MutableBag::add, MutableBag::withAll),
                 this.classUnderTest().reduceInPlace(supplier, MutableBag::add));
@@ -162,7 +161,7 @@ public abstract class AbstractImmutableCollectionTestCase
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Bag<Integer> results = integers.countBy(each -> each);
         Verify.assertSize(integers.size(), results);
-        Bag<Integer> results2 = integers.countBy(each -> each, SortedBags.mutable.empty());
+        Bag<Integer> results2 = integers.countBy(each -> each, MutableSortedBag.empty());
         Verify.assertSize(integers.size(), results2);
     }
 
@@ -175,7 +174,7 @@ public abstract class AbstractImmutableCollectionTestCase
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Bag<Integer> results = integers.countByWith((each, parm) -> each, null);
         Verify.assertSize(integers.size(), results);
-        Bag<Integer> results2 = integers.countByWith((each, parm) -> each, null, SortedBags.mutable.empty());
+        Bag<Integer> results2 = integers.countByWith((each, parm) -> each, null, MutableSortedBag.empty());
         Verify.assertSize(integers.size(), results2);
     }
 
@@ -188,7 +187,7 @@ public abstract class AbstractImmutableCollectionTestCase
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Bag<Integer> results = integers.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i));
         Verify.assertSize(integers.size() * 5, results);
-        Bag<Integer> results2 = integers.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i), SortedBags.mutable.empty());
+        Bag<Integer> results2 = integers.countByEach(each -> IntInterval.oneTo(5).collect(i -> each * i), MutableSortedBag.empty());
         Verify.assertSize(integers.size() * 5, results2);
     }
 
@@ -198,7 +197,7 @@ public abstract class AbstractImmutableCollectionTestCase
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Assert.assertEquals(
                 this.<Integer>newMutable().withAll(integers).select(IntegerPredicates.isOdd()),
-                integers.selectWith(Predicates2.in(), iList(1, 3, 5, 7, 9)));
+                integers.selectWith(Predicates2.in(), ImmutableList.of(1, 3, 5, 7, 9)));
     }
 
     @Test
@@ -207,7 +206,7 @@ public abstract class AbstractImmutableCollectionTestCase
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Assert.assertEquals(
                 this.<Integer>newMutable().with(101).withAll(integers).select(IntegerPredicates.isOdd()),
-                integers.selectWith(Predicates2.in(), iList(1, 3, 5, 7, 9), this.<Integer>newMutable().with(101)));
+                integers.selectWith(Predicates2.in(), ImmutableList.of(1, 3, 5, 7, 9), this.<Integer>newMutable().with(101)));
     }
 
     @Test
@@ -216,7 +215,7 @@ public abstract class AbstractImmutableCollectionTestCase
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Assert.assertEquals(
                 this.<Integer>newMutable().withAll(integers).reject(IntegerPredicates.isOdd()),
-                integers.rejectWith(Predicates2.in(), iList(1, 3, 5, 7, 9)));
+                integers.rejectWith(Predicates2.in(), ImmutableList.of(1, 3, 5, 7, 9)));
     }
 
     @Test
@@ -225,7 +224,7 @@ public abstract class AbstractImmutableCollectionTestCase
         ImmutableCollection<Integer> integers = this.classUnderTest();
         Assert.assertEquals(
                 this.<Integer>newMutable().with(100).withAll(integers).reject(IntegerPredicates.isOdd()),
-                integers.rejectWith(Predicates2.in(), iList(1, 3, 5, 7, 9), this.<Integer>newMutable().with(100)));
+                integers.rejectWith(Predicates2.in(), ImmutableList.of(1, 3, 5, 7, 9), this.<Integer>newMutable().with(100)));
     }
 
     @Test
@@ -383,7 +382,7 @@ public abstract class AbstractImmutableCollectionTestCase
     {
         MutableList<Integer> group1 = Interval.oneTo(100_000).toList().shuffleThis();
         MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
-        MutableList<Integer> integers = Lists.mutable.withAll(group1);
+        MutableList<Integer> integers = MutableList.ofAll(group1);
         integers.addAll(group2);
         ImmutableCollection<Integer> values = integers.toImmutable();
 
@@ -433,7 +432,7 @@ public abstract class AbstractImmutableCollectionTestCase
     {
         MutableList<Integer> group1 = Interval.oneTo(100_000).toList().shuffleThis();
         MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
-        MutableList<Integer> integers = Lists.mutable.withAll(group1);
+        MutableList<Integer> integers = MutableList.ofAll(group1);
         integers.addAll(group2);
         ImmutableCollection<Integer> values = integers.toImmutable();
         ImmutableObjectDoubleMap<Integer> result = values.sumByDouble(
@@ -588,7 +587,7 @@ public abstract class AbstractImmutableCollectionTestCase
     @Test
     public void flatCollect()
     {
-        RichIterable<String> actual = this.classUnderTest().flatCollect(integer -> Lists.fixedSize.of(String.valueOf(integer)));
+        RichIterable<String> actual = this.classUnderTest().flatCollect(integer -> FixedSizeList.of(String.valueOf(integer)));
 
         ImmutableCollection<String> expected = this.classUnderTest().collect(String::valueOf);
 
@@ -902,19 +901,19 @@ public abstract class AbstractImmutableCollectionTestCase
     @Test
     public void removeAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).removeAll(Lists.fixedSize.of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).removeAll(FixedSizeList.empty()));
     }
 
     @Test
     public void retainAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).retainAll(Lists.fixedSize.of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).retainAll(FixedSizeList.empty()));
     }
 
     @Test
     public void addAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).addAll(Lists.fixedSize.of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> ((Collection<Integer>) this.classUnderTest()).addAll(FixedSizeList.empty()));
     }
 
     @Test
@@ -938,7 +937,7 @@ public abstract class AbstractImmutableCollectionTestCase
     @Test
     public void tap()
     {
-        MutableList<Integer> tapResult = Lists.mutable.of();
+        MutableList<Integer> tapResult = MutableList.empty();
         ImmutableCollection<Integer> collection = this.classUnderTest();
         Assert.assertSame(collection, collection.tap(tapResult::add));
         Assert.assertEquals(collection.toList(), tapResult);

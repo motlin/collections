@@ -72,14 +72,11 @@ import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.AbstractMultiReaderMutableCollection;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.ReverseIterable;
 import org.eclipse.collections.impl.lazy.parallel.list.ListIterableParallelIterable;
 import org.eclipse.collections.impl.lazy.parallel.list.MultiReaderParallelListIterable;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.LazyIterate;
-
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
  * MultiReadFastList provides a thread-safe wrapper around a FastList, using a ReentrantReadWriteLock. In order to
@@ -202,7 +199,7 @@ public final class MultiReaderFastList<T>
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
-            return Lists.immutable.withAll(this.delegate);
+            return ImmutableList.ofAll(this.delegate);
         }
     }
 
@@ -841,8 +838,8 @@ public final class MultiReaderFastList<T>
             extends UntouchableMutableCollection<T>
             implements MutableList<T>
     {
-        private final MutableList<UntouchableListIterator<T>> requestedIterators = mList();
-        private final MutableList<UntouchableMutableList<T>> requestedSubLists = mList();
+        private final MutableList<UntouchableListIterator<T>> requestedIterators = MutableList.empty();
+        private final MutableList<UntouchableMutableList<T>> requestedSubLists = MutableList.empty();
 
         private UntouchableMutableList(MutableList<T> delegate)
         {

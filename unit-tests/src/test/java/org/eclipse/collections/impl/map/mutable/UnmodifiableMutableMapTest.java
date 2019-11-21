@@ -11,9 +11,9 @@
 package org.eclipse.collections.impl.map.mutable;
 
 import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
@@ -152,7 +152,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void retainAllFromKeySet()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.keySet().retainAll(Lists.mutable.of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> map.keySet().retainAll(MutableList.empty()));
     }
 
     @Override
@@ -192,7 +192,7 @@ public class UnmodifiableMutableMapTest extends MutableMapTestCase
     public void retainAllFromValues()
     {
         MutableMap<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "Two");
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.values().retainAll(Lists.mutable.of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> map.values().retainAll(MutableList.empty()));
     }
 
     @Override

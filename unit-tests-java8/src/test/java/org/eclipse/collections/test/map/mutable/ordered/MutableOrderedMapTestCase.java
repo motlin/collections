@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.test.map.mutable.ordered;
 
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableOrderedMap;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.test.MutableOrderedIterableTestCase;
 import org.eclipse.collections.test.map.OrderedMapIterableTestCase;
@@ -34,20 +34,20 @@ public interface MutableOrderedMapTestCase extends OrderedMapIterableTestCase, M
         MutableOrderedMap<Integer, String> map = this.newWithKeysValues(1, "1", 2, "Two", 3, "Three");
 
         Verify.assertThrows(NullPointerException.class, () -> map.removeAllKeys(null));
-        Assert.assertFalse(map.removeAllKeys(Sets.mutable.empty()));
-        Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4)));
-        Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4, 5, 6)));
-        Assert.assertFalse(map.removeAllKeys(Sets.mutable.with(4, 5, 6, 7, 8, 9)));
+        Assert.assertFalse(map.removeAllKeys(MutableSet.empty()));
+        Assert.assertFalse(map.removeAllKeys(MutableSet.of(4)));
+        Assert.assertFalse(map.removeAllKeys(MutableSet.of(4, 5, 6)));
+        Assert.assertFalse(map.removeAllKeys(MutableSet.of(4, 5, 6, 7, 8, 9)));
 
-        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(1)));
+        Assert.assertTrue(map.removeAllKeys(MutableSet.of(1)));
         Verify.denyContainsKey(1, map);
-        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(3, 4, 5, 6, 7)));
+        Assert.assertTrue(map.removeAllKeys(MutableSet.of(3, 4, 5, 6, 7)));
         Verify.denyContainsKey(3, map);
 
-        map.putAll(Maps.mutable.with(4, "Four", 5, "Five", 6, "Six", 7, "Seven"));
-        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(2, 3, 9, 10)));
+        map.putAll(MutableMap.of(4, "Four", 5, "Five", 6, "Six", 7, "Seven"));
+        Assert.assertTrue(map.removeAllKeys(MutableSet.of(2, 3, 9, 10)));
         Verify.denyContainsKey(2, map);
-        Assert.assertTrue(map.removeAllKeys(Sets.mutable.with(5, 3, 7, 8, 9)));
+        Assert.assertTrue(map.removeAllKeys(MutableSet.of(5, 3, 7, 8, 9)));
         Assert.assertEquals(this.newWithKeysValues(4, "Four", 6, "Six"), map);
     }
 }

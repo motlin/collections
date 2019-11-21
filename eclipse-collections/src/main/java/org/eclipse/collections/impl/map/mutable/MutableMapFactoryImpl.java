@@ -15,7 +15,6 @@ import java.util.Map;
 import org.eclipse.collections.api.factory.map.MutableMapFactory;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.impl.factory.Maps;
 
 public class MutableMapFactoryImpl implements MutableMapFactory
 {
@@ -120,7 +119,7 @@ public class MutableMapFactoryImpl implements MutableMapFactory
     @Override
     public <K, V> MutableMap<K, V> withMapIterable(MapIterable<? extends K, ? extends V> mapIterable)
     {
-        MutableMap<K, V> output = Maps.mutable.withInitialCapacity(mapIterable.size());
+        MutableMap<K, V> output = MutableMap.ofInitialCapacity(mapIterable.size());
         mapIterable.forEachKeyValue(output::put);
         return output;
     }

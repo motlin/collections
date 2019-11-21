@@ -15,8 +15,8 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.InternalIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.iterator.DistinctIterator;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.LazyIterate;
@@ -78,13 +78,13 @@ public class DistinctIterableTest extends AbstractLazyIterableTestCase
     @Test(expected = NoSuchElementException.class)
     public void noSuchElementException()
     {
-        new DistinctIterator<>(Lists.mutable.<Integer>of()).next();
+        new DistinctIterator<>(MutableList.<Integer>of()).next();
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void remove()
     {
-        new DistinctIterator<>(Lists.mutable.<Integer>of()).remove();
+        new DistinctIterator<>(MutableList.<Integer>of()).remove();
     }
 
     @Override

@@ -15,11 +15,10 @@ import java.util.RandomAccess;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.factory.Lists;
 
 /**
  * This is a nine element immutable List which is created by calling
- * Lists.immutable.with(one, two, three, four, five, six, seven, eight, nine) method.
+ * ImmutableList.of(one, two, three, four, five, six, seven, eight, nine) method.
  */
 final class ImmutableNonupletonList<T>
         extends AbstractImmutableList<T>
@@ -107,7 +106,7 @@ final class ImmutableNonupletonList<T>
     @Override
     public ImmutableList<T> newWith(T newItem)
     {
-        return Lists.immutable.with(
+        return ImmutableList.of(
                 this.get(0),
                 this.get(1),
                 this.get(2),

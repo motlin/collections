@@ -11,7 +11,6 @@
 package org.eclipse.collections.test;
 
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.factory.Lists;
 
 public interface CollisionsTestCase
 {
@@ -26,7 +25,7 @@ public interface CollisionsTestCase
     Integer COLLISION_9 = 136;
     Integer COLLISION_10 = 152;
 
-    ImmutableList<Integer> COLLISIONS = Lists.immutable.with(
+    ImmutableList<Integer> COLLISIONS = ImmutableList.of(
             COLLISION_1, COLLISION_2, COLLISION_3,
             COLLISION_4, COLLISION_5, COLLISION_6,
             COLLISION_7, COLLISION_8, COLLISION_9);

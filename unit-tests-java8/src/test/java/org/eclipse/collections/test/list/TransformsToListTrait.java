@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.test.list;
 
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
@@ -20,7 +21,6 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
@@ -36,13 +36,13 @@ public interface TransformsToListTrait extends RichIterableTestCase
     @Override
     default <T> ListIterable<T> getExpectedTransformed(T... elements)
     {
-        return Lists.immutable.with(elements);
+        return ImmutableList.of(elements);
     }
 
     @Override
     default <T> MutableList<T> newMutableForTransform(T... elements)
     {
-        return Lists.mutable.with(elements);
+        return MutableList.of(elements);
     }
 
     @Override

@@ -25,7 +25,6 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.AbstractListTestCase;
 import org.eclipse.collections.impl.list.mutable.ArrayListAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -129,7 +128,7 @@ public class ArrayAdapterTest extends AbstractListTestCase
     {
         super.forEachFromTo();
 
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableList<Integer> collection = this.newWith(1, 2, 3, 4);
         collection.forEach(2, 3, result::add);
         Verify.assertSize(2, result);

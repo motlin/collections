@@ -16,10 +16,11 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -57,8 +58,8 @@ public class EmptyListTest
     {
         Verify.assertEmpty(new EmptyList<>());
         Assert.assertFalse(new EmptyList<>().notEmpty());
-        Verify.assertEmpty(Lists.fixedSize.of());
-        Assert.assertFalse(Lists.fixedSize.of().notEmpty());
+        Verify.assertEmpty(FixedSizeList.empty());
+        Assert.assertFalse(FixedSizeList.empty().notEmpty());
     }
 
     @Test
@@ -77,79 +78,79 @@ public class EmptyListTest
     @Test
     public void readResolve()
     {
-        Verify.assertInstanceOf(EmptyList.class, Lists.fixedSize.of());
-        Verify.assertPostSerializedIdentity(Lists.fixedSize.of());
+        Verify.assertInstanceOf(EmptyList.class, FixedSizeList.empty());
+        Verify.assertPostSerializedIdentity(FixedSizeList.empty());
     }
 
     @Test
     public void testClone()
     {
-        Assert.assertSame(Lists.fixedSize.of().clone(), Lists.fixedSize.of());
+        Assert.assertSame(FixedSizeList.empty().clone(), FixedSizeList.empty());
     }
 
     @Test
     public void min()
     {
-        Verify.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().min(Comparators.naturalOrder()));
+        Verify.assertThrows(NoSuchElementException.class, () -> FixedSizeList.empty().min(Comparators.naturalOrder()));
     }
 
     @Test
     public void max()
     {
-        Verify.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().max(Comparators.naturalOrder()));
+        Verify.assertThrows(NoSuchElementException.class, () -> FixedSizeList.empty().max(Comparators.naturalOrder()));
     }
 
     @Test
     public void min_without_comparator()
     {
-        Verify.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().min());
+        Verify.assertThrows(NoSuchElementException.class, () -> FixedSizeList.empty().min());
     }
 
     @Test
     public void max_without_comparator()
     {
-        Verify.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().max());
+        Verify.assertThrows(NoSuchElementException.class, () -> FixedSizeList.empty().max());
     }
 
     @Test
     public void minBy()
     {
-        Verify.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().minBy(String::valueOf));
+        Verify.assertThrows(NoSuchElementException.class, () -> FixedSizeList.empty().minBy(String::valueOf));
     }
 
     @Test
     public void maxBy()
     {
-        Verify.assertThrows(NoSuchElementException.class, () -> Lists.fixedSize.of().maxBy(String::valueOf));
+        Verify.assertThrows(NoSuchElementException.class, () -> FixedSizeList.empty().maxBy(String::valueOf));
     }
 
     @Test
     public void zip()
     {
         Assert.assertEquals(
-                Lists.fixedSize.of(),
-                Lists.fixedSize.of().zip(FastList.newListWith(1, 2, 3)));
+                FixedSizeList.empty(),
+                FixedSizeList.empty().zip(FastList.newListWith(1, 2, 3)));
     }
 
     @Test
     public void zipWithIndex()
     {
         Assert.assertEquals(
-                Lists.fixedSize.of(),
-                Lists.fixedSize.of().zipWithIndex());
+                FixedSizeList.empty(),
+                FixedSizeList.empty().zipWithIndex());
     }
 
     @Test
     public void chunk_large_size()
     {
-        Assert.assertEquals(Lists.fixedSize.of(), Lists.fixedSize.of().chunk(10));
+        Assert.assertEquals(FixedSizeList.empty(), FixedSizeList.empty().chunk(10));
     }
 
     @Test
     public void sortThis()
     {
-        MutableList<Object> expected = Lists.fixedSize.of();
-        MutableList<Object> list = Lists.fixedSize.of();
+        MutableList<Object> expected = FixedSizeList.empty();
+        MutableList<Object> list = FixedSizeList.empty();
         MutableList<Object> sortedList = list.sortThis();
         Assert.assertEquals(expected, sortedList);
         Assert.assertSame(sortedList, list);
@@ -158,8 +159,8 @@ public class EmptyListTest
     @Test
     public void sortThisBy()
     {
-        MutableList<Object> expected = Lists.fixedSize.of();
-        MutableList<Object> list = Lists.fixedSize.of();
+        MutableList<Object> expected = FixedSizeList.empty();
+        MutableList<Object> list = FixedSizeList.empty();
         MutableList<Object> sortedList = list.sortThisBy(String::valueOf);
         Assert.assertEquals(expected, sortedList);
         Assert.assertSame(sortedList, list);
@@ -168,8 +169,8 @@ public class EmptyListTest
     @Test
     public void sortThisByPrimitive()
     {
-        MutableList<Object> expected = Lists.fixedSize.of();
-        MutableList<Object> list = Lists.fixedSize.of();
+        MutableList<Object> expected = FixedSizeList.empty();
+        MutableList<Object> list = FixedSizeList.empty();
         Assert.assertEquals(expected, list.sortThisByBoolean(anObject -> true));
         Assert.assertSame(list, list.sortThisByBoolean(anObject -> true));
         Assert.assertEquals(expected, list.sortThisByByte(anObject -> (byte) 0));
@@ -296,6 +297,6 @@ public class EmptyListTest
     @Test
     public void toImmutable()
     {
-        Assert.assertSame(Lists.immutable.empty(), new EmptyList<>().toImmutable());
+        Assert.assertSame(ImmutableList.empty(), new EmptyList<>().toImmutable());
     }
 }

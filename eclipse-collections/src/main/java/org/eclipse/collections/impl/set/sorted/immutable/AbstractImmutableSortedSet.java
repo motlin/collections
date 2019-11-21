@@ -73,7 +73,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedur
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.immutable.AbstractImmutableCollection;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.parallel.set.sorted.NonParallelSortedSetIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -302,7 +301,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     @Override
     public <V> ImmutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        MutableList<V> result = Lists.mutable.empty();
+        MutableList<V> result = MutableList.empty();
         this.forEach(new CollectProcedure<>(function, result));
         return result.toImmutable();
     }
@@ -316,7 +315,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     @Override
     public <V> ImmutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        MutableList<V> result = Lists.mutable.empty();
+        MutableList<V> result = MutableList.empty();
         this.forEach(new CollectIfProcedure<>(result, function, predicate));
         return result.toImmutable();
     }
@@ -324,7 +323,7 @@ abstract class AbstractImmutableSortedSet<T> extends AbstractImmutableCollection
     @Override
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        MutableList<V> result = Lists.mutable.empty();
+        MutableList<V> result = MutableList.empty();
         this.forEach(new FlatCollectProcedure<>(function, result));
         return result.toImmutable();
     }

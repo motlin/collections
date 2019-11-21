@@ -23,16 +23,15 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 
@@ -118,7 +117,7 @@ final class DoubletonMap<K, V>
     @Override
     public ImmutableMap<K, V> toImmutable()
     {
-        return Maps.immutable.with(this.key1, this.value1, this.key2, this.value2);
+        return ImmutableMap.of(this.key1, this.value1, this.key2, this.value2);
     }
 
     @Override
@@ -150,19 +149,19 @@ final class DoubletonMap<K, V>
     @Override
     public Set<K> keySet()
     {
-        return Sets.fixedSize.of(this.key1, this.key2);
+        return FixedSizeSet.of(this.key1, this.key2);
     }
 
     @Override
     public Collection<V> values()
     {
-        return Lists.fixedSize.of(this.value1, this.value2);
+        return FixedSizeList.of(this.value1, this.value2);
     }
 
     @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
-        return Sets.fixedSize.of(
+        return FixedSizeSet.of(
                 new ImmutableEntry<>(this.key1, this.value1),
                 new ImmutableEntry<>(this.key2, this.value2));
     }
@@ -266,7 +265,7 @@ final class DoubletonMap<K, V>
     @Override
     public <R> FixedSizeMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return Maps.fixedSize.of(this.key1, function.value(this.key1, this.value1), this.key2, function.value(this.key2, this.value2));
+        return FixedSizeMap.of(this.key1, function.value(this.key1, this.value1), this.key2, function.value(this.key2, this.value2));
     }
 
     @Override
@@ -274,7 +273,7 @@ final class DoubletonMap<K, V>
     {
         Pair<K2, V2> pair1 = function.value(this.key1, this.value1);
         Pair<K2, V2> pair2 = function.value(this.key2, this.value2);
-        return Maps.fixedSize.of(pair1.getOne(), pair1.getTwo(), pair2.getOne(), pair2.getTwo());
+        return FixedSizeMap.of(pair1.getOne(), pair1.getTwo(), pair2.getOne(), pair2.getTwo());
     }
 
     @Override
@@ -313,13 +312,13 @@ final class DoubletonMap<K, V>
         switch (result)
         {
             case 1:
-                return Maps.fixedSize.of(this.key1, this.value1);
+                return FixedSizeMap.of(this.key1, this.value1);
             case 2:
-                return Maps.fixedSize.of(this.key2, this.value2);
+                return FixedSizeMap.of(this.key2, this.value2);
             case 3:
                 return this.clone();
             default:
-                return Maps.fixedSize.of();
+                return FixedSizeMap.empty();
         }
     }
 

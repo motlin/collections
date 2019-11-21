@@ -12,8 +12,8 @@ package org.eclipse.collections.api.factory.set;
 
 import java.util.stream.Stream;
 
-import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
 
 public interface ImmutableSetFactory
 {
@@ -79,6 +79,6 @@ public interface ImmutableSetFactory
      */
     default <T> ImmutableSet<T> fromStream(Stream<? extends T> stream)
     {
-        return Sets.mutable.<T>fromStream(stream).toImmutable();
+        return MutableSet.<T>fromStream(stream).toImmutable();
     }
 }

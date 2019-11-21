@@ -19,8 +19,8 @@ import java.util.SortedSet;
 import java.util.concurrent.PriorityBlockingQueue;
 
 import org.eclipse.collections.api.collection.MutableCollection;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.MutableSet;
 
 public class DefaultSpeciesNewStrategy
 {
@@ -87,12 +87,12 @@ public class DefaultSpeciesNewStrategy
                 || collection instanceof PriorityQueue
                 || collection instanceof PriorityBlockingQueue)
         {
-            return Lists.mutable.empty();
+            return MutableList.empty();
         }
         if (collection instanceof Set)
         {
-            return Sets.mutable.empty();
+            return MutableSet.empty();
         }
-        return Lists.mutable.empty();
+        return MutableList.empty();
     }
 }

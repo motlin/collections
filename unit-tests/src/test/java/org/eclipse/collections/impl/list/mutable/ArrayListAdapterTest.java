@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
@@ -109,7 +108,7 @@ public class ArrayListAdapterTest extends AbstractListTestCase
     @Test
     public void testForEachWithFromToWithCommandoPatternOptimization()
     {
-        MutableList<Integer> result2 = Lists.mutable.of();
+        MutableList<Integer> result2 = MutableList.empty();
         // Requires list of 100+ elements to engage commando pattern optimization
         ArrayListAdapter.adapt(new ArrayList<>(Interval.oneTo(200))).forEach(99, 199, CollectionAddProcedure.on(result2));
         Verify.assertSize(101, result2);
@@ -118,7 +117,7 @@ public class ArrayListAdapterTest extends AbstractListTestCase
     @Test
     public void testForEachWithIndexWithFromToWithCommandoPatternOptimization()
     {
-        MutableList<Integer> result2 = Lists.mutable.of();
+        MutableList<Integer> result2 = MutableList.empty();
         // Requires list of 100+ elements to engage commando pattern optimization
         ArrayListAdapter.adapt(new ArrayList<>(Interval.oneTo(200))).forEachWithIndex(99, 199, new AddToList(result2));
         Verify.assertSize(101, result2);

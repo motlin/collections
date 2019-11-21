@@ -15,8 +15,8 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.BooleanIterable;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -478,24 +478,24 @@ public abstract class AbstractMutableBooleanCollectionTestCase extends AbstractB
     {
         BooleanIterable iterable1 = this.newWith(true);
         Verify.assertIterablesEqual(
-                Lists.mutable.with(this.newMutableCollectionWith(true)).toSet(),
+                MutableList.of(this.newMutableCollectionWith(true)).toSet(),
                 iterable1.chunk(1).toSet());
 
         BooleanIterable iterable2 = this.newWith(false);
         Verify.assertIterablesEqual(
-                Lists.mutable.with(this.newMutableCollectionWith(false)).toSet(),
+                MutableList.of(this.newMutableCollectionWith(false)).toSet(),
                 iterable2.chunk(1).toSet());
 
         BooleanIterable iterable3 = this.newWith(false, true);
         Verify.assertIterablesEqual(
-                Lists.mutable.with(this.newMutableCollectionWith(false), this.newMutableCollectionWith(true)).toSet(),
+                MutableList.of(this.newMutableCollectionWith(false), this.newMutableCollectionWith(true)).toSet(),
                 iterable3.chunk(1).toSet());
 
         Verify.assertIterablesEqual(
-                Lists.mutable.with(this.newMutableCollectionWith(false, true)),
+                MutableList.of(this.newMutableCollectionWith(false, true)),
                 iterable3.chunk(2));
         Verify.assertIterablesEqual(
-                Lists.mutable.with(this.newMutableCollectionWith(false, true)),
+                MutableList.of(this.newMutableCollectionWith(false, true)),
                 iterable3.chunk(3));
 
         Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));

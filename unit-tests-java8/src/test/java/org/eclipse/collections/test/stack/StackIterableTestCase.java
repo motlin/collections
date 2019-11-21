@@ -15,11 +15,10 @@ import java.util.EmptyStackException;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
+import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.test.OrderedIterableWithDuplicatesTestCase;
 import org.junit.Test;
 
@@ -41,13 +40,13 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     @Override
     default <T> StackIterable<T> getExpectedFiltered(T... elements)
     {
-        return Stacks.immutable.withReversed(elements);
+        return ImmutableStack.ofReversed(elements);
     }
 
     @Override
     default <T> MutableList<T> newMutableForFilter(T... elements)
     {
-        return Lists.mutable.with(elements);
+        return MutableList.of(elements);
     }
 
     @Override
@@ -55,7 +54,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     default void InternalIterable_forEach()
     {
         RichIterable<Integer> integers = this.newWith(3, 3, 3, 2, 2, 1);
-        MutableStack<Integer> result = Stacks.mutable.with();
+        MutableStack<Integer> result = MutableStack.empty();
         integers.forEach(Procedures.cast(result::push));
         assertEquals(this.newWith(1, 2, 2, 3, 3, 3), result);
     }
@@ -65,7 +64,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     default void RichIterable_tap()
     {
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
-        MutableStack<Integer> result = Stacks.mutable.with();
+        MutableStack<Integer> result = MutableStack.empty();
         iterable.tap(result::push).forEach(Procedures.noop());
         assertEquals(this.newWith(1, 2, 2, 3, 3, 3), result);
 
@@ -76,7 +75,7 @@ public interface StackIterableTestCase extends OrderedIterableWithDuplicatesTest
     default void InternalIterable_forEachWith()
     {
         RichIterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
-        MutableStack<Integer> result = Stacks.mutable.with();
+        MutableStack<Integer> result = MutableStack.empty();
         iterable.forEachWith((argument1, argument2) -> result.push(argument1 + argument2), 10);
         assertEquals(this.getExpectedFiltered(11, 12, 12, 13, 13, 13), result);
     }

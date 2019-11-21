@@ -97,7 +97,7 @@ public class MutableSortedMapFactoryImpl implements MutableSortedMapFactory
     {
         if (comparator == null)
         {
-            return this.of();
+            return this.empty();
         }
         return TreeSortedMap.newMap(comparator);
     }

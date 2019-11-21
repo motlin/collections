@@ -36,7 +36,6 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.Bags;
-import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -100,7 +99,7 @@ public interface MutableBag<T>
     @Override
     default MutableSet<T> selectUnique()
     {
-        MutableSet<T> result = Sets.mutable.empty();
+        MutableSet<T> result = MutableSet.empty();
         this.forEachWithOccurrences((each, occurrences) ->
         {
             if (occurrences == 1)

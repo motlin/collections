@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.set.mutable;
 
-import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -24,6 +24,6 @@ public class UnmodifiableMutableSetSerializationTest
                         + "bm1vZGlmaWFibGVDb2xsZWN0aW9uU2VyaWFsaXphdGlvblByb3h5AAAAAAAAAAEMAAB4cHNyADNv\n"
                         + "cmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLnNldC5tdXRhYmxlLlVuaWZpZWRTZXQAAAAAAAAA\n"
                         + "AQwAAHhwdwgAAAAAP0AAAHh4",
-                UnmodifiableMutableSet.of(Sets.mutable.of()));
+                UnmodifiableMutableSet.of(MutableSet.empty()));
     }
 }

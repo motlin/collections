@@ -53,7 +53,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableCollectionSerializationProxy;
-import org.eclipse.collections.impl.factory.Lists;
 
 /**
  * An unmodifiable view of a SortedBag.
@@ -217,7 +216,7 @@ public class UnmodifiableSortedBag<T>
     @Override
     public <V> MutableList<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        return this.getSortedBag().collectWithOccurrences(function, Lists.mutable.empty());
+        return this.getSortedBag().collectWithOccurrences(function, MutableList.empty());
     }
 
     /**

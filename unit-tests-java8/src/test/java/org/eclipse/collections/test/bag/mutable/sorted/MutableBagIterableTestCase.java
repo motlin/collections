@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.test.bag.mutable.sorted;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBagIterable;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.test.collection.mutable.MutableCollectionTestCase;
 import org.junit.Test;
@@ -46,9 +46,9 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     {
         MutableBagIterable<Integer> mutableBag = this.newWith(1, 2, 2, 3, 3, 3);
         assertEquals(4, mutableBag.addOccurrences(4, 4));
-        assertEquals(Bags.immutable.with(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
+        assertEquals(ImmutableBag.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
         assertEquals(3, mutableBag.addOccurrences(1, 2));
-        assertEquals(Bags.immutable.with(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
+        assertEquals(ImmutableBag.of(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4), mutableBag);
     }
 
     @Test
@@ -56,12 +56,12 @@ public interface MutableBagIterableTestCase extends MutableCollectionTestCase
     {
         MutableBagIterable<Integer> mutableBag = this.newWith(1, 2, 2, 3, 3, 3);
         assertFalse(mutableBag.removeOccurrences(4, 4));
-        assertEquals(Bags.immutable.with(1, 2, 2, 3, 3, 3), mutableBag);
+        assertEquals(ImmutableBag.of(1, 2, 2, 3, 3, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(1, 2));
-        assertEquals(Bags.immutable.with(2, 2, 3, 3, 3), mutableBag);
+        assertEquals(ImmutableBag.of(2, 2, 3, 3, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(3, 2));
-        assertEquals(Bags.immutable.with(2, 2, 3), mutableBag);
+        assertEquals(ImmutableBag.of(2, 2, 3), mutableBag);
         assertTrue(mutableBag.removeOccurrences(2, 1));
-        assertEquals(Bags.immutable.with(2, 3), mutableBag);
+        assertEquals(ImmutableBag.of(2, 3), mutableBag);
     }
 }

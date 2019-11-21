@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.lazy.parallel.set;
 
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.junit.Test;
 
@@ -27,24 +27,24 @@ public class MemoryEfficientMutableSetParallelSetIterableTest extends ParallelUn
     @Override
     protected ParallelUnsortedSetIterable<Integer> newWith(Integer... littleElements)
     {
-        return Sets.fixedSize.withAll(ArrayAdapter.adapt(littleElements)).asParallel(this.executorService, this.batchSize);
+        return FixedSizeSet.ofAll(ArrayAdapter.adapt(littleElements)).asParallel(this.executorService, this.batchSize);
     }
 
     @Override
     protected MutableSet<Integer> getExpectedWith(Integer... littleElements)
     {
-        return Sets.fixedSize.withAll(ArrayAdapter.adapt(littleElements));
+        return FixedSizeSet.ofAll(ArrayAdapter.adapt(littleElements));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void asParallel_small_batch()
     {
-        Sets.fixedSize.with(1, 2, 3, 4).asParallel(this.executorService, 0);
+        FixedSizeSet.of(1, 2, 3, 4).asParallel(this.executorService, 0);
     }
 
     @Test(expected = NullPointerException.class)
     public void asParallel_null_executorService()
     {
-        Sets.fixedSize.with(1, 2, 3, 4).asParallel(null, 2);
+        FixedSizeSet.of(1, 2, 3, 4).asParallel(null, 2);
     }
 }

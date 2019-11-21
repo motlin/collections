@@ -14,10 +14,10 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bimap.BiMap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.test.bag.TransformsToBagTrait;
 import org.eclipse.collections.test.set.UnsortedSetLikeTestTrait;
 import org.junit.Assert;
@@ -45,9 +45,9 @@ public interface UnsortedBiMapTestCase extends BiMapTestCase, TransformsToBagTra
         assertThat(
                 valuesSet,
                 isOneOf(
-                        Sets.immutable.with(3, 2),
-                        Sets.immutable.with(3, 1),
-                        Sets.immutable.with(2, 1)));
+                        ImmutableSet.of(3, 2),
+                        ImmutableSet.of(3, 1),
+                        ImmutableSet.of(2, 1)));
     }
 
     @Override
@@ -62,8 +62,8 @@ public interface UnsortedBiMapTestCase extends BiMapTestCase, TransformsToBagTra
         Assert.assertTrue(string, matcher.matches());
 
         assertEquals(
-                Bags.immutable.with("1", "2", "3"),
-                Bags.immutable.with(
+                ImmutableBag.of("1", "2", "3"),
+                ImmutableBag.of(
                         matcher.group(2),
                         matcher.group(4),
                         matcher.group(6)));

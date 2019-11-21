@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.map.sorted.mutable;
 
-import org.eclipse.collections.impl.factory.SortedMaps;
+import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -28,6 +28,6 @@ public class UnmodifiableTreeMapSerializationTest
                         + "AUwACGRlbGVnYXRldAAPTGphdmEvdXRpbC9NYXA7eHBzcgA9b3JnLmVjbGlwc2UuY29sbGVjdGlv\n"
                         + "bnMuaW1wbC5tYXAuc29ydGVkLm11dGFibGUuVHJlZVNvcnRlZE1hcAAAAAAAAAABDAAAeHBwdwQA\n"
                         + "AAAAeA==",
-                UnmodifiableTreeMap.of(SortedMaps.mutable.of()));
+                UnmodifiableTreeMap.of(MutableSortedMap.of()));
     }
 }

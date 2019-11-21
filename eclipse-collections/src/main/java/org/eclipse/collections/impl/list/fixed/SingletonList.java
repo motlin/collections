@@ -34,7 +34,7 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 
 /**
  * This class is a memory efficient list with one element. Unlike Collections.singletonList(), it can be sorted. It is
- * normally created by calling Lists.fixedSize.of(one).
+ * normally created by calling FixedSizeList.of(one).
  */
 final class SingletonList<T>
         extends AbstractMemoryEfficientMutableList<T>

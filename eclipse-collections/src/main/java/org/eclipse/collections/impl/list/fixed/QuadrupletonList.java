@@ -22,7 +22,7 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.block.factory.Comparators;
 
 /**
- * This is a four element memory efficient List which is created by calling Lists.fixedSize.of(one, two, three, four).
+ * This is a four element memory efficient List which is created by calling FixedSizeList.of(one, two, three, four).
  */
 final class QuadrupletonList<T>
         extends AbstractMemoryEfficientMutableList<T>

@@ -61,7 +61,6 @@ import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
@@ -440,7 +439,7 @@ abstract class AbstractMutableBiMap<K, V> extends AbstractBiMap<K, V> implements
     @Override
     public ImmutableBiMap<K, V> toImmutable()
     {
-        return BiMaps.immutable.withAll(this.delegate);
+        return ImmutableBiMap.ofAll(this.delegate);
     }
 
     @Override

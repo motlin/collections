@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.block.factory;
 import java.io.IOException;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.ListIterate;
@@ -240,11 +240,11 @@ public class Predicates2Test
     @Test
     public void in()
     {
-        MutableList<String> list1 = Lists.fixedSize.of("1", "3");
+        MutableList<String> list1 = FixedSizeList.of("1", "3");
         Assert.assertTrue(Predicates2.in().accept("1", list1));
         Assert.assertFalse(Predicates2.in().accept("2", list1));
         Assert.assertNotNull(Predicates2.in().toString());
-        MutableList<String> list2 = Lists.fixedSize.of("1", "2");
+        MutableList<String> list2 = FixedSizeList.of("1", "2");
         MutableList<String> newList = ListIterate.selectWith(list2, Predicates2.in(), list1);
         Assert.assertEquals(FastList.newListWith("1"), newList);
     }
@@ -252,10 +252,10 @@ public class Predicates2Test
     @Test
     public void attributeIn()
     {
-        MutableList<String> upperList = Lists.fixedSize.of("A", "B");
+        MutableList<String> upperList = FixedSizeList.of("A", "B");
         Assert.assertTrue(Predicates2.attributeIn(StringFunctions.toUpperCase()).accept("a", upperList));
         Assert.assertFalse(Predicates2.attributeIn(StringFunctions.toUpperCase()).accept("c", upperList));
-        MutableList<String> lowerList = Lists.fixedSize.of("a", "c");
+        MutableList<String> lowerList = FixedSizeList.of("a", "c");
         MutableList<String> newList =
                 ListIterate.selectWith(lowerList, Predicates2.attributeIn(StringFunctions.toUpperCase()), upperList);
         Assert.assertEquals(FastList.newListWith("a"), newList);
@@ -264,11 +264,11 @@ public class Predicates2Test
     @Test
     public void attributeIn_MultiTypes()
     {
-        MutableList<String> stringInts = Lists.fixedSize.of("1", "2");
+        MutableList<String> stringInts = FixedSizeList.of("1", "2");
         Assert.assertTrue(Predicates2.attributeIn(Functions.getToString()).accept(1, stringInts));
         Assert.assertFalse(Predicates2.attributeIn(Functions.getToString()).accept(3, stringInts));
         Assert.assertFalse(Predicates2.attributeIn(Functions.getToString()).accept(3, stringInts));
-        MutableList<Integer> intList = Lists.fixedSize.of(1, 3);
+        MutableList<Integer> intList = FixedSizeList.of(1, 3);
         MutableList<Integer> newList =
                 ListIterate.selectWith(intList, Predicates2.attributeIn(Functions.getToString()), stringInts);
         Assert.assertEquals(FastList.newListWith(1), newList);
@@ -277,11 +277,11 @@ public class Predicates2Test
     @Test
     public void notIn()
     {
-        MutableList<String> odds = Lists.fixedSize.of("1", "3");
+        MutableList<String> odds = FixedSizeList.of("1", "3");
         Assert.assertFalse(Predicates2.notIn().accept("1", odds));
         Assert.assertTrue(Predicates2.notIn().accept("2", odds));
         Assert.assertNotNull(Predicates2.notIn().toString());
-        MutableList<String> list = Lists.fixedSize.of("1", "2");
+        MutableList<String> list = FixedSizeList.of("1", "2");
         MutableList<String> newList = ListIterate.selectWith(list, Predicates2.notIn(), odds);
         Assert.assertEquals(FastList.newListWith("2"), newList);
     }
@@ -290,10 +290,10 @@ public class Predicates2Test
     public void attributeNotIn()
     {
         Function<String, String> function = StringFunctions.toLowerCase();
-        MutableList<String> lowerList = Lists.fixedSize.of("a", "b");
+        MutableList<String> lowerList = FixedSizeList.of("a", "b");
         Assert.assertFalse(Predicates2.attributeNotIn(function).accept("A", lowerList));
         Assert.assertTrue(Predicates2.attributeNotIn(function).accept("C", lowerList));
-        MutableList<String> upperList = Lists.fixedSize.of("A", "C");
+        MutableList<String> upperList = FixedSizeList.of("A", "C");
         MutableList<String> newList = ListIterate.rejectWith(upperList, Predicates2.attributeNotIn(function), lowerList);
         Assert.assertEquals(FastList.newListWith("A"), newList);
     }

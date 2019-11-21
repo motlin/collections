@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.Interval;
 import org.junit.After;
 import org.junit.Before;
@@ -37,8 +36,8 @@ public class SortedSetIterationTest
     private static final int SIZE = 1_000_000;
     private static final int BATCH_SIZE = 10_000;
 
-    private final MutableSortedSet<Integer> ecMutable = SortedSets.mutable.withAll(Interval.zeroTo(SIZE));
-    private final ImmutableSortedSet<Integer> ecImmutable = SortedSets.immutable.withAll(Interval.zeroTo(SIZE));
+    private final MutableSortedSet<Integer> ecMutable = MutableSortedSet.ofAll(Interval.zeroTo(SIZE));
+    private final ImmutableSortedSet<Integer> ecImmutable = ImmutableSortedSet.ofAll(Interval.zeroTo(SIZE));
 
     private ExecutorService executorService;
 

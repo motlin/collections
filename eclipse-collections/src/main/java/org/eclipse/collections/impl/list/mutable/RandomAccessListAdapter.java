@@ -54,7 +54,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProced
 import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.CharArrayList;
@@ -116,7 +115,7 @@ public final class RandomAccessListAdapter<T>
     @Override
     public ImmutableList<T> toImmutable()
     {
-        return Lists.immutable.withAll(this.delegate);
+        return ImmutableList.ofAll(this.delegate);
     }
 
     @Override
@@ -144,7 +143,7 @@ public final class RandomAccessListAdapter<T>
     @Deprecated
     public MutableList<T> newEmpty()
     {
-        return Lists.mutable.empty();
+        return MutableList.empty();
     }
 
     @Override

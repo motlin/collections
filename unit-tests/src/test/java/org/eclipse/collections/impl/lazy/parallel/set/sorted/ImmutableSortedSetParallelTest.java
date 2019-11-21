@@ -10,9 +10,9 @@
 
 package org.eclipse.collections.impl.lazy.parallel.set.sorted;
 
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.ParallelSortedSetIterable;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.junit.Test;
 
 public class ImmutableSortedSetParallelTest extends ParallelSortedSetIterableTestCase
@@ -26,18 +26,18 @@ public class ImmutableSortedSetParallelTest extends ParallelSortedSetIterableTes
     @Override
     protected ParallelSortedSetIterable<Integer> newWith(Integer... littleElements)
     {
-        return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), littleElements).asParallel(this.executorService, this.batchSize);
+        return ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), littleElements).asParallel(this.executorService, this.batchSize);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void asParallel_small_batch()
     {
-        SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(this.executorService, 0);
+        ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(this.executorService, 0);
     }
 
     @Test(expected = NullPointerException.class)
     public void asParallel_null_executorService()
     {
-        SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(null, 2);
+        ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), 4, 3, 2, 1).asParallel(null, 2);
     }
 }

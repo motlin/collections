@@ -54,7 +54,6 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableCollectionSerializationProxy;
-import org.eclipse.collections.impl.factory.SortedSets;
 
 /**
  * An unmodifiable view of a SortedSet.
@@ -104,7 +103,7 @@ public class UnmodifiableSortedSet<T>
     @Override
     public ImmutableSortedSet<T> toImmutable()
     {
-        return SortedSets.immutable.withSortedSet(this.getSortedSet());
+        return ImmutableSortedSet.ofSortedSet(this.getSortedSet());
     }
 
     @Override

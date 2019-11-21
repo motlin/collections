@@ -82,7 +82,6 @@ import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollection;
-import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -321,7 +320,7 @@ public class UnmodifiableTreeMap<K, V>
     @Override
     public ImmutableSortedMap<K, V> toImmutable()
     {
-        return SortedMaps.immutable.withSortedMap(this);
+        return ImmutableSortedMap.ofSortedMap(this);
     }
 
     @Override

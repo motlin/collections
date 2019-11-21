@@ -25,14 +25,11 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 /**
  * JUnit test for {@link UnmodifiableMutableList}.
@@ -48,7 +45,7 @@ public class UnmodifiableMutableListTest
     @Before
     public void setUp()
     {
-        this.mutableList = Lists.mutable.of(METALLICA, "Bon Jovi", "Europe", "Scorpions");
+        this.mutableList = MutableList.of(METALLICA, "Bon Jovi", "Europe", "Scorpions");
         this.unmodifiableList = UnmodifiableMutableList.of(this.mutableList);
     }
 
@@ -185,7 +182,7 @@ public class UnmodifiableMutableListTest
     {
         Verify.assertThrows(
                 UnsupportedOperationException.class,
-                () -> this.unmodifiableList.addAll(0, Lists.mutable.of("Madonna")));
+                () -> this.unmodifiableList.addAll(0, MutableList.of("Madonna")));
     }
 
     @Test
@@ -222,7 +219,7 @@ public class UnmodifiableMutableListTest
     public void subList()
     {
         MutableList<String> subList = this.unmodifiableList.subList(1, 3);
-        Assert.assertEquals(Lists.immutable.of("Bon Jovi", "Europe"), subList);
+        Assert.assertEquals(ImmutableList.of("Bon Jovi", "Europe"), subList);
         Verify.assertThrows(UnsupportedOperationException.class, subList::clear);
     }
 
@@ -273,28 +270,28 @@ public class UnmodifiableMutableListTest
     @Test
     public void toReversed()
     {
-        Assert.assertEquals(Lists.mutable.ofAll(this.unmodifiableList).toReversed(), this.unmodifiableList.toReversed());
+        Assert.assertEquals(MutableList.ofAll(this.unmodifiableList).toReversed(), this.unmodifiableList.toReversed());
     }
 
     @Test
     public void selectInstancesOf()
     {
         MutableList<Number> numbers = UnmodifiableMutableList.of(FastList.newListWith(1, 2.0, 3, 4.0, 5));
-        Assert.assertEquals(iList(1, 3, 5), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iList(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
+        Assert.assertEquals(ImmutableList.of(1, 3, 5), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(ImmutableList.of(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
     }
 
     @Test
     public void distinct()
     {
-        MutableList<Integer> list = UnmodifiableMutableList.of(Lists.mutable.with(3, 1, 2, 2, 1, 3));
+        MutableList<Integer> list = UnmodifiableMutableList.of(MutableList.of(3, 1, 2, 2, 1, 3));
         Verify.assertListsEqual(FastList.newListWith(3, 1, 2), list.distinct());
     }
 
     @Test
     public void distinctWithHashingStrategy()
     {
-        MutableList<String> letters = UnmodifiableMutableList.of(Lists.mutable.with("a", "A", "b", "C", "b", "D", "E", "e"));
+        MutableList<String> letters = UnmodifiableMutableList.of(MutableList.of("a", "A", "b", "C", "b", "D", "E", "e"));
         MutableList<String> expectedLetters = UnmodifiableMutableList.of(FastList.newListWith("a", "b", "C", "D", "E"));
         Verify.assertListsEqual(letters.distinct(HashingStrategies.fromFunction(String::toLowerCase)), expectedLetters);
     }
@@ -305,8 +302,8 @@ public class UnmodifiableMutableListTest
     @Test
     public void distinctBy()
     {
-        MutableList<String> letters = UnmodifiableMutableList.of(Lists.mutable.with("a", "A", "b", "C", "b", "D", "E", "e"));
-        MutableList<String> expectedLetters = UnmodifiableMutableList.of(Lists.mutable.with("a", "b", "C", "D", "E"));
+        MutableList<String> letters = UnmodifiableMutableList.of(MutableList.of("a", "A", "b", "C", "b", "D", "E", "e"));
+        MutableList<String> expectedLetters = UnmodifiableMutableList.of(MutableList.of("a", "b", "C", "D", "E"));
         Verify.assertListsEqual(letters.distinctBy(String::toLowerCase), expectedLetters);
     }
 
@@ -314,12 +311,12 @@ public class UnmodifiableMutableListTest
     public void take()
     {
         UnmodifiableMutableList<Integer> unmodifiableList = UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5));
-        Assert.assertEquals(iList(), unmodifiableList.take(0));
-        Assert.assertEquals(iList(1, 2, 3), unmodifiableList.take(3));
-        Assert.assertEquals(iList(1, 2, 3, 4), unmodifiableList.take(unmodifiableList.size() - 1));
-        Assert.assertEquals(iList(1, 2, 3, 4, 5), unmodifiableList.take(unmodifiableList.size()));
-        Assert.assertEquals(iList(1, 2, 3, 4, 5), unmodifiableList.take(10));
-        Assert.assertEquals(iList(1, 2, 3, 4, 5), unmodifiableList.take(Integer.MAX_VALUE));
+        Assert.assertEquals(ImmutableList.empty(), unmodifiableList.take(0));
+        Assert.assertEquals(ImmutableList.of(1, 2, 3), unmodifiableList.take(3));
+        Assert.assertEquals(ImmutableList.of(1, 2, 3, 4), unmodifiableList.take(unmodifiableList.size() - 1));
+        Assert.assertEquals(ImmutableList.of(1, 2, 3, 4, 5), unmodifiableList.take(unmodifiableList.size()));
+        Assert.assertEquals(ImmutableList.of(1, 2, 3, 4, 5), unmodifiableList.take(10));
+        Assert.assertEquals(ImmutableList.of(1, 2, 3, 4, 5), unmodifiableList.take(Integer.MAX_VALUE));
         Assert.assertNotSame(unmodifiableList, unmodifiableList.take(Integer.MAX_VALUE));
     }
 
@@ -333,7 +330,7 @@ public class UnmodifiableMutableListTest
     public void takeWhile()
     {
         Assert.assertEquals(
-                iList(1, 2, 3),
+                ImmutableList.of(1, 2, 3),
                 UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5)).takeWhile(Predicates.lessThan(4)));
     }
 
@@ -341,13 +338,13 @@ public class UnmodifiableMutableListTest
     public void drop()
     {
         UnmodifiableMutableList<Integer> unmodifiableList = UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5));
-        Assert.assertEquals(iList(1, 2, 3, 4, 5), unmodifiableList.drop(0));
+        Assert.assertEquals(ImmutableList.of(1, 2, 3, 4, 5), unmodifiableList.drop(0));
         Assert.assertNotSame(unmodifiableList, unmodifiableList.drop(0));
-        Assert.assertEquals(iList(4, 5), unmodifiableList.drop(3));
-        Assert.assertEquals(iList(5), unmodifiableList.drop(unmodifiableList.size() - 1));
-        Assert.assertEquals(iList(), unmodifiableList.drop(unmodifiableList.size()));
-        Assert.assertEquals(iList(), unmodifiableList.drop(10));
-        Assert.assertEquals(iList(), unmodifiableList.drop(Integer.MAX_VALUE));
+        Assert.assertEquals(ImmutableList.of(4, 5), unmodifiableList.drop(3));
+        Assert.assertEquals(ImmutableList.of(5), unmodifiableList.drop(unmodifiableList.size() - 1));
+        Assert.assertEquals(ImmutableList.empty(), unmodifiableList.drop(unmodifiableList.size()));
+        Assert.assertEquals(ImmutableList.empty(), unmodifiableList.drop(10));
+        Assert.assertEquals(ImmutableList.empty(), unmodifiableList.drop(Integer.MAX_VALUE));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -360,7 +357,7 @@ public class UnmodifiableMutableListTest
     public void dropWhile()
     {
         Assert.assertEquals(
-                iList(4, 5),
+                ImmutableList.of(4, 5),
                 UnmodifiableMutableList.of(FastList.newListWith(1, 2, 3, 4, 5)).dropWhile(Predicates.lessThan(4)));
     }
 
@@ -371,8 +368,8 @@ public class UnmodifiableMutableListTest
         MutableList<Integer> selected = partition.getSelected();
         MutableList<Integer> rejected = partition.getRejected();
 
-        Assert.assertEquals(iList(1, 2, 3), selected);
-        Assert.assertEquals(iList(4, 5), rejected);
+        Assert.assertEquals(ImmutableList.of(1, 2, 3), selected);
+        Assert.assertEquals(ImmutableList.of(4, 5), rejected);
     }
 
     @Test

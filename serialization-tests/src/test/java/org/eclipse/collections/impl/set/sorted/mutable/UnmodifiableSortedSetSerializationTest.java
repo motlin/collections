@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.set.sorted.mutable;
 
-import org.eclipse.collections.impl.factory.SortedSets;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -24,6 +24,6 @@ public class UnmodifiableSortedSetSerializationTest
                         + "bm1vZGlmaWFibGVDb2xsZWN0aW9uU2VyaWFsaXphdGlvblByb3h5AAAAAAAAAAEMAAB4cHNyAD1v\n"
                         + "cmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLnNldC5zb3J0ZWQubXV0YWJsZS5UcmVlU29ydGVk\n"
                         + "U2V0AAAAAAAAAAEMAAB4cHB3BAAAAAB4eA==",
-                UnmodifiableSortedSet.of(SortedSets.mutable.of()));
+                UnmodifiableSortedSet.of(MutableSortedSet.of()));
     }
 }

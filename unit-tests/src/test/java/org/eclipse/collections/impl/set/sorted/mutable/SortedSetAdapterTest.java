@@ -22,7 +22,6 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -183,7 +182,7 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
     public void forEachWithIndex()
     {
         super.forEachWithIndex();
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableCollection<Integer> collection = this.newWith(Comparators.reverseNaturalOrder(), 1, 2, 3, 4);
         collection.forEachWithIndex((object, index) -> result.add(object));
         Verify.assertListsEqual(FastList.newListWith(4, 3, 2, 1), result);
@@ -216,7 +215,7 @@ public class SortedSetAdapterTest extends AbstractSortedSetTestCase
     {
         super.iterator();
         MutableCollection<Integer> objects = this.newWith(2, 3, 1, 4, 5);
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         Iterator<Integer> iterator = objects.iterator();
         for (int i = objects.size(); i > 0; i--)
         {

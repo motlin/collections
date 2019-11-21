@@ -14,13 +14,13 @@ import java.util.Iterator;
 import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -45,8 +45,8 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
         Assert.assertEquals(
-                Lists.mutable.with(3, 2, 1, 0),
-                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+                MutableList.of(3, 2, 1, 0),
+                pairs.collect(ObjectIntPair::getOne, MutableList.empty()));
     }
 
     /**
@@ -56,22 +56,22 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     default void OrderedIterable_collectWithIndexWithTarget()
     {
         RichIterable<ObjectIntPair<Integer>> pairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
-                .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+                .collectWithIndex(PrimitiveTuples::pair, MutableList.empty());
         Assert.assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
         Assert.assertEquals(
-                Lists.mutable.with(3, 2, 1, 0),
-                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+                MutableList.of(3, 2, 1, 0),
+                pairs.collect(ObjectIntPair::getOne, MutableList.empty()));
 
         RichIterable<ObjectIntPair<Integer>> setOfPairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
-                .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+                .collectWithIndex(PrimitiveTuples::pair, MutableList.empty());
         Assert.assertEquals(
                 IntSets.mutable.with(0, 1, 2, 3),
                 setOfPairs.collectInt(ObjectIntPair::getTwo, IntSets.mutable.empty()));
         Assert.assertEquals(
-                Sets.mutable.with(3, 2, 1, 0),
-                setOfPairs.collect(ObjectIntPair::getOne, Sets.mutable.empty()));
+                MutableSet.of(3, 2, 1, 0),
+                setOfPairs.collect(ObjectIntPair::getOne, MutableSet.empty()));
     }
 
     @Test
@@ -168,7 +168,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         Assert.assertEquals(
-                Lists.immutable.with(
+                ImmutableList.of(
                         Tuples.pair(4, 0),
                         Tuples.pair(4, 1),
                         Tuples.pair(4, 2),
@@ -186,10 +186,10 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     default void OrderedIterable_zipWithIndex_target()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
-        MutableList<Pair<Integer, Integer>> target = Lists.mutable.empty();
+        MutableList<Pair<Integer, Integer>> target = MutableList.empty();
         MutableList<Pair<Integer, Integer>> result = iterable.zipWithIndex(target);
         Assert.assertEquals(
-                Lists.immutable.with(
+                ImmutableList.of(
                         Tuples.pair(4, 0),
                         Tuples.pair(4, 1),
                         Tuples.pair(4, 2),

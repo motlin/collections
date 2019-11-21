@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.bimap.immutable;
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.multimap.set.ImmutableSetMultimap;
 import org.eclipse.collections.impl.IntegerWithCast;
-import org.eclipse.collections.impl.factory.BiMaps;
 import org.eclipse.collections.impl.map.MapIterableTestCase;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -25,31 +24,31 @@ public class ImmutableHashBiMap2Test extends MapIterableTestCase
     @Override
     protected <K, V> ImmutableBiMap<K, V> newMap()
     {
-        return BiMaps.immutable.empty();
+        return ImmutableBiMap.empty();
     }
 
     @Override
     protected <K, V> ImmutableBiMap<K, V> newMapWithKeyValue(K key1, V value1)
     {
-        return BiMaps.immutable.with(key1, value1);
+        return ImmutableBiMap.of(key1, value1);
     }
 
     @Override
     protected <K, V> ImmutableBiMap<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2)
     {
-        return BiMaps.immutable.with(key1, value1, key2, value2);
+        return ImmutableBiMap.of(key1, value1, key2, value2);
     }
 
     @Override
     protected <K, V> ImmutableBiMap<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2, K key3, V value3)
     {
-        return BiMaps.immutable.with(key1, value1, key2, value2, key3, value3);
+        return ImmutableBiMap.of(key1, value1, key2, value2, key3, value3);
     }
 
     @Override
     protected <K, V> ImmutableBiMap<K, V> newMapWithKeysValues(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
-        return BiMaps.immutable.with(key1, value1, key2, value2, key3, value3, key4, value4);
+        return ImmutableBiMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
     }
 
     @Override

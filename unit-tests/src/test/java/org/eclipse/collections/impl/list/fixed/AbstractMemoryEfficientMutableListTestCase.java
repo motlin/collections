@@ -24,7 +24,6 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
@@ -45,7 +44,7 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
 
     protected MutableList<String> classUnderTest()
     {
-        return Lists.fixedSize.ofAll(this.getNStrings());
+        return FixedSizeList.ofAll(this.getNStrings());
     }
 
     private MutableList<String> getNStrings()
@@ -68,7 +67,7 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
     {
         this.list.replaceAll(s -> "");
         Assert.assertEquals(
-                Lists.mutable.withNValues(this.getSize(), () -> ""),
+                MutableList.withNValues(this.getSize(), () -> ""),
                 this.list);
     }
 
@@ -289,21 +288,21 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
     public void addAll()
     {
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> this.classUnderTest().addAll(Lists.mutable.empty()));
+                () -> this.classUnderTest().addAll(MutableList.empty()));
     }
 
     @Test
     public void addAllAtIndex()
     {
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> this.classUnderTest().addAll(0, Lists.mutable.empty()));
+                () -> this.classUnderTest().addAll(0, MutableList.empty()));
     }
 
     @Test
     public void addAllIterable()
     {
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> this.classUnderTest().addAllIterable(Lists.mutable.empty()));
+                () -> this.classUnderTest().addAllIterable(MutableList.empty()));
     }
 
     @Test
@@ -322,28 +321,28 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
     public void removeAll()
     {
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> this.classUnderTest().removeAll(Lists.fixedSize.empty()));
+                () -> this.classUnderTest().removeAll(FixedSizeList.empty()));
     }
 
     @Test
     public void removeAllIterable()
     {
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> this.classUnderTest().removeAllIterable(Lists.fixedSize.empty()));
+                () -> this.classUnderTest().removeAllIterable(FixedSizeList.empty()));
     }
 
     @Test
     public void retainAll()
     {
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> this.classUnderTest().retainAll(Lists.fixedSize.empty()));
+                () -> this.classUnderTest().retainAll(FixedSizeList.empty()));
     }
 
     @Test
     public void retainAllIterable()
     {
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> this.classUnderTest().retainAllIterable(Lists.fixedSize.empty()));
+                () -> this.classUnderTest().retainAllIterable(FixedSizeList.empty()));
     }
 
     @Test
@@ -359,23 +358,23 @@ public abstract class AbstractMemoryEfficientMutableListTestCase
         Verify.assertThrows(UnsupportedOperationException.class, () -> subList.add(""));
         Verify.assertThrows(UnsupportedOperationException.class, () -> subList.add(0, ""));
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> subList.addAll(Lists.mutable.empty()));
+                () -> subList.addAll(MutableList.empty()));
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> subList.addAllIterable(Lists.mutable.empty()));
+                () -> subList.addAllIterable(MutableList.empty()));
         Verify.assertThrows(UnsupportedOperationException.class, () -> subList.remove(0));
         Verify.assertThrows(UnsupportedOperationException.class, () -> subList.remove(null));
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> subList.removeAll(Lists.fixedSize.empty()));
+                () -> subList.removeAll(FixedSizeList.empty()));
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> subList.removeAllIterable(Lists.fixedSize.empty()));
+                () -> subList.removeAllIterable(FixedSizeList.empty()));
         Verify.assertThrows(UnsupportedOperationException.class,
                 () -> subList.removeIf(each -> true));
         Verify.assertThrows(UnsupportedOperationException.class,
                 () -> subList.removeIfWith((argument1, argument2) -> true, null));
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> subList.retainAll(Lists.fixedSize.empty()));
+                () -> subList.retainAll(FixedSizeList.empty()));
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> subList.retainAllIterable(Lists.fixedSize.empty()));
+                () -> subList.retainAllIterable(FixedSizeList.empty()));
         Verify.assertThrows(UnsupportedOperationException.class, subList::clear);
     }
 }

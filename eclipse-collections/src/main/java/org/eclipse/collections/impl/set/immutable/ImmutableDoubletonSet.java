@@ -20,7 +20,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Sets;
 
 final class ImmutableDoubletonSet<T>
         extends AbstractImmutableSet<T>
@@ -72,7 +71,7 @@ final class ImmutableDoubletonSet<T>
     {
         if (!this.contains(element))
         {
-            return Sets.immutable.with(this.element1, this.element2, element);
+            return ImmutableSet.of(this.element1, this.element2, element);
         }
         return this;
     }
@@ -83,8 +82,8 @@ final class ImmutableDoubletonSet<T>
         if (this.contains(element))
         {
             return Comparators.nullSafeEquals(element, this.element1)
-                    ? Sets.immutable.with(this.element2)
-                    : Sets.immutable.with(this.element1);
+                    ? ImmutableSet.of(this.element2)
+                    : ImmutableSet.of(this.element1);
         }
         return this;
     }

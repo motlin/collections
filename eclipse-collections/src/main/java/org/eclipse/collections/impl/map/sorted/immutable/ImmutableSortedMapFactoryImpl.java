@@ -98,7 +98,7 @@ public class ImmutableSortedMapFactoryImpl implements ImmutableSortedMapFactory
     {
         if (comparator == null)
         {
-            return this.of();
+            return this.empty();
         }
         return new ImmutableEmptySortedMap<>(comparator);
     }

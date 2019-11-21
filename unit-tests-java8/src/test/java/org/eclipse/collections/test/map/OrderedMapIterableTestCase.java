@@ -10,11 +10,11 @@
 
 package org.eclipse.collections.test.map;
 
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.OrderedMap;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.OrderedIterableTestCase;
 import org.eclipse.collections.test.list.TransformsToListTrait;
 import org.junit.Assert;
@@ -34,13 +34,13 @@ public interface OrderedMapIterableTestCase extends MapIterableTestCase, Ordered
     @Override
     default <T> ListIterable<T> getExpectedFiltered(T... elements)
     {
-        return Lists.immutable.with(elements);
+        return ImmutableList.of(elements);
     }
 
     @Override
     default <T> MutableList<T> newMutableForFilter(T... elements)
     {
-        return Lists.mutable.with(elements);
+        return MutableList.of(elements);
     }
 
     @Override

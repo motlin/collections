@@ -147,7 +147,7 @@ public interface MutableList<T>
     @Override
     default <V> MutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, Lists.mutable.withInitialCapacity(this.size()));
+        return this.collect(function, MutableList.ofInitialCapacity(this.size()));
     }
 
     /**
@@ -187,19 +187,19 @@ public interface MutableList<T>
     @Override
     default <P, V> MutableList<V> collectWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, Lists.mutable.withInitialCapacity(this.size()));
+        return this.collectWith(function, parameter, MutableList.ofInitialCapacity(this.size()));
     }
 
     @Override
     default <V> MutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return this.collectIf(predicate, function, Lists.mutable.empty());
+        return this.collectIf(predicate, function, MutableList.empty());
     }
 
     @Override
     default <V> MutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.flatCollect(function, Lists.mutable.withInitialCapacity(this.size()));
+        return this.flatCollect(function, MutableList.ofInitialCapacity(this.size()));
     }
 
     /**
@@ -320,7 +320,7 @@ public interface MutableList<T>
     @Override
     default ImmutableList<T> toImmutable()
     {
-        return Lists.immutable.withAll(this);
+        return ImmutableList.ofAll(this);
     }
 
     @Override

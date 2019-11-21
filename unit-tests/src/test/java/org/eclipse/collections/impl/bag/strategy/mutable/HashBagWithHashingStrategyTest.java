@@ -12,12 +12,11 @@ package org.eclipse.collections.impl.bag.strategy.mutable;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.HashingStrategy;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.bag.mutable.MutableBagTestCase;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.test.domain.Person;
 import org.junit.Assert;
@@ -59,8 +58,8 @@ public class HashBagWithHashingStrategyTest extends MutableBagTestCase
     {
         Verify.assertThrows(IllegalArgumentException.class, () -> HashBagWithHashingStrategy.newBag(null));
         Verify.assertThrows(IllegalArgumentException.class, () -> HashBagWithHashingStrategy.newBag(null, 1));
-        Verify.assertThrows(IllegalArgumentException.class, () -> HashBagWithHashingStrategy.newBag(null, Bags.mutable.empty()));
-        Verify.assertThrows(IllegalArgumentException.class, () -> HashBagWithHashingStrategy.newBag(null, Lists.mutable.empty()));
+        Verify.assertThrows(IllegalArgumentException.class, () -> HashBagWithHashingStrategy.newBag(null, MutableBag.empty()));
+        Verify.assertThrows(IllegalArgumentException.class, () -> HashBagWithHashingStrategy.newBag(null, MutableList.empty()));
         Verify.assertThrows(IllegalArgumentException.class, () -> HashBagWithHashingStrategy.newBag(HashingStrategies.defaultStrategy(), -1));
     }
 
@@ -70,8 +69,8 @@ public class HashBagWithHashingStrategyTest extends MutableBagTestCase
     {
         super.removeAllIterable();
         MutableBag<Integer> objects = this.newWith(1, 2, 3);
-        Assert.assertTrue(objects.removeAllIterable(Bags.mutable.of(1, 2, 4)));
-        Assert.assertEquals(Bags.mutable.of(3), objects.toBag());
+        Assert.assertTrue(objects.removeAllIterable(MutableBag.of(1, 2, 4)));
+        Assert.assertEquals(MutableBag.of(3), objects.toBag());
     }
 
     @Override

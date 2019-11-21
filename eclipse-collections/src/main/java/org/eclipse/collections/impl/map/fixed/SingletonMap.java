@@ -23,15 +23,14 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.impl.tuple.Tuples;
 
@@ -99,7 +98,7 @@ final class SingletonMap<K, V>
     @Override
     public ImmutableMap<K, V> toImmutable()
     {
-        return Maps.immutable.with(this.key1, this.value1);
+        return ImmutableMap.of(this.key1, this.value1);
     }
 
     @Override
@@ -128,19 +127,19 @@ final class SingletonMap<K, V>
     @Override
     public Set<K> keySet()
     {
-        return Sets.fixedSize.of(this.key1);
+        return FixedSizeSet.of(this.key1);
     }
 
     @Override
     public Collection<V> values()
     {
-        return Lists.fixedSize.of(this.value1);
+        return FixedSizeList.of(this.value1);
     }
 
     @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
-        return Sets.fixedSize.of(new ImmutableEntry<>(this.key1, this.value1));
+        return FixedSizeSet.of(new ImmutableEntry<>(this.key1, this.value1));
     }
 
     @Override
@@ -169,7 +168,7 @@ final class SingletonMap<K, V>
     @Override
     public MutableMap<V, K> flipUniqueValues()
     {
-        return Maps.fixedSize.with(this.value1, this.key1);
+        return FixedSizeMap.of(this.value1, this.key1);
     }
 
     @Override
@@ -223,20 +222,20 @@ final class SingletonMap<K, V>
         {
             return this.clone();
         }
-        return Maps.fixedSize.of();
+        return FixedSizeMap.empty();
     }
 
     @Override
     public <R> FixedSizeMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return Maps.fixedSize.of(this.key1, function.value(this.key1, this.value1));
+        return FixedSizeMap.of(this.key1, function.value(this.key1, this.value1));
     }
 
     @Override
     public <K2, V2> FixedSizeMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         Pair<K2, V2> pair1 = function.value(this.key1, this.value1);
-        return Maps.fixedSize.of(pair1.getOne(), pair1.getTwo());
+        return FixedSizeMap.of(pair1.getOne(), pair1.getTwo());
     }
 
     @Override
@@ -244,7 +243,7 @@ final class SingletonMap<K, V>
     {
         if (predicate.accept(this.key1, this.value1))
         {
-            return Maps.fixedSize.of();
+            return FixedSizeMap.empty();
         }
         return this.clone();
     }

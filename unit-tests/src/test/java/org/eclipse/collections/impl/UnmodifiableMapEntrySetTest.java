@@ -14,14 +14,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.collections.api.collection.ImmutableCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollectionTestCase;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.set.mutable.SetAdapter;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
 import org.eclipse.collections.impl.set.mutable.primitive.ByteHashSet;
@@ -44,12 +43,12 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Override
     protected MutableSet<Map.Entry<String, String>> getCollection()
     {
-        return SetAdapter.adapt(new UnmodifiableMap<>(Maps.mutable.of("1", "1", "2", "2")).entrySet());
+        return SetAdapter.adapt(new UnmodifiableMap<>(MutableMap.of("1", "1", "2", "2")).entrySet());
     }
 
     private MutableSet<Map.Entry<String, String>> newCollection()
     {
-        return SetAdapter.adapt(new UnmodifiableMap<>(Maps.mutable.<String, String>of()).entrySet());
+        return SetAdapter.adapt(new UnmodifiableMap<>(MutableMap.<String, String>empty()).entrySet());
     }
 
     @Override
@@ -155,25 +154,25 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
 
     private <T> MutableSet<Map.Entry<T, T>> newWith(T one)
     {
-        MutableMap<T, T> map = Maps.mutable.of(one, one);
+        MutableMap<T, T> map = MutableMap.of(one, one);
         return SetAdapter.adapt(new UnmodifiableMap<>(map).entrySet());
     }
 
     private <T> MutableSet<Map.Entry<T, T>> newWith(T one, T two)
     {
-        MutableMap<T, T> map = Maps.mutable.of(one, one, two, two);
+        MutableMap<T, T> map = MutableMap.of(one, one, two, two);
         return SetAdapter.adapt(new UnmodifiableMap<>(map).entrySet());
     }
 
     private <T> MutableSet<Map.Entry<T, T>> newWith(T one, T two, T three)
     {
-        MutableMap<T, T> map = Maps.mutable.of(one, one, two, two, three, three);
+        MutableMap<T, T> map = MutableMap.of(one, one, two, two, three, three);
         return SetAdapter.adapt(new UnmodifiableMap<>(map).entrySet());
     }
 
     private <T> MutableSet<Map.Entry<T, T>> newWith(T... littleElements)
     {
-        MutableMap<T, T> map = Maps.mutable.of();
+        MutableMap<T, T> map = MutableMap.empty();
         for (int i = 0; i < littleElements.length; i++)
         {
             map.put(littleElements[i], littleElements[i]);
@@ -221,8 +220,8 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     public void containsAllIterable()
     {
         MutableSet<Map.Entry<Integer, Integer>> collection = this.newWith(1, 2, 3, 4);
-        Assert.assertTrue(collection.containsAllIterable(Lists.immutable.of(this.entry(1), this.entry(2))));
-        Assert.assertFalse(collection.containsAllIterable(Lists.immutable.of(this.entry(1), this.entry(5))));
+        Assert.assertTrue(collection.containsAllIterable(ImmutableList.of(this.entry(1), this.entry(2))));
+        Assert.assertFalse(collection.containsAllIterable(ImmutableList.of(this.entry(1), this.entry(5))));
     }
 
     @Test
@@ -236,7 +235,7 @@ public class UnmodifiableMapEntrySetTest extends UnmodifiableMutableCollectionTe
     @Test
     public void forEach()
     {
-        MutableList<Map.Entry<Integer, Integer>> result = Lists.mutable.of();
+        MutableList<Map.Entry<Integer, Integer>> result = MutableList.empty();
         MutableSet<Map.Entry<Integer, Integer>> collection = this.newWith(1, 2, 3, 4);
         collection.forEach(CollectionAddProcedure.on(result));
         Verify.assertSize(4, result);

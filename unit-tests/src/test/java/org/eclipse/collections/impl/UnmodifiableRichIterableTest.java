@@ -13,9 +13,9 @@ package org.eclipse.collections.impl;
 import java.util.Collections;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -39,13 +39,13 @@ public class UnmodifiableRichIterableTest extends AbstractRichIterableTestCase
     @Override
     protected <T> RichIterable<T> newWith(T... elements)
     {
-        return UnmodifiableRichIterable.of(Lists.mutable.of(elements));
+        return UnmodifiableRichIterable.of(MutableList.of(elements));
     }
 
     @Before
     public void setUp()
     {
-        this.mutableCollection = Lists.mutable.of(METALLICA, BON_JOVI, EUROPE, SCORPIONS);
+        this.mutableCollection = MutableList.of(METALLICA, BON_JOVI, EUROPE, SCORPIONS);
         this.unmodifiableCollection = UnmodifiableRichIterable.of(this.mutableCollection);
     }
 
@@ -86,13 +86,13 @@ public class UnmodifiableRichIterableTest extends AbstractRichIterableTestCase
                 this.unmodifiableCollection.toArray(EMPTY_STRING_ARRAY));
         Assert.assertEquals(this.mutableCollection.toList(), this.unmodifiableCollection.toList());
         Verify.assertListsEqual(
-                Lists.mutable.of(BON_JOVI, EUROPE, METALLICA, SCORPIONS),
+                MutableList.of(BON_JOVI, EUROPE, METALLICA, SCORPIONS),
                 this.unmodifiableCollection.toSortedList());
         Verify.assertListsEqual(
-                Lists.mutable.of(SCORPIONS, METALLICA, EUROPE, BON_JOVI),
+                MutableList.of(SCORPIONS, METALLICA, EUROPE, BON_JOVI),
                 this.unmodifiableCollection.toSortedList(Collections.reverseOrder()));
         Verify.assertListsEqual(
-                Lists.mutable.of(BON_JOVI, EUROPE, METALLICA, SCORPIONS),
+                MutableList.of(BON_JOVI, EUROPE, METALLICA, SCORPIONS),
                 this.unmodifiableCollection.toSortedListBy(Functions.getStringPassThru()));
         Verify.assertSize(4, this.unmodifiableCollection.toSet());
         Verify.assertSize(4, this.unmodifiableCollection.toMap(Functions.getStringPassThru(), Functions.getStringPassThru()));

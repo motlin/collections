@@ -18,7 +18,6 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
@@ -114,7 +113,7 @@ public class AnagramTest
     @Test
     public void anagramsWithMultimapForEachMultiValue()
     {
-        MutableList<RichIterable<String>> results = Lists.mutable.of();
+        MutableList<RichIterable<String>> results = MutableList.empty();
         this.getWords().groupBy(Alphagram::new)
                 .multiValuesView().forEach(Procedures.ifTrue(iterable -> iterable.size() >= SIZE_THRESHOLD, results::add));
         Procedure<String> procedure = Procedures.cast(LOGGER::info);
@@ -129,7 +128,7 @@ public class AnagramTest
         MutableMap<Alphagram, MutableList<String>> map = UnifiedMap.newMap();
         this.getWords().each(word -> map.getIfAbsentPut(new Alphagram(word), FastList::new).add(word));
         MutableList<MutableList<String>> results =
-                map.select(iterable -> iterable.size() >= SIZE_THRESHOLD, Lists.mutable.of())
+                map.select(iterable -> iterable.size() >= SIZE_THRESHOLD, MutableList.empty())
                         .sortThisByInt(iterable -> -iterable.size());
         Procedure<String> procedure = Procedures.cast(LOGGER::info);
         results.forEach(Functions.bind(procedure, iterable -> iterable.size() + ": " + iterable));

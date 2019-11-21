@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.test.bag;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.UnsortedBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
@@ -28,7 +29,6 @@ import org.eclipse.collections.impl.bag.mutable.primitive.FloatHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.test.RichIterableTestCase;
 
 public interface TransformsToBagTrait extends RichIterableTestCase
@@ -36,13 +36,13 @@ public interface TransformsToBagTrait extends RichIterableTestCase
     @Override
     default <T> UnsortedBag<T> getExpectedTransformed(T... elements)
     {
-        return Bags.immutable.with(elements);
+        return ImmutableBag.of(elements);
     }
 
     @Override
     default <T> MutableBag<T> newMutableForTransform(T... elements)
     {
-        return Bags.mutable.with(elements);
+        return MutableBag.of(elements);
     }
 
     @Override

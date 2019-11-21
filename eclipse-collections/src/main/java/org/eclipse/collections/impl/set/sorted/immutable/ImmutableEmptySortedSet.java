@@ -30,13 +30,11 @@ import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.utility.ListIterate;
 
 /**
- * This is a zero element {@link ImmutableSortedSet} which is created by calling the SortedSets.immutable.empty() method.
+ * This is a zero element {@link ImmutableSortedSet} which is created by calling the ImmutableSortedSet.empty() method.
  */
 final class ImmutableEmptySortedSet<T>
         extends AbstractImmutableSortedSet<T>
@@ -82,13 +80,13 @@ final class ImmutableEmptySortedSet<T>
     @Override
     public ImmutableSortedSet<T> newWith(T element)
     {
-        return SortedSets.immutable.with(this.comparator, element);
+        return ImmutableSortedSet.of(this.comparator, element);
     }
 
     @Override
     public ImmutableSortedSet<T> newWithAll(Iterable<? extends T> elements)
     {
-        return SortedSets.immutable.withAll(this.comparator, elements);
+        return ImmutableSortedSet.ofAll(this.comparator, elements);
     }
 
     @Override
@@ -188,7 +186,7 @@ final class ImmutableEmptySortedSet<T>
     @Override
     public <V> ImmutableList<V> collectWithIndex(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 
     /**

@@ -65,8 +65,6 @@ import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.collection.mutable.AbstractMutableCollection;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.lazy.ReverseIterable;
 import org.eclipse.collections.impl.lazy.parallel.list.ListIterableParallelIterable;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
@@ -506,7 +504,7 @@ public abstract class AbstractMutableList<T>
     @Override
     public MutableStack<T> toStack()
     {
-        return Stacks.mutable.withAll(this);
+        return MutableStack.ofAll(this);
     }
 
     @Override
@@ -578,7 +576,7 @@ public abstract class AbstractMutableList<T>
     @Override
     public MutableList<T> newEmpty()
     {
-        return Lists.mutable.empty();
+        return MutableList.empty();
     }
 
     @Override
@@ -1034,7 +1032,7 @@ public abstract class AbstractMutableList<T>
 
         if (this instanceof RandomAccess)
         {
-            MutableList<RichIterable<T>> result = Lists.mutable.empty();
+            MutableList<RichIterable<T>> result = MutableList.empty();
             int i = 0;
             while (i < this.size())
             {

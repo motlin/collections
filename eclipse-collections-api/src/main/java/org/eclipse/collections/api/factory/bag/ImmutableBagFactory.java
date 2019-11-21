@@ -13,7 +13,7 @@ package org.eclipse.collections.api.factory.bag;
 import java.util.stream.Stream;
 
 import org.eclipse.collections.api.bag.ImmutableBag;
-import org.eclipse.collections.api.factory.Bags;
+import org.eclipse.collections.api.bag.MutableBag;
 
 /**
  * A factory which creates instances of type {@link ImmutableBag}.
@@ -61,6 +61,6 @@ public interface ImmutableBagFactory
      */
     default <T> ImmutableBag<T> fromStream(Stream<? extends T> stream)
     {
-        return Bags.mutable.<T>fromStream(stream).toImmutable();
+        return MutableBag.<T>fromStream(stream).toImmutable();
     }
 }

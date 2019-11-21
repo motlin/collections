@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.block.function;
 
-import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class MaxSizeFunctionTest
     @Test
     public void maxSizeMap()
     {
-        Assert.assertEquals(Integer.valueOf(3), MaxSizeFunction.MAP.value(2, Maps.mutable.of(1, 1, 2, 2, 3, 3)));
-        Assert.assertEquals(Integer.valueOf(3), MaxSizeFunction.MAP.value(3, Maps.mutable.of(1, 1, 2, 2)));
+        Assert.assertEquals(Integer.valueOf(3), MaxSizeFunction.MAP.value(2, MutableMap.of(1, 1, 2, 2, 3, 3)));
+        Assert.assertEquals(Integer.valueOf(3), MaxSizeFunction.MAP.value(3, MutableMap.of(1, 1, 2, 2)));
     }
 }

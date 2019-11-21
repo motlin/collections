@@ -13,10 +13,10 @@ package org.eclipse.collections.impl.list.fixed;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
@@ -48,7 +48,7 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testEqualsAndHashCode()
     {
-        MutableList<String> one = Lists.fixedSize.of("1", "2", "3", "4", "5");
+        MutableList<String> one = FixedSizeList.of("1", "2", "3", "4", "5");
         List<String> oneA = new ArrayList<>(one);
         Verify.assertEqualsAndHashCode(one, oneA);
         Verify.assertPostSerializedEqualsAndHashCode(one);
@@ -104,7 +104,7 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testSet()
     {
-        MutableList<String> list = Lists.fixedSize.of("1", "2", "3", "4", "5");
+        MutableList<String> list = FixedSizeList.of("1", "2", "3", "4", "5");
         Assert.assertEquals("1", list.set(0, "5"));
         Assert.assertEquals("2", list.set(1, "4"));
         Assert.assertEquals("3", list.set(2, "3"));
@@ -132,7 +132,7 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testGetFirstGetLast()
     {
-        MutableList<String> list5 = Lists.fixedSize.of("1", "2", "3", "4", "5");
+        MutableList<String> list5 = FixedSizeList.of("1", "2", "3", "4", "5");
         Assert.assertEquals("1", list5.getFirst());
         Assert.assertEquals("5", list5.getLast());
     }
@@ -140,8 +140,8 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testForEach()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5");
+        MutableList<String> result = MutableList.empty();
+        MutableList<String> source = FixedSizeList.of("1", "2", "3", "4", "5");
         source.forEach(CollectionAddProcedure.on(result));
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), result);
     }
@@ -150,8 +150,8 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     public void testForEachWithIndex()
     {
         int[] indexSum = new int[1];
-        MutableList<String> result = Lists.mutable.of();
-        MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5");
+        MutableList<String> result = MutableList.empty();
+        MutableList<String> source = FixedSizeList.of("1", "2", "3", "4", "5");
         source.forEachWithIndex((each, index) -> {
             result.add(each);
             indexSum[0] += index;
@@ -163,8 +163,8 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testForEachWith()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5");
+        MutableList<String> result = MutableList.empty();
+        MutableList<String> source = FixedSizeList.of("1", "2", "3", "4", "5");
         source.forEachWith(Procedures2.fromProcedure(result::add), null);
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5"), result);
     }
@@ -172,8 +172,8 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testForLoop()
     {
-        MutableList<String> list = Lists.fixedSize.of("one", "two", "three", "four", "five");
-        MutableList<String> upperList = Lists.fixedSize.of("ONE", "TWO", "THREE", "FOUR", "FIVE");
+        MutableList<String> list = FixedSizeList.of("one", "two", "three", "four", "five");
+        MutableList<String> upperList = FixedSizeList.of("ONE", "TWO", "THREE", "FOUR", "FIVE");
         for (String each : list)
         {
             Verify.assertContains(each.toUpperCase(), upperList);
@@ -183,9 +183,9 @@ public class QuintupletonListTest extends AbstractMemoryEfficientMutableListTest
     @Test
     public void testSubList()
     {
-        MutableList<String> list = Lists.fixedSize.of("one", "two", "three", "four", "five");
+        MutableList<String> list = FixedSizeList.of("one", "two", "three", "four", "five");
         MutableList<String> subList = list.subList(0, 4);
-        MutableList<String> upperList = Lists.fixedSize.of("ONE", "TWO", "THREE", "FOUR", "FIVE");
+        MutableList<String> upperList = FixedSizeList.of("ONE", "TWO", "THREE", "FOUR", "FIVE");
         for (String each : subList)
         {
             Verify.assertContains(each.toUpperCase(), upperList);

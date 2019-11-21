@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.test.CollectionTestCase;
 import org.junit.Assert;
@@ -66,7 +65,7 @@ public interface SetTestCase extends CollectionTestCase
     {
         Set<Integer> iterable = this.newWith(3, 2, 1);
 
-        MutableSet<Integer> mutableSet = Sets.mutable.with();
+        MutableSet<Integer> mutableSet = MutableSet.empty();
 
         Iterator<Integer> iterator = iterable.iterator();
         while (iterator.hasNext())

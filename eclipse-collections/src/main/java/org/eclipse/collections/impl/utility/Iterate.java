@@ -80,7 +80,6 @@ import org.eclipse.collections.impl.block.procedure.MaxComparatorProcedure;
 import org.eclipse.collections.impl.block.procedure.MinComparatorProcedure;
 import org.eclipse.collections.impl.block.procedure.MultimapKeyValuePutAllProcedure;
 import org.eclipse.collections.impl.block.procedure.MultimapKeyValuePutProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -3127,7 +3126,7 @@ public final class Iterate
      * Example using a Java 8 lambda expression:
      * <pre>
      * MutableMultimap&lt;String, String&gt; multimap =
-     *      Iterate.<b>toMultimap</b>(integers, each -&gt; "key:" + each, each -&gt; Lists.mutable.of("value:" + each), FastListMultimap.newMultimap());
+     *      Iterate.<b>toMultimap</b>(integers, each -&gt; "key:" + each, each -&gt; MutableList.of("value:" + each), FastListMultimap.newMultimap());
      * </pre>
      * <p>
      * Example using an anonymous inner class:
@@ -3144,7 +3143,7 @@ public final class Iterate
      *          {
      *              public Iterable&lt;String&gt; valueOf(Integer each)
      *              {
-     *                  return Lists.mutable.of("value:" + each);
+     *                  return MutableList.of("value:" + each);
      *              }
      *          }, FastListMultimap.newMultimap());
      * </pre>
@@ -3232,7 +3231,7 @@ public final class Iterate
         {
             return ((RichIterable<T>) iterable).toArray();
         }
-        MutableList<T> result = Lists.mutable.empty();
+        MutableList<T> result = MutableList.empty();
         Iterate.addAllTo(iterable, result);
         return result.toArray();
     }
@@ -3250,7 +3249,7 @@ public final class Iterate
         {
             return ((RichIterable<T>) iterable).toArray(target);
         }
-        MutableList<T> result = Lists.mutable.empty();
+        MutableList<T> result = MutableList.empty();
         Iterate.addAllTo(iterable, result);
         return result.toArray(target);
     }

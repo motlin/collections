@@ -22,7 +22,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
@@ -250,7 +249,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     @Test
     public void chunk()
     {
-        Assert.assertEquals(Lists.mutable.of(), this.classUnderTest().chunk(2));
+        Assert.assertEquals(MutableList.empty(), this.classUnderTest().chunk(2));
     }
 
     @Override
@@ -264,7 +263,7 @@ public abstract class AbstractImmutableEmptySetTestCase extends AbstractImmutabl
     @Test
     public void chunk_large_size()
     {
-        Assert.assertEquals(Lists.mutable.of(), this.classUnderTest().chunk(10));
+        Assert.assertEquals(MutableList.empty(), this.classUnderTest().chunk(10));
     }
 
     @Override

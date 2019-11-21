@@ -17,6 +17,7 @@ import java.util.Optional;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.procedure.Procedure;
@@ -28,6 +29,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
@@ -48,9 +50,6 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -69,8 +68,6 @@ import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 public abstract class AbstractLazyIterableTestCase
 {
@@ -163,16 +160,16 @@ public abstract class AbstractLazyIterableTestCase
     public void partition()
     {
         PartitionIterable<Integer> partition = this.lazyIterable.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iList(2, 4, 6), partition.getSelected());
-        Assert.assertEquals(iList(1, 3, 5, 7), partition.getRejected());
+        Assert.assertEquals(ImmutableList.of(2, 4, 6), partition.getSelected());
+        Assert.assertEquals(ImmutableList.of(1, 3, 5, 7), partition.getRejected());
     }
 
     @Test
     public void partitionWith()
     {
         PartitionIterable<Integer> partition = this.lazyIterable.partitionWith(Predicates2.in(), this.lazyIterable.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iList(2, 4, 6), partition.getSelected());
-        Assert.assertEquals(iList(1, 3, 5, 7), partition.getRejected());
+        Assert.assertEquals(ImmutableList.of(2, 4, 6), partition.getSelected());
+        Assert.assertEquals(ImmutableList.of(1, 3, 5, 7), partition.getRejected());
     }
 
     @Test
@@ -853,13 +850,13 @@ public abstract class AbstractLazyIterableTestCase
                 pairs.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).toSet());
         Assert.assertEquals(
                 nulls,
-                pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+                pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         LazyIterable<Pair<Integer, Object>> pairsPlusOne = this.lazyIterable.zip(nullsPlusOne);
         Assert.assertEquals(
                 this.lazyIterable.toSet(),
                 pairsPlusOne.collect((Function<Pair<Integer, ?>, Integer>) Pair::getOne).toSet());
-        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         LazyIterable<Pair<Integer, Object>> pairsMinusOne = this.lazyIterable.zip(nullsMinusOne);
         Assert.assertEquals(this.lazyIterable.size() - 1, pairsMinusOne.size());
@@ -892,7 +889,7 @@ public abstract class AbstractLazyIterableTestCase
     {
         LazyIterable<RichIterable<Integer>> groups = this.lazyIterable.chunk(2);
         RichIterable<Integer> sizes = groups.collect(RichIterable::size);
-        Assert.assertEquals(Bags.mutable.of(2, 2, 2, 1), sizes.toBag());
+        Assert.assertEquals(MutableBag.of(2, 2, 2, 1), sizes.toBag());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -945,12 +942,12 @@ public abstract class AbstractLazyIterableTestCase
         LazyIterable<Integer> collection = this.newWith(4, 5, 6, 7);
 
         Verify.assertSetsEqual(
-                Sets.mutable.with(1, 2, 3, 4, 5, 6, 7),
+                MutableSet.of(1, 2, 3, 4, 5, 6, 7),
                 collection.flatCollectWith(Interval::fromTo, 1).toSet());
 
         Verify.assertBagsEqual(
-                Bags.mutable.with(4, 3, 2, 1, 5, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1, 7, 6, 5, 4, 3, 2, 1),
-                collection.flatCollectWith(Interval::fromTo, 1, Bags.mutable.empty()));
+                MutableBag.of(4, 3, 2, 1, 5, 4, 3, 2, 1, 6, 5, 4, 3, 2, 1, 7, 6, 5, 4, 3, 2, 1),
+                collection.flatCollectWith(Interval::fromTo, 1, MutableBag.empty()));
     }
 
     @Test

@@ -44,8 +44,6 @@ import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.PartitionPredicate2Procedure;
 import org.eclipse.collections.impl.block.procedure.PartitionProcedure;
 import org.eclipse.collections.impl.block.procedure.SelectInstancesOfProcedure;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.parallel.AbstractBatch;
 import org.eclipse.collections.impl.lazy.parallel.AbstractParallelIterable;
@@ -722,8 +720,8 @@ public class UnifiedSet<T>
             Predicate2<? super T, ? super P> predicate,
             P parameter)
     {
-        MutableList<T> positiveResult = Lists.mutable.empty();
-        MutableList<T> negativeResult = Lists.mutable.empty();
+        MutableList<T> positiveResult = MutableList.empty();
+        MutableList<T> negativeResult = MutableList.empty();
         this.forEachWith((each, parm) -> (predicate.accept(each, parm) ? positiveResult : negativeResult).add(each), parameter);
         return Tuples.twin(positiveResult, negativeResult);
     }
@@ -993,7 +991,7 @@ public class UnifiedSet<T>
     @Override
     public ImmutableSet<T> toImmutable()
     {
-        return Sets.immutable.withAll(this);
+        return ImmutableSet.ofAll(this);
     }
 
     @Override

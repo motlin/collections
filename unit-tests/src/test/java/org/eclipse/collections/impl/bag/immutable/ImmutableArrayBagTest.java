@@ -13,20 +13,16 @@ package org.eclipse.collections.impl.bag.immutable;
 import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
 
 public class ImmutableArrayBagTest extends ImmutableBagTestCase
 {
@@ -64,10 +60,10 @@ public class ImmutableArrayBagTest extends ImmutableBagTestCase
         int maximumUsefulArrayBagSize = ImmutableArrayBag.MAXIMUM_USEFUL_ARRAY_BAG_SIZE;
         Verify.assertInstanceOf(
                 ImmutableArrayBag.class,
-                Bags.immutable.ofAll(Interval.oneTo(maximumUsefulArrayBagSize - 1)).newWith(maximumUsefulArrayBagSize));
+                ImmutableBag.ofAll(Interval.oneTo(maximumUsefulArrayBagSize - 1)).newWith(maximumUsefulArrayBagSize));
         Verify.assertInstanceOf(
                 ImmutableHashBag.class,
-                Bags.immutable.ofAll(Interval.oneTo(maximumUsefulArrayBagSize)).newWith(maximumUsefulArrayBagSize + 1));
+                ImmutableBag.ofAll(Interval.oneTo(maximumUsefulArrayBagSize)).newWith(maximumUsefulArrayBagSize + 1));
         Interval items = Interval.oneTo(maximumUsefulArrayBagSize);
         Verify.assertInstanceOf(
                 ImmutableHashBag.class,
@@ -120,7 +116,7 @@ public class ImmutableArrayBagTest extends ImmutableBagTestCase
         for (int i = 1; i <= ImmutableArrayBag.MAXIMUM_USEFUL_ARRAY_BAG_SIZE + 1; i++)
         {
             Interval interval = Interval.oneTo(i);
-            Verify.assertEqualsAndHashCode(HashBag.newBag(interval), Bags.immutable.ofAll(interval));
+            Verify.assertEqualsAndHashCode(HashBag.newBag(interval), ImmutableBag.ofAll(interval));
         }
 
         Verify.assertThrows(IllegalArgumentException.class, () -> new ImmutableArrayBag<>(new Integer[]{2, 3}, new int[]{2}));
@@ -133,8 +129,8 @@ public class ImmutableArrayBagTest extends ImmutableBagTestCase
         super.selectInstancesOf();
 
         ImmutableBag<Number> numbers = ImmutableArrayBag.newBagWith(1, 2.0, 2.0, 3, 3, 3, 4.0, 4.0, 4.0, 4.0);
-        Assert.assertEquals(iBag(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
+        Assert.assertEquals(ImmutableBag.of(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(ImmutableBag.of(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
     }
 
     @Override
@@ -143,7 +139,7 @@ public class ImmutableArrayBagTest extends ImmutableBagTestCase
     {
         // Only works on bags without duplicates
         ImmutableBag<Integer> immutableBag = ImmutableArrayBag.newBagWith(1, 2, 3);
-        Assert.assertEquals(Maps.immutable.of(1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id));
+        Assert.assertEquals(ImmutableMap.of(1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id));
     }
 
     @Override
@@ -152,7 +148,7 @@ public class ImmutableArrayBagTest extends ImmutableBagTestCase
     {
         // Only works on bags without duplicates
         ImmutableBag<Integer> immutableBag = ImmutableArrayBag.newBagWith(1, 2, 3);
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0)));
+        Assert.assertEquals(ImmutableMap.of(0, 0, 1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
     @Test
@@ -232,7 +228,7 @@ public class ImmutableArrayBagTest extends ImmutableBagTestCase
         super.selectUnique();
 
         ImmutableBag<String> bag = this.newBag();
-        ImmutableSet<String> expected = Sets.immutable.of("1");
+        ImmutableSet<String> expected = ImmutableSet.of("1");
         ImmutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
     }

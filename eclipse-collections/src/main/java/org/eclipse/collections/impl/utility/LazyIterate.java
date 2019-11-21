@@ -16,8 +16,8 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.ChunkIterable;
 import org.eclipse.collections.impl.lazy.CollectIterable;
 import org.eclipse.collections.impl.lazy.CompositeIterable;
@@ -46,7 +46,7 @@ import org.eclipse.collections.impl.tuple.Tuples;
  */
 public final class LazyIterate
 {
-    private static final LazyIterable<?> EMPTY_ITERABLE = Lists.immutable.empty().asLazy();
+    private static final LazyIterable<?> EMPTY_ITERABLE = ImmutableList.empty().asLazy();
 
     private LazyIterate()
     {

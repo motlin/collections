@@ -47,9 +47,6 @@ import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBag;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.AbstractMutableBagIterable;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -75,7 +72,7 @@ public abstract class AbstractMutableSortedBag<T>
     @Override
     public ImmutableSortedBag<T> toImmutable()
     {
-        return SortedBags.immutable.ofSortedBag(this);
+        return ImmutableSortedBag.ofSortedBag(this);
     }
 
     @Override
@@ -139,7 +136,7 @@ public abstract class AbstractMutableSortedBag<T>
     @Override
     public <V> MutableBag<V> countBy(Function<? super T, ? extends V> function)
     {
-        return this.countBy(function, Bags.mutable.empty());
+        return this.countBy(function, MutableBag.empty());
     }
 
     /**
@@ -148,7 +145,7 @@ public abstract class AbstractMutableSortedBag<T>
     @Override
     public <V, P> MutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.countByWith(function, parameter, Bags.mutable.empty());
+        return this.countByWith(function, parameter, MutableBag.empty());
     }
 
     /**
@@ -157,7 +154,7 @@ public abstract class AbstractMutableSortedBag<T>
     @Override
     public <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.countByEach(function, Bags.mutable.empty());
+        return this.countByEach(function, MutableBag.empty());
     }
 
     @Override
@@ -224,7 +221,7 @@ public abstract class AbstractMutableSortedBag<T>
     @Override
     public <V> MutableList<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        return this.collectWithOccurrences(function, Lists.mutable.empty());
+        return this.collectWithOccurrences(function, MutableList.empty());
     }
 
     /**

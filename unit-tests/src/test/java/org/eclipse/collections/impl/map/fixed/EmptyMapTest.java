@@ -21,8 +21,6 @@ import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
@@ -67,8 +65,8 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
         Assert.assertFalse(new EmptyMap<>().notEmpty());
         Verify.assertEmpty(new EmptyMap<>());
         Assert.assertFalse(new EmptyMap<>().notEmpty());
-        Verify.assertEmpty(Maps.fixedSize.of());
-        Assert.assertFalse(Maps.fixedSize.of().notEmpty());
+        Verify.assertEmpty(FixedSizeMap.empty());
+        Assert.assertFalse(FixedSizeMap.empty().notEmpty());
     }
 
     @Test
@@ -90,8 +88,8 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void testReadResolve()
     {
-        Verify.assertInstanceOf(EmptyMap.class, Maps.fixedSize.of());
-        Verify.assertPostSerializedIdentity(Maps.fixedSize.of());
+        Verify.assertInstanceOf(EmptyMap.class, FixedSizeMap.empty());
+        Verify.assertPostSerializedIdentity(FixedSizeMap.empty());
     }
 
     @Override
@@ -262,7 +260,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachValue()
     {
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         MutableMap<Integer, String> map = new EmptyMap<>();
         map.forEachValue(CollectionAddProcedure.on(collection));
         Verify.assertEmpty(collection);
@@ -272,7 +270,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEach()
     {
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         MutableMap<Integer, String> map = new EmptyMap<>();
         map.forEach(CollectionAddProcedure.on(collection));
         Verify.assertEmpty(collection);
@@ -282,7 +280,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachKey()
     {
-        MutableList<Integer> collection = Lists.mutable.of();
+        MutableList<Integer> collection = MutableList.empty();
         MutableMap<Integer, String> map = new EmptyMap<>();
         map.forEachKey(CollectionAddProcedure.on(collection));
         Verify.assertEmpty(collection);
@@ -292,7 +290,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachWith()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableMap<Integer, Integer> map = new EmptyMap<>();
         map.forEachWith((argument1, argument2) -> result.add(argument1 + argument2), 10);
         Verify.assertEmpty(result);
@@ -302,7 +300,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachWithIndex()
     {
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         MutableMap<Integer, String> map = new EmptyMap<>();
         map.forEachWithIndex((value, index) -> {
             result.add(value);
@@ -315,7 +313,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachKeyValue()
     {
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         MutableMap<Integer, String> map = new EmptyMap<>();
         map.forEachKeyValue((key, value) -> collection.add(key + value));
         Verify.assertEmpty(collection);
@@ -464,7 +462,7 @@ public class EmptyMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void iterator()
     {
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         MutableMap<Integer, String> map = new EmptyMap<>();
         for (String eachValue : map)
         {

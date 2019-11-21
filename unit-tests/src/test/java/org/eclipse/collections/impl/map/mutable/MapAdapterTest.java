@@ -63,7 +63,7 @@ public class MapAdapterTest extends MutableMapTestCase
     @Test
     public void adapt()
     {
-        MutableMap<Integer, Integer> map = Maps.mutable.with(1, 1, 2, 2, 3, 3);
+        MutableMap<Integer, Integer> map = MutableMap.of(1, 1, 2, 2, 3, 3);
         Assert.assertEquals(MapAdapter.adapt(new HashMap<>(map)), Maps.adapt(new HashMap<>(map)));
     }
 

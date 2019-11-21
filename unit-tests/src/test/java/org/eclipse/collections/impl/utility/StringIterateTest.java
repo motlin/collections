@@ -13,6 +13,7 @@ package org.eclipse.collections.impl.utility;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.procedure.primitive.CharProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.CharList;
 import org.eclipse.collections.api.list.primitive.ImmutableCharList;
@@ -30,7 +31,6 @@ import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.primitive.CodePointFunction;
 import org.eclipse.collections.impl.block.predicate.CodePointPredicate;
 import org.eclipse.collections.impl.block.procedure.primitive.CodePointProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.CharSets;
 import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -697,7 +697,7 @@ public class StringIterateTest
     public void forEachToken()
     {
         String tokens = "1,2";
-        MutableList<Integer> list = Lists.mutable.of();
+        MutableList<Integer> list = MutableList.empty();
         StringIterate.forEachToken(tokens, ",", Procedures.throwing(string -> list.add(Integer.valueOf(string))));
         Verify.assertSize(2, list);
         Verify.assertContains(1, list);
@@ -708,7 +708,7 @@ public class StringIterateTest
     public void forEachTrimmedToken()
     {
         String tokens = " 1,2 ";
-        MutableList<Integer> list = Lists.mutable.of();
+        MutableList<Integer> list = MutableList.empty();
         StringIterate.forEachTrimmedToken(tokens, ",", Procedures.throwing(string -> list.add(Integer.valueOf(string))));
         Verify.assertSize(2, list);
         Verify.assertContains(1, list);
@@ -833,27 +833,27 @@ public class StringIterateTest
     public void chunk()
     {
         Assert.assertEquals(
-                Lists.immutable.with("ab", "cd", "ef"),
+                ImmutableList.of("ab", "cd", "ef"),
                 StringIterate.chunk("abcdef", 2));
 
         Assert.assertEquals(
-                Lists.immutable.with("abc", "def"),
+                ImmutableList.of("abc", "def"),
                 StringIterate.chunk("abcdef", 3));
 
         Assert.assertEquals(
-                Lists.immutable.with("abc", "def", "g"),
+                ImmutableList.of("abc", "def", "g"),
                 StringIterate.chunk("abcdefg", 3));
 
         Assert.assertEquals(
-                Lists.immutable.with("abcdef"),
+                ImmutableList.of("abcdef"),
                 StringIterate.chunk("abcdef", 6));
 
         Assert.assertEquals(
-                Lists.immutable.with("abcdef"),
+                ImmutableList.of("abcdef"),
                 StringIterate.chunk("abcdef", 7));
 
         Assert.assertEquals(
-                Lists.immutable.with(),
+                ImmutableList.empty(),
                 StringIterate.chunk("", 2));
     }
 

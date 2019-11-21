@@ -21,13 +21,12 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.tuple.Tuples;
 
 final class ImmutableDoubletonMap<K, V>
@@ -58,19 +57,19 @@ final class ImmutableDoubletonMap<K, V>
     @Override
     public RichIterable<K> keysView()
     {
-        return Lists.immutable.with(this.key1, this.key2).asLazy();
+        return ImmutableList.of(this.key1, this.key2).asLazy();
     }
 
     @Override
     public RichIterable<V> valuesView()
     {
-        return Lists.immutable.with(this.value1, this.value2).asLazy();
+        return ImmutableList.of(this.value1, this.value2).asLazy();
     }
 
     @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
-        return Lists.immutable.with(
+        return ImmutableList.of(
                 Tuples.pair(this.key1, this.value1),
                 Tuples.pair(this.key2, this.value2)).asLazy();
     }
@@ -104,13 +103,13 @@ final class ImmutableDoubletonMap<K, V>
     @Override
     public Set<K> keySet()
     {
-        return Sets.immutable.with(this.key1, this.key2).castToSet();
+        return ImmutableSet.of(this.key1, this.key2).castToSet();
     }
 
     @Override
     public Collection<V> values()
     {
-        return Lists.immutable.with(this.value1, this.value2).castToList();
+        return ImmutableList.of(this.value1, this.value2).castToList();
     }
 
     @Override
@@ -147,7 +146,7 @@ final class ImmutableDoubletonMap<K, V>
         {
             throw new IllegalStateException("Duplicate value: " + this.value1 + " found at key: " + this.key1 + " and key: " + this.key2);
         }
-        return Maps.immutable.with(this.value1, this.key1, this.value2, this.key2);
+        return ImmutableMap.of(this.value1, this.key1, this.value2, this.key2);
     }
 
     @Override
@@ -191,13 +190,13 @@ final class ImmutableDoubletonMap<K, V>
         Pair<K2, V2> pair1 = function.value(this.key1, this.value1);
         Pair<K2, V2> pair2 = function.value(this.key2, this.value2);
 
-        return Maps.immutable.with(pair1.getOne(), pair1.getTwo(), pair2.getOne(), pair2.getTwo());
+        return ImmutableMap.of(pair1.getOne(), pair1.getTwo(), pair2.getOne(), pair2.getTwo());
     }
 
     @Override
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return Maps.immutable.with(this.key1, function.value(this.key1, this.value1), this.key2, function.value(this.key2, this.value2));
+        return ImmutableMap.of(this.key1, function.value(this.key1, this.value1), this.key2, function.value(this.key2, this.value2));
     }
 
     @Override
@@ -242,13 +241,13 @@ final class ImmutableDoubletonMap<K, V>
         switch (result)
         {
             case 1:
-                return Maps.immutable.with(this.key1, this.value1);
+                return ImmutableMap.of(this.key1, this.value1);
             case 2:
-                return Maps.immutable.with(this.key2, this.value2);
+                return ImmutableMap.of(this.key2, this.value2);
             case 3:
                 return this;
             default:
-                return Maps.immutable.empty();
+                return ImmutableMap.empty();
         }
     }
 

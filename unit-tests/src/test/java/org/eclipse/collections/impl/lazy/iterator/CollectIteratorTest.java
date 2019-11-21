@@ -13,18 +13,17 @@ package org.eclipse.collections.impl.lazy.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 public class CollectIteratorTest
 {
     @Test
     public void iterator()
     {
-        Iterator<String> iterator = new CollectIterator<>(iList(Boolean.TRUE), String::valueOf);
+        Iterator<String> iterator = new CollectIterator<>(ImmutableList.of(Boolean.TRUE), String::valueOf);
         Assert.assertTrue(iterator.hasNext());
         Assert.assertEquals("true", iterator.next());
         Assert.assertFalse(iterator.hasNext());
@@ -33,7 +32,7 @@ public class CollectIteratorTest
     @Test
     public void iteratorWithFunctionName()
     {
-        Iterator<String> iterator = new CollectIterator<>(iList(Boolean.TRUE), String::valueOf);
+        Iterator<String> iterator = new CollectIterator<>(ImmutableList.of(Boolean.TRUE), String::valueOf);
         Assert.assertTrue(iterator.hasNext());
         Assert.assertEquals("true", iterator.next());
         Assert.assertFalse(iterator.hasNext());
@@ -42,7 +41,7 @@ public class CollectIteratorTest
     @Test
     public void iteratorWithFunctionNameAndIterator()
     {
-        Iterator<String> iterator = new CollectIterator<>(iList(Boolean.TRUE).iterator(), String::valueOf);
+        Iterator<String> iterator = new CollectIterator<>(ImmutableList.of(Boolean.TRUE).iterator(), String::valueOf);
         Assert.assertTrue(iterator.hasNext());
         Assert.assertEquals("true", iterator.next());
         Assert.assertFalse(iterator.hasNext());
@@ -51,12 +50,12 @@ public class CollectIteratorTest
     @Test(expected = NoSuchElementException.class)
     public void noSuchElementException()
     {
-        new CollectIterator<>(Lists.mutable.<Boolean>of(), String::valueOf).next();
+        new CollectIterator<>(MutableList.<Boolean>of(), String::valueOf).next();
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void remove()
     {
-        new CollectIterator<>(Lists.mutable.<Boolean>of(), String::valueOf).remove();
+        new CollectIterator<>(MutableList.<Boolean>of(), String::valueOf).remove();
     }
 }

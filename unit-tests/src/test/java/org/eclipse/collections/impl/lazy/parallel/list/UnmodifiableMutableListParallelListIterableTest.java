@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.lazy.parallel.list;
 import java.util.ArrayList;
 
 import org.eclipse.collections.api.list.ListIterable;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.ArrayListAdapter;
 import org.junit.Test;
 
@@ -29,24 +29,24 @@ public class UnmodifiableMutableListParallelListIterableTest extends ParallelLis
     @Override
     protected ParallelListIterable<Integer> newWith(Integer... littleElements)
     {
-        return ArrayListAdapter.adapt(new ArrayList<>(Lists.mutable.of(littleElements))).asUnmodifiable().asParallel(this.executorService, this.batchSize);
+        return ArrayListAdapter.adapt(new ArrayList<>(MutableList.of(littleElements))).asUnmodifiable().asParallel(this.executorService, this.batchSize);
     }
 
     @Override
     protected ListIterable<Integer> getExpectedWith(Integer... littleElements)
     {
-        return ArrayListAdapter.adapt(new ArrayList<>(Lists.mutable.of(littleElements))).asUnmodifiable();
+        return ArrayListAdapter.adapt(new ArrayList<>(MutableList.of(littleElements))).asUnmodifiable();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void asParallel_small_batch()
     {
-        ArrayListAdapter.adapt(new ArrayList<>(Lists.mutable.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4))).asUnmodifiable().asParallel(this.executorService, 0);
+        ArrayListAdapter.adapt(new ArrayList<>(MutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4))).asUnmodifiable().asParallel(this.executorService, 0);
     }
 
     @Test(expected = NullPointerException.class)
     public void asParallel_null_executorService()
     {
-        Lists.mutable.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2);
+        MutableList.of(1, 2, 2, 3, 3, 3, 4, 4, 4, 4).asParallel(null, 2);
     }
 }

@@ -17,7 +17,6 @@ import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
@@ -69,7 +68,7 @@ public class CompositeIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void forEach()
     {
-        MutableList<Integer> list = Lists.mutable.of();
+        MutableList<Integer> list = MutableList.empty();
         LazyIterable<Integer> iterables = CompositeIterable.with(Interval.oneTo(5), Interval.fromTo(6, 10));
         iterables.forEach(CollectionAddProcedure.on(list));
         Verify.assertSize(10, list);
@@ -79,7 +78,7 @@ public class CompositeIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void forEachWithIndex()
     {
-        MutableList<Integer> list = Lists.mutable.of();
+        MutableList<Integer> list = MutableList.empty();
         LazyIterable<Integer> iterables = CompositeIterable.with(Interval.fromTo(6, 10), Interval.oneTo(5));
         iterables.forEachWithIndex((each, index) -> list.add(index, each));
         Verify.assertSize(10, list);
@@ -90,7 +89,7 @@ public class CompositeIterableTest extends AbstractLazyIterableTestCase
     @Test
     public void forEachWith()
     {
-        MutableList<Integer> list = Lists.mutable.of();
+        MutableList<Integer> list = MutableList.empty();
         LazyIterable<Integer> iterables = CompositeIterable.with(Interval.fromTo(6, 10), Interval.oneTo(5));
         iterables.forEachWith((each, parameter) -> list.add(parameter.intValue(), each), 0);
         Verify.assertSize(10, list);

@@ -36,7 +36,6 @@ import org.eclipse.collections.api.set.primitive.MutableCharSet;
 import org.eclipse.collections.api.tuple.primitive.CharCharPair;
 import org.eclipse.collections.api.tuple.primitive.CharObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.CharHashBag;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.CharLists;
 import org.eclipse.collections.impl.lazy.primitive.ReverseCharIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -429,7 +428,7 @@ public class CharAdapter
         {
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
-        MutableList<CharIterable> result = Lists.mutable.empty();
+        MutableList<CharIterable> result = MutableList.empty();
         if (this.notEmpty())
         {
             CharIterator iterator = this.charIterator();
@@ -574,7 +573,7 @@ public class CharAdapter
     {
         int size = this.size();
         int othersize = iterable.size();
-        MutableList<CharCharPair> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        MutableList<CharCharPair> target = MutableList.ofInitialCapacity(Math.min(size, othersize));
         CharIterator iterator = iterable.charIterator();
         for (int i = 0; i < size && i < othersize; i++)
         {
@@ -591,7 +590,7 @@ public class CharAdapter
     {
         int size = this.size();
         int othersize = Iterate.sizeOf(iterable);
-        MutableList<CharObjectPair<T>> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        MutableList<CharObjectPair<T>> target = MutableList.ofInitialCapacity(Math.min(size, othersize));
         Iterator<T> iterator = iterable.iterator();
         for (int i = 0; i < size && i < othersize; i++)
         {

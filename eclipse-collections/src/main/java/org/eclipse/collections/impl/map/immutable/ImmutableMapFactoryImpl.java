@@ -152,7 +152,7 @@ public class ImmutableMapFactoryImpl implements ImmutableMapFactory
     {
         if (map.isEmpty())
         {
-            return this.of();
+            return this.empty();
         }
 
         if (map.size() > 4)

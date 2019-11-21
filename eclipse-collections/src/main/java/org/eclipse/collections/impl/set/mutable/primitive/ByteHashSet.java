@@ -37,7 +37,6 @@ import org.eclipse.collections.api.set.primitive.ImmutableByteSet;
 import org.eclipse.collections.api.set.primitive.MutableByteSet;
 import org.eclipse.collections.impl.bag.mutable.primitive.ByteHashBag;
 import org.eclipse.collections.impl.block.procedure.checked.primitive.CheckedByteProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.ByteSets;
 import org.eclipse.collections.impl.lazy.primitive.LazyByteIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -978,7 +977,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
         {
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
-        MutableList<ByteIterable> result = Lists.mutable.empty();
+        MutableList<ByteIterable> result = MutableList.empty();
         if (this.notEmpty())
         {
             if (this.size() <= size)
@@ -1554,11 +1553,11 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
             }
             if (this.isEmpty())
             {
-                return Lists.mutable.empty();
+                return MutableList.empty();
             }
 
             ByteIterator iterator = this.byteIterator();
-            MutableList<ByteIterable> result = Lists.mutable.empty();
+            MutableList<ByteIterable> result = MutableList.empty();
             while (iterator.hasNext())
             {
                 MutableByteSet batch = ByteSets.mutable.empty();

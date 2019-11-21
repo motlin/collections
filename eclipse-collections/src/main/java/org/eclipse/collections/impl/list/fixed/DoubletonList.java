@@ -22,7 +22,7 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.block.factory.Comparators;
 
 /**
- * A DoubletonList is a two-element memory efficient List. It is created by calling Lists.fixedSize.of(one, two).
+ * A DoubletonList is a two-element memory efficient List. It is created by calling FixedSizeList.of(one, two).
  */
 final class DoubletonList<T>
         extends AbstractMemoryEfficientMutableList<T>

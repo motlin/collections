@@ -26,12 +26,12 @@ import org.eclipse.collections.api.block.function.primitive.LongFunction;
 import org.eclipse.collections.api.block.function.primitive.ShortFunction;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Functions2;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -285,13 +285,13 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
                 pairs.collect((Function<Pair<Object, ?>, Object>) Pair::getOne).toSet());
         Assert.assertEquals(
                 nulls,
-                pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+                pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         MutableCollection<Pair<Object, Object>> pairsPlusOne = collection.zip(nullsPlusOne);
         Assert.assertEquals(
                 collection.toSet(),
                 pairsPlusOne.collect((Function<Pair<Object, ?>, Object>) Pair::getOne).toSet());
-        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         MutableCollection<Pair<Object, Object>> pairsMinusOne = collection.zip(nullsMinusOne);
         Assert.assertEquals(collection.size() - 1, pairsMinusOne.size());
@@ -326,7 +326,7 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
         MutableCollection<Object> collection = (MutableCollection<Object>) this.getCollection();
         Assert.assertEquals(
                 this.getCollection().toBag(),
-                collection.flatCollect((Function<Object, Iterable<Object>>) Lists.fixedSize::of).toBag());
+                collection.flatCollect((Function<Object, Iterable<Object>>) FixedSizeList::of).toBag());
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -356,7 +356,7 @@ public abstract class UnmodifiableMutableCollectionTestCase<T>
     @Test
     public void tap()
     {
-        MutableList<T> tapResult = Lists.mutable.of();
+        MutableList<T> tapResult = MutableList.empty();
         MutableCollection<T> collection = this.getCollection();
         Assert.assertSame(collection, collection.tap(tapResult::add));
         Assert.assertEquals(collection.toList(), tapResult);

@@ -40,7 +40,6 @@ import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.lazy.primitive.CollectIntToObjectIterable;
 import org.eclipse.collections.impl.lazy.primitive.LazyIntIterableAdapter;
@@ -657,7 +656,7 @@ public final class IntInterval
         {
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
-        MutableList<IntIterable> result = Lists.mutable.empty();
+        MutableList<IntIterable> result = MutableList.empty();
         if (this.notEmpty())
         {
             int innerFrom = this.from;
@@ -917,7 +916,7 @@ public final class IntInterval
     {
         int size = this.size();
         int othersize = iterable.size();
-        MutableList<IntIntPair> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        MutableList<IntIntPair> target = MutableList.ofInitialCapacity(Math.min(size, othersize));
         IntIterator iterator = this.intIterator();
         IntIterator otherIterator = iterable.intIterator();
         for (int i = 0; i < size && otherIterator.hasNext(); i++)
@@ -932,7 +931,7 @@ public final class IntInterval
     {
         int size = this.size();
         int othersize = Iterate.sizeOf(iterable);
-        MutableList<IntObjectPair<T>> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        MutableList<IntObjectPair<T>> target = MutableList.ofInitialCapacity(Math.min(size, othersize));
         IntIterator iterator = this.intIterator();
         Iterator<T> otherIterator = iterable.iterator();
         for (int i = 0; i < size && otherIterator.hasNext(); i++)

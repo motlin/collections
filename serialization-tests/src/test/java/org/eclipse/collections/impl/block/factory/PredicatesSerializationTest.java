@@ -12,8 +12,9 @@ package org.eclipse.collections.impl.block.factory;
 
 import java.util.Collections;
 
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -426,7 +427,7 @@ public class PredicatesSerializationTest
                         + "ZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuUHJlZGljYXRlcwAAAAAAAAABAgAAeHBz\n"
                         + "cgBJb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5zZXQuaW1tdXRhYmxlLkltbXV0YWJsZVNl\n"
                         + "dFNlcmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHB3BAAAAAB4",
-                Predicates.in(Sets.immutable.with()));
+                Predicates.in(ImmutableSet.empty()));
     }
 
     @Test
@@ -440,7 +441,7 @@ public class PredicatesSerializationTest
                         + "aXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuUHJlZGljYXRlcwAAAAAAAAABAgAA\n"
                         + "eHBzcgBJb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5zZXQuaW1tdXRhYmxlLkltbXV0YWJs\n"
                         + "ZVNldFNlcmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHB3BAAAAAB4",
-                Predicates.notIn(Sets.immutable.with()));
+                Predicates.notIn(ImmutableSet.empty()));
     }
 
     @Test
@@ -457,7 +458,7 @@ public class PredicatesSerializationTest
                         + "ZXJvTGVuZ3RoRWxlbWVudEFycmF5dAATW0xqYXZhL2xhbmcvT2JqZWN0O3hwc3IAM29yZy5lY2xp\n"
                         + "cHNlLmNvbGxlY3Rpb25zLmltcGwuc2V0Lm11dGFibGUuVW5pZmllZFNldAAAAAAAAAABDAAAeHB3\n"
                         + "CAAAAAA/QAAAeHZyABBqYXZhLmxhbmcuT2JqZWN0AAAAAAAAAAAAAAB4cHA=",
-                Predicates.in(Collections.checkedSet(Sets.mutable.with(), Object.class)));
+                Predicates.in(Collections.checkedSet(MutableSet.empty(), Object.class)));
     }
 
     @Test
@@ -474,7 +475,7 @@ public class PredicatesSerializationTest
                         + "ABZ6ZXJvTGVuZ3RoRWxlbWVudEFycmF5dAATW0xqYXZhL2xhbmcvT2JqZWN0O3hwc3IAM29yZy5l\n"
                         + "Y2xpcHNlLmNvbGxlY3Rpb25zLmltcGwuc2V0Lm11dGFibGUuVW5pZmllZFNldAAAAAAAAAABDAAA\n"
                         + "eHB3CAAAAAA/QAAAeHZyABBqYXZhLmxhbmcuT2JqZWN0AAAAAAAAAAAAAAB4cHA=",
-                Predicates.notIn(Collections.checkedSet(Sets.mutable.with(), Object.class)));
+                Predicates.notIn(Collections.checkedSet(MutableSet.empty(), Object.class)));
     }
 
     @Test
@@ -487,7 +488,7 @@ public class PredicatesSerializationTest
                         + "YS91dGlsL0NvbGxlY3Rpb247eHIANW9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwuYmxvY2su\n"
                         + "ZmFjdG9yeS5QcmVkaWNhdGVzAAAAAAAAAAECAAB4cHNyADJvcmcuZWNsaXBzZS5jb2xsZWN0aW9u\n"
                         + "cy5pbXBsLmxpc3QubXV0YWJsZS5GYXN0TGlzdAAAAAAAAAABDAAAeHB3BAAAAAB4",
-                Predicates.in(Lists.mutable.with()));
+                Predicates.in(MutableList.empty()));
     }
 
     @Test
@@ -500,7 +501,7 @@ public class PredicatesSerializationTest
                         + "amF2YS91dGlsL0NvbGxlY3Rpb247eHIANW9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwuYmxv\n"
                         + "Y2suZmFjdG9yeS5QcmVkaWNhdGVzAAAAAAAAAAECAAB4cHNyADJvcmcuZWNsaXBzZS5jb2xsZWN0\n"
                         + "aW9ucy5pbXBsLmxpc3QubXV0YWJsZS5GYXN0TGlzdAAAAAAAAAABDAAAeHB3BAAAAAB4",
-                Predicates.notIn(Lists.mutable.with()));
+                Predicates.notIn(MutableList.empty()));
     }
 
     @Test

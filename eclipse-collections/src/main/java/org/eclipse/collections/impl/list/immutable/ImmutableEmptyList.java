@@ -36,13 +36,10 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
 
 /**
- * This is a zero element {@link ImmutableList} which is created by calling the Lists.immutable.empty() method.
+ * This is a zero element {@link ImmutableList} which is created by calling the ImmutableList.empty() method.
  */
 final class ImmutableEmptyList<T>
         extends AbstractImmutableList<T>
@@ -122,7 +119,7 @@ final class ImmutableEmptyList<T>
     @Override
     public ImmutableList<T> newWith(T newItem)
     {
-        return Lists.immutable.with(newItem);
+        return ImmutableList.of(newItem);
     }
 
     @Override
@@ -164,7 +161,7 @@ final class ImmutableEmptyList<T>
     @Override
     public <S> ImmutableList<Pair<T, S>> zip(Iterable<S> that)
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 
     @Override
@@ -176,13 +173,13 @@ final class ImmutableEmptyList<T>
     @Override
     public ImmutableList<Pair<T, Integer>> zipWithIndex()
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 
     @Override
     public MutableStack<T> toStack()
     {
-        return Stacks.mutable.empty();
+        return MutableStack.empty();
     }
 
     @Override
@@ -224,13 +221,13 @@ final class ImmutableEmptyList<T>
     @Override
     public <V> ImmutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 
     @Override
     public <V> ImmutableList<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 
     @Override
@@ -242,7 +239,7 @@ final class ImmutableEmptyList<T>
     @Override
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 
     @Override
@@ -257,7 +254,7 @@ final class ImmutableEmptyList<T>
     @Override
     public <V> ImmutableBag<V> countBy(Function<? super T, ? extends V> function)
     {
-        return Bags.immutable.empty();
+        return ImmutableBag.empty();
     }
 
     /**
@@ -275,7 +272,7 @@ final class ImmutableEmptyList<T>
     @Override
     public <V, P> ImmutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return Bags.immutable.empty();
+        return ImmutableBag.empty();
     }
 
     /**
@@ -293,7 +290,7 @@ final class ImmutableEmptyList<T>
     @Override
     public <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Bags.immutable.empty();
+        return ImmutableBag.empty();
     }
 
     /**

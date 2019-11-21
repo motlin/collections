@@ -12,7 +12,6 @@ package org.eclipse.collections.test.bimap;
 
 import org.eclipse.collections.api.bimap.BiMap;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
@@ -27,14 +26,14 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase
         BiMap<Object, Integer> iterable = this.newWith(4, 3, 2, 1);
 
         {
-            MutableList<Integer> target = Lists.mutable.empty();
+            MutableList<Integer> target = MutableList.empty();
             iterable.forEachValue(target::add);
             assertEquals(
                     target,
                     iterable.toList());
         }
 
-        MutableList<Integer> target = Lists.mutable.empty();
+        MutableList<Integer> target = MutableList.empty();
         iterable.forEachKeyValue((key, value) -> target.add(value));
         assertEquals(
                 target,

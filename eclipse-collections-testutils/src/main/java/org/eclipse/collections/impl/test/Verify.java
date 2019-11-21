@@ -56,7 +56,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -1633,7 +1632,7 @@ public final class Verify extends Assert
     {
         try
         {
-            MutableList<T> unacceptable = Iterate.reject(iterable, predicate, Lists.mutable.of());
+            MutableList<T> unacceptable = Iterate.reject(iterable, predicate, MutableList.empty());
             if (unacceptable.notEmpty())
             {
                 Assert.fail(message + " <" + unacceptable + '>');
@@ -1709,7 +1708,7 @@ public final class Verify extends Assert
     {
         try
         {
-            MutableList<T> unacceptable = Iterate.select(iterable, predicate, Lists.mutable.empty());
+            MutableList<T> unacceptable = Iterate.select(iterable, predicate, MutableList.empty());
             if (unacceptable.notEmpty())
             {
                 Assert.fail(message + " <" + unacceptable + '>');
@@ -2018,7 +2017,7 @@ public final class Verify extends Assert
 
             if (!ArrayIterate.allSatisfy(items, containsPredicate))
             {
-                ImmutableList<Object> result = Lists.immutable.of(items).newWithoutAll(iterable);
+                ImmutableList<Object> result = ImmutableList.of(items).newWithoutAll(iterable);
                 Assert.fail(collectionName + " did not contain these items" + ":<" + result + '>');
             }
         }
@@ -2541,7 +2540,7 @@ public final class Verify extends Assert
         {
             Verify.assertNotEmpty("Expected keys/values in assertion", expectedKeyValues);
 
-            MutableList<Object> expectedKeys = Lists.mutable.of();
+            MutableList<Object> expectedKeys = MutableList.empty();
             for (int i = 0; i < expectedKeyValues.length; i += 2)
             {
                 expectedKeys.add(expectedKeyValues[i]);
@@ -2608,7 +2607,7 @@ public final class Verify extends Assert
         {
             Verify.assertNotEmpty("Expected keys/values in assertion", expectedKeyValues);
 
-            MutableList<Object> expectedKeys = Lists.mutable.of();
+            MutableList<Object> expectedKeys = MutableList.empty();
             for (int i = 0; i < expectedKeyValues.length; i += 2)
             {
                 expectedKeys.add(expectedKeyValues[i]);
@@ -2631,7 +2630,7 @@ public final class Verify extends Assert
         {
             Verify.assertNotEmpty("Expected keys/values in assertion", expectedKeyValues);
 
-            MutableList<Object> expectedValues = Lists.mutable.of();
+            MutableList<Object> expectedValues = MutableList.empty();
             for (int i = 1; i < expectedKeyValues.length; i += 2)
             {
                 expectedValues.add(expectedKeyValues[i]);
@@ -2654,7 +2653,7 @@ public final class Verify extends Assert
         {
             Verify.assertNotEmpty("Expected keys/values in assertion", expectedKeyValues);
 
-            MutableList<Object> expectedKeys = Lists.mutable.of();
+            MutableList<Object> expectedKeys = MutableList.empty();
             for (int i = 0; i < expectedKeyValues.length; i += 2)
             {
                 expectedKeys.add(expectedKeyValues[i]);
@@ -2677,7 +2676,7 @@ public final class Verify extends Assert
         {
             Verify.assertNotEmpty("Expected keys/values in assertion", expectedKeyValues);
 
-            MutableList<Object> expectedValues = Lists.mutable.of();
+            MutableList<Object> expectedValues = MutableList.empty();
             for (int i = 1; i < expectedKeyValues.length; i += 2)
             {
                 expectedValues.add(expectedKeyValues[i]);
@@ -2700,7 +2699,7 @@ public final class Verify extends Assert
         {
             Verify.assertNotEmpty("Expected keys/values in assertion", expectedKeyValues);
 
-            MutableList<Object> expectedKeys = Lists.mutable.of();
+            MutableList<Object> expectedKeys = MutableList.empty();
             for (int i = 0; i < expectedKeyValues.length; i += 2)
             {
                 expectedKeys.add(expectedKeyValues[i]);
@@ -2723,7 +2722,7 @@ public final class Verify extends Assert
         {
             Verify.assertNotEmpty("Expected keys/values in assertion", expectedKeyValues);
 
-            MutableList<Object> expectedValues = Lists.mutable.of();
+            MutableList<Object> expectedValues = MutableList.empty();
             for (int i = 1; i < expectedKeyValues.length; i += 2)
             {
                 expectedValues.add(expectedKeyValues[i]);
@@ -2813,7 +2812,7 @@ public final class Verify extends Assert
 
             Verify.assertObjectNotNull(multimapName, actualMultimap);
 
-            MutableList<Map.Entry<?, ?>> missingEntries = Lists.mutable.of();
+            MutableList<Map.Entry<?, ?>> missingEntries = MutableList.empty();
             for (int i = 0; i < expectedKeyValues.length; i += 2)
             {
                 Object expectedKey = expectedKeyValues[i];

@@ -10,11 +10,10 @@
 
 package org.eclipse.collections.impl.set.immutable;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
@@ -28,15 +27,15 @@ public class ImmutableEmptySetTest extends AbstractImmutableEmptySetTestCase
     @Override
     protected ImmutableSet<Integer> classUnderTest()
     {
-        return Sets.immutable.of();
+        return ImmutableSet.empty();
     }
 
     @Override
     @Test
     public void newWithout()
     {
-        Assert.assertSame(Sets.immutable.of(), Sets.immutable.of().newWithout(1));
-        Assert.assertSame(Sets.immutable.of(), Sets.immutable.of().newWithoutAll(Interval.oneTo(3)));
+        Assert.assertSame(ImmutableSet.empty(), ImmutableSet.empty().newWithout(1));
+        Assert.assertSame(ImmutableSet.empty(), ImmutableSet.empty().newWithoutAll(Interval.oneTo(3)));
     }
 
     @Override
@@ -53,13 +52,13 @@ public class ImmutableEmptySetTest extends AbstractImmutableEmptySetTestCase
     @Test
     public void countByEach()
     {
-        Assert.assertEquals(Bags.immutable.empty(), this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
+        Assert.assertEquals(ImmutableBag.empty(), this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
     }
 
     @Test
     public void countByEach_target()
     {
-        MutableBag<Integer> target = Bags.mutable.empty();
+        MutableBag<Integer> target = MutableBag.empty();
         Assert.assertEquals(target, this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
     }
 }

@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.map.fixed;
 
-import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -23,6 +23,6 @@ public class EmptyMapSerializationTest
                 1L,
                 "rO0ABXNyAC9vcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5maXhlZC5FbXB0eU1hcAAA\n"
                         + "AAAAAAABAgAAeHA=",
-                Maps.fixedSize.of());
+                FixedSizeMap.empty());
     }
 }

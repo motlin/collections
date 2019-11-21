@@ -24,6 +24,7 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -31,6 +32,7 @@ import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.partition.list.PartitionImmutableList;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
@@ -45,8 +47,6 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.collection.immutable.AbstractImmutableCollectionTestCase;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.list.Interval;
@@ -60,8 +60,6 @@ import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 public abstract class AbstractImmutableListTestCase extends AbstractImmutableCollectionTestCase
 {
@@ -178,7 +176,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void forEach()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableList<Integer> collection = this.classUnderTest();
         collection.forEach(CollectionAddProcedure.on(result));
         Assert.assertEquals(collection, result);
@@ -187,7 +185,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void each()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableList<Integer> collection = this.classUnderTest();
         collection.each(result::add);
         Assert.assertEquals(collection, result);
@@ -196,7 +194,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void reverseForEach()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableList<Integer> list = this.classUnderTest();
         list.reverseForEach(result::add);
         Assert.assertEquals(ListIterate.reverseThis(FastList.newList(list)), result);
@@ -205,8 +203,8 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void reverseForEachWithIndex()
     {
-        MutableList<Integer> expected = Lists.mutable.of();
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> expected = MutableList.empty();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableList<Integer> list = this.classUnderTest();
         list.reverseForEachWithIndex((each, index) -> Assert.assertEquals(each - 1, index));
         list.reverseForEachWithIndex((each, index) -> result.add(each + index));
@@ -229,8 +227,8 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void forEachFromTo()
     {
-        MutableList<Integer> result = Lists.mutable.of();
-        MutableList<Integer> reverseResult = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
+        MutableList<Integer> reverseResult = MutableList.empty();
         ImmutableList<Integer> list = this.classUnderTest();
         list.forEach(0, list.size() - 1, result::add);
         Assert.assertEquals(list, result);
@@ -244,8 +242,8 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void forEachWithIndexFromTo()
     {
-        MutableList<Integer> result = Lists.mutable.of();
-        MutableList<Integer> reverseResult = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
+        MutableList<Integer> reverseResult = MutableList.empty();
         ImmutableList<Integer> list = this.classUnderTest();
         list.forEachWithIndex(0, list.size() - 1, ObjectIntProcedures.fromProcedure(result::add));
         Assert.assertEquals(list, result);
@@ -259,7 +257,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void forEachWith()
     {
-        MutableCollection<Integer> result = Lists.mutable.of();
+        MutableCollection<Integer> result = MutableList.empty();
         this.classUnderTest().forEachWith((argument1, argument2) -> result.add(argument1 + argument2), 0);
         Assert.assertEquals(this.classUnderTest(), result);
     }
@@ -268,7 +266,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     public void forEachWithIndex()
     {
         ImmutableList<Integer> list = this.classUnderTest();
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         list.forEachWithIndex((object, index) -> result.add(object + index));
         result.forEachWithIndex((object, index) -> Assert.assertEquals(object, result.set(index, object - index)));
         Assert.assertEquals(list, result);
@@ -307,7 +305,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     @Test
     public void flatCollectWithTarget()
     {
-        MutableCollection<String> actual = this.classUnderTest().flatCollect(integer -> Lists.fixedSize.of(String.valueOf(integer)), FastList.newList());
+        MutableCollection<String> actual = this.classUnderTest().flatCollect(integer -> FixedSizeList.of(String.valueOf(integer)), FastList.newList());
 
         ImmutableCollection<String> expected = this.classUnderTest().collect(String::valueOf);
 
@@ -329,15 +327,15 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         HashingStrategy<Integer> hashingStrategy = HashingStrategies.fromFunction(e -> e % 2);
         if (integers.size() > 1)
         {
-            Assert.assertEquals(Lists.immutable.with(1, 2), integers.distinct(hashingStrategy));
+            Assert.assertEquals(ImmutableList.of(1, 2), integers.distinct(hashingStrategy));
         }
         else if (integers.size() == 1)
         {
-            Assert.assertEquals(Lists.immutable.with(1), integers.distinct(hashingStrategy));
+            Assert.assertEquals(ImmutableList.of(1), integers.distinct(hashingStrategy));
         }
         else
         {
-            Assert.assertEquals(Lists.immutable.empty(), integers.distinct(hashingStrategy));
+            Assert.assertEquals(ImmutableList.empty(), integers.distinct(hashingStrategy));
         }
     }
 
@@ -350,15 +348,15 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
         ImmutableList<Integer> integers = this.classUnderTest();
         if (integers.size() > 1)
         {
-            Assert.assertEquals(Lists.immutable.with(1, 2), integers.distinctBy(e -> e % 2));
+            Assert.assertEquals(ImmutableList.of(1, 2), integers.distinctBy(e -> e % 2));
         }
         else if (integers.size() == 1)
         {
-            Assert.assertEquals(Lists.immutable.with(1), integers.distinctBy(e -> e % 2));
+            Assert.assertEquals(ImmutableList.of(1), integers.distinctBy(e -> e % 2));
         }
         else
         {
-            Assert.assertEquals(Lists.immutable.empty(), integers.distinctBy(e -> e % 2));
+            Assert.assertEquals(ImmutableList.empty(), integers.distinctBy(e -> e % 2));
         }
     }
 
@@ -452,7 +450,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     public void addAllAtIndex()
     {
         Verify.assertThrows(UnsupportedOperationException.class,
-                () -> this.classUnderTest().castToList().addAll(0, Lists.fixedSize.of()));
+                () -> this.classUnderTest().castToList().addAll(0, FixedSizeList.empty()));
     }
 
     @Test
@@ -473,7 +471,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     public void subList()
     {
         Verify.assertListsEqual(
-                Lists.immutable.of(1).castToList(),
+                ImmutableList.of(1).castToList(),
                 this.classUnderTest().castToList().subList(0, 1));
     }
 
@@ -543,10 +541,10 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     public void take()
     {
         ImmutableList<Integer> immutableList = this.classUnderTest();
-        Assert.assertEquals(Lists.immutable.of(), immutableList.take(0));
-        Assert.assertEquals(iList(1), immutableList.take(1));
+        Assert.assertEquals(ImmutableList.empty(), immutableList.take(0));
+        Assert.assertEquals(ImmutableList.of(1), immutableList.take(1));
         Assert.assertEquals(immutableList, immutableList.take(10));
-        MutableList<Integer> mutableList = Lists.mutable.ofAll(immutableList);
+        MutableList<Integer> mutableList = MutableList.ofAll(immutableList);
         Assert.assertEquals(
                 mutableList.take(mutableList.size() - 1),
                 immutableList.take(immutableList.size() - 1));
@@ -565,7 +563,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     public void takeWhile()
     {
         Assert.assertEquals(
-                iList(1),
+                ImmutableList.of(1),
                 this.classUnderTest().takeWhile(Predicates.lessThan(2)));
     }
 
@@ -574,7 +572,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     {
         ImmutableList<Integer> immutableList = this.classUnderTest();
         Assert.assertSame(immutableList, immutableList.drop(0));
-        MutableList<Integer> mutableList = Lists.mutable.ofAll(immutableList);
+        MutableList<Integer> mutableList = MutableList.ofAll(immutableList);
         Assert.assertEquals(mutableList.drop(1), immutableList.drop(1));
 
         if (mutableList.size() > 0)
@@ -583,9 +581,9 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
                     mutableList.drop(mutableList.size() - 1),
                     immutableList.drop(immutableList.size() - 1));
         }
-        Assert.assertEquals(Lists.immutable.of(), immutableList.drop(10));
-        Assert.assertEquals(Lists.immutable.of(), immutableList.drop(immutableList.size()));
-        Assert.assertEquals(Lists.immutable.of(), immutableList.drop(Integer.MAX_VALUE));
+        Assert.assertEquals(ImmutableList.empty(), immutableList.drop(10));
+        Assert.assertEquals(ImmutableList.empty(), immutableList.drop(immutableList.size()));
+        Assert.assertEquals(ImmutableList.empty(), immutableList.drop(Integer.MAX_VALUE));
     }
 
     @Test
@@ -601,7 +599,7 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
                 this.classUnderTest(),
                 this.classUnderTest().dropWhile(Predicates.lessThan(0)));
         Assert.assertEquals(
-                Lists.immutable.of(),
+                ImmutableList.empty(),
                 this.classUnderTest().dropWhile(Predicates.greaterThan(0)));
     }
 
@@ -610,10 +608,10 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     {
         PartitionImmutableList<Integer> partitionAll = this.classUnderTest().partitionWhile(Predicates.greaterThan(0));
         Assert.assertEquals(this.classUnderTest(), partitionAll.getSelected());
-        Assert.assertEquals(Lists.immutable.of(), partitionAll.getRejected());
+        Assert.assertEquals(ImmutableList.empty(), partitionAll.getRejected());
 
         PartitionImmutableList<Integer> partitionNone = this.classUnderTest().partitionWhile(Predicates.lessThan(0));
-        Assert.assertEquals(Lists.immutable.of(), partitionNone.getSelected());
+        Assert.assertEquals(ImmutableList.empty(), partitionNone.getSelected());
         Assert.assertEquals(this.classUnderTest(), partitionNone.getRejected());
     }
 
@@ -638,8 +636,8 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
                 IntLists.mutable.withAll(IntInterval.zeroTo(pairs.size() - 1)),
                 pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
         Assert.assertEquals(
-                Lists.mutable.withAll(Interval.oneTo(pairs.size())),
-                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+                MutableList.ofAll(Interval.oneTo(pairs.size())),
+                pairs.collect(ObjectIntPair::getOne, MutableList.empty()));
     }
 
     /**
@@ -649,22 +647,22 @@ public abstract class AbstractImmutableListTestCase extends AbstractImmutableCol
     public void collectWithIndexWithTarget()
     {
         RichIterable<ObjectIntPair<Integer>> pairs =
-                this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
+                this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, MutableList.empty());
         Assert.assertEquals(
                 IntLists.mutable.withAll(IntInterval.zeroTo(pairs.size() - 1)),
                 pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
         Assert.assertEquals(
-                Lists.mutable.withAll(Interval.oneTo(pairs.size())),
-                pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
+                MutableList.ofAll(Interval.oneTo(pairs.size())),
+                pairs.collect(ObjectIntPair::getOne, MutableList.empty()));
 
         RichIterable<ObjectIntPair<Integer>> setOfPairs =
-                this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, Sets.mutable.empty());
+                this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, MutableSet.empty());
         Assert.assertEquals(
                 IntSets.mutable.withAll(IntInterval.zeroTo(pairs.size() - 1)),
                 setOfPairs.collectInt(ObjectIntPair::getTwo, IntSets.mutable.empty()));
         Assert.assertEquals(
-                Sets.mutable.withAll(Interval.oneTo(pairs.size())),
-                setOfPairs.collect(ObjectIntPair::getOne, Sets.mutable.empty()));
+                MutableSet.ofAll(Interval.oneTo(pairs.size())),
+                setOfPairs.collect(ObjectIntPair::getOne, MutableSet.empty()));
     }
 
     @Test

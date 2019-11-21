@@ -22,13 +22,13 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.ordered.OrderedIterable;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
-import org.eclipse.collections.impl.factory.Sets;
 
 /**
- * This class is a memory efficient list with no elements. It is created by calling Lists.fixedSize.of() which
+ * This class is a memory efficient list with no elements. It is created by calling FixedSizeList.empty() which
  * actually returns a singleton instance.
  */
 final class EmptySet<T>
@@ -39,7 +39,7 @@ final class EmptySet<T>
 
     private Object readResolve()
     {
-        return Sets.fixedSize.of();
+        return FixedSizeSet.empty();
     }
 
     // Weird implementation of clone() is ok on final classes
@@ -167,7 +167,7 @@ final class EmptySet<T>
     @Override
     public <S> MutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
-        return Sets.fixedSize.of();
+        return FixedSizeSet.empty();
     }
 
     @Override
@@ -183,7 +183,7 @@ final class EmptySet<T>
     @Override
     public MutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return Sets.fixedSize.of();
+        return FixedSizeSet.empty();
     }
 
     @Override

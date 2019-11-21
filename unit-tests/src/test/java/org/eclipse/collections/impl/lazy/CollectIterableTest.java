@@ -13,9 +13,9 @@ package org.eclipse.collections.impl.lazy;
 import org.eclipse.collections.api.InternalIterable;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.LazyIterate;
@@ -137,7 +137,7 @@ public class CollectIterableTest extends AbstractLazyIterableTestCase
     {
         LazyIterable<String> stringNums = Interval.fromTo(0, 3).collect(Functions.getToString());
         stringNums.toArray();
-        Assert.assertEquals(Lists.immutable.of("0", "1", "2", "3"), Lists.immutable.ofAll(stringNums));
+        Assert.assertEquals(ImmutableList.of("0", "1", "2", "3"), ImmutableList.ofAll(stringNums));
     }
 }
 

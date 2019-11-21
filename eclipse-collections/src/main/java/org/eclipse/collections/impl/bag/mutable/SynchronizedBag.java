@@ -50,7 +50,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedCollectionSerializationProxy;
-import org.eclipse.collections.impl.factory.Bags;
 
 /**
  * A synchronized view of a {@link MutableBag}. It is imperative that the user manually synchronize on the collection when iterating over it using the
@@ -432,7 +431,7 @@ public class SynchronizedBag<T>
     @Override
     public ImmutableBag<T> toImmutable()
     {
-        return Bags.immutable.withAll(this);
+        return ImmutableBag.ofAll(this);
     }
 
     @Override

@@ -14,7 +14,6 @@ import java.util.EmptyStackException;
 import java.util.Iterator;
 
 import org.eclipse.collections.api.stack.ImmutableStack;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.test.stack.StackIterableTestCase;
 import org.junit.Test;
 
@@ -41,8 +40,8 @@ public interface ImmutableStackTestCase extends StackIterableTestCase
     {
         ImmutableStack<Integer> immutableStack = this.newWith(5, 1, 4, 2, 3);
         ImmutableStack<Integer> poppedStack = immutableStack.pop();
-        assertEquals(Stacks.immutable.withReversed(1, 4, 2, 3), poppedStack);
-        assertEquals(Stacks.immutable.withReversed(5, 1, 4, 2, 3), immutableStack);
+        assertEquals(ImmutableStack.ofReversed(1, 4, 2, 3), poppedStack);
+        assertEquals(ImmutableStack.ofReversed(5, 1, 4, 2, 3), immutableStack);
     }
 
     @Test
@@ -50,7 +49,7 @@ public interface ImmutableStackTestCase extends StackIterableTestCase
     {
         ImmutableStack<Integer> immutableStack = this.newWith(5, 1, 4, 2, 3);
         ImmutableStack<Integer> emptyStack = immutableStack.pop().pop().pop().pop().pop();
-        assertEquals(Stacks.immutable.with(), emptyStack);
+        assertEquals(ImmutableStack.empty(), emptyStack);
         assertThrows(EmptyStackException.class, (Runnable) emptyStack::pop);
     }
 }

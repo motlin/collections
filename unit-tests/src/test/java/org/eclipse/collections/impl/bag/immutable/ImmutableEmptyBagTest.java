@@ -27,6 +27,7 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.api.partition.bag.PartitionImmutableBag;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
@@ -37,8 +38,6 @@ import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -49,11 +48,11 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
-
 public class ImmutableEmptyBagTest extends ImmutableBagTestCase
 {
-    public static final Predicate<String> ERROR_THROWING_PREDICATE = each -> { throw new AssertionError(); };
+    public static final Predicate<String> ERROR_THROWING_PREDICATE = each -> {
+        throw new AssertionError();
+    };
 
     public static final Predicates2<String, Class<Integer>> ERROR_THROWING_PREDICATE_2 = new Predicates2<String, Class<Integer>>()
     {
@@ -78,7 +77,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void testFactory()
     {
-        Verify.assertInstanceOf(ImmutableEmptyBag.class, Bags.immutable.of());
+        Verify.assertInstanceOf(ImmutableEmptyBag.class, ImmutableBag.empty());
     }
 
     @Test
@@ -100,7 +99,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     public void selectDuplicates()
     {
         Assert.assertEquals(
-                Bags.immutable.empty(),
+                ImmutableBag.empty(),
                 this.newBag().selectDuplicates());
     }
 
@@ -129,13 +128,13 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     {
         Bag<String> bag = this.newBag();
         Bag<ObjectIntPair<String>> actual =
-                bag.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
-        Bag<ObjectIntPair<String>> expected = Bags.immutable.empty();
+                bag.collectWithOccurrences(PrimitiveTuples::pair, MutableBag.empty());
+        Bag<ObjectIntPair<String>> expected = ImmutableBag.empty();
         Assert.assertEquals(expected, actual);
 
         Set<ObjectIntPair<String>> actual2 =
-                bag.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
-        ImmutableSet<ObjectIntPair<String>> expected2 = Sets.immutable.empty();
+                bag.collectWithOccurrences(PrimitiveTuples::pair, MutableSet.empty());
+        ImmutableSet<ObjectIntPair<String>> expected2 = ImmutableSet.empty();
         Assert.assertEquals(expected2, actual2);
     }
 
@@ -159,10 +158,10 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void selectInstancesOf()
     {
-        ImmutableBag<Number> numbers = Bags.immutable.of();
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Double.class));
-        Assert.assertEquals(iBag(), numbers.selectInstancesOf(Number.class));
+        ImmutableBag<Number> numbers = ImmutableBag.empty();
+        Assert.assertEquals(ImmutableBag.empty(), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(ImmutableBag.empty(), numbers.selectInstancesOf(Double.class));
+        Assert.assertEquals(ImmutableBag.empty(), numbers.selectInstancesOf(Number.class));
     }
 
     @Override
@@ -190,7 +189,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Override
     public void toStringOfItemToCount()
     {
-        Assert.assertEquals("{}", Bags.immutable.of().toStringOfItemToCount());
+        Assert.assertEquals("{}", ImmutableBag.empty().toStringOfItemToCount());
     }
 
     @Override
@@ -551,13 +550,13 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void countByEach()
     {
-        Assert.assertEquals(Bags.immutable.empty(), this.newBag().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
+        Assert.assertEquals(ImmutableBag.empty(), this.newBag().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
     }
 
     @Test
     public void countByEach_target()
     {
-        MutableBag<String> target = Bags.mutable.empty();
+        MutableBag<String> target = MutableBag.empty();
         Assert.assertEquals(target, this.newBag().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
     }
 
@@ -585,7 +584,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void toSortedBag_empty()
     {
-        ImmutableBag<String> immutableBag = Bags.immutable.of();
+        ImmutableBag<String> immutableBag = ImmutableBag.empty();
 
         MutableSortedBag<String> sortedBag = immutableBag.toSortedBag(Comparators.reverseNaturalOrder());
         sortedBag.addOccurrences("apple", 3);
@@ -597,7 +596,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
     @Test
     public void toSortedBagBy_empty()
     {
-        ImmutableBag<Integer> immutableBag = Bags.immutable.of();
+        ImmutableBag<Integer> immutableBag = ImmutableBag.empty();
 
         Function<Integer, Integer> function = object -> object * -1;
         MutableSortedBag<Integer> sortedBag = immutableBag.toSortedBagBy(function);
@@ -625,7 +624,7 @@ public class ImmutableEmptyBagTest extends ImmutableBagTestCase
         super.selectUnique();
 
         ImmutableBag<String> bag = this.newBag();
-        ImmutableSet<String> expected = Sets.immutable.empty();
+        ImmutableSet<String> expected = ImmutableSet.empty();
         ImmutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
     }

@@ -25,8 +25,6 @@ import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimap;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimap;
 import org.eclipse.collections.impl.multimap.ImmutableMultimapSerializationProxy;
@@ -57,13 +55,13 @@ public final class ImmutableListMultimapImpl<K, V>
     @Override
     protected ImmutableList<V> createCollection()
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 
     @Override
     public ImmutableListMultimap<K, V> newEmpty()
     {
-        return new ImmutableListMultimapImpl<>(Maps.immutable.of());
+        return new ImmutableListMultimapImpl<>(ImmutableMap.empty());
     }
 
     @Override

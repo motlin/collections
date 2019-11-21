@@ -20,25 +20,25 @@ import org.eclipse.collections.api.factory.map.MutableMapFactory;
  * Mutable Examples:
  *
  * <pre>
- * MutableMap&lt;String, String&gt; emptyMap = Maps.mutable.empty();
- * MutableMap&lt;String, String&gt; mapWith = Maps.mutable.with("a", "A", "b", "B", "c", "C");
- * MutableMap&lt;String, String&gt; mapOf = Maps.mutable.of("a", "A", "b", "B", "c", "C");
+ * MutableMap&lt;String, String&gt; emptyMap = MutableMap.empty();
+ * MutableMap&lt;String, String&gt; mapWith = MutableMap.of("a", "A", "b", "B", "c", "C");
+ * MutableMap&lt;String, String&gt; mapOf = MutableMap.of("a", "A", "b", "B", "c", "C");
  * </pre>
  *
  * Immutable Examples:
  *
  * <pre>
- * ImmutableMap&lt;String, String&gt; emptyMap = Maps.immutable.empty();
- * ImmutableMap&lt;String, String&gt; mapWith = Maps.immutable.with("a", "A", "b", "B", "c", "C");
- * ImmutableMap&lt;String, String&gt; mapOf = Maps.immutable.of("a", "A", "b", "B", "c", "C");
+ * ImmutableMap&lt;String, String&gt; emptyMap = ImmutableMap.empty();
+ * ImmutableMap&lt;String, String&gt; mapWith = ImmutableMap.of("a", "A", "b", "B", "c", "C");
+ * ImmutableMap&lt;String, String&gt; mapOf = ImmutableMap.of("a", "A", "b", "B", "c", "C");
  * </pre>
  *
  * FixedSize Examples:
  *
  * <pre>
- * FixedSizeMap&lt;String, String&gt; emptyMap = Maps.fixedSize.empty();
- * FixedSizeMap&lt;String, String&gt; mapWith = Maps.fixedSize.with("a", "A", "b", "B", "c", "C");
- * FixedSizeMap&lt;String, String&gt; mapOf = Maps.fixedSize.of("a", "A", "b", "B", "c", "C");
+ * FixedSizeMap&lt;String, String&gt; emptyMap = FixedSizeMap.empty();
+ * FixedSizeMap&lt;String, String&gt; mapWith = FixedSizeMap.of("a", "A", "b", "B", "c", "C");
+ * FixedSizeMap&lt;String, String&gt; mapOf = FixedSizeMap.of("a", "A", "b", "B", "c", "C");
  * </pre>
  */
 @SuppressWarnings("ConstantNamingConvention")

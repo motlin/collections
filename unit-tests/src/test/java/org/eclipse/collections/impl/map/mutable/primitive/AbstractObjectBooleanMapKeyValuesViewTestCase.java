@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
@@ -38,8 +39,6 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -104,7 +103,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     @Test
     public void forEach()
     {
-        MutableList<ObjectBooleanPair<Integer>> result = Lists.mutable.of();
+        MutableList<ObjectBooleanPair<Integer>> result = MutableList.empty();
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false, 3, true);
         collection.forEach(CollectionAddProcedure.on(result));
         Verify.assertSize(3, result);
@@ -114,30 +113,30 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     @Test
     public void forEachWith()
     {
-        MutableBag<ObjectBooleanPair<Integer>> result = Bags.mutable.of();
-        MutableBag<Integer> result2 = Bags.mutable.of();
+        MutableBag<ObjectBooleanPair<Integer>> result = MutableBag.empty();
+        MutableBag<Integer> result2 = MutableBag.empty();
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false, 3, true);
         collection.forEachWith((argument1, argument2) -> {
             result.add(argument1);
             result2.add(argument2);
         }, 0);
 
-        Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), false), PrimitiveTuples.pair(Integer.valueOf(3), true)), result);
-        Assert.assertEquals(Bags.immutable.of(0, 0, 0), result2);
+        Assert.assertEquals(ImmutableBag.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), false), PrimitiveTuples.pair(Integer.valueOf(3), true)), result);
+        Assert.assertEquals(ImmutableBag.of(0, 0, 0), result2);
     }
 
     @Test
     public void forEachWithIndex()
     {
-        MutableBag<ObjectBooleanPair<Integer>> elements = Bags.mutable.of();
-        MutableBag<Integer> indexes = Bags.mutable.of();
+        MutableBag<ObjectBooleanPair<Integer>> elements = MutableBag.empty();
+        MutableBag<Integer> indexes = MutableBag.empty();
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false, 3, true);
         collection.forEachWithIndex((object, index) -> {
             elements.add(object);
             indexes.add(index);
         });
-        Assert.assertEquals(Bags.mutable.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), false), PrimitiveTuples.pair(Integer.valueOf(3), true)), elements);
-        Assert.assertEquals(Bags.mutable.of(0, 1, 2), indexes);
+        Assert.assertEquals(MutableBag.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), false), PrimitiveTuples.pair(Integer.valueOf(3), true)), elements);
+        Assert.assertEquals(MutableBag.of(0, 1, 2), indexes);
     }
 
     @Test
@@ -162,7 +161,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     public void selectWith_target()
     {
         HashBag<ObjectBooleanPair<Integer>> result = this.newWith(1, true, 2, false, 3, true).selectWith(Predicates2.notEqual(), PrimitiveTuples.pair(Integer.valueOf(2), false), HashBag.newBag());
-        Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(3), true)), result);
+        Assert.assertEquals(ImmutableBag.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(3), true)), result);
     }
 
     @Test
@@ -187,7 +186,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     public void rejectWith_target()
     {
         HashBag<ObjectBooleanPair<Integer>> result = this.newWith(1, true, 2, false, 3, true).rejectWith(Object::equals, PrimitiveTuples.pair(Integer.valueOf(2), false), HashBag.newBag());
-        Assert.assertEquals(Bags.immutable.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(3), true)), result);
+        Assert.assertEquals(ImmutableBag.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(3), true)), result);
     }
 
     @Test
@@ -386,7 +385,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     public void collectWith()
     {
         Assert.assertEquals(
-                Bags.mutable.of(5L, 7L, 9L),
+                MutableBag.of(5L, 7L, 9L),
                 this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> argument1.getOne() + argument1.getOne() + argument2, 1L).toBag());
     }
 
@@ -394,7 +393,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     public void collectWith_target()
     {
         Assert.assertEquals(
-                Bags.mutable.of(5L, 7L, 9L),
+                MutableBag.of(5L, 7L, 9L),
                 this.newWith(2, true, 3, false, 4, true).collectWith((argument1, argument2) -> argument1.getOne() + argument1.getOne() + argument2, 1L, HashBag.newBag()));
     }
 
@@ -430,7 +429,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     public void iterator()
     {
         RichIterable<ObjectBooleanPair<Integer>> objects = this.newWith(1, true, 2, false, 3, true);
-        MutableBag<ObjectBooleanPair<Integer>> actual = Bags.mutable.of();
+        MutableBag<ObjectBooleanPair<Integer>> actual = MutableBag.empty();
         Iterator<ObjectBooleanPair<Integer>> iterator = objects.iterator();
         for (int i = objects.size(); i-- > 0; )
         {
@@ -569,7 +568,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         RichIterable<ObjectBooleanPair<Integer>> pairs = this.newWith(5, false, 1, true, 2, true);
         MutableList<ObjectBooleanPair<Integer>> list = pairs.toSortedList();
-        Assert.assertEquals(Lists.mutable.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), true), PrimitiveTuples.pair(Integer.valueOf(5), false)), list);
+        Assert.assertEquals(MutableList.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), true), PrimitiveTuples.pair(Integer.valueOf(5), false)), list);
     }
 
     @Test
@@ -577,7 +576,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         RichIterable<ObjectBooleanPair<Integer>> pairs = this.newWith(5, false, 1, true, 2, true);
         MutableList<ObjectBooleanPair<Integer>> list = pairs.toSortedList(Comparators.reverseNaturalOrder());
-        Assert.assertEquals(Lists.mutable.of(PrimitiveTuples.pair(Integer.valueOf(5), false), PrimitiveTuples.pair(Integer.valueOf(2), true), PrimitiveTuples.pair(Integer.valueOf(1), true)), list);
+        Assert.assertEquals(MutableList.of(PrimitiveTuples.pair(Integer.valueOf(5), false), PrimitiveTuples.pair(Integer.valueOf(2), true), PrimitiveTuples.pair(Integer.valueOf(1), true)), list);
     }
 
     @Test
@@ -585,7 +584,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         RichIterable<ObjectBooleanPair<Integer>> pairs = this.newWith(5, false, 1, true, 2, true);
         MutableList<ObjectBooleanPair<Integer>> list = pairs.toSortedListBy(String::valueOf);
-        Assert.assertEquals(Lists.mutable.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), true), PrimitiveTuples.pair(Integer.valueOf(5), false)), list);
+        Assert.assertEquals(MutableList.of(PrimitiveTuples.pair(Integer.valueOf(1), true), PrimitiveTuples.pair(Integer.valueOf(2), true), PrimitiveTuples.pair(Integer.valueOf(5), false)), list);
     }
 
     @Test
@@ -759,7 +758,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     public void groupByEach()
     {
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false, 3, true);
-        Function<ObjectBooleanPair<Integer>, MutableList<Boolean>> function = object -> Lists.mutable.of(PrimitiveTuples.pair(Integer.valueOf(1), true).equals(object));
+        Function<ObjectBooleanPair<Integer>, MutableList<Boolean>> function = object -> MutableList.of(PrimitiveTuples.pair(Integer.valueOf(1), true).equals(object));
 
         Multimap<Boolean, ObjectBooleanPair<Integer>> multimap = collection.groupByEach(function);
         Assert.assertEquals(3, multimap.size());
@@ -774,8 +773,8 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false);
         RichIterable<Pair<ObjectBooleanPair<Integer>, Integer>> result = collection.zip(Interval.oneTo(5));
 
-        Assert.assertTrue(Bags.mutable.of(Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(1), true), 1), Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(2), false), 2)).equals(result.toBag())
-                || Bags.mutable.of(Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(2), false), 1), Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(1), true), 2)).equals(result.toBag()));
+        Assert.assertTrue(MutableBag.of(Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(1), true), 1), Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(2), false), 2)).equals(result.toBag())
+                || MutableBag.of(Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(2), false), 1), Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(1), true), 2)).equals(result.toBag()));
     }
 
     @Test
@@ -783,8 +782,8 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false);
         RichIterable<Pair<ObjectBooleanPair<Integer>, Integer>> result = collection.zipWithIndex();
-        Assert.assertTrue(Bags.mutable.of(Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(1), true), 0), Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(2), false), 1)).equals(result.toBag())
-                || Bags.mutable.of(Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(2), false), 0), Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(1), true), 1)).equals(result.toBag()));
+        Assert.assertTrue(MutableBag.of(Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(1), true), 0), Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(2), false), 1)).equals(result.toBag())
+                || MutableBag.of(Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(2), false), 0), Tuples.pair(PrimitiveTuples.pair(Integer.valueOf(1), true), 1)).equals(result.toBag()));
     }
 
     @Test
@@ -792,7 +791,7 @@ public abstract class AbstractObjectBooleanMapKeyValuesViewTestCase
     {
         RichIterable<ObjectBooleanPair<Integer>> collection = this.newWith(1, true, 2, false, 3, true);
         Assert.assertEquals(
-                Bags.immutable.of(
+                ImmutableBag.of(
                         FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(1), true)),
                         FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(2), false)),
                         FastList.newListWith(PrimitiveTuples.pair(Integer.valueOf(3), true))),

@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.bimap.immutable;
 
-import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -25,8 +25,8 @@ public class ImmutableHashBiMapSerializationTest
     public void serializedForm()
     {
         ImmutableHashBiMap<Integer, Character> biMap = new ImmutableHashBiMap<>(
-                Maps.immutable.with(1, 'a'),
-                Maps.immutable.with('a', 1));
+                ImmutableMap.of(1, 'a'),
+                ImmutableMap.of('a', 1));
 
         Verify.assertSerializedForm(1L, SERIALIZED_FORM, biMap);
     }
@@ -35,8 +35,8 @@ public class ImmutableHashBiMapSerializationTest
     public void inverse()
     {
         ImmutableHashBiMap<Character, Integer> biMap = new ImmutableHashBiMap<>(
-                Maps.immutable.with('a', 1),
-                Maps.immutable.with(1, 'a'));
+                ImmutableMap.of('a', 1),
+                ImmutableMap.of(1, 'a'));
 
         Verify.assertSerializedForm(1L, "rO0ABXNyAE1vcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJpbWFwLmltbXV0YWJsZS5JbW11\n"
                 + "dGFibGVCaU1hcFNlcmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHB3BAAAAAFzcgARamF2YS5s\n"

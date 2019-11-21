@@ -36,7 +36,6 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.factory.Bags;
-import org.eclipse.collections.api.factory.Sets;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.ordered.OrderedIterable;
@@ -111,7 +110,7 @@ public interface ImmutableBag<T> extends UnsortedBag<T>, ImmutableBagIterable<T>
     @Override
     default ImmutableSet<T> selectUnique()
     {
-        MutableSet<T> result = Sets.mutable.empty();
+        MutableSet<T> result = MutableSet.empty();
         this.forEachWithOccurrences((each, occurrences) ->
         {
             if (occurrences == 1)

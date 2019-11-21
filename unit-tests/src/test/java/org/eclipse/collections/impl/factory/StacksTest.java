@@ -90,50 +90,50 @@ public class StacksTest
     @Test
     public void emptyStack()
     {
-        Assert.assertTrue(Stacks.immutable.of().isEmpty());
+        Assert.assertTrue(ImmutableStack.empty().isEmpty());
     }
 
     @Test
     public void newStackWith()
     {
-        ImmutableStack<String> stack = Stacks.immutable.of();
-        Assert.assertEquals(stack, Stacks.immutable.of(stack.toArray()));
-        Assert.assertEquals(stack = stack.push("1"), Stacks.immutable.of("1"));
-        Assert.assertEquals(stack = stack.push("2"), Stacks.immutable.of("1", "2"));
-        Assert.assertEquals(stack = stack.push("3"), Stacks.immutable.of("1", "2", "3"));
-        Assert.assertEquals(stack = stack.push("4"), Stacks.immutable.of("1", "2", "3", "4"));
-        Assert.assertEquals(stack = stack.push("5"), Stacks.immutable.of("1", "2", "3", "4", "5"));
-        Assert.assertEquals(stack = stack.push("6"), Stacks.immutable.of("1", "2", "3", "4", "5", "6"));
-        Assert.assertEquals(stack = stack.push("7"), Stacks.immutable.of("1", "2", "3", "4", "5", "6", "7"));
-        Assert.assertEquals(stack = stack.push("8"), Stacks.immutable.of("1", "2", "3", "4", "5", "6", "7", "8"));
-        Assert.assertEquals(stack = stack.push("9"), Stacks.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
-        Assert.assertEquals(stack = stack.push("10"), Stacks.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
-        Assert.assertEquals(stack = stack.push("11"), Stacks.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
-        Assert.assertEquals(stack = stack.push("12"), Stacks.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
+        ImmutableStack<String> stack = ImmutableStack.empty();
+        Assert.assertEquals(stack, ImmutableStack.of(stack.toArray()));
+        Assert.assertEquals(stack = stack.push("1"), ImmutableStack.of("1"));
+        Assert.assertEquals(stack = stack.push("2"), ImmutableStack.of("1", "2"));
+        Assert.assertEquals(stack = stack.push("3"), ImmutableStack.of("1", "2", "3"));
+        Assert.assertEquals(stack = stack.push("4"), ImmutableStack.of("1", "2", "3", "4"));
+        Assert.assertEquals(stack = stack.push("5"), ImmutableStack.of("1", "2", "3", "4", "5"));
+        Assert.assertEquals(stack = stack.push("6"), ImmutableStack.of("1", "2", "3", "4", "5", "6"));
+        Assert.assertEquals(stack = stack.push("7"), ImmutableStack.of("1", "2", "3", "4", "5", "6", "7"));
+        Assert.assertEquals(stack = stack.push("8"), ImmutableStack.of("1", "2", "3", "4", "5", "6", "7", "8"));
+        Assert.assertEquals(stack = stack.push("9"), ImmutableStack.of("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        Assert.assertEquals(stack = stack.push("10"), ImmutableStack.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        Assert.assertEquals(stack = stack.push("11"), ImmutableStack.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+        Assert.assertEquals(stack = stack.push("12"), ImmutableStack.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
     }
 
     @SuppressWarnings("RedundantArrayCreation")
     @Test
     public void newStackWithArray()
     {
-        ImmutableStack<String> stack = Stacks.immutable.of();
-        Assert.assertEquals(stack = stack.push("1"), Stacks.immutable.of(new String[]{"1"}));
-        Assert.assertEquals(stack = stack.push("2"), Stacks.immutable.of(new String[]{"1", "2"}));
-        Assert.assertEquals(stack = stack.push("3"), Stacks.immutable.of(new String[]{"1", "2", "3"}));
-        Assert.assertEquals(stack = stack.push("4"), Stacks.immutable.of(new String[]{"1", "2", "3", "4"}));
-        Assert.assertEquals(stack = stack.push("5"), Stacks.immutable.of(new String[]{"1", "2", "3", "4", "5"}));
-        Assert.assertEquals(stack = stack.push("6"), Stacks.immutable.of(new String[]{"1", "2", "3", "4", "5", "6"}));
-        Assert.assertEquals(stack = stack.push("7"), Stacks.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7"}));
-        Assert.assertEquals(stack = stack.push("8"), Stacks.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8"}));
-        Assert.assertEquals(stack = stack.push("9"), Stacks.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
-        Assert.assertEquals(stack = stack.push("10"), Stacks.immutable.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-        Assert.assertEquals(stack = stack.push("11"), Stacks.immutable.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
+        ImmutableStack<String> stack = ImmutableStack.empty();
+        Assert.assertEquals(stack = stack.push("1"), ImmutableStack.of(new String[]{"1"}));
+        Assert.assertEquals(stack = stack.push("2"), ImmutableStack.of(new String[]{"1", "2"}));
+        Assert.assertEquals(stack = stack.push("3"), ImmutableStack.of(new String[]{"1", "2", "3"}));
+        Assert.assertEquals(stack = stack.push("4"), ImmutableStack.of(new String[]{"1", "2", "3", "4"}));
+        Assert.assertEquals(stack = stack.push("5"), ImmutableStack.of(new String[]{"1", "2", "3", "4", "5"}));
+        Assert.assertEquals(stack = stack.push("6"), ImmutableStack.of(new String[]{"1", "2", "3", "4", "5", "6"}));
+        Assert.assertEquals(stack = stack.push("7"), ImmutableStack.of(new String[]{"1", "2", "3", "4", "5", "6", "7"}));
+        Assert.assertEquals(stack = stack.push("8"), ImmutableStack.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8"}));
+        Assert.assertEquals(stack = stack.push("9"), ImmutableStack.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+        Assert.assertEquals(stack = stack.push("10"), ImmutableStack.of(new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+        Assert.assertEquals(stack = stack.push("11"), ImmutableStack.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"));
     }
 
     @Test
     public void newStackWithStack()
     {
-        ImmutableStack<String> stack = Stacks.immutable.of();
+        ImmutableStack<String> stack = ImmutableStack.empty();
         ArrayStack<String> arrayStack = ArrayStack.newStackWith("1");
         Assert.assertEquals(stack = stack.push("1"), arrayStack.toImmutable());
         arrayStack.push("2");
@@ -162,11 +162,11 @@ public class StacksTest
     public void newStackWithWithStack()
     {
         ArrayStack<Object> expected = ArrayStack.newStack();
-        Assert.assertEquals(expected, Stacks.mutable.ofAll(ArrayStack.newStack()));
+        Assert.assertEquals(expected, MutableStack.ofAll(ArrayStack.newStack()));
         expected.push(1);
-        Assert.assertEquals(ArrayStack.newStackWith(1), Stacks.mutable.ofAll(expected));
+        Assert.assertEquals(ArrayStack.newStackWith(1), MutableStack.ofAll(expected));
         expected.push(2);
-        Assert.assertEquals(ArrayStack.newStackWith(2, 1), Stacks.mutable.ofAll(expected));
+        Assert.assertEquals(ArrayStack.newStackWith(2, 1), MutableStack.ofAll(expected));
     }
 
     @Test

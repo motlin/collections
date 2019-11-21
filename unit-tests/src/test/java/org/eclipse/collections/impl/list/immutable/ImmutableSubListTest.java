@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.list.immutable;
 import java.util.ListIterator;
 
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,7 +21,7 @@ public class ImmutableSubListTest extends AbstractImmutableListTestCase
     @Override
     protected ImmutableList<Integer> classUnderTest()
     {
-        return Lists.immutable.of(0, 1, 2, 3, 4, 5, 6, 7).subList(1, 5);
+        return ImmutableList.of(0, 1, 2, 3, 4, 5, 6, 7).subList(1, 5);
     }
 
     @Test
@@ -68,21 +67,21 @@ public class ImmutableSubListTest extends AbstractImmutableListTestCase
     @Test
     public void getOnly()
     {
-        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 2);
+        ImmutableList<Integer> list = ImmutableList.of(1, 2, 3, 4, 5).subList(1, 2);
         Assert.assertEquals(Integer.valueOf(2), list.getOnly());
     }
 
     @Test(expected = IllegalStateException.class)
     public void getOnly_exception_when_empty()
     {
-        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 1);
+        ImmutableList<Integer> list = ImmutableList.of(1, 2, 3, 4, 5).subList(1, 1);
         list.getOnly();
     }
 
     @Test(expected = IllegalStateException.class)
     public void getOnly_exception_when_multiple_items()
     {
-        ImmutableList<Integer> list = Lists.immutable.of(1, 2, 3, 4, 5).subList(1, 3);
+        ImmutableList<Integer> list = ImmutableList.of(1, 2, 3, 4, 5).subList(1, 3);
         list.getOnly();
     }
 }

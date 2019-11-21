@@ -19,6 +19,7 @@ import org.eclipse.collections.api.list.primitive.MutableFloatList;
 import org.eclipse.collections.api.list.primitive.MutableIntList;
 import org.eclipse.collections.api.list.primitive.MutableLongList;
 import org.eclipse.collections.api.list.primitive.MutableShortList;
+import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.api.stack.primitive.BooleanStack;
 import org.eclipse.collections.api.stack.primitive.ByteStack;
@@ -28,8 +29,6 @@ import org.eclipse.collections.api.stack.primitive.FloatStack;
 import org.eclipse.collections.api.stack.primitive.IntStack;
 import org.eclipse.collections.api.stack.primitive.LongStack;
 import org.eclipse.collections.api.stack.primitive.ShortStack;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.factory.primitive.BooleanStacks;
 import org.eclipse.collections.impl.factory.primitive.ByteLists;
@@ -61,13 +60,13 @@ public interface TransformsToStackTrait extends RichIterableTestCase
     @Override
     default <T> StackIterable<T> getExpectedTransformed(T... elements)
     {
-        return Stacks.immutable.withReversed(elements);
+        return ImmutableStack.ofReversed(elements);
     }
 
     @Override
     default <T> MutableList<T> newMutableForTransform(T... elements)
     {
-        return Lists.mutable.with(elements);
+        return MutableList.of(elements);
     }
 
     @Override
