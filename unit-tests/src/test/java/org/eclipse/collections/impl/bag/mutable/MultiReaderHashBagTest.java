@@ -19,6 +19,7 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
@@ -28,8 +29,6 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -369,8 +368,8 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         MutableBag<Integer> integers3 = MultiReaderHashBag.newBagWith(1, null, 3, 4, 5);
         MutableBag<Integer> integers4 = MultiReaderHashBag.newBagWith(1, null, 3, 4, 5);
         MutableBag<Integer> integers5 = MultiReaderHashBag.newBagWith(1, null, 3);
-        MutableBag<Integer> randomAccessList = Bags.mutable.of(1, 2, 3);
-        MutableBag<Integer> randomAccessList2 = Bags.mutable.of(2, 3, 4);
+        MutableBag<Integer> randomAccessList = MutableBag.of(1, 2, 3);
+        MutableBag<Integer> randomAccessList2 = MutableBag.of(2, 3, 4);
         Verify.assertEqualsAndHashCode(integers, integers);
         Verify.assertPostSerializedEqualsAndHashCode(integers);
         Verify.assertEqualsAndHashCode(integers, integers2);
@@ -378,7 +377,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
         Assert.assertNotEquals(integers, integers3);
         Assert.assertNotEquals(integers, integers5);
         Assert.assertNotEquals(integers, randomAccessList2);
-        Assert.assertNotEquals(integers, Sets.fixedSize.of());
+        Assert.assertNotEquals(integers, FixedSizeSet.empty());
         Verify.assertEqualsAndHashCode(integers3, integers4);
         Assert.assertEquals(integers, integers2);
         Assert.assertNotEquals(integers, integers3);
@@ -552,7 +551,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     public void selectUnique()
     {
         MutableBag<String> bag = this.newWith("0", "1", "1", "1", "1", "2", "2", "2", "3", "3", "4", "5");
-        MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
+        MutableSet<String> expected = MutableSet.of("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
     }
@@ -616,7 +615,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
     {
         MultiReaderHashBag<Integer> numbers = this.newWith(1, 1, 1, 2, 2, 3, 3);
         MutableBag<ObjectIntPair<Integer>> pairs =
-                numbers.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
+                numbers.collectWithOccurrences(PrimitiveTuples::pair, MutableBag.empty());
         Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(1))
                 && pair.getTwo() == 3);
         Verify.assertAnySatisfy(pairs, pair -> pair.getOne().equals(new Integer(2))
@@ -625,7 +624,7 @@ public class MultiReaderHashBagTest extends MultiReaderMutableCollectionTestCase
                 && pair.getTwo() == 2);
         numbers.withReadLockAndDelegate(bag -> {
             MutableBag<ObjectIntPair<Integer>> pairs2 =
-                    bag.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
+                    bag.collectWithOccurrences(PrimitiveTuples::pair, MutableBag.empty());
             Verify.assertAnySatisfy(pairs2, pair -> pair.getOne().equals(new Integer(1))
                     && pair.getTwo() == 3);
             Verify.assertAnySatisfy(pairs2, pair -> pair.getOne().equals(new Integer(2))

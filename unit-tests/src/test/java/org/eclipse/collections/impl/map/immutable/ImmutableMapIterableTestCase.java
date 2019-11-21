@@ -15,7 +15,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.ImmutableMapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
@@ -23,8 +25,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -83,7 +83,7 @@ public abstract class ImmutableMapIterableTestCase
     @Test
     public void tap()
     {
-        MutableList<String> tapResult = Lists.mutable.of();
+        MutableList<String> tapResult = MutableList.empty();
         ImmutableMapIterable<Integer, String> map = this.classUnderTest();
         Assert.assertSame(map, map.tap(tapResult::add));
         Assert.assertEquals(map.toList(), tapResult);
@@ -226,7 +226,7 @@ public abstract class ImmutableMapIterableTestCase
         Object actualParameter = new Object();
 
         MutableSet<String> actualValues = UnifiedSet.newSet();
-        MutableList<Object> actualParameters = Lists.mutable.of();
+        MutableList<Object> actualParameters = MutableList.empty();
 
         this.classUnderTest().forEachWith((eachValue, parameter) -> {
             actualValues.add(eachValue);
@@ -241,7 +241,7 @@ public abstract class ImmutableMapIterableTestCase
     public void forEachWithIndex()
     {
         MutableSet<String> actualValues = UnifiedSet.newSet();
-        MutableList<Integer> actualIndices = Lists.mutable.of();
+        MutableList<Integer> actualIndices = MutableList.empty();
 
         this.classUnderTest().forEachWithIndex((eachValue, index) -> {
             actualValues.add(eachValue);
@@ -349,7 +349,7 @@ public abstract class ImmutableMapIterableTestCase
     {
         if (this.size() == 0)
         {
-            return Lists.mutable.of();
+            return MutableList.empty();
         }
         return Interval.zeroTo(this.size() - 1);
     }
@@ -395,8 +395,8 @@ public abstract class ImmutableMapIterableTestCase
     {
         ImmutableMapIterable<Integer, String> immutable = this.classUnderTest();
         ImmutableMapIterable<Integer, String> immutable2 = immutable.newWithoutAllKeys(immutable.keysView());
-        ImmutableMapIterable<Integer, String> immutable3 = immutable.newWithoutAllKeys(Lists.immutable.of());
+        ImmutableMapIterable<Integer, String> immutable3 = immutable.newWithoutAllKeys(ImmutableList.empty());
         Assert.assertEquals(immutable, immutable3);
-        Assert.assertEquals(Maps.immutable.of(), immutable2);
+        Assert.assertEquals(ImmutableMap.of(), immutable2);
     }
 }

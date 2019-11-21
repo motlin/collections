@@ -21,12 +21,11 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.tuple.Tuples;
 
 final class ImmutableSingletonMap<K, V>
@@ -53,19 +52,19 @@ final class ImmutableSingletonMap<K, V>
     @Override
     public RichIterable<K> keysView()
     {
-        return Lists.immutable.with(this.key1).asLazy();
+        return ImmutableList.of(this.key1).asLazy();
     }
 
     @Override
     public RichIterable<V> valuesView()
     {
-        return Lists.immutable.with(this.value1).asLazy();
+        return ImmutableList.of(this.value1).asLazy();
     }
 
     @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
-        return Lists.immutable.with(Tuples.pair(this.key1, this.value1)).asLazy();
+        return ImmutableList.of(Tuples.pair(this.key1, this.value1)).asLazy();
     }
 
     @Override
@@ -94,13 +93,13 @@ final class ImmutableSingletonMap<K, V>
     @Override
     public Set<K> keySet()
     {
-        return Sets.immutable.with(this.key1).castToSet();
+        return ImmutableSet.of(this.key1).castToSet();
     }
 
     @Override
     public Collection<V> values()
     {
-        return Lists.immutable.with(this.value1).castToList();
+        return ImmutableList.of(this.value1).castToList();
     }
 
     @Override
@@ -135,7 +134,7 @@ final class ImmutableSingletonMap<K, V>
     @Override
     public ImmutableMap<V, K> flipUniqueValues()
     {
-        return Maps.immutable.with(this.value1, this.key1);
+        return ImmutableMap.of(this.value1, this.key1);
     }
 
     @Override
@@ -169,7 +168,7 @@ final class ImmutableSingletonMap<K, V>
         {
             return this;
         }
-        return Maps.immutable.empty();
+        return ImmutableMap.empty();
     }
 
     @Override
@@ -177,7 +176,7 @@ final class ImmutableSingletonMap<K, V>
     {
         if (predicate.accept(this.key1, this.value1))
         {
-            return Maps.immutable.empty();
+            return ImmutableMap.empty();
         }
         return this;
     }
@@ -186,13 +185,13 @@ final class ImmutableSingletonMap<K, V>
     public <K2, V2> ImmutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
         Pair<K2, V2> pair = function.value(this.key1, this.value1);
-        return Maps.immutable.with(pair.getOne(), pair.getTwo());
+        return ImmutableMap.of(pair.getOne(), pair.getTwo());
     }
 
     @Override
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return Maps.immutable.with(this.key1, function.value(this.key1, this.value1));
+        return ImmutableMap.of(this.key1, function.value(this.key1, this.value1));
     }
 
     @Override

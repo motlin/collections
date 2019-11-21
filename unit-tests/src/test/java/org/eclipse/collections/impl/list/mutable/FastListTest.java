@@ -21,10 +21,14 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Predicates;
@@ -36,9 +40,6 @@ import org.eclipse.collections.impl.block.function.MinSizeFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.CountProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.math.IntegerSum;
@@ -52,10 +53,6 @@ import org.eclipse.collections.impl.utility.LazyIterate;
 import org.eclipse.collections.impl.utility.ListIterate;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
 
 /**
  * JUnit test for {@link FastList}.
@@ -82,11 +79,11 @@ public class FastListTest extends AbstractListTestCase
         Assert.assertEquals(FastList.newListWith(null, null, null, null, null), FastList.newWithNValues(5, () -> null));
         Assert.assertEquals(
                 FastList.newListWith(
-                        Lists.mutable.with(),
-                        Lists.mutable.with(),
-                        Lists.mutable.with(),
-                        Lists.mutable.with(),
-                        Lists.mutable.with()),
+                        MutableList.empty(),
+                        MutableList.empty(),
+                        MutableList.empty(),
+                        MutableList.empty(),
+                        MutableList.empty()),
                 FastList.newWithNValues(5, FastList::new));
     }
 
@@ -102,7 +99,7 @@ public class FastListTest extends AbstractListTestCase
     public void testFastListNewWithContainsAllItems()
     {
         Assert.assertEquals(
-                Bags.mutable.of("Alice", "Bob", "Cooper", "Dio"),
+                MutableBag.of("Alice", "Bob", "Cooper", "Dio"),
                 this.newWith("Alice", "Bob", "Cooper", "Dio").toBag());
     }
 
@@ -263,7 +260,7 @@ public class FastListTest extends AbstractListTestCase
     {
         MutableList<Integer> list = Interval.toReverseList(1, 5);
         Twin<MutableList<Integer>> result =
-                list.selectAndRejectWith(Predicates2.in(), Lists.fixedSize.of(1));
+                list.selectAndRejectWith(Predicates2.in(), FixedSizeList.of(1));
         Verify.assertSize(1, result.getOne());
         Verify.assertSize(4, result.getTwo());
     }
@@ -450,26 +447,26 @@ public class FastListTest extends AbstractListTestCase
     public void removeAll()
     {
         FastList<Integer> objects = FastList.newListWith(1, 2, 3);
-        objects.removeAll(mList(1, 2));
+        objects.removeAll(MutableList.of(1, 2));
         Verify.assertSize(1, objects);
         Verify.assertContains(3, objects);
         FastList<Integer> objects2 = FastList.newListWith(1, 2, 3);
-        objects2.removeAll(mList(1));
+        objects2.removeAll(MutableList.of(1));
         Verify.assertSize(2, objects2);
         Verify.assertContainsAll(objects2, 2, 3);
         FastList<Integer> objects3 = FastList.newListWith(1, 2, 3);
-        objects3.removeAll(mList(3));
+        objects3.removeAll(MutableList.of(3));
         Verify.assertSize(2, objects3);
         Verify.assertContainsAll(objects3, 1, 2);
         FastList<Integer> objects4 = FastList.newListWith(1, 2, 3);
-        objects4.removeAll(mList());
+        objects4.removeAll(MutableList.empty());
         Verify.assertSize(3, objects4);
         Verify.assertContainsAll(objects4, 1, 2, 3);
         FastList<Integer> objects5 = FastList.newListWith(1, 2, 3);
-        objects5.removeAll(mList(1, 2, 3));
+        objects5.removeAll(MutableList.of(1, 2, 3));
         Verify.assertEmpty(objects5);
         FastList<Integer> objects6 = FastList.newListWith(1, 2, 3);
-        objects6.removeAll(mList(2));
+        objects6.removeAll(MutableList.of(2));
         Verify.assertSize(2, objects6);
         Verify.assertContainsAll(objects6, 1, 3);
     }
@@ -479,26 +476,26 @@ public class FastListTest extends AbstractListTestCase
     public void removeAllIterable()
     {
         FastList<Integer> objects = FastList.newListWith(1, 2, 3);
-        objects.removeAllIterable(iList(1, 2));
+        objects.removeAllIterable(ImmutableList.of(1, 2));
         Verify.assertSize(1, objects);
         Verify.assertContains(3, objects);
         FastList<Integer> objects2 = FastList.newListWith(1, 2, 3);
-        objects2.removeAllIterable(iList(1));
+        objects2.removeAllIterable(ImmutableList.of(1));
         Verify.assertSize(2, objects2);
         Verify.assertContainsAll(objects2, 2, 3);
         FastList<Integer> objects3 = FastList.newListWith(1, 2, 3);
-        objects3.removeAllIterable(iList(3));
+        objects3.removeAllIterable(ImmutableList.of(3));
         Verify.assertSize(2, objects3);
         Verify.assertContainsAll(objects3, 1, 2);
         FastList<Integer> objects4 = FastList.newListWith(1, 2, 3);
-        objects4.removeAllIterable(iList());
+        objects4.removeAllIterable(ImmutableList.empty());
         Verify.assertSize(3, objects4);
         Verify.assertContainsAll(objects4, 1, 2, 3);
         FastList<Integer> objects5 = FastList.newListWith(1, 2, 3);
-        objects5.removeAllIterable(iList(1, 2, 3));
+        objects5.removeAllIterable(ImmutableList.of(1, 2, 3));
         Verify.assertEmpty(objects5);
         FastList<Integer> objects6 = FastList.newListWith(1, 2, 3);
-        objects6.removeAllIterable(iList(2));
+        objects6.removeAllIterable(ImmutableList.of(2));
         Verify.assertSize(2, objects6);
         Verify.assertContainsAll(objects6, 1, 3);
     }
@@ -509,7 +506,7 @@ public class FastListTest extends AbstractListTestCase
         String fred = new String("Fred");    // Deliberate String copy for unit test purpose
         String wilma = new String("Wilma");  // Deliberate String copy for unit test purpose
         FastList<String> objects = FastList.<String>newList().with(fred, wilma);
-        objects.removeAll(mList("Fred"));
+        objects.removeAll(MutableList.of("Fred"));
         objects.remove(0);
         Verify.assertSize(0, objects);
         WeakReference<String> ref = new WeakReference<>(wilma);
@@ -531,26 +528,26 @@ public class FastListTest extends AbstractListTestCase
         super.retainAll();
 
         MutableList<Integer> objects = this.newWith(1, 2, 3);
-        objects.retainAll(mList(1, 2));
+        objects.retainAll(MutableList.of(1, 2));
         Verify.assertSize(2, objects);
         Verify.assertContainsAll(objects, 1, 2);
         MutableList<Integer> objects2 = this.newWith(1, 2, 3);
-        objects2.retainAll(mList(1));
+        objects2.retainAll(MutableList.of(1));
         Verify.assertSize(1, objects2);
         Verify.assertContainsAll(objects2, 1);
         MutableList<Integer> objects3 = this.newWith(1, 2, 3);
-        objects3.retainAll(mList(3));
+        objects3.retainAll(MutableList.of(3));
         Verify.assertSize(1, objects3);
         Verify.assertContainsAll(objects3, 3);
         MutableList<Integer> objects4 = this.newWith(1, 2, 3);
-        objects4.retainAll(mList(2));
+        objects4.retainAll(MutableList.of(2));
         Verify.assertSize(1, objects4);
         Verify.assertContainsAll(objects4, 2);
         MutableList<Integer> objects5 = this.newWith(1, 2, 3);
-        objects5.retainAll(mList());
+        objects5.retainAll(MutableList.empty());
         Verify.assertEmpty(objects5);
         MutableList<Integer> objects6 = this.newWith(1, 2, 3);
-        objects6.retainAll(mList(1, 2, 3));
+        objects6.retainAll(MutableList.of(1, 2, 3));
         Verify.assertSize(3, objects6);
         Verify.assertContainsAll(objects6, 1, 2, 3);
     }
@@ -562,26 +559,26 @@ public class FastListTest extends AbstractListTestCase
         super.retainAllIterable();
 
         MutableList<Integer> objects = this.newWith(1, 2, 3);
-        objects.retainAllIterable(iList(1, 2));
+        objects.retainAllIterable(ImmutableList.of(1, 2));
         Verify.assertSize(2, objects);
         Verify.assertContainsAll(objects, 1, 2);
         MutableList<Integer> objects2 = this.newWith(1, 2, 3);
-        objects2.retainAllIterable(iList(1));
+        objects2.retainAllIterable(ImmutableList.of(1));
         Verify.assertSize(1, objects2);
         Verify.assertContainsAll(objects2, 1);
         MutableList<Integer> objects3 = this.newWith(1, 2, 3);
-        objects3.retainAllIterable(iList(3));
+        objects3.retainAllIterable(ImmutableList.of(3));
         Verify.assertSize(1, objects3);
         Verify.assertContainsAll(objects3, 3);
         MutableList<Integer> objects4 = this.newWith(1, 2, 3);
-        objects4.retainAllIterable(iList(2));
+        objects4.retainAllIterable(ImmutableList.of(2));
         Verify.assertSize(1, objects4);
         Verify.assertContainsAll(objects4, 2);
         MutableList<Integer> objects5 = this.newWith(1, 2, 3);
-        objects5.retainAllIterable(iList());
+        objects5.retainAllIterable(ImmutableList.empty());
         Verify.assertEmpty(objects5);
         MutableList<Integer> objects6 = this.newWith(1, 2, 3);
-        objects6.retainAllIterable(iList(1, 2, 3));
+        objects6.retainAllIterable(ImmutableList.of(1, 2, 3));
         Verify.assertSize(3, objects6);
         Verify.assertContainsAll(objects6, 1, 2, 3);
     }
@@ -680,19 +677,19 @@ public class FastListTest extends AbstractListTestCase
         super.addAll();
 
         MutableList<Integer> integers1 = FastList.newList();
-        Assert.assertTrue(integers1.addAll(mList(1, 2, 3, 4)));
+        Assert.assertTrue(integers1.addAll(MutableList.of(1, 2, 3, 4)));
         Verify.assertListsEqual(FastList.newListWith(1, 2, 3, 4), integers1);
         Assert.assertTrue(integers1.addAll(FastList.<Integer>newList(4).with(1, 2, 3, 4)));
         Verify.assertListsEqual(FastList.newListWith(1, 2, 3, 4, 1, 2, 3, 4), integers1);
-        Assert.assertTrue(integers1.addAll(mSet(5)));
+        Assert.assertTrue(integers1.addAll(MutableSet.of(5)));
         Verify.assertListsEqual(FastList.newListWith(1, 2, 3, 4, 1, 2, 3, 4, 5), integers1);
 
         MutableList<Integer> integers2 = FastList.newListWith(0);
-        Assert.assertTrue(integers2.addAll(mList(1, 2, 3, 4)));
+        Assert.assertTrue(integers2.addAll(MutableList.of(1, 2, 3, 4)));
         Verify.assertListsEqual(FastList.newListWith(0, 1, 2, 3, 4), integers2);
         Assert.assertTrue(integers2.addAll(FastList.<Integer>newList(4).with(1, 2, 3, 4)));
         Verify.assertListsEqual(FastList.newListWith(0, 1, 2, 3, 4, 1, 2, 3, 4), integers2);
-        Assert.assertTrue(integers2.addAll(mSet(5)));
+        Assert.assertTrue(integers2.addAll(MutableSet.of(5)));
         Verify.assertListsEqual(FastList.newListWith(0, 1, 2, 3, 4, 1, 2, 3, 4, 5), integers2);
 
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> FastList.newList().addAll(1, null));
@@ -705,11 +702,11 @@ public class FastListTest extends AbstractListTestCase
         super.addAllIterable();
 
         FastList<Integer> integers = FastList.newList();
-        Assert.assertTrue(integers.addAllIterable(iList(1, 2, 3, 4)));
+        Assert.assertTrue(integers.addAllIterable(ImmutableList.of(1, 2, 3, 4)));
         Verify.assertListsEqual(FastList.newListWith(1, 2, 3, 4), integers);
         Assert.assertTrue(integers.addAllIterable(FastList.<Integer>newList(4).with(1, 2, 3, 4)));
         Verify.assertListsEqual(FastList.newListWith(1, 2, 3, 4, 1, 2, 3, 4), integers);
-        Assert.assertTrue(integers.addAllIterable(mSet(5)));
+        Assert.assertTrue(integers.addAllIterable(MutableSet.of(5)));
         Verify.assertListsEqual(FastList.newListWith(1, 2, 3, 4, 1, 2, 3, 4, 5), integers);
     }
 
@@ -717,9 +714,9 @@ public class FastListTest extends AbstractListTestCase
     public void testAddAllEmpty()
     {
         FastList<Integer> integers = FastList.newList();
-        integers.addAll(Lists.mutable.of());
+        integers.addAll(MutableList.empty());
         Verify.assertEmpty(integers);
-        integers.addAll(Sets.mutable.of());
+        integers.addAll(MutableSet.empty());
         Verify.assertEmpty(integers);
         integers.addAll(FastList.newList());
         Verify.assertEmpty(integers);
@@ -731,11 +728,11 @@ public class FastListTest extends AbstractListTestCase
     public void addAllWithMultipleTypes()
     {
         FastList<Integer> list = FastList.newList();
-        list.addAll(mList(1, 2, 3, 4));
-        list.addAll(mSet(5, 6));
-        list.addAll(new ArrayList<>(mList(7, 8)));
+        list.addAll(MutableList.of(1, 2, 3, 4));
+        list.addAll(MutableSet.of(5, 6));
+        list.addAll(new ArrayList<>(MutableList.of(7, 8)));
         list.addAll(this.newWith(9, 10));
-        Assert.assertFalse(list.addAll(Lists.mutable.of()));
+        Assert.assertFalse(list.addAll(MutableList.empty()));
         Assert.assertEquals(this.newWith(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), list);
     }
 
@@ -745,7 +742,7 @@ public class FastListTest extends AbstractListTestCase
     {
         super.addAllAtIndex();
         FastList<Integer> integers = this.newWith(5);
-        integers.addAll(0, mList(1, 2, 3, 4));
+        integers.addAll(0, MutableList.of(1, 2, 3, 4));
         Verify.assertStartsWith(integers, 1, 2, 3, 4, 5);
         integers.addAll(0, FastList.<Integer>newList(4).with(-3, -2, -1, 0));
         Verify.assertStartsWith(integers, -3, -2, -1, 0, 1, 2, 3, 4, 5);
@@ -755,13 +752,13 @@ public class FastListTest extends AbstractListTestCase
     public void testAddAllAtIndexEmpty()
     {
         FastList<Integer> integers = this.newWith(5);
-        integers.addAll(0, Lists.mutable.of());
+        integers.addAll(0, MutableList.empty());
         Verify.assertSize(1, integers);
         Verify.assertStartsWith(integers, 5);
         integers.addAll(0, FastList.newList(4));
         Verify.assertSize(1, integers);
         Verify.assertStartsWith(integers, 5);
-        integers.addAll(0, Sets.mutable.of());
+        integers.addAll(0, MutableSet.empty());
         Verify.assertSize(1, integers);
         Verify.assertStartsWith(integers, 5);
         FastList<String> zeroSizedList = FastList.newList(0);
@@ -971,14 +968,14 @@ public class FastListTest extends AbstractListTestCase
         Verify.assertEqualsAndHashCode(integers, integers);
         Verify.assertPostSerializedEqualsAndHashCode(integers);
         Verify.assertEqualsAndHashCode(integers, integers2);
-        Verify.assertEqualsAndHashCode(integers, iList(1, 2, 3));
+        Verify.assertEqualsAndHashCode(integers, ImmutableList.of(1, 2, 3));
         Verify.assertEqualsAndHashCode(integers, linkedList);
         Assert.assertNotEquals(integers, integers3);
         Assert.assertNotEquals(integers, integers5);
-        Assert.assertNotEquals(integers, iList(2, 3, 4));
+        Assert.assertNotEquals(integers, ImmutableList.of(2, 3, 4));
         Assert.assertNotEquals(integers, linkedList2);
         Assert.assertNotEquals(integers, linkedList3);
-        Assert.assertNotEquals(integers, mSet());
+        Assert.assertNotEquals(integers, MutableSet.empty());
         Verify.assertEqualsAndHashCode(integers3, integers4);
         Verify.assertEqualsAndHashCode(integers3, new ArrayList<>(integers3));
         Verify.assertEqualsAndHashCode(integers3, new LinkedList<>(integers3));
@@ -1071,17 +1068,17 @@ public class FastListTest extends AbstractListTestCase
     @Test
     public void testNewListWithCollection()
     {
-        Verify.assertEmpty(FastList.newList(iList()));
-        Verify.assertEmpty(FastList.newList(mSet()));
+        Verify.assertEmpty(FastList.newList(ImmutableList.empty()));
+        Verify.assertEmpty(FastList.newList(MutableSet.empty()));
         Verify.assertEmpty(FastList.newList(FastList.newList()));
         Verify.assertEmpty(FastList.newList(FastList.newList(4)));
 
-        FastList<Integer> setToList = FastList.newList(mSet(1, 2, 3, 4, 5));
+        FastList<Integer> setToList = FastList.newList(MutableSet.of(1, 2, 3, 4, 5));
         Verify.assertNotEmpty(setToList);
         Verify.assertSize(5, setToList);
         Verify.assertContainsAll(setToList, 1, 2, 3, 4, 5);
 
-        FastList<Integer> arrayListToList = FastList.newList(iList(1, 2, 3, 4, 5));
+        FastList<Integer> arrayListToList = FastList.newList(ImmutableList.of(1, 2, 3, 4, 5));
         Verify.assertNotEmpty(arrayListToList);
         Verify.assertSize(5, arrayListToList);
         Verify.assertStartsWith(arrayListToList, 1, 2, 3, 4, 5);
@@ -1103,8 +1100,8 @@ public class FastListTest extends AbstractListTestCase
     public void testContainsAll()
     {
         FastList<Integer> list = this.newWith(1, 2, 3, 4, 5, null);
-        Assert.assertTrue(list.containsAll(mList(1, 3, 5, null)));
-        Assert.assertFalse(list.containsAll(mList(2, null, 6)));
+        Assert.assertTrue(list.containsAll(MutableList.of(1, 3, 5, null)));
+        Assert.assertFalse(list.containsAll(MutableList.of(2, null, 6)));
         Assert.assertTrue(list.containsAll(this.newWith(1, 3, 5, null)));
         Assert.assertFalse(list.containsAll(this.newWith(2, null, 6)));
     }
@@ -1185,11 +1182,11 @@ public class FastListTest extends AbstractListTestCase
                 FastList.<String>newList().with("1", "2", "3", "4").with("5", "6", "7", "8"));
 
         MutableList<String> list = FastList.newListWith("A")
-                .withAll(Lists.immutable.of("1", "2"))
-                .withAll(Lists.immutable.of())
-                .withAll(Sets.immutable.of("3", "4"));
+                .withAll(ImmutableList.of("1", "2"))
+                .withAll(ImmutableList.empty())
+                .withAll(ImmutableSet.of("3", "4"));
         Assert.assertEquals(
-                Bags.mutable.of("A", "1", "2", "3", "4"),
+                MutableBag.of("A", "1", "2", "3", "4"),
                 list.toBag());
         Verify.assertStartsWith(list, "A", "1", "2");  // "3" and "4" are from a set, so may not be in order
 

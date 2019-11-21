@@ -48,7 +48,6 @@ import org.eclipse.collections.api.set.primitive.MutableShortSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.UnmodifiableCollectionSerializationProxy;
-import org.eclipse.collections.impl.factory.Sets;
 
 /**
  * An unmodifiable view of a list.
@@ -98,7 +97,7 @@ public class UnmodifiableMutableSet<T>
     @Override
     public ImmutableSet<T> toImmutable()
     {
-        return Sets.immutable.withAll(this.getMutableSet());
+        return ImmutableSet.ofAll(this.getMutableSet());
     }
 
     @Override

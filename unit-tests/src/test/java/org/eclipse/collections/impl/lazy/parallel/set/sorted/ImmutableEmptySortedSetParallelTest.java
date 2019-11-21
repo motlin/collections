@@ -13,13 +13,13 @@ package org.eclipse.collections.impl.lazy.parallel.set.sorted;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.ParallelSortedSetIterable;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
 import org.junit.Assert;
 import org.junit.Test;
@@ -47,19 +47,19 @@ public class ImmutableEmptySortedSetParallelTest extends NonParallelSortedSetIte
     @Override
     protected ParallelSortedSetIterable<Integer> newWith(Integer... littleElements)
     {
-        return SortedSets.immutable.with(Comparators.<Integer>reverseNaturalOrder()).asParallel(this.executorService, this.batchSize);
+        return ImmutableSortedSet.of(Comparators.<Integer>reverseNaturalOrder()).asParallel(this.executorService, this.batchSize);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void asParallel_small_batch()
     {
-        SortedSets.immutable.with(Comparators.reverseNaturalOrder()).asParallel(this.executorService, 0);
+        ImmutableSortedSet.of(Comparators.reverseNaturalOrder()).asParallel(this.executorService, 0);
     }
 
     @Test(expected = NullPointerException.class)
     public void asParallel_null_executorService()
     {
-        SortedSets.immutable.with(Comparators.reverseNaturalOrder()).asParallel(null, 2);
+        ImmutableSortedSet.of(Comparators.reverseNaturalOrder()).asParallel(null, 2);
     }
 
     @Override

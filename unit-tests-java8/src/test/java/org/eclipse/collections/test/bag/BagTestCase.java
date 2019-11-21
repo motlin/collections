@@ -14,11 +14,12 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.test.RichIterableWithDuplicatesTestCase;
 import org.junit.Assert;
@@ -94,18 +95,18 @@ public interface BagTestCase extends RichIterableWithDuplicatesTestCase
     {
         Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
         Bag<ObjectIntPair<Integer>> actual =
-                bag.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
+                bag.collectWithOccurrences(PrimitiveTuples::pair, MutableBag.empty());
         Bag<ObjectIntPair<Integer>> expected =
-                Bags.immutable.with(
+                ImmutableBag.of(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1));
         Assert.assertEquals(expected, actual);
 
         Set<ObjectIntPair<Integer>> actual2 =
-                bag.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
+                bag.collectWithOccurrences(PrimitiveTuples::pair, MutableSet.empty());
         ImmutableSet<ObjectIntPair<Integer>> expected2 =
-                Sets.immutable.with(
+                ImmutableSet.of(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1));

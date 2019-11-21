@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.lazy.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -42,7 +42,7 @@ public class TakeWhileIteratorTest
         Iterator<Integer> iterator4 = new TakeWhileIterator<>(list, Predicates.alwaysFalse());
         assertElements(iterator4, 0);
 
-        Iterator<Integer> iterator5 = new TakeWhileIterator<>(Lists.fixedSize.of(), Predicates.alwaysFalse());
+        Iterator<Integer> iterator5 = new TakeWhileIterator<>(FixedSizeList.empty(), Predicates.alwaysFalse());
         assertElements(iterator5, 0);
     }
 
@@ -72,14 +72,14 @@ public class TakeWhileIteratorTest
     @Test
     public void remove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> new TakeWhileIterator<>(Lists.fixedSize.<Integer>of(), Predicates.alwaysTrue()).remove());
+        Verify.assertThrows(UnsupportedOperationException.class, () -> new TakeWhileIterator<>(FixedSizeList.<Integer>empty(), Predicates.alwaysTrue()).remove());
     }
 
     @Test
     public void noSuchElementException()
     {
-        Verify.assertThrows(NoSuchElementException.class, () -> new TakeWhileIterator<>(Lists.fixedSize.<Integer>of(), Predicates.alwaysTrue()).next());
+        Verify.assertThrows(NoSuchElementException.class, () -> new TakeWhileIterator<>(FixedSizeList.<Integer>empty(), Predicates.alwaysTrue()).next());
 
-        Verify.assertThrows(NoSuchElementException.class, () -> new TakeWhileIterator<>(Lists.fixedSize.of(1, 2, 3), Predicates.alwaysFalse()).next());
+        Verify.assertThrows(NoSuchElementException.class, () -> new TakeWhileIterator<>(FixedSizeList.of(1, 2, 3), Predicates.alwaysFalse()).next());
     }
 }

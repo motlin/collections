@@ -14,9 +14,11 @@ import java.util.Set;
 
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.partition.PartitionMutableCollection;
 import org.eclipse.collections.api.set.ImmutableSet;
@@ -26,16 +28,11 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.primitive.IntPredicates;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedCollectionTestCase;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
 
 /**
  * JUnit test for {@link SynchronizedBag}.
@@ -81,8 +78,8 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
         Multimap<Boolean, Integer> multimap =
                 list.groupBy(object -> IntegerPredicates.isOdd().accept(object));
 
-        Assert.assertEquals(Bags.mutable.of(1, 3, 5, 7), multimap.get(Boolean.TRUE));
-        Assert.assertEquals(Bags.mutable.of(2, 4, 6), multimap.get(Boolean.FALSE));
+        Assert.assertEquals(MutableBag.of(1, 3, 5, 7), multimap.get(Boolean.TRUE));
+        Assert.assertEquals(MutableBag.of(2, 4, 6), multimap.get(Boolean.FALSE));
     }
 
     @Override
@@ -116,8 +113,8 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
 
         MutableBag<Integer> integers = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         PartitionMutableCollection<Integer> result = integers.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iBag(2, 2, 4, 4, 4, 4), result.getSelected());
-        Assert.assertEquals(iBag(1, 3, 3, 3), result.getRejected());
+        Assert.assertEquals(ImmutableBag.of(2, 2, 4, 4, 4, 4), result.getSelected());
+        Assert.assertEquals(ImmutableBag.of(1, 3, 3, 3), result.getRejected());
     }
 
     @Override
@@ -128,22 +125,22 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
 
         MutableBag<Integer> integers = this.newWith(1, 2, 2, 3, 3, 3, 4, 4, 4, 4);
         PartitionMutableCollection<Integer> result = integers.partitionWith(Predicates2.in(), integers.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iBag(2, 2, 4, 4, 4, 4), result.getSelected());
-        Assert.assertEquals(iBag(1, 3, 3, 3), result.getRejected());
+        Assert.assertEquals(ImmutableBag.of(2, 2, 4, 4, 4, 4), result.getSelected());
+        Assert.assertEquals(ImmutableBag.of(1, 3, 3, 3), result.getRejected());
     }
 
     @Test
     public void selectByOccurrences()
     {
         MutableBag<Integer> integers = this.newWith(1, 1, 1, 1, 2, 2, 2, 3, 3, 4);
-        Assert.assertEquals(iBag(1, 1, 1, 1, 3, 3), integers.selectByOccurrences(IntPredicates.isEven()));
+        Assert.assertEquals(ImmutableBag.of(1, 1, 1, 1, 3, 3), integers.selectByOccurrences(IntPredicates.isEven()));
     }
 
     @Test
     public void selectDuplicates()
     {
         Assert.assertEquals(
-                iBag(1, 1, 1, 1, 2, 2, 2, 3, 3),
+                ImmutableBag.of(1, 1, 1, 1, 2, 2, 2, 3, 3),
                 this.newWith(0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 5).selectDuplicates());
     }
 
@@ -188,7 +185,7 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
     {
         MutableBag<Integer> integers = this.newWith(1, 1, 1, 1, 2, 2, 2, 3, 3, 4);
         MapIterable<Integer, Integer> result = integers.toMapOfItemToCount();
-        Assert.assertEquals(Maps.mutable.with(1, 4, 2, 3, 3, 2, 4, 1), result);
+        Assert.assertEquals(MutableMap.of(1, 4, 2, 3, 3, 2, 4, 1), result);
     }
 
     @Test
@@ -196,7 +193,7 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
     {
         MutableBag<Integer> integers = this.newWith(1, 1, 1, 1);
         String result = integers.toStringOfItemToCount();
-        Assert.assertEquals(Maps.mutable.with(1, 4).toString(), result);
+        Assert.assertEquals(MutableMap.of(1, 4).toString(), result);
     }
 
     @Test
@@ -216,18 +213,18 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
     {
         Bag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
         Bag<ObjectIntPair<Integer>> actual =
-                bag.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
+                bag.collectWithOccurrences(PrimitiveTuples::pair, MutableBag.empty());
         Bag<ObjectIntPair<Integer>> expected =
-                Bags.immutable.with(
+                ImmutableBag.of(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1));
         Assert.assertEquals(expected, actual);
 
         Set<ObjectIntPair<Integer>> actual2 =
-                bag.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
+                bag.collectWithOccurrences(PrimitiveTuples::pair, MutableSet.empty());
         ImmutableSet<ObjectIntPair<Integer>> expected2 =
-                Sets.immutable.with(
+                ImmutableSet.of(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1));
@@ -297,8 +294,8 @@ public class SynchronizedBagTest extends AbstractSynchronizedCollectionTestCase
     @Test
     public void selectUnique()
     {
-        MutableBag<String> bag = Bags.mutable.with("0", "1", "1", "1", "1", "2", "2", "2", "3", "3", "4", "5").asSynchronized();
-        MutableSet<String> expected = Sets.mutable.with("0", "4", "5");
+        MutableBag<String> bag = MutableBag.of("0", "1", "1", "1", "1", "2", "2", "2", "3", "3", "4", "5").asSynchronized();
+        MutableSet<String> expected = MutableSet.of("0", "4", "5");
         MutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
     }

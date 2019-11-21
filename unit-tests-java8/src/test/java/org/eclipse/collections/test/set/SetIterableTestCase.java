@@ -11,9 +11,8 @@
 package org.eclipse.collections.test.set;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.SetIterable;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.test.CollisionsTestCase;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
@@ -42,7 +41,7 @@ public interface SetIterableTestCase extends RichIterableUniqueTestCase, Collisi
     @Test
     default void equalsAndHashCode()
     {
-        MutableList<Integer> list = Lists.mutable.empty();
+        MutableList<Integer> list = MutableList.empty();
         for (Integer collision : COLLISIONS)
         {
             list.add(collision);
@@ -59,7 +58,7 @@ public interface SetIterableTestCase extends RichIterableUniqueTestCase, Collisi
         assertNotEquals(this.newWith(1, 2), this.newWith(1));
         assertNotEquals(this.newWith(1), this.newWith());
 
-        SetIterable<Integer> expected = Sets.mutable.with(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4);
+        SetIterable<Integer> expected = MutableSet.of(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4);
         assertNotEquals(expected, this.newWith(COLLISION_2, COLLISION_3, COLLISION_4, COLLISION_5));
         assertNotEquals(expected, this.newWith(COLLISION_1, COLLISION_3, COLLISION_4, COLLISION_5));
         assertNotEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_4, COLLISION_5));

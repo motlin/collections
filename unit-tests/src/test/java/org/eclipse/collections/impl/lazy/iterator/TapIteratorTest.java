@@ -12,7 +12,8 @@ package org.eclipse.collections.impl.lazy.iterator;
 
 import java.util.NoSuchElementException;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,14 +22,14 @@ public class TapIteratorTest
     @Test(expected = NoSuchElementException.class)
     public void nextIfDoesntHaveAnything()
     {
-        new TapIterator<>(Lists.immutable.of(), object -> {
+        new TapIterator<>(ImmutableList.empty(), object -> {
         }).next();
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void removeIsUnsupported()
     {
-        new TapIterator<>(Lists.immutable.of().iterator(), object -> {
+        new TapIterator<>(ImmutableList.empty().iterator(), object -> {
         }).remove();
     }
 
@@ -37,7 +38,7 @@ public class TapIteratorTest
     {
         Object expected = new Object();
         TapIterator<Object> iterator = new TapIterator<>(
-                Lists.fixedSize.of(expected), object -> { });
+                FixedSizeList.of(expected), object -> { });
         Assert.assertSame(expected, iterator.next());
     }
 }

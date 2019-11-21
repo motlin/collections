@@ -33,7 +33,6 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.MaxSizeFunction;
 import org.eclipse.collections.impl.block.function.MinSizeFunction;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.IntegerSum;
@@ -44,9 +43,6 @@ import org.eclipse.collections.impl.utility.ListIterate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
-
 /**
  * JUnit test for {@link IterableIterate}.
  */
@@ -55,7 +51,7 @@ public class IterableIterateTest
     @Test
     public void injectInto()
     {
-        Iterable<Integer> iterable = new IterableAdapter<>(iList(1, 2, 3));
+        Iterable<Integer> iterable = new IterableAdapter<>(ImmutableList.of(1, 2, 3));
         Assert.assertEquals(
                 1 + 1 + 2 + 3,
                 Iterate.injectInto(1, iterable, AddFunction.INTEGER).intValue());
@@ -64,7 +60,7 @@ public class IterableIterateTest
     @Test
     public void injectIntoOver30()
     {
-        MutableList<Integer> list = Lists.mutable.of();
+        MutableList<Integer> list = MutableList.empty();
         for (int i = 0; i < 31; i++)
         {
             list.add(1);
@@ -76,7 +72,7 @@ public class IterableIterateTest
     @Test
     public void injectIntoDouble()
     {
-        Iterable<Double> iterable = new IterableAdapter<>(iList(1.0, 2.0, 3.0));
+        Iterable<Double> iterable = new IterableAdapter<>(ImmutableList.of(1.0, 2.0, 3.0));
         Assert.assertEquals(
                 1.0 + 1.0 + 2.0 + 3.0,
                 Iterate.injectInto(1.0, iterable, AddFunction.DOUBLE).doubleValue(),
@@ -86,38 +82,38 @@ public class IterableIterateTest
     @Test
     public void injectIntoString()
     {
-        Iterable<String> iterable = new IterableAdapter<>(iList("1", "2", "3"));
+        Iterable<String> iterable = new IterableAdapter<>(ImmutableList.of("1", "2", "3"));
         Assert.assertEquals("0123", Iterate.injectInto("0", iterable, AddFunction.STRING));
     }
 
     @Test
     public void injectIntoMaxString()
     {
-        Iterable<String> iterable = new IterableAdapter<>(iList("1", "12", "123"));
+        Iterable<String> iterable = new IterableAdapter<>(ImmutableList.of("1", "12", "123"));
         Assert.assertEquals(3, Iterate.injectInto(Integer.MIN_VALUE, iterable, MaxSizeFunction.STRING).intValue());
     }
 
     @Test
     public void injectIntoMinString()
     {
-        Iterable<String> iterable = new IterableAdapter<>(iList("1", "12", "123"));
+        Iterable<String> iterable = new IterableAdapter<>(ImmutableList.of("1", "12", "123"));
         Assert.assertEquals(1, Iterate.injectInto(Integer.MAX_VALUE, iterable, MinSizeFunction.STRING).intValue());
     }
 
     @Test
     public void collect()
     {
-        Iterable<Boolean> iterable = new IterableAdapter<>(iList(Boolean.TRUE, Boolean.FALSE, null));
+        Iterable<Boolean> iterable = new IterableAdapter<>(ImmutableList.of(Boolean.TRUE, Boolean.FALSE, null));
         Collection<String> result = Iterate.collect(iterable, String::valueOf);
-        Assert.assertEquals(iList("true", "false", "null"), result);
+        Assert.assertEquals(ImmutableList.of("true", "false", "null"), result);
     }
 
     @Test
     public void collectWithTarget()
     {
-        Iterable<Boolean> iterable = new IterableAdapter<>(iList(Boolean.TRUE, Boolean.FALSE, null));
+        Iterable<Boolean> iterable = new IterableAdapter<>(ImmutableList.of(Boolean.TRUE, Boolean.FALSE, null));
         Collection<String> result = Iterate.collect(iterable, String::valueOf, FastList.newList());
-        Assert.assertEquals(iList("true", "false", "null"), result);
+        Assert.assertEquals(ImmutableList.of("true", "false", "null"), result);
     }
 
     @Test
@@ -157,7 +153,7 @@ public class IterableIterateTest
         //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
         Integer secondInt = new Integer(2);
         Assert.assertNotSame(firstInt, secondInt);
-        ImmutableList<Integer> list2 = iList(1, firstInt, secondInt);
+        ImmutableList<Integer> list2 = ImmutableList.of(1, firstInt, secondInt);
         Assert.assertSame(list2.get(1), Iterate.detect(list2, Integer.valueOf(2)::equals));
     }
 
@@ -179,7 +175,7 @@ public class IterableIterateTest
         //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
         Integer secondInt = new Integer(2);
         Assert.assertNotSame(firstInt, secondInt);
-        ImmutableList<Integer> list2 = iList(1, firstInt, secondInt);
+        ImmutableList<Integer> list2 = ImmutableList.of(1, firstInt, secondInt);
         Assert.assertSame(list2.get(1), Iterate.detectWith(list2, Object::equals, 2));
     }
 
@@ -200,7 +196,7 @@ public class IterableIterateTest
         //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
         Integer secondInt = new Integer(2);
         Assert.assertNotSame(firstInt, secondInt);
-        ImmutableList<Integer> list2 = iList(1, firstInt, secondInt);
+        ImmutableList<Integer> list2 = ImmutableList.of(1, firstInt, secondInt);
         Optional<Integer> result = Iterate.detectOptional(list2, Integer.valueOf(2)::equals);
         Assert.assertTrue(result.isPresent());
         Assert.assertSame(list2.get(1), result.get());
@@ -219,7 +215,7 @@ public class IterableIterateTest
     @Test
     public void detectOptionalNull()
     {
-        MutableList<Integer> objects = mList(1, null, 3);
+        MutableList<Integer> objects = MutableList.of(1, null, 3);
         Iterable<Integer> iterable = new IterableAdapter<>(objects);
 
         Verify.assertThrows(NullPointerException.class, () -> Iterate.detectOptional(iterable, Objects::isNull));
@@ -235,7 +231,7 @@ public class IterableIterateTest
         //noinspection CachedNumberConstructorCall,UnnecessaryBoxing
         Integer secondInt = new Integer(2);
         Assert.assertNotSame(firstInt, secondInt);
-        ImmutableList<Integer> list2 = iList(1, firstInt, secondInt);
+        ImmutableList<Integer> list2 = ImmutableList.of(1, firstInt, secondInt);
         Optional<Integer> result = Iterate.detectWithOptional(list2, Object::equals, 2);
         Assert.assertTrue(result.isPresent());
         Assert.assertSame(list2.get(1), result.get());
@@ -245,7 +241,7 @@ public class IterableIterateTest
     @Test
     public void detectWithOptionalOver30()
     {
-        MutableList<Integer> objects = mList(1, null, 3);
+        MutableList<Integer> objects = MutableList.of(1, null, 3);
         Iterable<Integer> iterable = new IterableAdapter<>(objects);
 
         Verify.assertThrows(NullPointerException.class, () -> Iterate.detectWithOptional(iterable, (i, object) -> i == object, null));
@@ -365,7 +361,7 @@ public class IterableIterateTest
     {
         Iterable<Number> iterable = new IterableAdapter<>(FastList.newListWith(1, 2.0, 3, 4.0, 5));
         Collection<Integer> result = Iterate.selectInstancesOf(iterable, Integer.class);
-        Assert.assertEquals(iList(1, 3, 5), result);
+        Assert.assertEquals(ImmutableList.of(1, 3, 5), result);
     }
 
     @Test
@@ -382,9 +378,9 @@ public class IterableIterateTest
     public void selectAndRejectWith()
     {
         Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
-        Twin<MutableList<Integer>> result = Iterate.selectAndRejectWith(iterable, Predicates2.in(), iList(1));
-        Assert.assertEquals(iList(1), result.getOne());
-        Assert.assertEquals(iList(5, 4, 3, 2), result.getTwo());
+        Twin<MutableList<Integer>> result = Iterate.selectAndRejectWith(iterable, Predicates2.in(), ImmutableList.of(1));
+        Assert.assertEquals(ImmutableList.of(1), result.getOne());
+        Assert.assertEquals(ImmutableList.of(5, 4, 3, 2), result.getTwo());
     }
 
     @Test
@@ -392,8 +388,8 @@ public class IterableIterateTest
     {
         Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
         PartitionIterable<Integer> partition = Iterate.partition(iterable, IntegerPredicates.isEven());
-        Assert.assertEquals(iList(4, 2), partition.getSelected());
-        Assert.assertEquals(iList(5, 3, 1), partition.getRejected());
+        Assert.assertEquals(ImmutableList.of(4, 2), partition.getSelected());
+        Assert.assertEquals(ImmutableList.of(5, 3, 1), partition.getRejected());
     }
 
     @Test
@@ -457,7 +453,7 @@ public class IterableIterateTest
     {
         Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
         Collection<Integer> results = Iterate.selectWith(iterable, Predicates2.instanceOf(), Integer.class);
-        Assert.assertEquals(iList(5, 4, 3, 2, 1), results);
+        Assert.assertEquals(ImmutableList.of(5, 4, 3, 2, 1), results);
         Verify.assertSize(5, results);
     }
 
@@ -467,7 +463,7 @@ public class IterableIterateTest
         Iterable<Integer> iterable = new IterableAdapter<>(this.getIntegerList());
         MutableList<Integer> results =
                 Iterate.selectWith(iterable, Predicates2.instanceOf(), Integer.class, FastList.newList());
-        Assert.assertEquals(iList(5, 4, 3, 2, 1), results);
+        Assert.assertEquals(ImmutableList.of(5, 4, 3, 2, 1), results);
         Verify.assertSize(5, results);
     }
 
@@ -476,7 +472,7 @@ public class IterableIterateTest
     {
         Iterable<Integer> iterable = new IterableAdapter<>(Interval.oneTo(31));
         Collection<Class<?>> result = Iterate.collectIf(iterable, Integer.valueOf(31)::equals, Object::getClass);
-        Assert.assertEquals(iList(Integer.class), result);
+        Assert.assertEquals(ImmutableList.of(Integer.class), result);
     }
 
     @Test
@@ -485,7 +481,7 @@ public class IterableIterateTest
         Iterable<Integer> iterable = new IterableAdapter<>(Interval.oneTo(31));
         Collection<Class<?>> result =
                 Iterate.collectIf(iterable, Integer.valueOf(31)::equals, Object::getClass, FastList.newList());
-        Assert.assertEquals(iList(Integer.class), result);
+        Assert.assertEquals(ImmutableList.of(Integer.class), result);
     }
 
     @Test
@@ -531,26 +527,26 @@ public class IterableIterateTest
     @Test
     public void removeIf()
     {
-        MutableList<Integer> objects = mList(1, 2, 3, null);
+        MutableList<Integer> objects = MutableList.of(1, 2, 3, null);
         Iterable<Integer> iterable = new IterableAdapter<>(objects);
         Iterate.removeIf(iterable, Predicates.isNull());
         Verify.assertIterableSize(3, objects);
         Verify.assertContainsAll(objects, 1, 2, 3);
-        MutableList<Integer> objects4 = mList(null, 1, 2, 3);
+        MutableList<Integer> objects4 = MutableList.of(null, 1, 2, 3);
         Iterable<Integer> iterable4 = new IterableAdapter<>(objects4);
         Iterate.removeIf(iterable4, Predicates.isNull());
         Verify.assertIterableSize(3, objects4);
         Verify.assertContainsAll(objects4, 1, 2, 3);
-        MutableList<Integer> objects3 = mList(1, null, 2, 3);
+        MutableList<Integer> objects3 = MutableList.of(1, null, 2, 3);
         Iterable<Integer> iterable3 = new IterableAdapter<>(objects3);
         Iterate.removeIf(iterable3, Predicates.isNull());
         Verify.assertIterableSize(3, objects3);
         Verify.assertContainsAll(objects3, 1, 2, 3);
-        MutableList<Integer> objects2 = mList(null, null, null, null);
+        MutableList<Integer> objects2 = MutableList.of(null, null, null, null);
         Iterable<Integer> iterable2 = new IterableAdapter<>(objects2);
         Iterate.removeIf(iterable2, Predicates.isNull());
         Verify.assertIterableEmpty(objects2);
-        MutableList<Integer> objects1 = mList(1, 2, 3);
+        MutableList<Integer> objects1 = MutableList.of(1, 2, 3);
         Iterable<Integer> iterable1 = new IterableAdapter<>(objects1);
         Iterate.removeIf(iterable1, Predicates.isNull());
         Verify.assertIterableSize(3, objects1);
@@ -560,40 +556,40 @@ public class IterableIterateTest
     @Test
     public void removeIfWith()
     {
-        MutableList<Integer> objects1 = mList(1, 2, 3, null);
+        MutableList<Integer> objects1 = MutableList.of(1, 2, 3, null);
         Iterable<Integer> iterable = new IterableAdapter<>(objects1);
         Iterate.removeIfWith(iterable, (each5, ignored5) -> each5 == null, null);
-        Assert.assertEquals(iList(1, 2, 3), objects1);
+        Assert.assertEquals(ImmutableList.of(1, 2, 3), objects1);
 
-        MutableList<Integer> objects2 = mList(null, 1, 2, 3);
+        MutableList<Integer> objects2 = MutableList.of(null, 1, 2, 3);
         Iterable<Integer> iterable4 = new IterableAdapter<>(objects2);
         Iterate.removeIfWith(iterable4, (each4, ignored4) -> each4 == null, null);
-        Assert.assertEquals(iList(1, 2, 3), objects2);
+        Assert.assertEquals(ImmutableList.of(1, 2, 3), objects2);
 
-        MutableList<Integer> objects3 = mList(1, null, 2, 3);
+        MutableList<Integer> objects3 = MutableList.of(1, null, 2, 3);
         Iterable<Integer> iterable3 = new IterableAdapter<>(objects3);
         Iterate.removeIfWith(iterable3, (each3, ignored3) -> each3 == null, null);
-        Assert.assertEquals(iList(1, 2, 3), objects3);
+        Assert.assertEquals(ImmutableList.of(1, 2, 3), objects3);
 
-        MutableList<Integer> objects4 = mList(null, null, null, null);
+        MutableList<Integer> objects4 = MutableList.of(null, null, null, null);
         Iterable<Integer> iterable2 = new IterableAdapter<>(objects4);
         Iterate.removeIfWith(iterable2, (each2, ignored2) -> each2 == null, null);
         Verify.assertIterableEmpty(objects4);
 
-        MutableList<Integer> objects5 = mList(null, 1, 2, 3, null);
+        MutableList<Integer> objects5 = MutableList.of(null, 1, 2, 3, null);
         Iterate.removeIfWith(objects5, (each1, ignored1) -> each1 == null, null);
-        Assert.assertEquals(iList(1, 2, 3), objects5);
+        Assert.assertEquals(ImmutableList.of(1, 2, 3), objects5);
 
-        MutableList<Integer> objects6 = mList(1, 2, 3);
+        MutableList<Integer> objects6 = MutableList.of(1, 2, 3);
         Iterable<Integer> iterable1 = new IterableAdapter<>(objects6);
         Iterate.removeIfWith(iterable1, (each, ignored) -> each == null, null);
-        Assert.assertEquals(iList(1, 2, 3), objects6);
+        Assert.assertEquals(ImmutableList.of(1, 2, 3), objects6);
     }
 
     @Test
     public void forEach()
     {
-        MutableList<Integer> newCollection = Lists.mutable.of();
+        MutableList<Integer> newCollection = MutableList.empty();
         IterableAdapter<Integer> iterable = new IterableAdapter<>(Interval.oneTo(10));
         Iterate.forEach(iterable, newCollection::add);
         Assert.assertEquals(Interval.oneTo(10), newCollection);
@@ -748,10 +744,10 @@ public class IterableIterateTest
 
     private void assertForEachUsingFromTo(List<Integer> integers)
     {
-        MutableList<Integer> results = Lists.mutable.of();
+        MutableList<Integer> results = MutableList.empty();
         IterableIterate.forEach(integers, 0, 4, results::add);
         Assert.assertEquals(integers, results);
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = MutableList.empty();
 
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEach(integers, 4, -1, reverseResults::add));
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEach(integers, -1, 4, reverseResults::add));
@@ -767,10 +763,10 @@ public class IterableIterateTest
 
     private void assertForEachWithIndexUsingFromTo(List<Integer> integers)
     {
-        MutableList<Integer> results = Lists.mutable.of();
+        MutableList<Integer> results = MutableList.empty();
         IterableIterate.forEachWithIndex(integers, 0, 4, ObjectIntProcedures.fromProcedure(results::add));
         Assert.assertEquals(integers, results);
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = MutableList.empty();
         ObjectIntProcedure<Integer> objectIntProcedure = ObjectIntProcedures.fromProcedure(reverseResults::add);
         Verify.assertThrows(IllegalArgumentException.class, () -> IterableIterate.forEachWithIndex(integers, 4, -1, objectIntProcedure));
         Verify.assertThrows(IllegalArgumentException.class, () -> IterableIterate.forEachWithIndex(integers, -1, 4, objectIntProcedure));

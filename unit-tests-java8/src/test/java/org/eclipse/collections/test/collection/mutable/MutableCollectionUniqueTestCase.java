@@ -12,9 +12,9 @@ package org.eclipse.collections.test.collection.mutable;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
@@ -51,7 +51,7 @@ public interface MutableCollectionUniqueTestCase extends MutableCollectionTestCa
     default void MutableCollection_removeIfWith()
     {
         MutableCollection<Integer> collection = this.newWith(5, 4, 3, 2, 1);
-        collection.removeIfWith(Predicates2.<Integer>in(), Lists.immutable.with(5, 3, 1));
+        collection.removeIfWith(Predicates2.<Integer>in(), ImmutableList.of(5, 3, 1));
         IterableTestCase.assertEquals(this.getExpectedFiltered(4, 2), collection);
 
         MutableCollection<Integer> collection2 = this.newWith(1, 2, 3, 4);

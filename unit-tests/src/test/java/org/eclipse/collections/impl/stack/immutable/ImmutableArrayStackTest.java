@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.stack.immutable;
 import java.util.EmptyStackException;
 
 import org.eclipse.collections.api.stack.ImmutableStack;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.stack.mutable.ArrayStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -24,25 +23,25 @@ public class ImmutableArrayStackTest extends ImmutableStackTestCase
     @Override
     protected <T> ImmutableStack<T> newStackWith(T... elements)
     {
-        return Stacks.immutable.of(elements);
+        return ImmutableStack.of(elements);
     }
 
     @Override
     protected <T> ImmutableStack<T> newStackFromTopToBottom(T... elements)
     {
-        return Stacks.immutable.ofReversed(elements);
+        return ImmutableStack.ofReversed(elements);
     }
 
     @Override
     protected <T> ImmutableStack<T> newStackFromTopToBottom(Iterable<T> elements)
     {
-        return Stacks.immutable.ofAllReversed(elements);
+        return ImmutableStack.ofAllReversed(elements);
     }
 
     @Override
     protected <T> ImmutableStack<T> newStack(Iterable<T> elements)
     {
-        return Stacks.immutable.ofAll(elements);
+        return ImmutableStack.ofAll(elements);
     }
 
     @Override

@@ -14,14 +14,14 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.ordered.OrderedIterable;
 import org.eclipse.collections.api.ordered.SortedIterable;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.test.SortedIterableTestCase;
 import org.eclipse.collections.test.domain.A;
@@ -49,20 +49,20 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     @Override
     default <T> SortedSetIterable<T> getExpectedFiltered(T... elements)
     {
-        return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), elements);
+        return ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), elements);
     }
 
     @Override
     default <T> MutableSortedSet<T> newMutableForFilter(T... elements)
     {
-        return SortedSets.mutable.with(Comparators.reverseNaturalOrder(), elements);
+        return MutableSortedSet.of(Comparators.reverseNaturalOrder(), elements);
     }
 
     @Test
     default void SortedSetIterable_union()
     {
         SortedSetIterable<Integer> union = this.newWith(1, 2, 3).union(this.newWith(3, 4, 5));
-        assertEquals(SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 5, 4, 3, 2, 1), union);
+        assertEquals(ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), 5, 4, 3, 2, 1), union);
     }
 
     @Override
@@ -158,7 +158,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
         Assert.assertEquals(
-                Lists.immutable.with(
+                ImmutableList.of(
                         Tuples.pair(4, 0),
                         Tuples.pair(3, 1),
                         Tuples.pair(2, 2),
@@ -172,12 +172,12 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
         Assert.assertEquals(
-                Lists.immutable.with(
+                ImmutableList.of(
                         Tuples.pair(4, 0),
                         Tuples.pair(3, 1),
                         Tuples.pair(2, 2),
                         Tuples.pair(1, 3)),
-                iterable.zipWithIndex(Lists.mutable.empty()));
+                iterable.zipWithIndex(MutableList.empty()));
     }
 
     @Test
@@ -185,25 +185,25 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     {
         SortedIterable<Integer> integers = this.newWith(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
 
-        MutableList<Integer> result = Lists.mutable.empty();
+        MutableList<Integer> result = MutableList.empty();
         integers.forEach(5, 7, result::add);
-        assertEquals(Lists.immutable.with(4, 3, 2), result);
+        assertEquals(ImmutableList.of(4, 3, 2), result);
 
-        MutableList<Integer> result2 = Lists.mutable.empty();
+        MutableList<Integer> result2 = MutableList.empty();
         integers.forEach(5, 5, result2::add);
-        assertEquals(Lists.immutable.with(4), result2);
+        assertEquals(ImmutableList.of(4), result2);
 
-        MutableList<Integer> result3 = Lists.mutable.empty();
+        MutableList<Integer> result3 = MutableList.empty();
         integers.forEach(0, 9, result3::add);
-        assertEquals(Lists.immutable.with(9, 8, 7, 6, 5, 4, 3, 2, 1, 0), result3);
+        assertEquals(ImmutableList.of(9, 8, 7, 6, 5, 4, 3, 2, 1, 0), result3);
 
-        MutableList<Integer> result4 = Lists.mutable.empty();
+        MutableList<Integer> result4 = MutableList.empty();
         integers.forEach(0, 0, result4::add);
-        assertEquals(Lists.immutable.with(9), result4);
+        assertEquals(ImmutableList.of(9), result4);
 
-        MutableList<Integer> result5 = Lists.mutable.empty();
+        MutableList<Integer> result5 = MutableList.empty();
         integers.forEach(9, 9, result5::add);
-        assertEquals(Lists.immutable.with(0), result5);
+        assertEquals(ImmutableList.of(0), result5);
 
         assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(-1, 0, result::add));
         assertThrows(IndexOutOfBoundsException.class, () -> integers.forEach(0, -1, result::add));
@@ -215,7 +215,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     default void OrderedIterable_forEach_from_to_reverse_order()
     {
         SortedIterable<Integer> integers = this.newWith(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
-        MutableList<Integer> result = Lists.mutable.empty();
+        MutableList<Integer> result = MutableList.empty();
         assertThrows(IllegalArgumentException.class, () -> integers.forEach(7, 5, result::add));
     }
 }

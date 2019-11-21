@@ -15,12 +15,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.TreeSet;
 
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
-import org.eclipse.collections.impl.factory.Sets;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -57,9 +56,9 @@ public class ImmutableTreeSetTest
         Verify.assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList(null, null)));
         Verify.assertThrows(NullPointerException.class, () -> new TreeSet<>(Arrays.asList((Object) null)));
 
-        Verify.assertThrows(ClassCastException.class, () -> SortedSets.immutable.of(new Object()));
-        Verify.assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null, null));
-        Verify.assertThrows(NullPointerException.class, () -> SortedSets.immutable.of((Object) null));
+        Verify.assertThrows(ClassCastException.class, () -> ImmutableSortedSet.of(new Object()));
+        Verify.assertThrows(NullPointerException.class, () -> ImmutableSortedSet.of((Object) null, null));
+        Verify.assertThrows(NullPointerException.class, () -> ImmutableSortedSet.of((Object) null));
     }
 
     @Override
@@ -74,11 +73,11 @@ public class ImmutableTreeSetTest
 
         Assert.assertNotEquals(
                 new TreeSet<>(Arrays.asList("1", "2", "3")),
-                Sets.immutable.of("1", "2", null));
+                ImmutableSet.of("1", "2", null));
 
         Assert.assertNotEquals(
-                SortedSets.immutable.of("1", "2", "3"),
-                SortedSets.immutable.of(1, 2, 3));
+                ImmutableSortedSet.of("1", "2", "3"),
+                ImmutableSortedSet.of(1, 2, 3));
     }
 
     @Test
@@ -113,8 +112,8 @@ public class ImmutableTreeSetTest
     @Test
     public void powerSet()
     {
-        ImmutableSortedSet<SortedSetIterable<Integer>> intPowerSet = SortedSets.immutable.of(1, 2, 3).powerSet();
-        ImmutableSortedSet<SortedSetIterable<Integer>> revPowerSet = SortedSets.immutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3).powerSet();
+        ImmutableSortedSet<SortedSetIterable<Integer>> intPowerSet = ImmutableSortedSet.of(1, 2, 3).powerSet();
+        ImmutableSortedSet<SortedSetIterable<Integer>> revPowerSet = ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), 1, 2, 3).powerSet();
 
         FastList<TreeSortedSet<Integer>> expectedSortedSet = FastList.newListWith(TreeSortedSet.newSet(), TreeSortedSet.newSetWith(1), TreeSortedSet.newSetWith(2),
                 TreeSortedSet.newSetWith(3), TreeSortedSet.newSetWith(1, 2), TreeSortedSet.newSetWith(1, 3), TreeSortedSet.newSetWith(2, 3), TreeSortedSet.newSetWith(1, 2, 3));
@@ -130,13 +129,13 @@ public class ImmutableTreeSetTest
     @Test
     public void compareTo()
     {
-        ImmutableSortedSet<Integer> set = SortedSets.immutable.of(1, 2, 3);
+        ImmutableSortedSet<Integer> set = ImmutableSortedSet.of(1, 2, 3);
         Assert.assertEquals(0, set.compareTo(set));
-        Assert.assertEquals(-1, set.compareTo(SortedSets.immutable.of(1, 2, 3, 4)));
-        Assert.assertEquals(1, set.compareTo(SortedSets.immutable.of(1, 2)));
+        Assert.assertEquals(-1, set.compareTo(ImmutableSortedSet.of(1, 2, 3, 4)));
+        Assert.assertEquals(1, set.compareTo(ImmutableSortedSet.of(1, 2)));
 
-        Assert.assertEquals(-1, set.compareTo(SortedSets.immutable.of(1, 2, 4)));
-        Assert.assertEquals(1, set.compareTo(SortedSets.immutable.of(1, 2, 2)));
+        Assert.assertEquals(-1, set.compareTo(ImmutableSortedSet.of(1, 2, 4)));
+        Assert.assertEquals(1, set.compareTo(ImmutableSortedSet.of(1, 2, 2)));
     }
 
     @Override

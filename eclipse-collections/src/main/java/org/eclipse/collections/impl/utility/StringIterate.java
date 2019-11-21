@@ -34,7 +34,6 @@ import org.eclipse.collections.impl.block.function.primitive.CharFunction;
 import org.eclipse.collections.impl.block.function.primitive.CodePointFunction;
 import org.eclipse.collections.impl.block.predicate.CodePointPredicate;
 import org.eclipse.collections.impl.block.procedure.primitive.CodePointProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -145,7 +144,7 @@ public final class StringIterate
      */
     public static MutableList<String> tokensToList(String string, String separator)
     {
-        MutableList<String> list = Lists.mutable.empty();
+        MutableList<String> list = MutableList.empty();
         for (StringTokenizer stringTokenizer = new StringTokenizer(string, separator); stringTokenizer.hasMoreTokens(); )
         {
             String token = stringTokenizer.nextToken();

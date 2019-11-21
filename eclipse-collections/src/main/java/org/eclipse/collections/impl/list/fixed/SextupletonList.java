@@ -22,7 +22,7 @@ import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.impl.block.factory.Comparators;
 
 /**
- * This is a six element immutable List which is created by calling Lists.fixedSize.of(one, two, three, four, five, six).
+ * This is a six element immutable List which is created by calling FixedSizeList.of(one, two, three, four, five, six).
  */
 final class SextupletonList<T>
         extends AbstractMemoryEfficientMutableList<T>

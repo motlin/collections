@@ -14,8 +14,6 @@ import java.util.List;
 
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,7 +23,7 @@ public class UnmodifiableMapTest
 {
     private static final String ROCK_OUT = "Bands that Rock";
     private static final String NAP_TIME = "Bands than Don't";
-    private static final MutableList<String> MASTERS_OF_ROCK = Lists.mutable.of("Nine Inch Nails", "Soundgarden", "White Zombie", "Radiohead");
+    private static final MutableList<String> MASTERS_OF_ROCK = MutableList.of("Nine Inch Nails", "Soundgarden", "White Zombie", "Radiohead");
 
     private MutableMap<String, List<String>> mutableMap;
     private UnmodifiableMap<String, List<String>> unmodifiableMap;
@@ -33,9 +31,9 @@ public class UnmodifiableMapTest
     @Before
     public void setUp()
     {
-        this.mutableMap = Maps.mutable.of(
+        this.mutableMap = MutableMap.of(
                 ROCK_OUT, MASTERS_OF_ROCK,
-                NAP_TIME, Lists.mutable.of("Metallica", "Bon Jovi", "Europe", "Scorpions"));
+                NAP_TIME, MutableList.of("Metallica", "Bon Jovi", "Europe", "Scorpions"));
         this.unmodifiableMap = new UnmodifiableMap<>(this.mutableMap);
     }
 
@@ -78,7 +76,7 @@ public class UnmodifiableMapTest
     @Test
     public void testPut()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.put("foo", Lists.mutable.of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.put("foo", MutableList.empty()));
     }
 
     @Test
@@ -90,7 +88,7 @@ public class UnmodifiableMapTest
     @Test
     public void testPutAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.putAll(Maps.mutable.of()));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.unmodifiableMap.putAll(MutableMap.empty()));
     }
 
     @Test

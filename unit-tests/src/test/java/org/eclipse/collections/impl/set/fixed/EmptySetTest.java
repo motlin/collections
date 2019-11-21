@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -55,8 +55,8 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         Assert.assertTrue(this.emptySet.isEmpty());
         Assert.assertFalse(this.emptySet.notEmpty());
-        Assert.assertTrue(Sets.fixedSize.of().isEmpty());
-        Assert.assertFalse(Sets.fixedSize.of().notEmpty());
+        Assert.assertTrue(FixedSizeSet.empty().isEmpty());
+        Assert.assertFalse(FixedSizeSet.empty().notEmpty());
     }
 
     @Test
@@ -82,15 +82,15 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void testReadResolve()
     {
-        Verify.assertInstanceOf(EmptySet.class, Sets.fixedSize.of());
-        Verify.assertPostSerializedIdentity(Sets.fixedSize.of());
+        Verify.assertInstanceOf(EmptySet.class, FixedSizeSet.empty());
+        Verify.assertPostSerializedIdentity(FixedSizeSet.empty());
     }
 
     @Override
     @Test
     public void testClone()
     {
-        Assert.assertSame(Sets.fixedSize.of().clone(), Sets.fixedSize.of());
+        Assert.assertSame(FixedSizeSet.empty().clone(), FixedSizeSet.empty());
     }
 
     @Test
@@ -212,11 +212,11 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
 
         MutableSet<Pair<String, Object>> pairs = set.zip(nulls);
         Assert.assertEquals(set, pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(nulls, pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        Assert.assertEquals(nulls, pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         MutableSet<Pair<String, Object>> pairsPlusOne = set.zip(nullsPlusOne);
         Assert.assertEquals(set, pairsPlusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         Assert.assertEquals(
                 set.zip(nulls),
@@ -246,7 +246,7 @@ public class EmptySetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void chunk_large_size()
     {
-        Assert.assertEquals(Lists.mutable.of(), this.classUnderTest().chunk(10));
+        Assert.assertEquals(MutableList.empty(), this.classUnderTest().chunk(10));
     }
 
     @Override

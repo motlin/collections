@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.bag.immutable;
 
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.bag.ImmutableBag;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,10 +21,10 @@ public class ImmutableBagFactoryTest
     @Test
     public void immutables()
     {
-        ImmutableBag<Object> immutableBag = Bags.immutable.of();
+        ImmutableBag<Object> immutableBag = ImmutableBag.empty();
         Verify.assertIterableSize(0, immutableBag);
-        Verify.assertIterableSize(4, Bags.immutable.of(1, 2, 2, 3));
-        ImmutableBag<Object> actual = Bags.immutable.ofAll(immutableBag);
+        Verify.assertIterableSize(4, ImmutableBag.of(1, 2, 2, 3));
+        ImmutableBag<Object> actual = ImmutableBag.ofAll(immutableBag);
         Assert.assertSame(immutableBag, actual);
         Assert.assertEquals(immutableBag, actual);
     }
@@ -33,7 +32,7 @@ public class ImmutableBagFactoryTest
     @Test
     public void singletonBagCreation()
     {
-        Bag<String> singleton = Bags.immutable.of("a");
+        Bag<String> singleton = ImmutableBag.of("a");
         Verify.assertInstanceOf(ImmutableSingletonBag.class, singleton);
     }
 }

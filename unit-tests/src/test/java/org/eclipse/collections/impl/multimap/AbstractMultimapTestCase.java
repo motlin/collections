@@ -24,10 +24,7 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Multimaps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
@@ -150,7 +147,7 @@ public abstract class AbstractMultimapTestCase
     @Test
     public void forEachKeyValue()
     {
-        MutableBag<String> collection = Bags.mutable.of();
+        MutableBag<String> collection = MutableBag.empty();
         Multimap<Integer, String> multimap =
                 this.newMultimapWithKeysValues(1, "One", 2, "Two", 3, "Three");
         multimap.forEachKeyValue((key, value) -> collection.add(key + value));
@@ -170,7 +167,7 @@ public abstract class AbstractMultimapTestCase
     @Test
     public void forEachValue()
     {
-        MutableBag<String> collection = Bags.mutable.of();
+        MutableBag<String> collection = MutableBag.empty();
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
         multimap.forEachValue(CollectionAddProcedure.on(collection));
         Assert.assertEquals(HashBag.newBagWith("1", "2", "3"), collection);
@@ -180,7 +177,7 @@ public abstract class AbstractMultimapTestCase
     public void valuesView()
     {
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
-        Assert.assertEquals(Bags.mutable.of("1", "2", "3"), multimap.valuesView().toBag());
+        Assert.assertEquals(MutableBag.of("1", "2", "3"), multimap.valuesView().toBag());
     }
 
     @Test
@@ -188,14 +185,14 @@ public abstract class AbstractMultimapTestCase
     {
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
         Assert.assertEquals(
-                Bags.mutable.of("1", "2", "3"),
+                MutableBag.of("1", "2", "3"),
                 multimap.multiValuesView().flatCollect(Functions.getPassThru()).toBag());
     }
 
     @Test
     public void forEachKey()
     {
-        MutableList<Integer> collection = Lists.mutable.of();
+        MutableList<Integer> collection = MutableList.empty();
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
         multimap.forEachKey(CollectionAddProcedure.on(collection));
         Assert.assertEquals(FastList.newListWith(1, 2, 3), collection);
@@ -214,10 +211,10 @@ public abstract class AbstractMultimapTestCase
     {
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
         Assert.assertEquals(
-                Bags.mutable.of(1, 2, 3),
+                MutableBag.of(1, 2, 3),
                 multimap.keyMultiValuePairsView().collect(Pair::getOne).toBag());
         Assert.assertEquals(
-                Bags.mutable.of("1", "2", "3"),
+                MutableBag.of("1", "2", "3"),
                 multimap.keyMultiValuePairsView().flatCollect(Functions.secondOfPair()).toBag());
     }
 
@@ -226,7 +223,7 @@ public abstract class AbstractMultimapTestCase
     {
         Multimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "1", 2, "2", 3, "3");
         Assert.assertEquals(
-                Bags.mutable.of(Tuples.pair(1, "1"), Tuples.pair(2, "2"), Tuples.pair(3, "3")),
+                MutableBag.of(Tuples.pair(1, "1"), Tuples.pair(2, "2"), Tuples.pair(3, "3")),
                 multimap.keyValuePairsView().toBag());
     }
 
@@ -280,7 +277,7 @@ public abstract class AbstractMultimapTestCase
     {
         Multimap<String, Integer> multimap =
                 this.newMultimapWithKeysValues("One", 1, "Two", 2, "Three", 3);
-        Assert.assertEquals(Bags.mutable.of("One", "Two", "Three"), multimap.keysView().toBag());
+        Assert.assertEquals(MutableBag.of("One", "Two", "Three"), multimap.keysView().toBag());
     }
 
     @Test
@@ -291,7 +288,7 @@ public abstract class AbstractMultimapTestCase
         Set<String> keySet = (Set<String>) multimap.keySet();
         Verify.assertThrows(UnsupportedOperationException.class, () -> keySet.add("Four"));
         Verify.assertThrows(UnsupportedOperationException.class, () -> keySet.remove("Four"));
-        Assert.assertEquals(Sets.mutable.of("One", "Two", "Three"), keySet);
+        Assert.assertEquals(MutableSet.of("One", "Two", "Three"), keySet);
     }
 
     @Test

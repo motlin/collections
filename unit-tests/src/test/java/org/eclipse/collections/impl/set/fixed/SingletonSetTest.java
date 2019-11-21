@@ -15,9 +15,12 @@ import java.util.Iterator;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.partition.set.PartitionMutableSet;
+import org.eclipse.collections.api.set.FixedSizeSet;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Functions;
@@ -26,8 +29,6 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.SynchronizedMutableSet;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -36,9 +37,6 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
 
 /**
  * JUnit test for {@link SingletonSet}.
@@ -52,7 +50,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void setUp()
     {
         this.set = new SingletonSet<>("1");
-        this.intSet = Sets.fixedSize.of(1);
+        this.intSet = FixedSizeSet.of(1);
     }
 
     @Override
@@ -82,7 +80,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void asSynchronized()
     {
         super.asSynchronized();
-        Verify.assertInstanceOf(SynchronizedMutableSet.class, Sets.fixedSize.of("1").asSynchronized());
+        Verify.assertInstanceOf(SynchronizedMutableSet.class, FixedSizeSet.of("1").asSynchronized());
     }
 
     @Test
@@ -96,7 +94,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void equalsAndHashCode()
     {
         super.equalsAndHashCode();
-        MutableSet<String> one = Sets.fixedSize.of("1");
+        MutableSet<String> one = FixedSizeSet.of("1");
         MutableSet<String> oneA = UnifiedSet.newSet();
         oneA.add("1");
         Verify.assertEqualsAndHashCode(one, oneA);
@@ -148,7 +146,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void addingAllToOtherSet()
     {
-        MutableSet<String> newSet = UnifiedSet.newSet(Sets.fixedSize.of("1"));
+        MutableSet<String> newSet = UnifiedSet.newSet(FixedSizeSet.of("1"));
         newSet.add("2");
         Verify.assertContainsAll(newSet, "1", "2");
     }
@@ -163,7 +161,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void tap()
     {
-        MutableList<Integer> tapResult = Lists.mutable.of();
+        MutableList<Integer> tapResult = MutableList.empty();
         Assert.assertSame(this.intSet, this.intSet.tap(tapResult::add));
         Assert.assertEquals(this.intSet.toList(), tapResult);
     }
@@ -171,7 +169,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void forEach()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         this.intSet.forEach(CollectionAddProcedure.on(result));
         Verify.assertSize(1, result);
         Verify.assertContainsAll(result, 1);
@@ -180,7 +178,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void forEachWith()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         this.intSet.forEachWith((argument1, argument2) -> result.add(argument1 + argument2), 0);
         Verify.assertSize(1, result);
         Verify.assertContainsAll(result, 1);
@@ -189,7 +187,7 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void forEachWithIndex()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         this.intSet.forEachWithIndex((object, index) -> result.add(object + index));
         Verify.assertContainsAll(result, 1);
     }
@@ -234,23 +232,23 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void partition()
     {
         PartitionMutableSet<Integer> partition = this.intSet.partition(Predicates.lessThan(3));
-        Assert.assertEquals(mSet(1), partition.getSelected());
-        Assert.assertEquals(mSet(), partition.getRejected());
+        Assert.assertEquals(MutableSet.of(1), partition.getSelected());
+        Assert.assertEquals(MutableSet.empty(), partition.getRejected());
     }
 
     @Test
     public void partitionWith()
     {
         PartitionMutableSet<Integer> partition = this.intSet.partitionWith(Predicates2.lessThan(), 3);
-        Assert.assertEquals(mSet(1), partition.getSelected());
-        Assert.assertEquals(mSet(), partition.getRejected());
+        Assert.assertEquals(MutableSet.of(1), partition.getSelected());
+        Assert.assertEquals(MutableSet.empty(), partition.getRejected());
     }
 
     @Test
     public void selectInstancesOf()
     {
-        MutableSet<Number> numbers = Sets.fixedSize.of(1);
-        Assert.assertEquals(iSet(1), numbers.selectInstancesOf(Integer.class));
+        MutableSet<Number> numbers = FixedSizeSet.of(1);
+        Assert.assertEquals(ImmutableSet.of(1), numbers.selectInstancesOf(Integer.class));
         Verify.assertEmpty(numbers.selectInstancesOf(Double.class));
     }
 
@@ -410,13 +408,13 @@ public class SingletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void removeAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.intSet.removeAll(Lists.fixedSize.of(1, 2)));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.intSet.removeAll(FixedSizeList.of(1, 2)));
     }
 
     @Test
     public void retainAll()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> this.intSet.retainAll(Lists.fixedSize.of(2)));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> this.intSet.retainAll(FixedSizeList.of(2)));
     }
 
     @Test

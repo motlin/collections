@@ -30,12 +30,15 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -44,10 +47,6 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.factory.primitive.ObjectDoubleMaps;
 import org.eclipse.collections.impl.factory.primitive.ObjectLongMaps;
 import org.eclipse.collections.impl.list.Interval;
@@ -763,8 +762,8 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     default void RichIterable_reduceInPlaceCollector()
     {
         RichIterable<Integer> iterable = this.newWith(1, 2, 3);
-        MutableBag<Integer> result = iterable.reduceInPlace(Collectors.toCollection(Bags.mutable::empty));
-        Assert.assertEquals(Bags.immutable.with(1, 2, 3), result);
+        MutableBag<Integer> result = iterable.reduceInPlace(Collectors.toCollection(MutableBag::empty));
+        Assert.assertEquals(ImmutableBag.of(1, 2, 3), result);
 
         String joining = result.collect(Object::toString).reduceInPlace(Collectors.joining(","));
         Assert.assertEquals(result.collect(Object::toString).makeString(","), joining);
@@ -794,8 +793,8 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(1, 2, 3);
         MutableBag<Integer> result =
-                iterable.reduceInPlace(Bags.mutable::empty, MutableBag::add);
-        Assert.assertEquals(Bags.immutable.with(1, 2, 3), result);
+                iterable.reduceInPlace(MutableBag::empty, MutableBag::add);
+        Assert.assertEquals(ImmutableBag.of(1, 2, 3), result);
 
         String joining =
                 result.collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
@@ -918,10 +917,10 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
         assertEquals(
-                Lists.immutable.with(4, 3, 2, 1),
+                ImmutableList.of(4, 3, 2, 1),
                 iterable.toList());
 
-        MutableList<Integer> target = Lists.mutable.empty();
+        MutableList<Integer> target = MutableList.empty();
         iterable.each(target::add);
         assertEquals(
                 target,
@@ -933,8 +932,8 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     default void RichIterable_into()
     {
         assertEquals(
-                Lists.immutable.with(4, 3, 2, 1),
-                this.newWith(4, 3, 2, 1).into(Lists.mutable.empty()));
+                ImmutableList.of(4, 3, 2, 1),
+                this.newWith(4, 3, 2, 1).into(MutableList.empty()));
     }
 
     @Override
@@ -944,19 +943,19 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
 
         assertEquals(
-                Lists.immutable.with(1, 2, 3, 4),
+                ImmutableList.of(1, 2, 3, 4),
                 iterable.toSortedList());
 
         assertEquals(
-                Lists.immutable.with(4, 3, 2, 1),
+                ImmutableList.of(4, 3, 2, 1),
                 iterable.toSortedList(Comparators.reverseNaturalOrder()));
 
         assertEquals(
-                Lists.immutable.with(1, 2, 3, 4),
+                ImmutableList.of(1, 2, 3, 4),
                 iterable.toSortedListBy(Functions.identity()));
 
         assertEquals(
-                Lists.immutable.with(4, 3, 2, 1),
+                ImmutableList.of(4, 3, 2, 1),
                 iterable.toSortedListBy(each -> each * -1));
     }
 
@@ -965,7 +964,7 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     default void RichIterable_toSet()
     {
         assertEquals(
-                Sets.immutable.with(4, 3, 2, 1),
+                ImmutableSet.of(4, 3, 2, 1),
                 this.newWith(4, 3, 2, 1).toSet());
     }
 
@@ -976,19 +975,19 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
 
         assertEquals(
-                SortedSets.immutable.with(1, 2, 3, 4),
+                ImmutableSortedSet.of(1, 2, 3, 4),
                 iterable.toSortedSet());
 
         assertEquals(
-                SortedSets.immutable.with(Comparators.reverseNaturalOrder(), 4, 3, 2, 1),
+                ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), 4, 3, 2, 1),
                 iterable.toSortedSet(Comparators.reverseNaturalOrder()));
 
         assertEquals(
-                SortedSets.immutable.with(Comparators.byFunction(Functions.identity()), 1, 2, 3, 4),
+                ImmutableSortedSet.of(Comparators.byFunction(Functions.identity()), 1, 2, 3, 4),
                 iterable.toSortedSetBy(Functions.identity()));
 
         assertEquals(
-                SortedSets.immutable.with(Comparators.byFunction((Integer each) -> each * -1), 4, 3, 2, 1),
+                ImmutableSortedSet.of(Comparators.byFunction((Integer each) -> each * -1), 4, 3, 2, 1),
                 iterable.toSortedSetBy(each -> each * -1));
     }
 
@@ -997,7 +996,7 @@ public interface RichIterableUniqueTestCase extends RichIterableTestCase
     default void RichIterable_toBag()
     {
         assertEquals(
-                Bags.immutable.with(4, 3, 2, 1),
+                ImmutableBag.of(4, 3, 2, 1),
                 this.newWith(4, 3, 2, 1).toBag());
     }
 

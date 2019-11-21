@@ -40,8 +40,6 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.MultimapEachPutProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.tuple.Tuples;
@@ -120,7 +118,7 @@ final class ImmutableSingletonBag<T>
     @Override
     public ImmutableBag<T> newWith(T element)
     {
-        return Bags.immutable.with(this.value, element);
+        return ImmutableBag.of(this.value, element);
     }
 
     @Override
@@ -131,7 +129,7 @@ final class ImmutableSingletonBag<T>
 
     private ImmutableBag<T> emptyIfMatchesOrThis(Predicate<Object> predicate)
     {
-        return predicate.accept(this.value) ? Bags.immutable.empty() : this;
+        return predicate.accept(this.value) ? ImmutableBag.empty() : this;
     }
 
     @Override
@@ -206,7 +204,7 @@ final class ImmutableSingletonBag<T>
     {
         return predicate.accept(1)
                 ? this
-                : Bags.immutable.empty();
+                : ImmutableBag.empty();
     }
 
     @Override
@@ -214,7 +212,7 @@ final class ImmutableSingletonBag<T>
     {
         return predicate.accept(this.value)
                 ? this
-                : Bags.immutable.empty();
+                : ImmutableBag.empty();
     }
 
     @Override
@@ -244,7 +242,7 @@ final class ImmutableSingletonBag<T>
     public ImmutableBag<T> reject(Predicate<? super T> predicate)
     {
         return predicate.accept(this.value)
-                ? Bags.immutable.empty()
+                ? ImmutableBag.empty()
                 : this;
     }
 
@@ -276,13 +274,13 @@ final class ImmutableSingletonBag<T>
     {
         return clazz.isInstance(this.value)
                 ? (ImmutableBag<S>) this
-                : Bags.immutable.empty();
+                : ImmutableBag.empty();
     }
 
     @Override
     public <V> ImmutableBag<V> collect(Function<? super T, ? extends V> function)
     {
-        return Bags.immutable.with(function.valueOf(this.value));
+        return ImmutableBag.of(function.valueOf(this.value));
     }
 
     @Override
@@ -291,8 +289,8 @@ final class ImmutableSingletonBag<T>
             Function<? super T, ? extends V> function)
     {
         return predicate.accept(this.value)
-                ? Bags.immutable.with(function.valueOf(this.value))
-                : Bags.immutable.empty();
+                ? ImmutableBag.of(function.valueOf(this.value))
+                : ImmutableBag.empty();
     }
 
     @Override
@@ -449,9 +447,9 @@ final class ImmutableSingletonBag<T>
         Iterator<S> iterator = that.iterator();
         if (!iterator.hasNext())
         {
-            return Bags.immutable.empty();
+            return ImmutableBag.empty();
         }
-        return Bags.immutable.with(Tuples.pair(this.value, iterator.next()));
+        return ImmutableBag.of(Tuples.pair(this.value, iterator.next()));
     }
 
     /**
@@ -461,7 +459,7 @@ final class ImmutableSingletonBag<T>
     @Deprecated
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return Sets.immutable.with(Tuples.pair(this.value, 0));
+        return ImmutableSet.of(Tuples.pair(this.value, 0));
     }
 
     @Override
@@ -538,6 +536,6 @@ final class ImmutableSingletonBag<T>
     @Override
     public ImmutableSet<T> selectUnique()
     {
-        return Sets.immutable.of(this.value);
+        return ImmutableSet.of(this.value);
     }
 }

@@ -20,8 +20,11 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
@@ -35,7 +38,6 @@ import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.MaxSizeFunction;
 import org.eclipse.collections.impl.block.function.MinSizeFunction;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -45,15 +47,12 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
-
 public class ListIterateTest
 {
     @Test
     public void injectInto()
     {
-        MutableList<Integer> list = Lists.fixedSize.of(1, 2, 3);
+        MutableList<Integer> list = FixedSizeList.of(1, 2, 3);
         List<Integer> linked = new LinkedList<>(list);
         Assert.assertEquals(Integer.valueOf(7), ListIterate.injectInto(1, list, AddFunction.INTEGER));
         Assert.assertEquals(Integer.valueOf(7), ListIterate.injectInto(1, linked, AddFunction.INTEGER));
@@ -87,8 +86,8 @@ public class ListIterateTest
         List<Integer> list = new LinkedList<>(Interval.fromTo(5, 1));
         Assert.assertEquals(4, Iterate.detectIndexWith(list, Object::equals, 1));
         Assert.assertEquals(0, Iterate.detectIndexWith(list, Object::equals, 5));
-        Assert.assertEquals(-1, Iterate.detectIndexWith(iList(), Object::equals, 5));
-        Assert.assertEquals(-1, Iterate.detectIndexWith(iSet(), Object::equals, 5));
+        Assert.assertEquals(-1, Iterate.detectIndexWith(ImmutableList.empty(), Object::equals, 5));
+        Assert.assertEquals(-1, Iterate.detectIndexWith(ImmutableSet.empty(), Object::equals, 5));
     }
 
     @Test
@@ -108,7 +107,7 @@ public class ListIterateTest
     @Test
     public void injectIntoInt()
     {
-        MutableList<Integer> list = Lists.fixedSize.of(1, 2, 3);
+        MutableList<Integer> list = FixedSizeList.of(1, 2, 3);
         List<Integer> linked = new LinkedList<>(list);
         Assert.assertEquals(7, ListIterate.injectInto(1, list, AddFunction.INTEGER_TO_INT));
         Assert.assertEquals(7, ListIterate.injectInto(1, linked, AddFunction.INTEGER_TO_INT));
@@ -117,7 +116,7 @@ public class ListIterateTest
     @Test
     public void injectIntoLong()
     {
-        MutableList<Integer> list = Lists.fixedSize.of(1, 2, 3);
+        MutableList<Integer> list = FixedSizeList.of(1, 2, 3);
         List<Integer> linked = new LinkedList<>(list);
         Assert.assertEquals(7, ListIterate.injectInto(1, list, AddFunction.INTEGER_TO_LONG));
         Assert.assertEquals(7, ListIterate.injectInto(1, linked, AddFunction.INTEGER_TO_LONG));
@@ -126,7 +125,7 @@ public class ListIterateTest
     @Test
     public void injectIntoDouble()
     {
-        MutableList<Double> list = Lists.fixedSize.of(1.0d, 2.0d, 3.0d);
+        MutableList<Double> list = FixedSizeList.of(1.0d, 2.0d, 3.0d);
         List<Double> linked = new LinkedList<>(list);
         Assert.assertEquals(7.0d, ListIterate.injectInto(1.0, list, AddFunction.DOUBLE), 0.001);
         Assert.assertEquals(7.0d, ListIterate.injectInto(1.0, linked, AddFunction.DOUBLE), 0.001);
@@ -138,7 +137,7 @@ public class ListIterateTest
     @Test
     public void injectIntoFloat()
     {
-        MutableList<Float> list = Lists.fixedSize.of(1.0f, 2.0f, 3.0f);
+        MutableList<Float> list = FixedSizeList.of(1.0f, 2.0f, 3.0f);
         List<Float> linked = new LinkedList<>(list);
         Assert.assertEquals(7.0f, ListIterate.injectInto(1.0f, list, AddFunction.FLOAT), 0.001);
         Assert.assertEquals(7.0f, ListIterate.injectInto(1.0f, linked, AddFunction.FLOAT), 0.001);
@@ -150,7 +149,7 @@ public class ListIterateTest
     @Test
     public void injectIntoString()
     {
-        MutableList<String> list = Lists.fixedSize.of("1", "2", "3");
+        MutableList<String> list = FixedSizeList.of("1", "2", "3");
         List<String> linked = new LinkedList<>(list);
         Assert.assertEquals("0123", ListIterate.injectInto("0", list, AddFunction.STRING));
         Assert.assertEquals("0123", ListIterate.injectInto("0", linked, AddFunction.STRING));
@@ -159,7 +158,7 @@ public class ListIterateTest
     @Test
     public void injectIntoMaxString()
     {
-        MutableList<String> list = Lists.fixedSize.of("1", "12", "123");
+        MutableList<String> list = FixedSizeList.of("1", "12", "123");
         List<String> linked = new LinkedList<>(list);
         Function2<Integer, String, Integer> function = MaxSizeFunction.STRING;
         Assert.assertEquals(Integer.valueOf(3), ListIterate.injectInto(Integer.MIN_VALUE, list, function));
@@ -169,7 +168,7 @@ public class ListIterateTest
     @Test
     public void injectIntoMinString()
     {
-        MutableList<String> list = Lists.fixedSize.of("1", "12", "123");
+        MutableList<String> list = FixedSizeList.of("1", "12", "123");
         List<String> linked = new LinkedList<>(list);
         Function2<Integer, String, Integer> function = MinSizeFunction.STRING;
         Assert.assertEquals(Integer.valueOf(1), ListIterate.injectInto(Integer.MAX_VALUE, list, function));
@@ -179,7 +178,7 @@ public class ListIterateTest
     @Test
     public void collect()
     {
-        MutableList<Boolean> list = Lists.fixedSize.of(true, false, null);
+        MutableList<Boolean> list = FixedSizeList.of(true, false, null);
         List<Boolean> linked = new LinkedList<>(list);
         this.assertCollect(list);
         this.assertCollect(list.asSynchronized());
@@ -202,7 +201,7 @@ public class ListIterateTest
     @Test
     public void collectWithIndex()
     {
-        MutableList<Boolean> list = Lists.fixedSize.of(true, false, null);
+        MutableList<Boolean> list = FixedSizeList.of(true, false, null);
         List<Boolean> linked = new LinkedList<>(list);
         this.assertCollectWithIndex(list);
         this.assertCollectWithIndex(linked);
@@ -214,18 +213,18 @@ public class ListIterateTest
     private void assertCollectWithIndex(List<Boolean> list)
     {
         MutableList<ObjectIntPair<Boolean>> newCollection = ListIterate.collectWithIndex(list, PrimitiveTuples::pair);
-        Verify.assertListsEqual(newCollection, Lists.mutable.with(PrimitiveTuples.pair(Boolean.TRUE, 0), PrimitiveTuples.pair(Boolean.FALSE, 1), PrimitiveTuples.pair(null, 2)));
+        Verify.assertListsEqual(newCollection, MutableList.of(PrimitiveTuples.pair(Boolean.TRUE, 0), PrimitiveTuples.pair(Boolean.FALSE, 1), PrimitiveTuples.pair(null, 2)));
 
         List<ObjectIntPair<Boolean>> newCollection2 = ListIterate.collectWithIndex(list, PrimitiveTuples::pair, new ArrayList<>());
-        Verify.assertListsEqual(newCollection2, Lists.mutable.with(PrimitiveTuples.pair(Boolean.TRUE, 0), PrimitiveTuples.pair(Boolean.FALSE, 1), PrimitiveTuples.pair(null, 2)));
+        Verify.assertListsEqual(newCollection2, MutableList.of(PrimitiveTuples.pair(Boolean.TRUE, 0), PrimitiveTuples.pair(Boolean.FALSE, 1), PrimitiveTuples.pair(null, 2)));
     }
 
     @Test
     public void flatten()
     {
-        MutableList<MutableList<Boolean>> list = Lists.fixedSize.of(
-                Lists.fixedSize.of(true, false),
-                Lists.fixedSize.of(true, null));
+        MutableList<MutableList<Boolean>> list = FixedSizeList.of(
+                FixedSizeList.of(true, false),
+                FixedSizeList.of(true, null));
         List<MutableList<Boolean>> linked = new LinkedList<>(list);
         this.assertFlatten(list);
         this.assertFlatten(list.asSynchronized());
@@ -252,7 +251,7 @@ public class ListIterateTest
         Assert.assertNull(ListIterate.getFirst(null));
         Assert.assertNull(ListIterate.getLast(null));
 
-        MutableList<Boolean> list = Lists.fixedSize.of(true, null, false);
+        MutableList<Boolean> list = FixedSizeList.of(true, null, false);
         Assert.assertEquals(Boolean.TRUE, ListIterate.getFirst(list));
         Assert.assertEquals(Boolean.FALSE, ListIterate.getLast(list));
 
@@ -322,17 +321,17 @@ public class ListIterateTest
         MutableList<Integer> integers = Interval.oneTo(5).toList();
 
         this.assertForEachUsingFromTo(integers);
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = MutableList.empty();
         this.assertReverseForEachUsingFromTo(integers, reverseResults, reverseResults::add);
         this.assertForEachUsingFromTo(new LinkedList<>(integers));
     }
 
     private void assertForEachUsingFromTo(List<Integer> integers)
     {
-        MutableList<Integer> results = Lists.mutable.of();
+        MutableList<Integer> results = MutableList.empty();
         ListIterate.forEach(integers, 0, 4, results::add);
         Assert.assertEquals(integers, results);
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = MutableList.empty();
 
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEach(integers, 4, -1, reverseResults::add));
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEach(integers, -1, 4, reverseResults::add));
@@ -351,17 +350,17 @@ public class ListIterateTest
         MutableList<Integer> integers = Interval.oneTo(5).toList();
         this.assertForEachWithIndexUsingFromTo(integers);
         this.assertForEachWithIndexUsingFromTo(new LinkedList<>(integers));
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = MutableList.empty();
         ObjectIntProcedure<Integer> objectIntProcedure = ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(reverseResults));
         this.assertReverseForEachIndexUsingFromTo(integers, reverseResults, objectIntProcedure);
     }
 
     private void assertForEachWithIndexUsingFromTo(List<Integer> integers)
     {
-        MutableList<Integer> results = Lists.mutable.of();
+        MutableList<Integer> results = MutableList.empty();
         ListIterate.forEachWithIndex(integers, 0, 4, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(results)));
         Assert.assertEquals(integers, results);
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = MutableList.empty();
         ObjectIntProcedure<Integer> objectIntProcedure = ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(reverseResults));
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEachWithIndex(integers, 4, -1, objectIntProcedure));
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ListIterate.forEachWithIndex(integers, -1, 4, objectIntProcedure));
@@ -377,7 +376,7 @@ public class ListIterateTest
     public void reverseForEach()
     {
         MutableList<Integer> integers = Interval.oneTo(5).toList();
-        MutableList<Integer> reverseResults = Lists.mutable.of();
+        MutableList<Integer> reverseResults = MutableList.empty();
         ListIterate.reverseForEach(integers, CollectionAddProcedure.on(reverseResults));
         Assert.assertEquals(ListIterate.reverseThis(integers), reverseResults);
     }
@@ -385,8 +384,8 @@ public class ListIterateTest
     @Test
     public void reverseForEach_emptyList()
     {
-        MutableList<Integer> integers = Lists.mutable.of();
-        MutableList<Integer> results = Lists.mutable.of();
+        MutableList<Integer> integers = MutableList.empty();
+        MutableList<Integer> results = MutableList.empty();
         ListIterate.reverseForEach(integers, CollectionAddProcedure.on(results));
         Assert.assertEquals(integers, results);
     }
@@ -397,7 +396,7 @@ public class ListIterateTest
         MutableList<Integer> list = this.getIntegerList();
         this.assertReverseForEachWithIndex(list);
         this.assertReverseForEachWithIndex(new LinkedList<>(list));
-        ListIterate.reverseForEachWithIndex(Lists.mutable.empty(), (ignored1, index) -> Assert.fail());
+        ListIterate.reverseForEachWithIndex(MutableList.empty(), (ignored1, index) -> Assert.fail());
     }
 
     private void assertReverseForEachWithIndex(List<Integer> list)
@@ -413,8 +412,8 @@ public class ListIterateTest
     @Test
     public void forEachInBoth()
     {
-        MutableList<String> list1 = Lists.fixedSize.of("1", "2");
-        MutableList<String> list2 = Lists.fixedSize.of("a", "b");
+        MutableList<String> list1 = FixedSizeList.of("1", "2");
+        MutableList<String> list2 = FixedSizeList.of("a", "b");
         this.assertForEachInBoth(list1, list2);
         this.assertForEachInBoth(list1, new LinkedList<>(list2));
         this.assertForEachInBoth(new LinkedList<>(list1), list2);
@@ -447,7 +446,7 @@ public class ListIterateTest
     private void assertDetectWith(List<Integer> list)
     {
         Assert.assertEquals(Integer.valueOf(1), ListIterate.detectWith(list, Object::equals, 1));
-        MutableList<Integer> list2 = Lists.fixedSize.of(1, 2, 2);
+        MutableList<Integer> list2 = FixedSizeList.of(1, 2, 2);
         Assert.assertSame(list2.get(1), ListIterate.detectWith(list2, Object::equals, 2));
     }
 
@@ -482,9 +481,9 @@ public class ListIterateTest
     @Test
     public void distinct()
     {
-        List<Integer> list = Lists.mutable.with(5, 2, 3, 5, 4, 2);
-        List<Integer> expectedList = Lists.mutable.with(5, 2, 3, 4);
-        List<Integer> actualList = Lists.mutable.empty();
+        List<Integer> list = MutableList.of(5, 2, 3, 5, 4, 2);
+        List<Integer> expectedList = MutableList.of(5, 2, 3, 4);
+        List<Integer> actualList = MutableList.empty();
         Verify.assertListsEqual(expectedList, ListIterate.distinct(list, actualList));
         Verify.assertListsEqual(expectedList, actualList);
         actualList.clear();
@@ -495,8 +494,8 @@ public class ListIterateTest
     @Test
     public void distinctBy()
     {
-        MutableList<Integer> list = Lists.mutable.with(5, 2, 3, 5, 4, 2);
-        MutableList<Integer> expectedList = Lists.mutable.with(5, 2, 3, 4);
+        MutableList<Integer> list = MutableList.of(5, 2, 3, 5, 4, 2);
+        MutableList<Integer> expectedList = MutableList.of(5, 2, 3, 4);
         Verify.assertListsEqual(expectedList, ListIterate.distinctBy(list, Object::toString));
     }
 
@@ -519,7 +518,7 @@ public class ListIterateTest
     private void assertSelectAndRejectWith(List<Integer> list)
     {
         Twin<MutableList<Integer>> result =
-                ListIterate.selectAndRejectWith(list, Predicates2.in(), Lists.fixedSize.of(1));
+                ListIterate.selectAndRejectWith(list, Predicates2.in(), FixedSizeList.of(1));
         Verify.assertSize(1, result.getOne());
         Verify.assertSize(4, result.getTwo());
     }
@@ -590,7 +589,7 @@ public class ListIterateTest
     @Test
     public void collectIf()
     {
-        MutableList<Integer> integers = Lists.fixedSize.of(1, 2, 3);
+        MutableList<Integer> integers = FixedSizeList.of(1, 2, 3);
         this.assertCollectIf(integers);
         this.assertCollectIf(new LinkedList<>(integers));
     }
@@ -604,8 +603,8 @@ public class ListIterateTest
     @Test
     public void reverseThis()
     {
-        Assert.assertEquals(FastList.newListWith(2, 3, 1), ListIterate.reverseThis(Lists.fixedSize.of(1, 3, 2)));
-        Assert.assertEquals(FastList.newListWith(2, 3, 1), ListIterate.reverseThis(new LinkedList<>(Lists.fixedSize.of(1, 3, 2))));
+        Assert.assertEquals(FastList.newListWith(2, 3, 1), ListIterate.reverseThis(FixedSizeList.of(1, 3, 2)));
+        Assert.assertEquals(FastList.newListWith(2, 3, 1), ListIterate.reverseThis(new LinkedList<>(FixedSizeList.of(1, 3, 2))));
     }
 
     @Test
@@ -615,7 +614,7 @@ public class ListIterateTest
         this.assertTake(integers);
         this.assertTake(new LinkedList<>(integers));
 
-        Verify.assertSize(0, ListIterate.take(Lists.fixedSize.of(), 2));
+        Verify.assertSize(0, ListIterate.take(FixedSizeList.empty(), 2));
         Verify.assertSize(0, ListIterate.take(new LinkedList<>(), 2));
         Verify.assertSize(0, ListIterate.take(new LinkedList<>(), Integer.MAX_VALUE));
 
@@ -635,7 +634,7 @@ public class ListIterateTest
         Verify.assertListsEqual(FastList.newListWith(5, 4, 3, 2, 1), ListIterate.take(integers, integers.size()));
         Assert.assertNotSame(integers, ListIterate.take(integers, integers.size()));
 
-        Verify.assertEmpty(ListIterate.take(Lists.fixedSize.of(), 2));
+        Verify.assertEmpty(ListIterate.take(FixedSizeList.empty(), 2));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -652,7 +651,7 @@ public class ListIterateTest
         this.assertDrop(integers);
         this.assertDrop(new LinkedList<>(integers));
 
-        Verify.assertSize(0, ListIterate.drop(Lists.fixedSize.<Integer>of(), 2));
+        Verify.assertSize(0, ListIterate.drop(FixedSizeList.<Integer>empty(), 2));
         Verify.assertSize(0, ListIterate.drop(new LinkedList<>(), 2));
         Verify.assertSize(0, ListIterate.drop(new LinkedList<>(), Integer.MAX_VALUE));
 
@@ -671,7 +670,7 @@ public class ListIterateTest
         Verify.assertEmpty(ListIterate.drop(integers, 6, FastList.newList()));
         Verify.assertEmpty(ListIterate.drop(integers, integers.size()));
 
-        Verify.assertSize(0, ListIterate.drop(Lists.fixedSize.of(), 2));
+        Verify.assertSize(0, ListIterate.drop(FixedSizeList.empty(), 2));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -700,9 +699,9 @@ public class ListIterateTest
     public void removeIfWithProcedure()
     {
         MutableList<Integer> list1 = FastList.newListWith(1, 2, 3, 4, 5);
-        MutableList<Integer> resultList1 = Lists.mutable.of();
+        MutableList<Integer> resultList1 = MutableList.empty();
         List<Integer> list2 = new LinkedList<>(list1);
-        MutableList<Integer> resultList2 = Lists.mutable.of();
+        MutableList<Integer> resultList2 = MutableList.empty();
 
         ListIterate.removeIf(list1, IntegerPredicates.isEven(), CollectionAddProcedure.on(resultList1));
         Assert.assertEquals(FastList.newListWith(1, 3, 5), list1);
@@ -738,7 +737,7 @@ public class ListIterateTest
     public void zip()
     {
         List<Integer> integers = Interval.oneTo(3);
-        List<Twin<Integer>> expected = Lists.mutable.with(
+        List<Twin<Integer>> expected = MutableList.of(
                 Tuples.twin(1, 1),
                 Tuples.twin(2, 2),
                 Tuples.twin(3, 3));

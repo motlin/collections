@@ -42,8 +42,6 @@ import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
@@ -134,7 +132,7 @@ public abstract class AbstractMutableBagIterable<T>
         }
 
         Iterator<T> iterator = this.iterator();
-        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        MutableList<RichIterable<T>> result = MutableList.empty();
         while (iterator.hasNext())
         {
             MutableCollection<T> batch = this.newEmpty();
@@ -228,7 +226,7 @@ public abstract class AbstractMutableBagIterable<T>
     @Override
     public <V> MutableBag<V> countBy(Function<? super T, ? extends V> function)
     {
-        return this.countBy(function, Bags.mutable.empty());
+        return this.countBy(function, MutableBag.empty());
     }
 
     /**
@@ -237,7 +235,7 @@ public abstract class AbstractMutableBagIterable<T>
     @Override
     public <V, P> MutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.countByWith(function, parameter, Bags.mutable.empty());
+        return this.countByWith(function, parameter, MutableBag.empty());
     }
 
     /**
@@ -246,7 +244,7 @@ public abstract class AbstractMutableBagIterable<T>
     @Override
     public <V> MutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.countByEach(function, Bags.mutable.empty());
+        return this.countByEach(function, MutableBag.empty());
     }
 
     @Override
@@ -338,12 +336,12 @@ public abstract class AbstractMutableBagIterable<T>
     @Override
     public MutableList<ObjectIntPair<T>> topOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n, item -> -item.getTwo(), Lists.mutable.empty());
+        return this.occurrencesSortingBy(n, item -> -item.getTwo(), MutableList.empty());
     }
 
     @Override
     public MutableList<ObjectIntPair<T>> bottomOccurrences(int n)
     {
-        return this.occurrencesSortingBy(n, ObjectIntPair::getTwo, Lists.mutable.empty());
+        return this.occurrencesSortingBy(n, ObjectIntPair::getTwo, MutableList.empty());
     }
 }

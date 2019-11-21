@@ -26,8 +26,6 @@ import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -894,7 +892,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
     public void trimToSize()
     {
         UnifiedMapWithHashingStrategy<String, String> map = UnifiedMapWithHashingStrategy.newMap(STRING_HASHING_STRATEGY);
-        MutableMap<String, String> expected = Maps.mutable.empty();
+        MutableMap<String, String> expected = MutableMap.empty();
 
         Interval integers = Interval.fromTo(0, 250);
         integers.each(each ->
@@ -911,7 +909,7 @@ public class UnifiedMapWithHashingStrategyTest extends UnifiedMapTestCase
         Assert.assertEquals(expected, map);
         Assert.assertEquals(261, map.size());
 
-        MutableList<Integer> toRemove = Lists.mutable.withAll(Interval.evensFromTo(0, 20));
+        MutableList<Integer> toRemove = MutableList.ofAll(Interval.evensFromTo(0, 20));
 
         toRemove.addAll(Interval.oddsFromTo(35, 55));
         toRemove.each(each ->

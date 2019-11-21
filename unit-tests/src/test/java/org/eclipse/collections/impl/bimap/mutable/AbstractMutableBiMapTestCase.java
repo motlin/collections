@@ -20,8 +20,6 @@ import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.IntegerWithCast;
-import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.mutable.MutableMapIterableTestCase;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
@@ -487,7 +485,7 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
     @Override
     public void toImmutable()
     {
-        ImmutableBiMap<Integer, Character> expectedImmutableBiMap = BiMaps.immutable.of(null, 'b', 1, null, 3, 'c');
+        ImmutableBiMap<Integer, Character> expectedImmutableBiMap = ImmutableBiMap.of(null, 'b', 1, null, 3, 'c');
         ImmutableBiMap<Integer, Character> characters = this.classUnderTest().toImmutable();
         Assert.assertEquals(expectedImmutableBiMap, characters);
     }
@@ -505,8 +503,8 @@ public abstract class AbstractMutableBiMapTestCase extends MutableMapIterableTes
     public void into()
     {
         MutableBiMap<Integer, Character> map = this.newMapWithKeysValues(1, 'a', 2, 'b');
-        MutableSet<Character> target = Sets.mutable.of('c');
+        MutableSet<Character> target = MutableSet.of('c');
         map.into(target);
-        Verify.assertSetsEqual(Sets.mutable.of('a', 'b', 'c'), target);
+        Verify.assertSetsEqual(MutableSet.of('a', 'b', 'c'), target);
     }
 }

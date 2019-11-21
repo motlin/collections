@@ -15,10 +15,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -126,7 +126,7 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
     {
         super.forEachFromTo();
 
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableList<Integer> collection = this.newWith(1, 2, 3, 4);
         collection.forEach(2, 3, result::add);
         Verify.assertSize(2, result);
@@ -207,7 +207,7 @@ public class RandomAccessListAdapterTest extends AbstractListTestCase
     public void testAddAllAtIndex()
     {
         MutableList<Integer> objects = this.newWith(1, 2, 3);
-        objects.addAll(0, Lists.fixedSize.of(0));
+        objects.addAll(0, FixedSizeList.of(0));
         Verify.assertSize(4, objects);
         Verify.assertItemAtIndex(0, 0, objects);
     }

@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.map.fixed;
 
-import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -23,6 +23,6 @@ public class TripletonMapSerializationTest
                 1L,
                 "rO0ABXNyADNvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLm1hcC5maXhlZC5TaW5nbGV0b25N\n"
                         + "YXAAAAAAAAAAAQwAAHhwcHB4",
-                Maps.fixedSize.of(null, null, null, null, null, null));
+                FixedSizeMap.of(null, null, null, null, null, null));
     }
 }

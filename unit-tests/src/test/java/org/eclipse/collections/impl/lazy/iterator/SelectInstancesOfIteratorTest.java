@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.lazy.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -43,12 +43,12 @@ public class SelectInstancesOfIteratorTest
     @Test
     public void noSuchElementException()
     {
-        Verify.assertThrows(NoSuchElementException.class, () -> new SelectInstancesOfIterator<>(Lists.fixedSize.of(), Object.class).next());
+        Verify.assertThrows(NoSuchElementException.class, () -> new SelectInstancesOfIterator<>(FixedSizeList.empty(), Object.class).next());
     }
 
     @Test
     public void remove()
     {
-        Verify.assertThrows(UnsupportedOperationException.class, () -> new SelectInstancesOfIterator<>(Lists.fixedSize.of(), Object.class).remove());
+        Verify.assertThrows(UnsupportedOperationException.class, () -> new SelectInstancesOfIterator<>(FixedSizeList.empty(), Object.class).remove());
     }
 }

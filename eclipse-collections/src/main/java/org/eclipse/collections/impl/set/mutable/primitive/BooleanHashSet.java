@@ -34,7 +34,6 @@ import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.bag.mutable.primitive.BooleanHashBag;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.lazy.primitive.LazyBooleanIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -426,7 +425,7 @@ public class BooleanHashSet implements MutableBooleanSet, Externalizable
         {
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
-        MutableList<BooleanIterable> result = Lists.mutable.empty();
+        MutableList<BooleanIterable> result = MutableList.empty();
         switch (this.state)
         {
             case 0:

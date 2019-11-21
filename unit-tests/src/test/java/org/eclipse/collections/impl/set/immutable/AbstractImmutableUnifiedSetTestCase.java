@@ -26,7 +26,6 @@ import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -123,7 +122,7 @@ public abstract class AbstractImmutableUnifiedSetTestCase
     @Test
     public void tap()
     {
-        MutableList<Integer> tapResult = Lists.mutable.of();
+        MutableList<Integer> tapResult = MutableList.empty();
         ImmutableSet<Integer> set = this.newSetWith(1, 2, 3, 4);
         Assert.assertSame(set, set.tap(tapResult::add));
         Assert.assertEquals(set.toList(), tapResult);
@@ -132,7 +131,7 @@ public abstract class AbstractImmutableUnifiedSetTestCase
     @Test
     public void forEach()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableSet<Integer> set = this.newSetWith(1, 2, 3, 4);
         set.forEach(CollectionAddProcedure.on(result));
         Verify.assertSize(4, result);
@@ -142,7 +141,7 @@ public abstract class AbstractImmutableUnifiedSetTestCase
     @Test
     public void forEachWithIndex()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableSet<Integer> set = this.newSetWith(1, 2, 3, 4);
         set.forEachWithIndex((object, index) -> result.add(object + index));
         Verify.assertContainsAll(result, 1, 3, 5, 7);
@@ -370,7 +369,7 @@ public abstract class AbstractImmutableUnifiedSetTestCase
     @Test
     public void forEachWith()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ImmutableSet<Integer> collection = this.newSetWith(1, 2, 3, 4);
         collection.forEachWith((argument1, argument2) -> result.add(argument1 + argument2), 0);
         Verify.assertSize(4, result);

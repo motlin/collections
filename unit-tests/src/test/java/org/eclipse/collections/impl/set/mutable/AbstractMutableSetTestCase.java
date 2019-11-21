@@ -20,6 +20,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
 import org.eclipse.collections.api.tuple.Pair;
@@ -31,7 +32,6 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionTestCase;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -39,9 +39,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
  * JUnit test for {@link AbstractMutableSet}.
@@ -440,8 +437,8 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
             MutableSet<Integer> integers = this.<Integer>newWith().withAll(MORE_COLLISIONS);
             @SuppressWarnings("BoxingBoxedValue")
             Integer keyCopy = new Integer(item);
-            Assert.assertTrue(integers.retainAll(mList(keyCopy)));
-            Assert.assertEquals(iSet(keyCopy), integers);
+            Assert.assertTrue(integers.retainAll(MutableList.of(keyCopy)));
+            Assert.assertEquals(ImmutableSet.of(keyCopy), integers);
             Assert.assertNotSame(keyCopy, Iterate.getOnly(integers));
         }
 
@@ -475,7 +472,7 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
         int size = MORE_COLLISIONS.size();
         for (int i = 1; i < size; i++)
         {
-            MutableList<Integer> tapResult = Lists.mutable.of();
+            MutableList<Integer> tapResult = MutableList.empty();
             MutableSet<Integer> set = this.newWith();
             set.addAll(MORE_COLLISIONS.subList(0, i));
             Assert.assertSame(set, set.tap(tapResult::add));
@@ -555,7 +552,7 @@ public abstract class AbstractMutableSetTestCase extends AbstractCollectionTestC
             MutableSet<Integer> set = this.newWith();
             set.addAll(MORE_COLLISIONS.subList(0, i));
             MutableSet<Integer> result = UnifiedSet.newSet();
-            MutableList<Integer> indexes = Lists.mutable.of();
+            MutableList<Integer> indexes = MutableList.empty();
             set.forEachWithIndex((each, index) -> {
                 result.add(each);
                 indexes.add(index);

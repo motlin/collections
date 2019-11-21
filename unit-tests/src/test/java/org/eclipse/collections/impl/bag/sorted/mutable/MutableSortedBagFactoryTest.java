@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.bag.sorted.mutable;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,63 +24,63 @@ public class MutableSortedBagFactoryTest
     @Test
     public void ofEmpty()
     {
-        Assert.assertEquals(TreeBag.newBag(), SortedBags.mutable.of());
-        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), SortedBags.mutable.of(Comparators.reverseNaturalOrder()));
+        Assert.assertEquals(TreeBag.newBag(), MutableSortedBag.of());
+        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), MutableSortedBag.of(Comparators.reverseNaturalOrder()));
     }
 
     @Test
     public void withEmpty()
     {
-        Assert.assertEquals(TreeBag.newBag(), SortedBags.mutable.with());
-        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), SortedBags.mutable.with(Comparators.reverseNaturalOrder()));
+        Assert.assertEquals(TreeBag.newBag(), MutableSortedBag.of());
+        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), MutableSortedBag.of(Comparators.reverseNaturalOrder()));
     }
 
     @Test
     public void ofElements()
     {
-        Assert.assertEquals(TreeBag.newBagWith(1, 1, 2), SortedBags.mutable.of(1, 1, 2));
-        Assert.assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 1, 2), SortedBags.mutable.of(Comparators.reverseNaturalOrder(), 1, 1, 2));
+        Assert.assertEquals(TreeBag.newBagWith(1, 1, 2), MutableSortedBag.of(1, 1, 2));
+        Assert.assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 1, 2), MutableSortedBag.of(Comparators.reverseNaturalOrder(), 1, 1, 2));
     }
 
     @Test
     public void withElements()
     {
-        Assert.assertEquals(TreeBag.newBagWith(1, 1, 2), SortedBags.mutable.with(1, 1, 2));
-        Assert.assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 1, 2), SortedBags.mutable.with(Comparators.reverseNaturalOrder(), 1, 1, 2));
+        Assert.assertEquals(TreeBag.newBagWith(1, 1, 2), MutableSortedBag.of(1, 1, 2));
+        Assert.assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 1, 2), MutableSortedBag.of(Comparators.reverseNaturalOrder(), 1, 1, 2));
     }
 
     @Test
     public void ofAll()
     {
         LazyIterable<Integer> list = FastList.newListWith(1, 2, 2).asLazy();
-        Assert.assertEquals(TreeBag.newBagWith(1, 2, 2), SortedBags.mutable.ofAll(list));
+        Assert.assertEquals(TreeBag.newBagWith(1, 2, 2), MutableSortedBag.ofAll(list));
     }
 
     @Test
     public void withAll()
     {
         LazyIterable<Integer> list = FastList.newListWith(1, 2, 2).asLazy();
-        Assert.assertEquals(TreeBag.newBagWith(1, 2, 2), SortedBags.mutable.withAll(list));
+        Assert.assertEquals(TreeBag.newBagWith(1, 2, 2), MutableSortedBag.ofAll(list));
     }
 
     @Test
     public void ofAllComparator()
     {
         LazyIterable<Integer> list = FastList.newListWith(1, 2, 2).asLazy();
-        Assert.assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 2, 2), SortedBags.mutable.ofAll(Comparators.reverseNaturalOrder(), list));
+        Assert.assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 2, 2), MutableSortedBag.ofAll(Comparators.reverseNaturalOrder(), list));
     }
 
     @Test
     public void withAllComparator()
     {
         LazyIterable<Integer> list = FastList.newListWith(1, 2, 2).asLazy();
-        Assert.assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 2, 2), SortedBags.mutable.withAll(Comparators.reverseNaturalOrder(), list));
+        Assert.assertEquals(TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 2, 2), MutableSortedBag.ofAll(Comparators.reverseNaturalOrder(), list));
     }
 
     @Test
     public void empty()
     {
-        Assert.assertEquals(TreeBag.newBag(), SortedBags.mutable.empty());
-        Assert.assertEquals(TreeBag.newBag(Comparator.reverseOrder()), SortedBags.mutable.empty(Comparator.reverseOrder()));
+        Assert.assertEquals(TreeBag.newBag(), MutableSortedBag.empty());
+        Assert.assertEquals(TreeBag.newBag(Comparator.reverseOrder()), MutableSortedBag.empty(Comparator.reverseOrder()));
     }
 }

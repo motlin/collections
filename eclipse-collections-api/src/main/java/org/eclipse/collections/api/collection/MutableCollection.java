@@ -238,7 +238,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableCollection&lt;Integer&gt; integers =
-     *     List.mutable.with(new Integer(0), new Long(0L), new Double(0.0)).selectInstancesOf(Integer.class);
+     *     MutableList.of(new Integer(0), new Long(0L), new Double(0.0)).selectInstancesOf(Integer.class);
      * </pre>
      *
      * @since 2.0
@@ -369,7 +369,7 @@ public interface MutableCollection<T>
      * Co-variant example for MutableCollection:
      * <pre>
      * MutableCollection&lt;Integer&gt; integers =
-     *     Lists.mutable.with(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1));
+     *     MutableList.of(1, 2, 3).collectWith((each, parameter) -&gt; each + parameter, Integer.valueOf(1));
      * </pre>
      * <p>
      */
@@ -382,7 +382,7 @@ public interface MutableCollection<T>
      * <p>
      * <pre>
      * MutableCollection&lt;String&gt; collected =
-     *     Lists.mutable.of().with(1, 2, 3).collectIf(Predicates.notNull(), Functions.getToString())
+     *     MutableList.empty().with(1, 2, 3).collectIf(Predicates.notNull(), Functions.getToString())
      * </pre>
      */
     @Override

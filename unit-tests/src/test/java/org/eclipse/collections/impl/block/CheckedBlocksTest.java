@@ -19,6 +19,8 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.function.checked.CheckedFunction;
 import org.eclipse.collections.impl.block.function.checked.CheckedFunction0;
@@ -34,9 +36,6 @@ import org.eclipse.collections.impl.utility.ListIterate;
 import org.eclipse.collections.impl.utility.MapIterate;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 public class CheckedBlocksTest
 {
@@ -368,7 +367,7 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        iList("test").forEach(block);
+        ImmutableList.of("test").forEach(block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -382,7 +381,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        iList("test").forEach(block);
+        ImmutableList.of("test").forEach(block);
     }
 
     @Test
@@ -395,7 +394,7 @@ public class CheckedBlocksTest
             {
             }
         };
-        iList("test").forEach(block);
+        ImmutableList.of("test").forEach(block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -409,7 +408,7 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        iList("test").forEachWithIndex(block);
+        ImmutableList.of("test").forEachWithIndex(block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -423,7 +422,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        iList("test").forEachWithIndex(block);
+        ImmutableList.of("test").forEachWithIndex(block);
     }
 
     @Test
@@ -436,7 +435,7 @@ public class CheckedBlocksTest
             {
             }
         };
-        iList("test").forEachWithIndex(block);
+        ImmutableList.of("test").forEachWithIndex(block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -450,7 +449,7 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        iList("test").collect(block);
+        ImmutableList.of("test").collect(block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -464,7 +463,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        iList("test").collect(block);
+        ImmutableList.of("test").collect(block);
     }
 
     @Test
@@ -478,7 +477,7 @@ public class CheckedBlocksTest
                 return null;
             }
         };
-        iList("test").collect(block);
+        ImmutableList.of("test").collect(block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -492,7 +491,7 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        iList("test").select(block);
+        ImmutableList.of("test").select(block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -506,7 +505,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        iList("test").select(block);
+        ImmutableList.of("test").select(block);
     }
 
     @Test
@@ -520,7 +519,7 @@ public class CheckedBlocksTest
                 return true;
             }
         };
-        iList("test").select(block);
+        ImmutableList.of("test").select(block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -534,7 +533,7 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        ListIterate.forEachInBoth(mList("test"), mList("test"), block);
+        ListIterate.forEachInBoth(MutableList.of("test"), MutableList.of("test"), block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -548,7 +547,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        ListIterate.forEachInBoth(mList("test"), mList("test"), block);
+        ListIterate.forEachInBoth(MutableList.of("test"), MutableList.of("test"), block);
     }
 
     @Test
@@ -562,7 +561,7 @@ public class CheckedBlocksTest
                 // nop
             }
         };
-        ListIterate.forEachInBoth(mList("test"), mList("test"), block);
+        ListIterate.forEachInBoth(MutableList.of("test"), MutableList.of("test"), block);
     }
 
     @Test(expected = RuntimeException.class)
@@ -576,7 +575,7 @@ public class CheckedBlocksTest
                 throw new InterruptedException();
             }
         };
-        mList("test").selectWith(block, null);
+        MutableList.of("test").selectWith(block, null);
     }
 
     @Test(expected = RuntimeException.class)
@@ -590,7 +589,7 @@ public class CheckedBlocksTest
                 throw new RuntimeException();
             }
         };
-        mList("test").selectWith(block, null);
+        MutableList.of("test").selectWith(block, null);
     }
 
     @Test
@@ -604,7 +603,7 @@ public class CheckedBlocksTest
                 return true;
             }
         };
-        mList("test").selectWith(block, null);
+        MutableList.of("test").selectWith(block, null);
     }
 
     @Test

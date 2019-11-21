@@ -22,6 +22,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
@@ -29,7 +30,6 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.impl.block.procedure.MultimapPutProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 import org.eclipse.collections.impl.multimap.list.SynchronizedPutFastListMultimap;
@@ -225,7 +225,7 @@ public final class FJIterate
             }
             else
             {
-                combiner.combineAll(Lists.immutable.of(procedure));
+                combiner.combineAll(ImmutableList.of(procedure));
             }
         }
         else
@@ -446,7 +446,7 @@ public final class FJIterate
             }
             else
             {
-                combiner.combineAll(Lists.immutable.of(procedure));
+                combiner.combineAll(ImmutableList.of(procedure));
             }
         }
         else
@@ -472,7 +472,7 @@ public final class FJIterate
             }
             else
             {
-                combiner.combineAll(Lists.immutable.of(procedure));
+                combiner.combineAll(ImmutableList.of(procedure));
             }
         }
         else

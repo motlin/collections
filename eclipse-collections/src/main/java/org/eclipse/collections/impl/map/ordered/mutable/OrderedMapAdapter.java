@@ -73,9 +73,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedur
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.mutable.CollectionAdapter;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -492,7 +489,7 @@ public class OrderedMapAdapter<K, V>
     @Override
     public <R> MutableList<R> collect(Function<? super V, ? extends R> function)
     {
-        return this.collect(function, Lists.mutable.withInitialCapacity(this.size()));
+        return this.collect(function, MutableList.ofInitialCapacity(this.size()));
     }
 
     @Override
@@ -504,25 +501,25 @@ public class OrderedMapAdapter<K, V>
     @Override
     public <R> MutableList<R> collectIf(Predicate<? super V> predicate, Function<? super V, ? extends R> function)
     {
-        return this.collectIf(predicate, function, Lists.mutable.empty());
+        return this.collectIf(predicate, function, MutableList.empty());
     }
 
     @Override
     public <R> MutableList<R> flatCollect(Function<? super V, ? extends Iterable<R>> function)
     {
-        return this.flatCollect(function, Lists.mutable.withInitialCapacity(this.size()));
+        return this.flatCollect(function, MutableList.ofInitialCapacity(this.size()));
     }
 
     @Override
     public MutableList<V> select(Predicate<? super V> predicate)
     {
-        return this.select(predicate, Lists.mutable.empty());
+        return this.select(predicate, MutableList.empty());
     }
 
     @Override
     public MutableList<V> reject(Predicate<? super V> predicate)
     {
-        return this.reject(predicate, Lists.mutable.empty());
+        return this.reject(predicate, MutableList.empty());
     }
 
     @Override
@@ -556,7 +553,7 @@ public class OrderedMapAdapter<K, V>
     @Override
     public <S> MutableList<S> selectInstancesOf(Class<S> clazz)
     {
-        MutableList<S> result = Lists.mutable.withInitialCapacity(this.size());
+        MutableList<S> result = MutableList.ofInitialCapacity(this.size());
         this.forEach(new SelectInstancesOfProcedure<>(clazz, result));
         return result;
     }
@@ -564,13 +561,13 @@ public class OrderedMapAdapter<K, V>
     @Override
     public <S> MutableList<Pair<V, S>> zip(Iterable<S> that)
     {
-        return this.zip(that, Lists.mutable.withInitialCapacity(Math.min(this.size(), Iterate.sizeOf(that))));
+        return this.zip(that, MutableList.ofInitialCapacity(Math.min(this.size(), Iterate.sizeOf(that))));
     }
 
     @Override
     public MutableList<Pair<V, Integer>> zipWithIndex()
     {
-        return this.zipWithIndex(Lists.mutable.withInitialCapacity(this.size()));
+        return this.zipWithIndex(MutableList.ofInitialCapacity(this.size()));
     }
 
     @Override
@@ -707,7 +704,7 @@ public class OrderedMapAdapter<K, V>
             Function0<? extends V2> zeroValueFactory,
             Procedure2<? super V2, ? super V> mutatingAggregator)
     {
-        MutableMap<K2, V2> map = Maps.mutable.empty();
+        MutableMap<K2, V2> map = MutableMap.empty();
         this.forEach(new MutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, mutatingAggregator));
         return map;
     }
@@ -718,7 +715,7 @@ public class OrderedMapAdapter<K, V>
             Function0<? extends V2> zeroValueFactory,
             Function2<? super V2, ? super V, ? extends V2> nonMutatingAggregator)
     {
-        MutableMap<K2, V2> map = Maps.mutable.empty();
+        MutableMap<K2, V2> map = MutableMap.empty();
         this.forEach(new NonMutatingAggregationProcedure<>(map, groupBy, zeroValueFactory, nonMutatingAggregator));
         return map;
     }
@@ -796,13 +793,13 @@ public class OrderedMapAdapter<K, V>
     @Override
     public <V1> MutableBag<V1> countBy(Function<? super V, ? extends V1> function)
     {
-        return this.collect(function, Bags.mutable.empty());
+        return this.collect(function, MutableBag.empty());
     }
 
     @Override
     public <V1, P> MutableBag<V1> countByWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
     {
-        return this.collectWith(function, parameter, Bags.mutable.empty());
+        return this.collectWith(function, parameter, MutableBag.empty());
     }
 
     /**
@@ -811,6 +808,6 @@ public class OrderedMapAdapter<K, V>
     @Override
     public <V1> MutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
     {
-        return this.flatCollect(function, Bags.mutable.empty());
+        return this.flatCollect(function, MutableBag.empty());
     }
 }

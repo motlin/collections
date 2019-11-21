@@ -11,9 +11,9 @@
 package org.eclipse.collections.test.lazy;
 
 import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.DistinctIterable;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.test.NoIteratorTestCase;
@@ -35,19 +35,19 @@ public class DistinctIterableTestNoIteratorTest implements NoIteratorTestCase, R
     @Override
     public <T> ListIterable<T> getExpectedFiltered(T... elements)
     {
-        return Lists.immutable.with(elements);
+        return ImmutableList.of(elements);
     }
 
     @Override
     public <T> MutableList<T> newMutableForFilter(T... elements)
     {
-        return Lists.mutable.with(elements);
+        return MutableList.of(elements);
     }
 
     @Override
     public <T> ListIterable<T> getExpectedTransformed(T... elements)
     {
-        return Lists.immutable.with(elements);
+        return ImmutableList.of(elements);
     }
 
     @Override

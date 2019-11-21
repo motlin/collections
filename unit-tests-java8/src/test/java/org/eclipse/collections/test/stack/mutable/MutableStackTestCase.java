@@ -13,8 +13,8 @@ package org.eclipse.collections.test.stack.mutable;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 
+import org.eclipse.collections.api.stack.ImmutableStack;
 import org.eclipse.collections.api.stack.MutableStack;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.test.stack.StackIterableTestCase;
 import org.junit.Test;
 
@@ -41,7 +41,7 @@ public interface MutableStackTestCase extends StackIterableTestCase
     {
         MutableStack<Integer> mutableStack = this.newWith(5, 1, 4, 2, 3);
         assertEquals(Integer.valueOf(5), mutableStack.pop());
-        assertEquals(Stacks.immutable.withReversed(1, 4, 2, 3), mutableStack);
+        assertEquals(ImmutableStack.ofReversed(1, 4, 2, 3), mutableStack);
     }
 
     @Test

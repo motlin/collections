@@ -14,7 +14,6 @@ import java.util.Collections;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.Verify;
@@ -91,17 +90,17 @@ public class HashBagTest extends MutableBagTestCase
         super.removeAll();
         MutableBag<Integer> bag1 = this.newWith(1, 2, 3);
         Assert.assertTrue(bag1.removeAll(this.newWith(1, 2, 4)));
-        Assert.assertEquals(Bags.mutable.of(3), bag1);
+        Assert.assertEquals(MutableBag.of(3), bag1);
 
         MutableBag<Integer> bag2 = this.newWith(1, 1, 1, 2, 2, 3, 4);
         Verify.assertSize(7, bag2);
         Assert.assertTrue(bag2.removeAll(this.newWith(1, 2, 2, 4)));
         Verify.assertSize(1, bag2);
-        Assert.assertEquals(Bags.mutable.of(3), bag2);
+        Assert.assertEquals(MutableBag.of(3), bag2);
 
         MutableBag<Integer> bag3 = this.newWith(1, 2, 3);
         Assert.assertFalse(bag3.removeAll(this.newWith(4, 5)));
-        Assert.assertEquals(Bags.mutable.of(1, 2, 3), bag3);
+        Assert.assertEquals(MutableBag.of(1, 2, 3), bag3);
     }
 
     @Test

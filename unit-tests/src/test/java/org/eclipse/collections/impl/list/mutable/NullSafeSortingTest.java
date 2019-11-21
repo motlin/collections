@@ -17,8 +17,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.RandomAccess;
 
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class NullSafeSortingTest
     @Test
     public void emptyFastList()
     {
-        Lists.mutable.of().sortThis(null);
+        MutableList.empty().sortThis(null);
     }
 
     @Test
@@ -95,19 +95,19 @@ public class NullSafeSortingTest
     @Test
     public void emptyList()
     {
-        Lists.fixedSize.of().sortThis(null);
+        FixedSizeList.empty().sortThis(null);
     }
 
     @Test
     public void singletonList()
     {
-        Lists.fixedSize.of(1).sortThis(null);
+        FixedSizeList.of(1).sortThis(null);
     }
 
     @Test
     public void doubletonList()
     {
-        Lists.fixedSize.of(1, 2).sortThis(null);
+        FixedSizeList.of(1, 2).sortThis(null);
     }
 
     private static final class CustomList<E>
@@ -119,7 +119,7 @@ public class NullSafeSortingTest
 
         private CustomList(E obj1, E obj2)
         {
-            this.delegate = Lists.fixedSize.of(obj1, obj2);
+            this.delegate = FixedSizeList.of(obj1, obj2);
         }
 
         @Override

@@ -18,9 +18,9 @@ import java.util.Set;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
@@ -69,9 +69,9 @@ public class SetAdapterTest extends AbstractMutableSetTestCase
     @Test
     public void adapt()
     {
-        MutableSet<Integer> adapter1 = SetAdapter.adapt(Sets.fixedSize.of(1, 2, 3, 4));
+        MutableSet<Integer> adapter1 = SetAdapter.adapt(FixedSizeSet.of(1, 2, 3, 4));
         MutableSet<Integer> adapter2 = new SetAdapter<Integer>(new HashSet<>()).with(1, 2, 3, 4);
-        MutableSet<Integer> adapter3 = Sets.adapt(Sets.fixedSize.of(1, 2, 3, 4));
+        MutableSet<Integer> adapter3 = Sets.adapt(FixedSizeSet.of(1, 2, 3, 4));
         Verify.assertEqualsAndHashCode(adapter1, adapter2);
         Verify.assertEqualsAndHashCode(adapter2, adapter3);
     }
@@ -151,7 +151,7 @@ public class SetAdapterTest extends AbstractMutableSetTestCase
     @Test
     public void forEachWithIndex()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableCollection<Integer> collection = this.newWith(1, 2, 3, 4);
         collection.forEachWithIndex((object, index) -> result.add(object));
         Verify.assertContainsAll(result, 1, 2, 3, 4);
@@ -178,7 +178,7 @@ public class SetAdapterTest extends AbstractMutableSetTestCase
     public void iterator()
     {
         MutableCollection<Integer> objects = this.newWith(1, 2, 3);
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         Iterator<Integer> iterator = objects.iterator();
         for (int i = objects.size(); i-- > 0; )
         {

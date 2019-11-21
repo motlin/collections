@@ -59,7 +59,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedur
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.mutable.AbstractCollectionAdapter;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.lazy.parallel.set.NonParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
@@ -119,7 +118,7 @@ public final class SetAdapter<T>
     @Override
     public ImmutableSet<T> toImmutable()
     {
-        return Sets.immutable.withAll(this.delegate);
+        return ImmutableSet.ofAll(this.delegate);
     }
 
     public static <E> MutableSet<E> adapt(Set<E> set)

@@ -56,7 +56,7 @@ public class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFactory
     {
         if (items == null || items.length == 0)
         {
-            return this.of();
+            return this.empty();
         }
 
         return ImmutableTreeSet.newSetWith(items);
@@ -90,7 +90,7 @@ public class ImmutableSortedSetFactoryImpl implements ImmutableSortedSetFactory
     {
         if (comparator == null)
         {
-            return this.of();
+            return this.empty();
         }
         return new ImmutableEmptySortedSet<>(comparator);
     }

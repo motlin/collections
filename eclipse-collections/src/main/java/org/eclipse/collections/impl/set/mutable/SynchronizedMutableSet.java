@@ -49,7 +49,6 @@ import org.eclipse.collections.api.set.primitive.MutableShortSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.AbstractSynchronizedMutableCollection;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedCollectionSerializationProxy;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.lazy.parallel.set.SynchronizedParallelUnsortedSetIterable;
 
 /**
@@ -439,7 +438,7 @@ public class SynchronizedMutableSet<T>
     {
         synchronized (this.getLock())
         {
-            return Sets.immutable.withAll(this.getMutableSet());
+            return ImmutableSet.ofAll(this.getMutableSet());
         }
     }
 }

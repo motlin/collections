@@ -15,8 +15,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
-
 public class ImmutableQuadrupletonSetTest
         extends AbstractImmutableSetTestCase
 {
@@ -43,7 +41,7 @@ public class ImmutableQuadrupletonSetTest
     {
         ImmutableSet<Number> numbers = new ImmutableQuadrupletonSet<>(1, 2.0, 3, 4.0);
         Assert.assertEquals(
-                iSet(1, 3),
+                ImmutableSet.of(1, 3),
                 numbers.selectInstancesOf(Integer.class));
     }
 

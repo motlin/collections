@@ -37,7 +37,6 @@ import org.eclipse.collections.api.set.primitive.MutableIntSet;
 import org.eclipse.collections.api.tuple.primitive.IntIntPair;
 import org.eclipse.collections.api.tuple.primitive.IntObjectPair;
 import org.eclipse.collections.impl.bag.mutable.primitive.IntHashBag;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.lazy.primitive.ReverseIntIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -550,7 +549,7 @@ public class CodePointAdapter
         {
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
-        MutableList<IntIterable> result = Lists.mutable.empty();
+        MutableList<IntIterable> result = MutableList.empty();
         if (this.notEmpty())
         {
             if (this.size() <= size)
@@ -756,7 +755,7 @@ public class CodePointAdapter
     {
         int size = this.size();
         int othersize = iterable.size();
-        MutableList<IntIntPair> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        MutableList<IntIntPair> target = MutableList.ofInitialCapacity(Math.min(size, othersize));
         IntIterator iterator = iterable.intIterator();
         for (int i = 0; i < size && i < othersize; i++)
         {
@@ -773,7 +772,7 @@ public class CodePointAdapter
     {
         int size = this.size();
         int othersize = Iterate.sizeOf(iterable);
-        MutableList<IntObjectPair<T>> target = Lists.mutable.withInitialCapacity(Math.min(size, othersize));
+        MutableList<IntObjectPair<T>> target = MutableList.ofInitialCapacity(Math.min(size, othersize));
         Iterator<T> iterator = iterable.iterator();
         for (int i = 0; i < size && iterator.hasNext(); i++)
         {

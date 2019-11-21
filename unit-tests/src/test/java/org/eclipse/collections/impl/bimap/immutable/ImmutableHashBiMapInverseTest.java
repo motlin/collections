@@ -11,9 +11,8 @@
 package org.eclipse.collections.impl.bimap.immutable;
 
 import org.eclipse.collections.api.bimap.ImmutableBiMap;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
-import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 
 public class ImmutableHashBiMapInverseTest extends AbstractImmutableBiMapTestCase
@@ -21,30 +20,30 @@ public class ImmutableHashBiMapInverseTest extends AbstractImmutableBiMapTestCas
     @Override
     protected ImmutableBiMap<Integer, String> classUnderTest()
     {
-        return BiMaps.immutable.with("1", 1, "2", 2, "3", 3, "4", 4).inverse();
+        return ImmutableBiMap.of("1", 1, "2", 2, "3", 3, "4", 4).inverse();
     }
 
     @Override
     protected ImmutableBiMap<Integer, String> newEmpty()
     {
-        return BiMaps.immutable.<String, Integer>empty().inverse();
+        return ImmutableBiMap.<String, Integer>empty().inverse();
     }
 
     @Override
     protected ImmutableBiMap<Integer, String> newWithMap()
     {
-        return BiMaps.immutable.withAll(UnifiedMap.newWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4)).inverse();
+        return ImmutableBiMap.ofAll(UnifiedMap.newWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4)).inverse();
     }
 
     @Override
     protected ImmutableBiMap<Integer, String> newWithHashBiMap()
     {
-        return BiMaps.immutable.withAll(HashBiMap.newWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4)).inverse();
+        return ImmutableBiMap.ofAll(HashBiMap.newWithKeysValues("1", 1, "2", 2, "3", 3, "4", 4)).inverse();
     }
 
     @Override
     protected ImmutableBiMap<Integer, String> newWithImmutableMap()
     {
-        return BiMaps.immutable.withAll(Maps.immutable.of("1", 1, "2", 2, "3", 3, "4", 4)).inverse();
+        return ImmutableBiMap.ofAll(ImmutableMap.of("1", 1, "2", 2, "3", 3, "4", 4)).inverse();
     }
 }

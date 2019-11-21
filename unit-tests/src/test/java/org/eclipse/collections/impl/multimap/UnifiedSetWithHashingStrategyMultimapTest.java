@@ -18,8 +18,6 @@ import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.multimap.set.AbstractMutableSetMultimapTestCase;
@@ -48,8 +46,8 @@ public class UnifiedSetWithHashingStrategyMultimapTest extends AbstractMutableSe
     private static final Person JANESMITH = new Person("Jane", "Smith");
     private static final Person JOHNDOE = new Person("John", "Doe");
     private static final Person JANEDOE = new Person("Jane", "Doe");
-    private static final ImmutableList<Person> PEOPLE = Lists.immutable.of(JOHNSMITH, JANESMITH, JOHNDOE, JANEDOE);
-    private static final ImmutableSet<Person> LAST_NAME_HASHED_SET = Sets.immutable.of(JOHNSMITH, JOHNDOE);
+    private static final ImmutableList<Person> PEOPLE = ImmutableList.of(JOHNSMITH, JANESMITH, JOHNDOE, JANEDOE);
+    private static final ImmutableSet<Person> LAST_NAME_HASHED_SET = ImmutableSet.of(JOHNSMITH, JOHNDOE);
 
     @Override
     public <K, V> UnifiedSetWithHashingStrategyMultimap<K, V> newMultimap()

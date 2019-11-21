@@ -32,7 +32,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.collection.mutable.CollectionAdapter;
-import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.set.mutable.SetAdapter;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.MapIterate;
@@ -392,7 +391,7 @@ public class TreeSortedMap<K, V>
             throw new IllegalArgumentException("Count must be greater than zero, but was: " + count);
         }
 
-        MutableSortedMap<K, V> output = SortedMaps.mutable.of(this.comparator());
+        MutableSortedMap<K, V> output = MutableSortedMap.of(this.comparator());
         Iterator<Entry<K, V>> iterator = this.treeMap.entrySet().iterator();
         int start = Math.min(count, this.size());
         if (start == this.size())

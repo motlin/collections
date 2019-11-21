@@ -11,12 +11,13 @@
 package org.eclipse.collections.impl;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.partition.PartitionIterable;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.LazyIterableAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
@@ -24,14 +25,12 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-
 public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
 {
     @Override
     protected <T> RichIterable<T> newWith(T... littleElements)
     {
-        return SynchronizedRichIterable.of(Lists.mutable.of(littleElements));
+        return SynchronizedRichIterable.of(MutableList.of(littleElements));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
     {
         RichIterable<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         PartitionIterable<Integer> result = integers.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        Assert.assertEquals(ImmutableList.of(-2, 0, 2, 4, 6, 8), result.getSelected());
+        Assert.assertEquals(ImmutableList.of(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
     @Override
@@ -58,8 +57,8 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
     {
         RichIterable<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         PartitionIterable<Integer> result = integers.partitionWith(Predicates2.in(), FastList.newListWith(-2, 0, 2, 4, 6, 8));
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        Assert.assertEquals(ImmutableList.of(-2, 0, 2, 4, 6, 8), result.getSelected());
+        Assert.assertEquals(ImmutableList.of(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
     @Override
@@ -96,8 +95,8 @@ public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
         RichIterable<Integer> integers = this.newWith(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9).asLazy();
         Verify.assertInstanceOf(LazyIterableAdapter.class, integers);
         PartitionIterable<Integer> result = integers.partitionWith(Predicates2.in(), FastList.newListWith(-2, 0, 2, 4, 6, 8));
-        Assert.assertEquals(iList(-2, 0, 2, 4, 6, 8), result.getSelected());
-        Assert.assertEquals(iList(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
+        Assert.assertEquals(ImmutableList.of(-2, 0, 2, 4, 6, 8), result.getSelected());
+        Assert.assertEquals(ImmutableList.of(-3, -1, 1, 3, 5, 7, 9), result.getRejected());
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.lazy.parallel.list;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.ParallelListIterable;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
 
 public class CompositeListParallelListIterableTest extends NonParallelListIterableTestCase
@@ -25,6 +25,6 @@ public class CompositeListParallelListIterableTest extends NonParallelListIterab
     @Override
     protected ParallelListIterable<Integer> newWith(Integer... littleElements)
     {
-        return new CompositeFastList<Integer>().withAll(Lists.mutable.of(littleElements)).asParallel(null, this.batchSize);
+        return new CompositeFastList<Integer>().withAll(MutableList.of(littleElements)).asParallel(null, this.batchSize);
     }
 }

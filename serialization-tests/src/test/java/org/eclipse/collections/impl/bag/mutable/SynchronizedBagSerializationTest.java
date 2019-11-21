@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.bag.mutable;
 
-import org.eclipse.collections.impl.factory.Bags;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -27,6 +27,6 @@ public class SynchronizedBagSerializationTest
                         + "eW5jaHJvbml6ZWRDb2xsZWN0aW9uU2VyaWFsaXphdGlvblByb3h5AAAAAAAAAAEMAAB4cHNyADBv\n"
                         + "cmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJhZy5tdXRhYmxlLkhhc2hCYWcAAAAAAAAAAQwA\n"
                         + "AHhwdwQAAAAAeHg=",
-                SynchronizedBag.of(Bags.mutable.of()));
+                SynchronizedBag.of(MutableBag.empty()));
     }
 }

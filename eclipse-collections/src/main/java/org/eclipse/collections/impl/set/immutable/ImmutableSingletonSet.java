@@ -20,7 +20,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Sets;
 
 final class ImmutableSingletonSet<T>
         extends AbstractImmutableSet<T>
@@ -67,7 +66,7 @@ final class ImmutableSingletonSet<T>
     {
         if (!this.contains(element))
         {
-            return Sets.immutable.with(this.element1, element);
+            return ImmutableSet.of(this.element1, element);
         }
         return this;
     }
@@ -77,7 +76,7 @@ final class ImmutableSingletonSet<T>
     {
         if (this.contains(element))
         {
-            return Sets.immutable.empty();
+            return ImmutableSet.empty();
         }
         return this;
     }

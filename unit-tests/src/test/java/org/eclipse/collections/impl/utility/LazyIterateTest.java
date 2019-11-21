@@ -20,9 +20,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.IntegerSum;
@@ -190,9 +187,9 @@ public class LazyIterateTest
     @Test
     public void cartesianProduct()
     {
-        MutableList<Integer> iterable1 = Lists.mutable.with(1, 2);
-        MutableList<Integer> iterable2 = Lists.mutable.with(2, 3, 4);
-        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct1 = Bags.mutable.with(
+        MutableList<Integer> iterable1 = MutableList.of(1, 2);
+        MutableList<Integer> iterable2 = MutableList.of(2, 3, 4);
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct1 = MutableBag.of(
                 Tuples.pair(1, 2),
                 Tuples.pair(2, 2),
                 Tuples.pair(1, 3),
@@ -200,7 +197,7 @@ public class LazyIterateTest
                 Tuples.pair(1, 4),
                 Tuples.pair(2, 4));
         Assert.assertEquals(expectedCartesianProduct1, LazyIterate.cartesianProduct(iterable1, iterable2).toBag());
-        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct2 = Bags.mutable.with(
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct2 = MutableBag.of(
                 Tuples.pair(2, 1),
                 Tuples.pair(3, 1),
                 Tuples.pair(4, 1),
@@ -213,17 +210,17 @@ public class LazyIterateTest
     @Test
     public void cartesianProductDuplicatesToConcreteCollections()
     {
-        MutableList<Integer> iterable1 = Lists.mutable.with(1, 1);
-        MutableList<Integer> iterable2 = Lists.mutable.with(2, 2);
-        MutableBag<Pair<Integer, Integer>> expectedBag = Bags.mutable.with(
+        MutableList<Integer> iterable1 = MutableList.of(1, 1);
+        MutableList<Integer> iterable2 = MutableList.of(2, 2);
+        MutableBag<Pair<Integer, Integer>> expectedBag = MutableBag.of(
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2));
         Assert.assertEquals(expectedBag, LazyIterate.cartesianProduct(iterable1, iterable2).toBag());
-        MutableSet<Pair<Integer, Integer>> expectedSet = Sets.mutable.with(Tuples.pair(1, 2));
+        MutableSet<Pair<Integer, Integer>> expectedSet = MutableSet.of(Tuples.pair(1, 2));
         Assert.assertEquals(expectedSet, LazyIterate.cartesianProduct(iterable1, iterable2).toSet());
-        MutableList<Pair<Integer, Integer>> expectedList = Lists.mutable.with(
+        MutableList<Pair<Integer, Integer>> expectedList = MutableList.of(
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2),
                 Tuples.pair(1, 2),
@@ -234,9 +231,9 @@ public class LazyIterateTest
     @Test
     public void cartesianProductWithFunction()
     {
-        MutableList<Integer> iterable1 = Lists.mutable.with(1, 2);
-        MutableList<Integer> iterable2 = Lists.mutable.with(2, 3, 4);
-        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct = Bags.mutable.with(
+        MutableList<Integer> iterable1 = MutableList.of(1, 2);
+        MutableList<Integer> iterable2 = MutableList.of(2, 3, 4);
+        MutableBag<Pair<Integer, Integer>> expectedCartesianProduct = MutableBag.of(
                 Tuples.pair(1, 2),
                 Tuples.pair(2, 2),
                 Tuples.pair(1, 3),
@@ -246,25 +243,25 @@ public class LazyIterateTest
         Assert.assertEquals(
                 expectedCartesianProduct,
                 LazyIterate.cartesianProduct(iterable1, iterable2, Tuples::pair).toBag());
-        MutableBag<MutableList<Integer>> expectedCartesianProduct2 = Bags.mutable.with(
-                Lists.mutable.with(2, 1),
-                Lists.mutable.with(3, 1),
-                Lists.mutable.with(4, 1),
-                Lists.mutable.with(2, 2),
-                Lists.mutable.with(3, 2),
-                Lists.mutable.with(4, 2));
+        MutableBag<MutableList<Integer>> expectedCartesianProduct2 = MutableBag.of(
+                MutableList.of(2, 1),
+                MutableList.of(3, 1),
+                MutableList.of(4, 1),
+                MutableList.of(2, 2),
+                MutableList.of(3, 2),
+                MutableList.of(4, 2));
         Assert.assertEquals(
                 expectedCartesianProduct2,
-                LazyIterate.cartesianProduct(iterable2, iterable1, Lists.mutable::with).toBag());
+                LazyIterate.cartesianProduct(iterable2, iterable1, MutableList::of).toBag());
     }
 
     @Test
     public void cartesianProduct_empty()
     {
         Assert.assertEquals(
-                Bags.mutable.empty(),
+                MutableBag.empty(),
                 LazyIterate.cartesianProduct(
-                        Lists.mutable.with(1, 2),
-                        Lists.mutable.empty()).toBag());
+                        MutableList.of(1, 2),
+                        MutableList.empty()).toBag());
     }
 }

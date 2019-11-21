@@ -16,14 +16,13 @@ import org.eclipse.collections.api.bimap.ImmutableBiMap;
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.api.factory.bimap.ImmutableBiMapFactory;
 import org.eclipse.collections.api.map.ImmutableMap;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.utility.MapIterate;
 
 public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
 {
     public static final ImmutableBiMapFactory INSTANCE = new ImmutableBiMapFactoryImpl();
 
-    private static final ImmutableHashBiMap<?, ?> EMPTY_INSTANCE = new ImmutableHashBiMap<>(Maps.immutable.empty(), Maps.immutable.empty());
+    private static final ImmutableHashBiMap<?, ?> EMPTY_INSTANCE = new ImmutableHashBiMap<>(ImmutableMap.empty(), ImmutableMap.empty());
 
     @Override
     public <K, V> ImmutableBiMap<K, V> empty()
@@ -53,8 +52,8 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
     public <K, V> ImmutableBiMap<K, V> with(K key, V value)
     {
         return new ImmutableHashBiMap<>(
-                Maps.immutable.with(key, value),
-                Maps.immutable.with(value, key));
+                ImmutableMap.of(key, value),
+                ImmutableMap.of(value, key));
     }
 
     @Override
@@ -67,8 +66,8 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
     public <K, V> ImmutableBiMap<K, V> with(K key1, V value1, K key2, V value2)
     {
         return new ImmutableHashBiMap<>(
-                Maps.immutable.with(key1, value1, key2, value2),
-                Maps.immutable.with(value1, key1, value2, key2));
+                ImmutableMap.of(key1, value1, key2, value2),
+                ImmutableMap.of(value1, key1, value2, key2));
     }
 
     @Override
@@ -81,8 +80,8 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
     public <K, V> ImmutableBiMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3)
     {
         return new ImmutableHashBiMap<>(
-                Maps.immutable.with(key1, value1, key2, value2, key3, value3),
-                Maps.immutable.with(value1, key1, value2, key2, value3, key3));
+                ImmutableMap.of(key1, value1, key2, value2, key3, value3),
+                ImmutableMap.of(value1, key1, value2, key2, value3, key3));
     }
 
     @Override
@@ -95,8 +94,8 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
     public <K, V> ImmutableBiMap<K, V> with(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4)
     {
         return new ImmutableHashBiMap<>(
-                Maps.immutable.with(key1, value1, key2, value2, key3, value3, key4, value4),
-                Maps.immutable.with(value1, key1, value2, key2, value3, key3, value4, key4));
+                ImmutableMap.of(key1, value1, key2, value2, key3, value3, key4, value4),
+                ImmutableMap.of(value1, key1, value2, key2, value3, key3, value4, key4));
     }
 
     @Override
@@ -116,8 +115,8 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
         {
             return this.withAll((MutableBiMap<K, V>) map);
         }
-        ImmutableMap<K, V> immutableMap = Maps.immutable.withAll(map);
-        return new ImmutableHashBiMap<>(immutableMap, Maps.immutable.withAll(MapIterate.flipUniqueValues(immutableMap)));
+        ImmutableMap<K, V> immutableMap = ImmutableMap.ofAll(map);
+        return new ImmutableHashBiMap<>(immutableMap, ImmutableMap.ofAll(MapIterate.flipUniqueValues(immutableMap)));
     }
 
     @Override
@@ -129,7 +128,7 @@ public class ImmutableBiMapFactoryImpl implements ImmutableBiMapFactory
     @Override
     public <K, V> ImmutableBiMap<K, V> withAll(MutableBiMap<K, V> biMap)
     {
-        return new ImmutableHashBiMap<>(Maps.immutable.withAll(biMap), Maps.immutable.withAll(biMap.inverse()));
+        return new ImmutableHashBiMap<>(ImmutableMap.ofAll(biMap), ImmutableMap.ofAll(biMap.inverse()));
     }
 
     @Override

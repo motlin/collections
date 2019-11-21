@@ -29,8 +29,6 @@ import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedObjectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.checked.CheckedProcedure2;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimap;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -58,13 +56,13 @@ public final class ImmutableBagMultimapImpl<K, V>
     @Override
     protected ImmutableBag<V> createCollection()
     {
-        return Bags.immutable.empty();
+        return ImmutableBag.empty();
     }
 
     @Override
     public ImmutableBagMultimap<K, V> newEmpty()
     {
-        return new ImmutableBagMultimapImpl<>(Maps.immutable.of());
+        return new ImmutableBagMultimapImpl<>(ImmutableMap.empty());
     }
 
     @Override
@@ -117,7 +115,7 @@ public final class ImmutableBagMultimapImpl<K, V>
             {
                 K key = (K) in.readObject();
                 int valuesSize = in.readInt();
-                MutableBag<V> bag = Bags.mutable.empty();
+                MutableBag<V> bag = MutableBag.empty();
                 for (int j = 0; j < valuesSize; j++)
                 {
                     V value = (V) in.readObject();

@@ -12,9 +12,9 @@ package org.eclipse.collections.test.collection.mutable;
 
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.CollectionTestCase;
 import org.eclipse.collections.test.IterableTestCase;
 import org.eclipse.collections.test.RichIterableTestCase;
@@ -97,16 +97,16 @@ public interface MutableCollectionTestCase extends CollectionTestCase, RichItera
     default void MutableCollection_removeIfWith()
     {
         MutableCollection<Integer> collection1 = this.newWith(5, 5, 4, 4, 3, 3, 2, 2, 1, 1);
-        Assert.assertTrue(collection1.removeIfWith(Predicates2.<Integer>in(), Lists.immutable.with(5, 3, 1)));
+        Assert.assertTrue(collection1.removeIfWith(Predicates2.<Integer>in(), ImmutableList.of(5, 3, 1)));
         IterableTestCase.assertEquals(this.getExpectedFiltered(4, 4, 2, 2), collection1);
 
         MutableCollection<Integer> collection2 = this.newWith(1, 2, 3);
-        Assert.assertFalse(collection2.removeIfWith(Predicates2.<Integer>in(), Lists.immutable.with(4)));
+        Assert.assertFalse(collection2.removeIfWith(Predicates2.<Integer>in(), ImmutableList.of(4)));
         IterableTestCase.assertEquals(this.getExpectedFiltered(1, 2, 3), collection2);
-        Assert.assertTrue(collection2.removeIfWith(Predicates2.<Integer>in(), Lists.immutable.with(1, 2, 3)));
+        Assert.assertTrue(collection2.removeIfWith(Predicates2.<Integer>in(), ImmutableList.of(1, 2, 3)));
 
         MutableCollection<Integer> collection3 = this.newWith();
-        Assert.assertFalse(collection3.removeIfWith(Predicates2.<Integer>in(), Lists.immutable.with()));
+        Assert.assertFalse(collection3.removeIfWith(Predicates2.<Integer>in(), ImmutableList.empty()));
         IterableTestCase.assertEquals(this.getExpectedFiltered(), collection3);
 
         MutableCollection<Integer> collection4 = this.newWith(2, 2, 4, 6);

@@ -14,9 +14,9 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
-import org.eclipse.collections.impl.factory.SortedBags;
 import org.junit.Test;
 
 public class ImmutableSortedBagImplNoIteratorTest extends ImmutableSortedBagImplTest
@@ -24,25 +24,25 @@ public class ImmutableSortedBagImplNoIteratorTest extends ImmutableSortedBagImpl
     @Override
     protected ImmutableSortedBag<Integer> classUnderTest()
     {
-        return new ImmutableSortedBagImplNoIterator<>(SortedBags.immutable.with(1, 1, 1, 2));
+        return new ImmutableSortedBagImplNoIterator<>(ImmutableSortedBag.of(1, 1, 1, 2));
     }
 
     @Override
     protected <T> MutableCollection<T> newMutable()
     {
-        return SortedBags.mutable.empty();
+        return MutableSortedBag.empty();
     }
 
     @Override
     protected ImmutableSortedBag<Integer> classUnderTest(Comparator<? super Integer> comparator)
     {
-        return new ImmutableSortedBagImplNoIterator<>(SortedBags.immutable.with(comparator, 1, 1, 1, 2));
+        return new ImmutableSortedBagImplNoIterator<>(ImmutableSortedBag.of(comparator, 1, 1, 1, 2));
     }
 
     @Override
     protected <T> ImmutableSortedBag<T> newWith(T... elements)
     {
-        ImmutableSortedBag<T> bag = SortedBags.immutable.with(elements);
+        ImmutableSortedBag<T> bag = ImmutableSortedBag.of(elements);
         if (bag.isEmpty())
         {
             return new ImmutableEmptySortedBagImplNoIterator<>(bag.comparator());
@@ -53,7 +53,7 @@ public class ImmutableSortedBagImplNoIteratorTest extends ImmutableSortedBagImpl
     @Override
     protected <T> ImmutableSortedBag<T> newWith(Comparator<? super T> comparator, T... elements)
     {
-        return new ImmutableSortedBagImplNoIterator<>(SortedBags.immutable.with(comparator, elements));
+        return new ImmutableSortedBagImplNoIterator<>(ImmutableSortedBag.of(comparator, elements));
     }
 
     @Override

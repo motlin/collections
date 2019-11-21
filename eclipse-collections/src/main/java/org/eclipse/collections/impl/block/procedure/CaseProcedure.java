@@ -14,8 +14,8 @@ import java.util.List;
 
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.tuple.Tuples;
 
 /**
@@ -27,7 +27,7 @@ public final class CaseProcedure<T> implements Procedure<T>
 {
     private static final long serialVersionUID = 1L;
 
-    private final List<Pair<Predicate<? super T>, Procedure<? super T>>> predicateProcedures = Lists.mutable.empty();
+    private final List<Pair<Predicate<? super T>, Procedure<? super T>>> predicateProcedures = MutableList.empty();
     private Procedure<? super T> defaultProcedure;
 
     public CaseProcedure(Procedure<? super T> defaultProcedure)

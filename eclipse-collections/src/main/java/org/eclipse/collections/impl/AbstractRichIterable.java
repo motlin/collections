@@ -101,13 +101,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoDoublePr
 import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoFloatProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoIntProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.InjectIntoLongProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
-import org.eclipse.collections.impl.factory.SortedMaps;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.eclipse.collections.impl.utility.LazyIterate;
@@ -166,7 +159,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     @Override
     public MutableList<T> toList()
     {
-        MutableList<T> list = Lists.mutable.empty();
+        MutableList<T> list = MutableList.empty();
         this.forEachWith(Procedures2.addToCollection(), list);
         return list;
     }
@@ -180,7 +173,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     @Override
     public MutableSortedSet<T> toSortedSet()
     {
-        MutableSortedSet<T> treeSet = SortedSets.mutable.empty();
+        MutableSortedSet<T> treeSet = MutableSortedSet.empty();
         this.forEachWith(Procedures2.addToCollection(), treeSet);
         return treeSet;
     }
@@ -188,7 +181,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
-        MutableSortedSet<T> treeSet = SortedSets.mutable.with(comparator);
+        MutableSortedSet<T> treeSet = MutableSortedSet.of(comparator);
         this.forEachWith(Procedures2.addToCollection(), treeSet);
         return treeSet;
     }
@@ -202,7 +195,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     @Override
     public MutableSet<T> toSet()
     {
-        MutableSet<T> set = Sets.mutable.empty();
+        MutableSet<T> set = MutableSet.empty();
         this.forEachWith(Procedures2.addToCollection(), set);
         return set;
     }
@@ -210,7 +203,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     @Override
     public MutableBag<T> toBag()
     {
-        MutableBag<T> bag = Bags.mutable.empty();
+        MutableBag<T> bag = MutableBag.empty();
         this.forEachWith(Procedures2.addToCollection(), bag);
         return bag;
     }
@@ -242,7 +235,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        MutableMap<K, V> map = Maps.mutable.empty();
+        MutableMap<K, V> map = MutableMap.empty();
         this.forEach(new MapCollectProcedure<>(map, keyFunction, valueFunction));
         return map;
     }
@@ -252,7 +245,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        MutableSortedMap<K, V> sortedMap = SortedMaps.mutable.empty();
+        MutableSortedMap<K, V> sortedMap = MutableSortedMap.empty();
         this.forEach(new MapCollectProcedure<>(sortedMap, keyFunction, valueFunction));
         return sortedMap;
     }
@@ -263,7 +256,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        MutableSortedMap<K, V> sortedMap = SortedMaps.mutable.with(comparator);
+        MutableSortedMap<K, V> sortedMap = MutableSortedMap.of(comparator);
         this.forEach(new MapCollectProcedure<>(sortedMap, keyFunction, valueFunction));
         return sortedMap;
     }
@@ -282,7 +275,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        MutableBiMap<K, V> biMap = BiMaps.mutable.empty();
+        MutableBiMap<K, V> biMap = MutableBiMap.empty();
         this.forEach(new BiMapCollectProcedure<>(biMap, keyFunction, valueFunction));
         return biMap;
     }
@@ -605,9 +598,9 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
      * enclosed in square brackets.
      * <p>
      * <pre>
-     * Assert.assertEquals("[]", Lists.mutable.empty().toString());
-     * Assert.assertEquals("[1]", Lists.mutable.with(1).toString());
-     * Assert.assertEquals("[1, 2, 3]", Lists.mutable.with(1, 2, 3).toString());
+     * Assert.assertEquals("[]", MutableList.empty().toString());
+     * Assert.assertEquals("[1]", MutableList.of(1).toString());
+     * Assert.assertEquals("[1, 2, 3]", MutableList.of(1, 2, 3).toString());
      * </pre>
      *
      * @return a string representation of this collection.
@@ -710,7 +703,7 @@ public abstract class AbstractRichIterable<T> implements RichIterable<T>
     @Override
     public <V> Bag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.countByEach(function, Bags.mutable.empty());
+        return this.countByEach(function, MutableBag.empty());
     }
 
     @Override

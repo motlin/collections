@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.ThrowingAppendable;
@@ -30,7 +31,6 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.IntegerSum;
 import org.eclipse.collections.impl.math.MutableInteger;
@@ -130,7 +130,7 @@ public class IntervalTest
     @Test
     public void forEachOnFromToInterval()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         Interval interval = Interval.oneTo(5);
         interval.forEach(CollectionAddProcedure.on(result));
         Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5), result);
@@ -139,7 +139,7 @@ public class IntervalTest
     @Test
     public void forEachWithExecutor()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         Interval interval = Interval.oneTo(5);
         interval.forEach(CollectionAddProcedure.on(result), Executors.newSingleThreadExecutor());
         Assert.assertEquals(FastList.newListWith(1, 2, 3, 4, 5), result);
@@ -148,7 +148,7 @@ public class IntervalTest
     @Test
     public void forEachWithExecutorInReverse()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         Interval interval = Interval.fromToBy(5, 1, -1);
         interval.forEach(CollectionAddProcedure.on(result), Executors.newSingleThreadExecutor());
         Assert.assertEquals(FastList.newListWith(5, 4, 3, 2, 1), result);
@@ -157,7 +157,7 @@ public class IntervalTest
     @Test
     public void runWithExecutor() throws InterruptedException
     {
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         ExecutorService service = Executors.newSingleThreadExecutor();
         Interval.oneTo(3).run(() -> result.add(null), service);
         service.shutdown();
@@ -168,7 +168,7 @@ public class IntervalTest
     @Test
     public void runWithExecutorInReverse() throws InterruptedException
     {
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         ExecutorService service = Executors.newSingleThreadExecutor();
         Interval.fromTo(3, 1).run(() -> result.add(null), service);
         service.shutdown();
@@ -771,11 +771,11 @@ public class IntervalTest
     {
         Interval interval = Interval.fromTo(-10, 12).by(5);
 
-        MutableList<Integer> forwardResult = Lists.mutable.of();
+        MutableList<Integer> forwardResult = MutableList.empty();
         interval.forEach(CollectionAddProcedure.on(forwardResult), 1, 3);
         Assert.assertEquals(FastList.newListWith(-5, 0, 5), forwardResult);
 
-        MutableList<Integer> backwardsResult = Lists.mutable.of();
+        MutableList<Integer> backwardsResult = MutableList.empty();
         interval.forEach(CollectionAddProcedure.on(backwardsResult), 3, 1);
         Assert.assertEquals(FastList.newListWith(5, 0, -5), backwardsResult);
 
@@ -787,11 +787,11 @@ public class IntervalTest
     {
         Interval interval = Interval.fromTo(-10, 12).by(5);
 
-        MutableList<Integer> forwardResult = Lists.mutable.of();
+        MutableList<Integer> forwardResult = MutableList.empty();
         interval.forEachWithIndex(new AddParametersProcedure(forwardResult), 1, 3);
         Assert.assertEquals(FastList.newListWith(-4, 2, 8), forwardResult);
 
-        MutableList<Integer> backwardsResult = Lists.mutable.of();
+        MutableList<Integer> backwardsResult = MutableList.empty();
         interval.forEachWithIndex(new AddParametersProcedure(backwardsResult), 3, 1);
         Assert.assertEquals(FastList.newListWith(8, 2, -4), backwardsResult);
     }
@@ -1008,7 +1008,7 @@ public class IntervalTest
         LazyIterable<Integer> lazyInterval = Interval.oneTo(1000000).flatCollect(Interval::oneTo);
         LazyIterable<Integer> distinct = lazyInterval.distinct();
         LazyIterable<Integer> take = distinct.take(5);
-        Assert.assertEquals(Lists.immutable.of(1, 2, 3, 4, 5), take.toList());
+        Assert.assertEquals(ImmutableList.of(1, 2, 3, 4, 5), take.toList());
     }
 
     private static final class AddParametersProcedure implements ObjectIntProcedure<Integer>
@@ -1030,7 +1030,7 @@ public class IntervalTest
     @Test
     public void tap()
     {
-        MutableList<Integer> tapResult = Lists.mutable.of();
+        MutableList<Integer> tapResult = MutableList.empty();
         Interval interval = Interval.fromTo(10, -10).by(-5);
         LazyIterable<Integer> lazyTapIterable = interval.tap(tapResult::add);
         lazyTapIterable.each(x -> {

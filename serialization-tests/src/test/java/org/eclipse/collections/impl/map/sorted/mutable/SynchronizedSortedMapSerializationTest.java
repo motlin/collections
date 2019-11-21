@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.map.sorted.mutable;
 
-import org.eclipse.collections.impl.factory.SortedMaps;
+import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -25,6 +25,6 @@ public class SynchronizedSortedMapSerializationTest
                         + "aXplZE1hcFNlcmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHBzcgA9b3JnLmVjbGlwc2UuY29s\n"
                         + "bGVjdGlvbnMuaW1wbC5tYXAuc29ydGVkLm11dGFibGUuVHJlZVNvcnRlZE1hcAAAAAAAAAABDAAA\n"
                         + "eHBwdwQAAAAAeHg=",
-                SynchronizedSortedMap.of(SortedMaps.mutable.of()));
+                SynchronizedSortedMap.of(MutableSortedMap.of()));
     }
 }

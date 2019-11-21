@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.multimap.bag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Bags;
 
 /**
  * Test of {@link HashBagMultimap}.
@@ -88,6 +87,6 @@ public class HashBagMultimapTest extends AbstractMutableBagMultimapTestCase
     @Override
     protected final <V> MutableBag<V> createCollection(V... args)
     {
-        return Bags.mutable.of(args);
+        return MutableBag.of(args);
     }
 }

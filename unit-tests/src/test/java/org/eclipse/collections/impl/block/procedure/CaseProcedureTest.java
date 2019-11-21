@@ -13,7 +13,6 @@ package org.eclipse.collections.impl.block.procedure;
 import java.util.List;
 
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -24,7 +23,7 @@ public class CaseProcedureTest
     @Test
     public void noopCaseAndThenDefault()
     {
-        List<String> result = Lists.mutable.empty();
+        List<String> result = MutableList.empty();
         FastList<String> strings = FastList.newListWith("1", "2");
         CaseProcedure<String> procedure = new CaseProcedure<>();
         strings.each(procedure);
@@ -38,8 +37,8 @@ public class CaseProcedureTest
     @Test
     public void oneCaseWithDefault()
     {
-        MutableList<String> ifOneList = Lists.mutable.of();
-        MutableList<String> defaultList = Lists.mutable.of();
+        MutableList<String> ifOneList = MutableList.empty();
+        MutableList<String> defaultList = MutableList.empty();
         MutableList<String> list = FastList.newListWith("1", "2");
         CaseProcedure<String> procedure =
                 new CaseProcedure<String>(defaultList::add)
@@ -53,8 +52,8 @@ public class CaseProcedureTest
     @Test
     public void twoCasesNoDefault()
     {
-        MutableList<String> ifOneList = Lists.mutable.of();
-        MutableList<String> ifTwoList = Lists.mutable.of();
+        MutableList<String> ifOneList = MutableList.empty();
+        MutableList<String> ifTwoList = MutableList.empty();
         MutableList<String> list = FastList.newListWith("1", "2", "3");
         CaseProcedure<String> procedure =
                 new CaseProcedure<String>()
@@ -69,9 +68,9 @@ public class CaseProcedureTest
     @Test
     public void twoCasesWithDefault()
     {
-        MutableList<String> ifOneList = Lists.mutable.of();
-        MutableList<String> ifTwoList = Lists.mutable.of();
-        MutableList<String> defaultList = Lists.mutable.of();
+        MutableList<String> ifOneList = MutableList.empty();
+        MutableList<String> ifTwoList = MutableList.empty();
+        MutableList<String> defaultList = MutableList.empty();
         MutableList<String> list = FastList.newListWith("1", "2", "3", "4");
         CaseProcedure<String> procedure =
                 new CaseProcedure<String>(defaultList::add)

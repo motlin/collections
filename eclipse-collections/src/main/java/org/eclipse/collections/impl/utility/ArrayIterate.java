@@ -69,7 +69,6 @@ import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -1510,10 +1509,10 @@ public final class ArrayIterate
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
         int index = 0;
-        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        MutableList<RichIterable<T>> result = MutableList.empty();
         while (index < array.length)
         {
-            MutableList<T> batch = Lists.mutable.empty();
+            MutableList<T> batch = MutableList.empty();
             for (int i = 0; i < size && index < array.length; i++)
             {
                 batch.add(array[index]);

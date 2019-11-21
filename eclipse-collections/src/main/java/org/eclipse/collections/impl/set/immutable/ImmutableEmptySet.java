@@ -38,12 +38,10 @@ import org.eclipse.collections.api.partition.set.PartitionImmutableSet;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.EmptyIterator;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
 
 /**
- * This is a zero element {@link ImmutableSet} which is created by calling the Sets.immutable.empty() method.
+ * This is a zero element {@link ImmutableSet} which is created by calling the ImmutableSet.empty() method.
  */
 final class ImmutableEmptySet<T>
         extends AbstractImmutableSet<T>
@@ -73,13 +71,13 @@ final class ImmutableEmptySet<T>
     @Override
     public ImmutableSet<T> newWith(T element)
     {
-        return Sets.immutable.with(element);
+        return ImmutableSet.of(element);
     }
 
     @Override
     public ImmutableSet<T> newWithAll(Iterable<? extends T> elements)
     {
-        return Sets.immutable.withAll(elements);
+        return ImmutableSet.ofAll(elements);
     }
 
     @Override
@@ -194,7 +192,7 @@ final class ImmutableEmptySet<T>
     @Override
     public <S> ImmutableSet<Pair<T, S>> zip(Iterable<S> that)
     {
-        return Sets.immutable.empty();
+        return ImmutableSet.empty();
     }
 
     @Override
@@ -210,7 +208,7 @@ final class ImmutableEmptySet<T>
     @Override
     public ImmutableSet<Pair<T, Integer>> zipWithIndex()
     {
-        return Sets.immutable.empty();
+        return ImmutableSet.empty();
     }
 
     @Override
@@ -240,19 +238,19 @@ final class ImmutableEmptySet<T>
     @Override
     public <V> ImmutableSet<V> collect(Function<? super T, ? extends V> function)
     {
-        return Sets.immutable.empty();
+        return ImmutableSet.empty();
     }
 
     @Override
     public <V> ImmutableSet<V> collectIf(Predicate<? super T> predicate, Function<? super T, ? extends V> function)
     {
-        return Sets.immutable.empty();
+        return ImmutableSet.empty();
     }
 
     @Override
     public <V> ImmutableSet<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Sets.immutable.empty();
+        return ImmutableSet.empty();
     }
 
     /**
@@ -261,7 +259,7 @@ final class ImmutableEmptySet<T>
     @Override
     public <V> ImmutableBag<V> countBy(Function<? super T, ? extends V> function)
     {
-        return Bags.immutable.empty();
+        return ImmutableBag.empty();
     }
 
     /**
@@ -279,7 +277,7 @@ final class ImmutableEmptySet<T>
     @Override
     public <V, P> ImmutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return Bags.immutable.empty();
+        return ImmutableBag.empty();
     }
 
     /**
@@ -297,7 +295,7 @@ final class ImmutableEmptySet<T>
     @Override
     public <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return Bags.immutable.empty();
+        return ImmutableBag.empty();
     }
 
     /**

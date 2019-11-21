@@ -12,10 +12,10 @@ package org.eclipse.collections.impl.lazy.parallel.set.sorted;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.lazy.parallel.set.ParallelUnsortedSetIterableTestCase;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.junit.Assert;
@@ -32,7 +32,7 @@ public class ParallelFlatCollectDistinctSortedSetIterableTest extends ParallelUn
     @Override
     protected ParallelUnsortedSetIterable<Integer> newWith(Integer... littleElements)
     {
-        return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), littleElements)
+        return ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), littleElements)
                 .asParallel(this.executorService, 2)
                 .flatCollect(i -> FastList.newListWith(9, 8, 7, 6, 5, 4, 3, 2, 1).select(j -> j <= i).collect(j -> i * 10 + j))
                 .collect(i -> i / 10)

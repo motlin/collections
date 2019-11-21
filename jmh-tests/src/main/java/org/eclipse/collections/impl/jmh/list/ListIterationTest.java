@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.jmh.runner.AbstractJMHTestRunner;
 import org.eclipse.collections.impl.list.Interval;
 import org.junit.After;
@@ -38,8 +37,8 @@ public class ListIterationTest extends AbstractJMHTestRunner
     private static final int SIZE = 1_000_000;
     private static final int BATCH_SIZE = 10_000;
 
-    private final MutableList<Integer> ecMutable = Lists.mutable.withAll(Interval.zeroTo(SIZE));
-    private final ImmutableList<Integer> ecImmutable = Lists.immutable.withAll(Interval.zeroTo(SIZE));
+    private final MutableList<Integer> ecMutable = MutableList.ofAll(Interval.zeroTo(SIZE));
+    private final ImmutableList<Integer> ecImmutable = ImmutableList.ofAll(Interval.zeroTo(SIZE));
 
     private ExecutorService executorService;
 

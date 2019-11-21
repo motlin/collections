@@ -78,7 +78,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedur
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.immutable.AbstractImmutableCollection;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.lazy.ReverseIterable;
 import org.eclipse.collections.impl.lazy.parallel.list.ListIterableParallelIterable;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -195,7 +194,7 @@ abstract class AbstractImmutableList<T>
                 results[currentIndex++] = item;
             }
         }
-        return Lists.immutable.with(results);
+        return ImmutableList.of(results);
     }
 
     @Override
@@ -206,7 +205,7 @@ abstract class AbstractImmutableList<T>
         T[] array = (T[]) new Object[oldSize + newSize];
         this.toArray(array);
         Iterate.forEachWithIndex(elements, (each, index) -> array[oldSize + index] = each);
-        return Lists.immutable.with(array);
+        return ImmutableList.of(array);
     }
 
     @Override
@@ -232,7 +231,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableList<T> select(Predicate<? super T> predicate)
     {
-        MutableList<T> result = Lists.mutable.empty();
+        MutableList<T> result = MutableList.empty();
         this.forEach(new SelectProcedure<>(predicate, result));
         return result.toImmutable();
     }
@@ -255,7 +254,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableList<T> reject(Predicate<? super T> predicate)
     {
-        MutableList<T> result = Lists.mutable.empty();
+        MutableList<T> result = MutableList.empty();
         this.forEach(new RejectProcedure<>(predicate, result));
         return result.toImmutable();
     }
@@ -298,7 +297,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public <V> ImmutableList<V> collect(Function<? super T, ? extends V> function)
     {
-        MutableList<V> result = Lists.mutable.empty();
+        MutableList<V> result = MutableList.empty();
         this.forEach(new CollectProcedure<>(function, result));
         return result.toImmutable();
     }
@@ -378,7 +377,7 @@ abstract class AbstractImmutableList<T>
             Predicate<? super T> predicate,
             Function<? super T, ? extends V> function)
     {
-        MutableList<V> result = Lists.mutable.empty();
+        MutableList<V> result = MutableList.empty();
         this.forEach(new CollectIfProcedure<>(result, function, predicate));
         return result.toImmutable();
     }
@@ -393,7 +392,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public <V> ImmutableList<V> flatCollect(Function<? super T, ? extends Iterable<V>> function)
     {
-        MutableList<V> result = Lists.mutable.empty();
+        MutableList<V> result = MutableList.empty();
         this.forEach(new FlatCollectProcedure<>(function, result));
         return result.toImmutable();
     }
@@ -858,7 +857,7 @@ abstract class AbstractImmutableList<T>
     @Override
     public ImmutableList<T> toReversed()
     {
-        return Lists.immutable.withAll(this.asReversed());
+        return ImmutableList.ofAll(this.asReversed());
     }
 
     @Override
@@ -895,9 +894,9 @@ abstract class AbstractImmutableList<T>
 
         if (this.isEmpty())
         {
-            return Lists.immutable.empty();
+            return ImmutableList.empty();
         }
-        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        MutableList<RichIterable<T>> result = MutableList.empty();
         if (this.size() <= size)
         {
             result.add(this);
@@ -966,12 +965,12 @@ abstract class AbstractImmutableList<T>
             T[] array = (T[]) new Object[oldSize + 1];
             this.toArray(array);
             array[oldSize] = newItem;
-            return Lists.immutable.with(array);
+            return ImmutableList.of(array);
         }
 
         protected Object writeReplace()
         {
-            return Lists.immutable.withAll(this);
+            return ImmutableList.ofAll(this);
         }
 
         @Override

@@ -14,6 +14,7 @@ import java.util.Comparator;
 
 import org.eclipse.collections.api.factory.set.sorted.ImmutableSortedSetFactory;
 import org.eclipse.collections.api.factory.set.sorted.MutableSortedSetFactory;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
@@ -36,8 +37,8 @@ public class SortedSetsTest
         Verify.assertInstanceOf(ImmutableSortedSet.class, factory.with());
         Assert.assertEquals(TreeSortedSet.newSet(Comparators.reverseNaturalOrder()), factory.empty(Comparators.reverseNaturalOrder()));
         Verify.assertInstanceOf(ImmutableSortedSet.class, factory.empty(Comparators.reverseNaturalOrder()));
-        Assert.assertSame(SortedSets.immutable.empty(), SortedSets.immutable.of(new Integer[0]));
-        Assert.assertSame(SortedSets.immutable.empty(), SortedSets.immutable.of((Object[]) null));
+        Assert.assertSame(ImmutableSortedSet.empty(), ImmutableSortedSet.of(new Integer[0]));
+        Assert.assertSame(ImmutableSortedSet.empty(), ImmutableSortedSet.of((Object[]) null));
         Assert.assertEquals(UnifiedSet.newSetWith(), factory.of(Comparators.reverseNaturalOrder()));
         Assert.assertEquals(TreeSortedSet.newSetWith(Comparators.reverseNaturalOrder()).comparator(), factory.of(Comparators.reverseNaturalOrder()).comparator());
         Assert.assertEquals(TreeSortedSet.newSetWith().comparator(), factory.of((Comparator<Integer>) null).comparator());
@@ -49,24 +50,24 @@ public class SortedSetsTest
         Verify.assertInstanceOf(ImmutableSortedSet.class, factory.of(1, 2, 3, 4, 5, 6));
         Assert.assertEquals(UnifiedSet.newSetWith(1, 2, 3, 4, 5, 6, 7, 8), factory.of(1, 2, 3, 4, 5, 6, 7, 8));
         Verify.assertInstanceOf(ImmutableSortedSet.class, factory.of(1, 2, 3, 4, 5, 6, 7, 8));
-        Assert.assertEquals(SortedSets.mutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8), factory.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8));
+        Assert.assertEquals(MutableSortedSet.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8), factory.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8));
         Verify.assertInstanceOf(ImmutableSortedSet.class, factory.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8));
         Assert.assertEquals(
-                SortedSets.mutable.of(Comparators.reverseNaturalOrder(), 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 7, 8),
+                MutableSortedSet.of(Comparators.reverseNaturalOrder(), 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 7, 8),
                 factory.of(Comparators.reverseNaturalOrder(), 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 7, 8));
         Verify.assertInstanceOf(ImmutableSortedSet.class, factory.of(Comparators.reverseNaturalOrder(), 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 7, 8));
-        Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8)));
-        Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8).comparator(), factory.ofAll(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8)).comparator());
-        Assert.assertEquals(SortedSets.mutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(Comparators.reverseNaturalOrder(), SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8)));
-        Assert.assertEquals(SortedSets.mutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8).comparator(), factory.ofAll(Comparators.reverseNaturalOrder(), SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8)).comparator());
-        Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(SortedSets.immutable.of(1, 2, 3, 4, 5, 6, 7, 8)));
-        Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(SortedSets.immutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8)));
-        Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(SortedSets.immutable.of(1, 2, 3, 4, 5, 6, 7, 8).castToSortedSet()));
-        Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(SortedSets.immutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8).castToSortedSet()));
-        Assert.assertEquals(SortedSets.mutable.empty(), factory.ofSortedSet(SortedSets.mutable.with()));
-        Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8)));
-        Assert.assertEquals(SortedSets.mutable.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(SortedSets.mutable.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8)));
-        Assert.assertEquals(SortedSets.immutable.empty(), SortedSets.immutable.ofAll(null, Lists.mutable.empty()));
+        Assert.assertEquals(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8)));
+        Assert.assertEquals(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8).comparator(), factory.ofAll(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8)).comparator());
+        Assert.assertEquals(MutableSortedSet.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(Comparators.reverseNaturalOrder(), MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8)));
+        Assert.assertEquals(MutableSortedSet.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8).comparator(), factory.ofAll(Comparators.reverseNaturalOrder(), MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8)).comparator());
+        Assert.assertEquals(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(ImmutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8)));
+        Assert.assertEquals(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofAll(ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8)));
+        Assert.assertEquals(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(ImmutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8).castToSortedSet()));
+        Assert.assertEquals(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8).castToSortedSet()));
+        Assert.assertEquals(MutableSortedSet.empty(), factory.ofSortedSet(MutableSortedSet.of()));
+        Assert.assertEquals(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8)));
+        Assert.assertEquals(MutableSortedSet.of(1, 2, 3, 4, 5, 6, 7, 8), factory.ofSortedSet(MutableSortedSet.of(Comparators.reverseNaturalOrder(), 1, 2, 3, 4, 5, 6, 7, 8)));
+        Assert.assertEquals(ImmutableSortedSet.empty(), ImmutableSortedSet.ofAll(null, MutableList.empty()));
     }
 
     @Test

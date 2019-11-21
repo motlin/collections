@@ -73,7 +73,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.partition.list.PartitionFastList;
@@ -1413,7 +1412,7 @@ public final class ListIterate
     /**
      * Reverses the order of the items in the list.
      * <pre>
-     *     List&lt;Integer&gt; integers = Lists.fixedSize.of(1, 3, 2);
+     *     List&lt;Integer&gt; integers = FixedSizeList.of(1, 3, 2);
      *     Verify.assertListsEqual(FastList.newListWith(2, 3, 1), ListIterate.reverse(integers));
      * </pre>
      *
@@ -1665,10 +1664,10 @@ public final class ListIterate
         }
 
         Iterator<T> iterator = list.iterator();
-        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        MutableList<RichIterable<T>> result = MutableList.empty();
         while (iterator.hasNext())
         {
-            MutableCollection<T> batch = Lists.mutable.empty();
+            MutableCollection<T> batch = MutableList.empty();
             for (int i = 0; i < size && iterator.hasNext(); i++)
             {
                 batch.add(iterator.next());

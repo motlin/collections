@@ -20,16 +20,15 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Multimaps;
-import org.eclipse.collections.impl.factory.Sets;
 
 final class EmptyMap<K, V>
         extends AbstractMemoryEfficientMutableMap<K, V>
@@ -39,7 +38,7 @@ final class EmptyMap<K, V>
 
     private Object readResolve()
     {
-        return Maps.fixedSize.of();
+        return FixedSizeMap.empty();
     }
 
     @Override
@@ -70,7 +69,7 @@ final class EmptyMap<K, V>
     @Override
     public ImmutableMap<K, V> toImmutable()
     {
-        return Maps.immutable.empty();
+        return ImmutableMap.empty();
     }
 
     @Override
@@ -100,19 +99,19 @@ final class EmptyMap<K, V>
     @Override
     public Set<K> keySet()
     {
-        return Sets.fixedSize.of();
+        return FixedSizeSet.empty();
     }
 
     @Override
     public Collection<V> values()
     {
-        return Lists.fixedSize.of();
+        return FixedSizeList.empty();
     }
 
     @Override
     public MutableSet<Entry<K, V>> entrySet()
     {
-        return Sets.fixedSize.of();
+        return FixedSizeSet.empty();
     }
 
     @Override
@@ -141,7 +140,7 @@ final class EmptyMap<K, V>
     @Override
     public MutableMap<V, K> flipUniqueValues()
     {
-        return Maps.fixedSize.with();
+        return FixedSizeMap.empty();
     }
 
     @Override
@@ -178,25 +177,25 @@ final class EmptyMap<K, V>
     @Override
     public FixedSizeMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
-        return Maps.fixedSize.of();
+        return FixedSizeMap.empty();
     }
 
     @Override
     public <R> FixedSizeMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return Maps.fixedSize.of();
+        return FixedSizeMap.empty();
     }
 
     @Override
     public <K2, V2> FixedSizeMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return Maps.fixedSize.of();
+        return FixedSizeMap.empty();
     }
 
     @Override
     public FixedSizeMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
-        return Maps.fixedSize.of();
+        return FixedSizeMap.empty();
     }
 
     @Override

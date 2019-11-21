@@ -55,7 +55,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.SynchronizedMutableCollection;
-import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.AbstractSynchronizedMapIterable;
 import org.eclipse.collections.impl.map.mutable.SynchronizedMapSerializationProxy;
@@ -486,7 +485,7 @@ public class SynchronizedSortedMap<K, V>
     {
         synchronized (this.lock)
         {
-            return SortedMaps.immutable.withSortedMap(this);
+            return ImmutableSortedMap.ofSortedMap(this);
         }
     }
 

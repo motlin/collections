@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.block.procedure;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.Iterate;
@@ -28,8 +27,8 @@ public class IfProcedureTest
     @Test
     public void procedure()
     {
-        MutableList<String> list1 = Lists.mutable.of();
-        MutableList<String> list2 = Lists.mutable.of();
+        MutableList<String> list1 = MutableList.empty();
+        MutableList<String> list2 = MutableList.empty();
         Procedure<String> ifProcedure = new IfProcedure<>("1"::equals, list1::add, list2::add);
         LOGGER.info("{}", ifProcedure);
         MutableList<String> list = FastList.newListWith("1", "2");

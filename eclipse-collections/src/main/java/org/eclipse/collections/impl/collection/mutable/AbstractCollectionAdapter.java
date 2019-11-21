@@ -73,8 +73,6 @@ import org.eclipse.collections.impl.block.procedure.BiMapCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.BiMaps;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
@@ -735,7 +733,7 @@ public abstract class AbstractCollectionAdapter<T>
     @Override
     public MutableList<T> toList()
     {
-        return Lists.mutable.withAll(this.getDelegate());
+        return MutableList.ofAll(this.getDelegate());
     }
 
     @Override
@@ -851,7 +849,7 @@ public abstract class AbstractCollectionAdapter<T>
             Function<? super T, ? extends K> keyFunction,
             Function<? super T, ? extends V> valueFunction)
     {
-        MutableBiMap<K, V> biMap = BiMaps.mutable.empty();
+        MutableBiMap<K, V> biMap = MutableBiMap.empty();
         Iterate.forEach(this.getDelegate(), new BiMapCollectProcedure<>(biMap, keyFunction, valueFunction));
         return biMap;
     }

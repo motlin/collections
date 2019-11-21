@@ -26,17 +26,15 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
-import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
- * This is a zero element {@link ImmutableSortedMap} which is created by calling SortedMaps.immutable.empty().
+ * This is a zero element {@link ImmutableSortedMap} which is created by calling ImmutableSortedMap.empty().
  */
 final class ImmutableEmptySortedMap<K, V>
         extends AbstractImmutableSortedMap<K, V>
@@ -136,7 +134,7 @@ final class ImmutableEmptySortedMap<K, V>
     @Override
     public ImmutableMap<V, K> flipUniqueValues()
     {
-        return Maps.immutable.with();
+        return ImmutableMap.empty();
     }
 
     @Override
@@ -201,13 +199,13 @@ final class ImmutableEmptySortedMap<K, V>
     @Override
     public <K2, V2> ImmutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return Maps.immutable.empty();
+        return ImmutableMap.empty();
     }
 
     @Override
     public <R> ImmutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return SortedMaps.immutable.with(this.comparator);
+        return ImmutableSortedMap.of(this.comparator);
     }
 
     @Override
@@ -231,7 +229,7 @@ final class ImmutableEmptySortedMap<K, V>
     @Override
     public Set<Entry<K, V>> entrySet()
     {
-        return Sets.immutable.<Entry<K, V>>with().castToSet();
+        return ImmutableSet.<Entry<K, V>>empty().castToSet();
     }
 
     @Override
@@ -249,13 +247,13 @@ final class ImmutableEmptySortedMap<K, V>
     @Override
     public Set<K> keySet()
     {
-        return Sets.immutable.<K>of().castToSet();
+        return ImmutableSet.<K>empty().castToSet();
     }
 
     @Override
     public Collection<V> values()
     {
-        return Lists.immutable.<V>empty().castToList();
+        return ImmutableList.<V>empty().castToList();
     }
 
     @Override

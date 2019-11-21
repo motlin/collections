@@ -19,13 +19,13 @@ import java.util.Set;
 
 import org.eclipse.collections.api.collection.ImmutableCollection;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.CollectionRemoveProcedure;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.ArrayListAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.ListAdapter;
@@ -82,8 +82,8 @@ public final class CollectionAdapter<T>
     public ImmutableCollection<T> toImmutable()
     {
         return this.delegate instanceof Set
-                ? Sets.immutable.withAll(this.delegate)
-                : Lists.immutable.withAll(this.delegate);
+                ? ImmutableSet.ofAll(this.delegate)
+                : ImmutableList.ofAll(this.delegate);
     }
 
     public static <E> MutableSet<E> wrapSet(Iterable<E> iterable)
@@ -204,6 +204,6 @@ public final class CollectionAdapter<T>
         {
             return UnifiedSet.newSet();
         }
-        return Lists.mutable.empty();
+        return MutableList.empty();
     }
 }

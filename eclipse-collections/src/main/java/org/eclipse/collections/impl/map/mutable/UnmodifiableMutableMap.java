@@ -75,7 +75,6 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableIteratorAdapter;
 import org.eclipse.collections.impl.UnmodifiableMap;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.tuple.AbstractImmutableEntry;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
@@ -403,7 +402,7 @@ public class UnmodifiableMutableMap<K, V>
     @Override
     public ImmutableMap<K, V> toImmutable()
     {
-        return Maps.immutable.withAll(this);
+        return ImmutableMap.ofAll(this);
     }
 
     @Override

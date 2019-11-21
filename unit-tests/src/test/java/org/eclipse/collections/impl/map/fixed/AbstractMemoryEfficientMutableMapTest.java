@@ -20,6 +20,7 @@ import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -38,8 +39,6 @@ import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.SynchronizedMutableMap;
@@ -54,9 +53,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
 
 /**
  * JUnit test for {@link AbstractMemoryEfficientMutableMap}.
@@ -477,13 +473,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(iList(1), sorted);
+                Assert.assertEquals(ImmutableList.of(1), sorted);
                 break;
             case 2:
-                Assert.assertEquals(iList(1, 2), sorted);
+                Assert.assertEquals(ImmutableList.of(1, 2), sorted);
                 break;
             case 3:
-                Assert.assertEquals(iList(1, 2, 3), sorted);
+                Assert.assertEquals(ImmutableList.of(1, 2, 3), sorted);
                 break;
             default:
                 Verify.assertEmpty(sorted);
@@ -494,13 +490,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(iList(1), reverse);
+                Assert.assertEquals(ImmutableList.of(1), reverse);
                 break;
             case 2:
-                Assert.assertEquals(iList(2, 1), reverse);
+                Assert.assertEquals(ImmutableList.of(2, 1), reverse);
                 break;
             case 3:
-                Assert.assertEquals(iList(3, 2, 1), reverse);
+                Assert.assertEquals(ImmutableList.of(3, 2, 1), reverse);
                 break;
             default:
                 Verify.assertEmpty(reverse);
@@ -517,13 +513,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(iList(1), list);
+                Assert.assertEquals(ImmutableList.of(1), list);
                 break;
             case 2:
-                Assert.assertEquals(iList(1, 2), list);
+                Assert.assertEquals(ImmutableList.of(1, 2), list);
                 break;
             case 3:
-                Assert.assertEquals(iList(1, 2, 3), list);
+                Assert.assertEquals(ImmutableList.of(1, 2, 3), list);
                 break;
             default:
                 Verify.assertEmpty(list);
@@ -543,13 +539,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(iList(1), sizes);
+                Assert.assertEquals(ImmutableList.of(1), sizes);
                 break;
             case 2:
-                Assert.assertEquals(iList(2), sizes);
+                Assert.assertEquals(ImmutableList.of(2), sizes);
                 break;
             case 3:
-                Assert.assertEquals(iList(2, 1), sizes);
+                Assert.assertEquals(ImmutableList.of(2, 1), sizes);
                 break;
             default:
                 Assert.assertEquals(0, chunks.size());
@@ -622,13 +618,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertEquals(Bags.mutable.of(2), collectWith);
+                Assert.assertEquals(MutableBag.of(2), collectWith);
                 break;
             case 2:
-                Assert.assertEquals(Bags.mutable.of(2, 3), collectWith);
+                Assert.assertEquals(MutableBag.of(2, 3), collectWith);
                 break;
             case 3:
-                Assert.assertEquals(Bags.mutable.of(2, 3, 4), collectWith);
+                Assert.assertEquals(MutableBag.of(2, 3, 4), collectWith);
                 break;
             default:
                 Verify.assertEmpty(collectWith);
@@ -703,13 +699,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (map.size())
         {
             case 1:
-                Assert.assertTrue(map.containsAllIterable(iList("One")));
+                Assert.assertTrue(map.containsAllIterable(ImmutableList.of("One")));
                 break;
             case 2:
-                Assert.assertTrue(map.containsAllIterable(iList("One", "Two")));
+                Assert.assertTrue(map.containsAllIterable(ImmutableList.of("One", "Two")));
                 break;
             case 3:
-                Assert.assertTrue(map.containsAllIterable(iList("One", "Two", "Three")));
+                Assert.assertTrue(map.containsAllIterable(ImmutableList.of("One", "Two", "Three")));
                 break;
             default:
                 Verify.assertEmpty(map);
@@ -810,7 +806,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
 
         Function<String, Iterable<Character>> function = object ->
         {
-            MutableList<Character> result = Lists.mutable.of();
+            MutableList<Character> result = MutableList.empty();
             if (object != null)
             {
                 char[] chars = object.toCharArray();
@@ -1049,7 +1045,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     {
         MutableMap<String, Integer> map = this.newMapWithKeysValues("1", 1, "2", 2, "3", 3);
         Assert.assertEquals(Integer.valueOf(map.size()), map.maxBy(String::valueOf));
-        Verify.assertContains(Integer.valueOf(map.size()), iList(1, 2, 3));
+        Verify.assertContains(Integer.valueOf(map.size()), ImmutableList.of(1, 2, 3));
     }
 
     @Test
@@ -1070,12 +1066,12 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         switch (size)
         {
             case 0:
-                return iSet();
+                return ImmutableSet.empty();
             case 1:
             case 2:
-                return iSet(1);
+                return ImmutableSet.of(1);
             case 3:
-                return iSet(1, 3);
+                return ImmutableSet.of(1, 3);
             default:
                 throw new AssertionError();
         }
@@ -1119,10 +1115,10 @@ public abstract class AbstractMemoryEfficientMutableMapTest
         {
             case 0:
             case 1:
-                return iSet();
+                return ImmutableSet.empty();
             case 2:
             case 3:
-                return iSet(2);
+                return ImmutableSet.of(2);
             default:
                 throw new AssertionError();
         }
@@ -1208,13 +1204,13 @@ public abstract class AbstractMemoryEfficientMutableMapTest
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet());
         Assert.assertEquals(
                 nulls,
-                pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+                pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         RichIterable<Pair<String, Object>> pairsPlusOne = map.zip(nullsPlusOne);
         Assert.assertEquals(
                 map.toSet(),
                 pairsPlusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne).toSet());
-        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         if (map.notEmpty())
         {
@@ -1308,7 +1304,7 @@ public abstract class AbstractMemoryEfficientMutableMapTest
     @Test
     public void tap()
     {
-        MutableList<String> tapResult = Lists.mutable.of();
+        MutableList<String> tapResult = MutableList.empty();
         MutableMap<String, String> map = this.classUnderTest();
         Assert.assertSame(map, map.tap(tapResult::add));
         Assert.assertEquals(map.toList(), tapResult);

@@ -15,11 +15,11 @@ import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
 import org.eclipse.collections.api.bag.primitive.MutableBooleanBag;
 import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunction;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.set.primitive.MutableBooleanSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -284,19 +284,19 @@ public abstract class AbstractMutableBooleanBagTestCase extends AbstractMutableB
         Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().topOccurrences(-1));
         Assert.assertTrue(this.newWith().topOccurrences(1).isEmpty());
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(true, 2)),
+                MutableList.of(PrimitiveTuples.pair(true, 2)),
                 this.newWith(true, true, false).topOccurrences(1));
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(false, 2)),
+                MutableList.of(PrimitiveTuples.pair(false, 2)),
                 this.newWith(false, true, false).topOccurrences(1));
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(true, 2), PrimitiveTuples.pair(false, 1)),
+                MutableList.of(PrimitiveTuples.pair(true, 2), PrimitiveTuples.pair(false, 1)),
                 this.newWith(true, true, false).topOccurrences(2));
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(true, 1), PrimitiveTuples.pair(false, 1)).toBag(),
+                MutableList.of(PrimitiveTuples.pair(true, 1), PrimitiveTuples.pair(false, 1)).toBag(),
                 this.newWith(true, false).topOccurrences(1).toBag());
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(false, 2), PrimitiveTuples.pair(true, 1)).toBag(),
+                MutableList.of(PrimitiveTuples.pair(false, 2), PrimitiveTuples.pair(true, 1)).toBag(),
                 this.newWith(true, false, false).topOccurrences(2).toBag());
     }
 
@@ -306,19 +306,19 @@ public abstract class AbstractMutableBooleanBagTestCase extends AbstractMutableB
         Verify.assertThrows(IllegalArgumentException.class, () -> this.newWith().bottomOccurrences(-1));
         Assert.assertTrue(this.newWith().bottomOccurrences(1).isEmpty());
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(false, 1)),
+                MutableList.of(PrimitiveTuples.pair(false, 1)),
                 this.newWith(true, true, false).bottomOccurrences(1));
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(true, 1)),
+                MutableList.of(PrimitiveTuples.pair(true, 1)),
                 this.newWith(false, true, false).bottomOccurrences(1));
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(true, 1), PrimitiveTuples.pair(false, 2)),
+                MutableList.of(PrimitiveTuples.pair(true, 1), PrimitiveTuples.pair(false, 2)),
                 this.newWith(false, true, false).bottomOccurrences(2));
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(true, 1), PrimitiveTuples.pair(false, 1)),
+                MutableList.of(PrimitiveTuples.pair(true, 1), PrimitiveTuples.pair(false, 1)),
                 this.newWith(true, false).bottomOccurrences(1));
         Assert.assertEquals(
-                Lists.mutable.with(PrimitiveTuples.pair(false, 1), PrimitiveTuples.pair(true, 2)),
+                MutableList.of(PrimitiveTuples.pair(false, 1), PrimitiveTuples.pair(true, 2)),
                 this.newWith(true, true, false).bottomOccurrences(2));
     }
 

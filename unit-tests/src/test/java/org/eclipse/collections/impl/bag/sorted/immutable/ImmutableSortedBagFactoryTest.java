@@ -13,9 +13,9 @@ package org.eclipse.collections.impl.bag.sorted.immutable;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -26,59 +26,59 @@ public class ImmutableSortedBagFactoryTest
     @Test
     public void empty()
     {
-        Assert.assertEquals(TreeBag.newBag(), SortedBags.immutable.empty());
-        Verify.assertInstanceOf(ImmutableSortedBag.class, SortedBags.immutable.empty());
+        Assert.assertEquals(TreeBag.newBag(), ImmutableSortedBag.empty());
+        Verify.assertInstanceOf(ImmutableSortedBag.class, ImmutableSortedBag.empty());
 
-        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), SortedBags.immutable.empty(Comparators.reverseNaturalOrder()));
-        Verify.assertInstanceOf(ImmutableSortedBag.class, SortedBags.immutable.empty(Comparators.reverseNaturalOrder()));
+        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), ImmutableSortedBag.empty(Comparators.reverseNaturalOrder()));
+        Verify.assertInstanceOf(ImmutableSortedBag.class, ImmutableSortedBag.empty(Comparators.reverseNaturalOrder()));
     }
 
     @Test
     public void ofElements()
     {
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.mutable.of(1, 1, 2)), SortedBags.immutable.of(1, 1, 2));
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.mutable.of(Comparators.reverseNaturalOrder(), 1, 1, 2)), SortedBags.immutable.of(Comparators.reverseNaturalOrder(), 1, 1, 2));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(MutableSortedBag.of(1, 1, 2)), ImmutableSortedBag.of(1, 1, 2));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(MutableSortedBag.of(Comparators.reverseNaturalOrder(), 1, 1, 2)), ImmutableSortedBag.of(Comparators.reverseNaturalOrder(), 1, 1, 2));
 
-        Assert.assertEquals(TreeBag.newBag(), SortedBags.immutable.of());
-        Verify.assertInstanceOf(ImmutableSortedBag.class, SortedBags.immutable.of());
+        Assert.assertEquals(TreeBag.newBag(), ImmutableSortedBag.of());
+        Verify.assertInstanceOf(ImmutableSortedBag.class, ImmutableSortedBag.of());
         Comparator<Integer> nullComparator = null;
-        Assert.assertEquals(TreeBag.newBag(), SortedBags.immutable.of(nullComparator));
-        Verify.assertInstanceOf(ImmutableSortedBag.class, SortedBags.immutable.of(nullComparator));
-        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), SortedBags.immutable.of(Comparator.reverseOrder()));
-        Verify.assertInstanceOf(ImmutableSortedBag.class, SortedBags.immutable.of(Comparator.reverseOrder()));
-        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), SortedBags.immutable.of(Comparator.reverseOrder(), new Integer[]{}));
-        Verify.assertInstanceOf(ImmutableSortedBag.class, SortedBags.immutable.of(Comparator.reverseOrder(), new Integer[]{}));
-        Assert.assertEquals(TreeBag.newBag(), SortedBags.immutable.of(new Integer[]{}));
-        Verify.assertInstanceOf(ImmutableSortedBag.class, SortedBags.immutable.of(new Integer[]{}));
+        Assert.assertEquals(TreeBag.newBag(), ImmutableSortedBag.of(nullComparator));
+        Verify.assertInstanceOf(ImmutableSortedBag.class, ImmutableSortedBag.of(nullComparator));
+        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), ImmutableSortedBag.of(Comparator.reverseOrder()));
+        Verify.assertInstanceOf(ImmutableSortedBag.class, ImmutableSortedBag.of(Comparator.reverseOrder()));
+        Assert.assertEquals(TreeBag.newBag(Comparators.reverseNaturalOrder()), ImmutableSortedBag.of(Comparator.reverseOrder(), new Integer[]{}));
+        Verify.assertInstanceOf(ImmutableSortedBag.class, ImmutableSortedBag.of(Comparator.reverseOrder(), new Integer[]{}));
+        Assert.assertEquals(TreeBag.newBag(), ImmutableSortedBag.of(new Integer[]{}));
+        Verify.assertInstanceOf(ImmutableSortedBag.class, ImmutableSortedBag.of(new Integer[]{}));
     }
 
     @Test
     public void withElements()
     {
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.mutable.with(1, 1, 2)), SortedBags.immutable.with(1, 1, 2));
-        Verify.assertThrows(IllegalArgumentException.class, () -> new ImmutableSortedBagImpl<>(SortedBags.mutable.with(Comparators.reverseNaturalOrder(), FastList.newList().toArray())));
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.mutable.with(Comparators.reverseNaturalOrder(), 1, 1, 2)), SortedBags.immutable.with(Comparators.reverseNaturalOrder(), 1, 1, 2));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(MutableSortedBag.of(1, 1, 2)), ImmutableSortedBag.of(1, 1, 2));
+        Verify.assertThrows(IllegalArgumentException.class, () -> new ImmutableSortedBagImpl<>(MutableSortedBag.of(Comparators.reverseNaturalOrder(), FastList.newList().toArray())));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(MutableSortedBag.of(Comparators.reverseNaturalOrder(), 1, 1, 2)), ImmutableSortedBag.of(Comparators.reverseNaturalOrder(), 1, 1, 2));
     }
 
     @Test
     public void ofAll()
     {
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.mutable.of(1, 1, 2)), SortedBags.immutable.ofAll(new ImmutableSortedBagImpl<>(TreeBag.newBagWith(1, 1, 2))));
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.mutable.of(1, 1, 2)), SortedBags.immutable.ofAll(FastList.newListWith(1, 1, 2)));
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.mutable.of(Comparators.reverseNaturalOrder(), 1, 1, 2)), SortedBags.immutable.ofAll(Comparators.reverseNaturalOrder(), FastList.newListWith(1, 1, 2)));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(MutableSortedBag.of(1, 1, 2)), ImmutableSortedBag.ofAll(new ImmutableSortedBagImpl<>(TreeBag.newBagWith(1, 1, 2))));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(MutableSortedBag.of(1, 1, 2)), ImmutableSortedBag.ofAll(FastList.newListWith(1, 1, 2)));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(MutableSortedBag.of(Comparators.reverseNaturalOrder(), 1, 1, 2)), ImmutableSortedBag.ofAll(Comparators.reverseNaturalOrder(), FastList.newListWith(1, 1, 2)));
     }
 
     @Test
     public void ofSortedBag()
     {
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.immutable.of(1)), SortedBags.immutable.ofSortedBag(new ImmutableSortedBagImpl<>(TreeBag.newBagWith(1))));
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.immutable.of(1)), SortedBags.immutable.ofSortedBag(TreeBag.newBagWith(1)));
-        Assert.assertEquals(SortedBags.immutable.of(Comparators.reverseNaturalOrder()), SortedBags.immutable.ofSortedBag(TreeBag.newBag(Comparators.reverseNaturalOrder())));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(ImmutableSortedBag.of(1)), ImmutableSortedBag.ofSortedBag(new ImmutableSortedBagImpl<>(TreeBag.newBagWith(1))));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(ImmutableSortedBag.of(1)), ImmutableSortedBag.ofSortedBag(TreeBag.newBagWith(1)));
+        Assert.assertEquals(ImmutableSortedBag.of(Comparators.reverseNaturalOrder()), ImmutableSortedBag.ofSortedBag(TreeBag.newBag(Comparators.reverseNaturalOrder())));
     }
 
     @Test
     public void withSortedBag()
     {
-        Assert.assertEquals(new ImmutableSortedBagImpl<>(SortedBags.immutable.of(1)), SortedBags.immutable.ofSortedBag(new ImmutableSortedBagImpl<>(TreeBag.newBagWith(1))));
+        Assert.assertEquals(new ImmutableSortedBagImpl<>(ImmutableSortedBag.of(1)), ImmutableSortedBag.ofSortedBag(new ImmutableSortedBagImpl<>(TreeBag.newBagWith(1))));
     }
 }

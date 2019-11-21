@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.list.ImmutableList;
@@ -26,8 +27,6 @@ import org.eclipse.collections.impl.block.factory.ObjectIntProcedures;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
@@ -44,7 +43,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Override
     protected ImmutableList<Integer> classUnderTest()
     {
-        return Lists.immutable.empty();
+        return ImmutableList.empty();
     }
 
     @Override
@@ -73,16 +72,16 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void newWithout()
     {
-        Assert.assertSame(Lists.immutable.empty(), Lists.immutable.empty().newWithout(1));
-        Assert.assertSame(Lists.immutable.empty(), Lists.immutable.empty().newWithoutAll(Interval.oneTo(3)));
+        Assert.assertSame(ImmutableList.empty(), ImmutableList.empty().newWithout(1));
+        Assert.assertSame(ImmutableList.empty(), ImmutableList.empty().newWithoutAll(Interval.oneTo(3)));
     }
 
     @Override
     @Test
     public void reverseForEach()
     {
-        ImmutableList<Integer> list = Lists.immutable.empty();
-        MutableList<Integer> result = Lists.mutable.empty();
+        ImmutableList<Integer> list = ImmutableList.empty();
+        MutableList<Integer> result = MutableList.empty();
         list.reverseForEach(CollectionAddProcedure.on(result));
         Assert.assertEquals(list, result);
     }
@@ -91,7 +90,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void reverseForEachWithIndex()
     {
-        ImmutableList<Object> list = Lists.immutable.empty();
+        ImmutableList<Object> list = ImmutableList.empty();
         list.reverseForEachWithIndex((each, index) -> fail());
     }
 
@@ -99,8 +98,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void forEachFromTo()
     {
-        MutableList<Integer> result = Lists.mutable.empty();
-        MutableList<Integer> reverseResult = Lists.mutable.empty();
+        MutableList<Integer> result = MutableList.empty();
+        MutableList<Integer> reverseResult = MutableList.empty();
         ImmutableList<Integer> list = this.classUnderTest();
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(0, list.size() - 1, CollectionAddProcedure.on(result)));
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.forEach(list.size() - 1, 0, CollectionAddProcedure.on(reverseResult)));
@@ -110,8 +109,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void forEachWithIndexFromTo()
     {
-        MutableList<Integer> result = Lists.mutable.empty();
-        MutableList<Integer> reverseResult = Lists.mutable.empty();
+        MutableList<Integer> result = MutableList.empty();
+        MutableList<Integer> reverseResult = MutableList.empty();
         ImmutableList<Integer> list = this.classUnderTest();
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(0, list.size() - 1, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(result))));
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> list.forEachWithIndex(list.size() - 1, 0, ObjectIntProcedures.fromProcedure(CollectionAddProcedure.on(reverseResult))));
@@ -156,7 +155,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     {
         //Evaluates true for all empty lists and false for all non-empty lists
 
-        Assert.assertTrue(this.classUnderTest().corresponds(Lists.mutable.empty(), Predicates2.alwaysFalse()));
+        Assert.assertTrue(this.classUnderTest().corresponds(MutableList.empty(), Predicates2.alwaysFalse()));
 
         ImmutableList<Integer> integers = this.classUnderTest().newWith(Integer.valueOf(1));
         Assert.assertFalse(this.classUnderTest().corresponds(integers, Predicates2.alwaysTrue()));
@@ -354,7 +353,7 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void chunk()
     {
-        Assert.assertEquals(Lists.mutable.empty(), this.classUnderTest().chunk(2));
+        Assert.assertEquals(MutableList.empty(), this.classUnderTest().chunk(2));
     }
 
     @Override
@@ -397,8 +396,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void takeWhile()
     {
-        Assert.assertEquals(Lists.immutable.empty(), this.classUnderTest().takeWhile(ignored -> true));
-        Assert.assertEquals(Lists.immutable.empty(), this.classUnderTest().takeWhile(ignored -> false));
+        Assert.assertEquals(ImmutableList.empty(), this.classUnderTest().takeWhile(ignored -> true));
+        Assert.assertEquals(ImmutableList.empty(), this.classUnderTest().takeWhile(ignored -> false));
     }
 
     @Override
@@ -419,8 +418,8 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     {
         super.dropWhile();
 
-        Assert.assertEquals(Lists.immutable.empty(), this.classUnderTest().dropWhile(ignored -> true));
-        Assert.assertEquals(Lists.immutable.empty(), this.classUnderTest().dropWhile(ignored -> false));
+        Assert.assertEquals(ImmutableList.empty(), this.classUnderTest().dropWhile(ignored -> true));
+        Assert.assertEquals(ImmutableList.empty(), this.classUnderTest().dropWhile(ignored -> false));
     }
 
     @Override
@@ -430,12 +429,12 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
         super.partitionWhile();
 
         PartitionImmutableList<Integer> partition1 = this.classUnderTest().partitionWhile(ignored -> true);
-        Assert.assertEquals(Lists.immutable.empty(), partition1.getSelected());
-        Assert.assertEquals(Lists.immutable.empty(), partition1.getRejected());
+        Assert.assertEquals(ImmutableList.empty(), partition1.getSelected());
+        Assert.assertEquals(ImmutableList.empty(), partition1.getRejected());
 
         PartitionImmutableList<Integer> partiton2 = this.classUnderTest().partitionWhile(ignored -> false);
-        Assert.assertEquals(Lists.immutable.empty(), partiton2.getSelected());
-        Assert.assertEquals(Lists.immutable.empty(), partiton2.getRejected());
+        Assert.assertEquals(ImmutableList.empty(), partiton2.getSelected());
+        Assert.assertEquals(ImmutableList.empty(), partiton2.getRejected());
     }
 
     @Override
@@ -525,19 +524,19 @@ public class ImmutableEmptyListTest extends AbstractImmutableListTestCase
     @Test
     public void collectWithIndexWithTarget()
     {
-        Verify.assertEmpty(this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
+        Verify.assertEmpty(this.classUnderTest().collectWithIndex(PrimitiveTuples::pair, MutableList.empty()));
     }
 
     @Test
     public void countByEach()
     {
-        Assert.assertEquals(Bags.immutable.empty(), this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
+        Assert.assertEquals(ImmutableBag.empty(), this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i)));
     }
 
     @Test
     public void countByEach_target()
     {
-        MutableBag<Integer> target = Bags.mutable.empty();
+        MutableBag<Integer> target = MutableBag.empty();
         Assert.assertEquals(target, this.classUnderTest().countByEach(each -> IntInterval.oneTo(5).collect(i -> each + i), target));
     }
 }

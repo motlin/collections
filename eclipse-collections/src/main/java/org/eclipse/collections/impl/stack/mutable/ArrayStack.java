@@ -83,7 +83,6 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -950,7 +949,7 @@ public class ArrayStack<T> implements MutableStack<T>, Externalizable
     @Override
     public ImmutableStack<T> toImmutable()
     {
-        return Stacks.immutable.withAll(this.delegate);
+        return ImmutableStack.ofAll(this.delegate);
     }
 
     @Override

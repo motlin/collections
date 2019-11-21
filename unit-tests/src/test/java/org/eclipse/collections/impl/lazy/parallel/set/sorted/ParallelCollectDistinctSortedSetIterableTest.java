@@ -13,10 +13,11 @@ package org.eclipse.collections.impl.lazy.parallel.set.sorted;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.lazy.parallel.set.ParallelUnsortedSetIterableTestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class ParallelCollectDistinctSortedSetIterableTest extends ParallelUnsort
     @Override
     protected ParallelUnsortedSetIterable<Integer> newWith(Integer... littleElements)
     {
-        return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), littleElements)
+        return ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), littleElements)
                 .asParallel(this.executorService, this.batchSize)
                 .collect(i -> i / 10)
                 .asUnique();
@@ -41,8 +42,8 @@ public class ParallelCollectDistinctSortedSetIterableTest extends ParallelUnsort
     @Override
     protected MutableSet<Integer> getExpectedWith(Integer... littleElements)
     {
-        return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), littleElements)
-                .collect(i -> i / 10, SortedSets.mutable.of()).toSet();
+        return ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), littleElements)
+                .collect(i -> i / 10, MutableSortedSet.of()).toSet();
     }
 
     @Test

@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.collection.mutable;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -24,6 +24,6 @@ public class UnmodifiableMutableCollectionSerializationTest
                         + "bm1vZGlmaWFibGVDb2xsZWN0aW9uU2VyaWFsaXphdGlvblByb3h5AAAAAAAAAAEMAAB4cHNyADJv\n"
                         + "cmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxpc3QubXV0YWJsZS5GYXN0TGlzdAAAAAAAAAAB\n"
                         + "DAAAeHB3BAAAAAB4eA==",
-                UnmodifiableMutableCollection.of(Lists.mutable.of()));
+                UnmodifiableMutableCollection.of(MutableList.empty()));
     }
 }

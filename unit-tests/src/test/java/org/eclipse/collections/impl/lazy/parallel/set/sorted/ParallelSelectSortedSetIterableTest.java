@@ -10,11 +10,11 @@
 
 package org.eclipse.collections.impl.lazy.parallel.set.sorted;
 
+import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.ParallelSortedSetIterable;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.factory.SortedSets;
 
 public class ParallelSelectSortedSetIterableTest extends ParallelSortedSetIterableTestCase
 {
@@ -27,7 +27,7 @@ public class ParallelSelectSortedSetIterableTest extends ParallelSortedSetIterab
     @Override
     protected ParallelSortedSetIterable<Integer> newWith(Integer... littleElements)
     {
-        return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), littleElements)
+        return ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), littleElements)
                 .asParallel(this.executorService, this.batchSize)
                 .select(Predicates.greaterThan(0)).select(Predicates.lessThan(5));
     }
@@ -35,7 +35,7 @@ public class ParallelSelectSortedSetIterableTest extends ParallelSortedSetIterab
     @Override
     protected SortedSetIterable<Integer> getExpectedWith(Integer... littleElements)
     {
-        return SortedSets.immutable.with(Comparators.reverseNaturalOrder(), littleElements)
+        return ImmutableSortedSet.of(Comparators.reverseNaturalOrder(), littleElements)
                 .select(Predicates.greaterThan(0)).select(Predicates.lessThan(5));
     }
 }

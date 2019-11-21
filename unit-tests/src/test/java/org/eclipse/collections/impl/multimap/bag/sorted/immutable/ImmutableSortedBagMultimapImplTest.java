@@ -10,7 +10,11 @@
 
 package org.eclipse.collections.impl.multimap.bag.sorted.immutable;
 
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.ImmutableMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
@@ -18,9 +22,6 @@ import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimapTestCase;
@@ -42,7 +43,7 @@ public class ImmutableSortedBagMultimapImplTest extends AbstractImmutableMultima
     @Override
     protected MutableCollection<String> mutableCollection()
     {
-        return SortedBags.mutable.empty();
+        return MutableSortedBag.empty();
     }
 
     @Override
@@ -56,8 +57,8 @@ public class ImmutableSortedBagMultimapImplTest extends AbstractImmutableMultima
         mutableMap.put("Less than 3", 2);
         ImmutableSortedBagMultimap<String, Integer> multimap = mutableMap.toImmutable();
         ImmutableBagMultimap<Integer, String> flipped = multimap.flip();
-        Assert.assertEquals(Bags.immutable.with("Less than 3", "Less than 3"), flipped.get(2));
-        Assert.assertEquals(Bags.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
+        Assert.assertEquals(ImmutableBag.of("Less than 3", "Less than 3"), flipped.get(2));
+        Assert.assertEquals(ImmutableBag.of("Less than 2", "Less than 3"), flipped.get(1));
     }
 
     @Override
@@ -103,8 +104,8 @@ public class ImmutableSortedBagMultimapImplTest extends AbstractImmutableMultima
     @Test
     public void constructors()
     {
-        ImmutableSortedBagMultimap<Integer, Integer> map = new ImmutableSortedBagMultimapImpl<>(Maps.immutable.empty());
-        ImmutableSortedBagMultimap<Integer, Integer> map2 = new ImmutableSortedBagMultimapImpl<>(Maps.immutable.empty(), Comparators.reverseNaturalOrder());
+        ImmutableSortedBagMultimap<Integer, Integer> map = new ImmutableSortedBagMultimapImpl<>(ImmutableMap.empty());
+        ImmutableSortedBagMultimap<Integer, Integer> map2 = new ImmutableSortedBagMultimapImpl<>(ImmutableMap.empty(), Comparators.reverseNaturalOrder());
         Assert.assertEquals(this.classUnderTest(), map);
         Assert.assertEquals(TreeBagMultimap.newMultimap(Comparators.reverseNaturalOrder()), map2);
     }
@@ -112,7 +113,7 @@ public class ImmutableSortedBagMultimapImplTest extends AbstractImmutableMultima
     @Test
     public void empty()
     {
-        ImmutableSortedBagMultimap<Object, Object> multimap = new ImmutableSortedBagMultimapImpl<>(Maps.mutable.empty()).newEmpty();
+        ImmutableSortedBagMultimap<Object, Object> multimap = new ImmutableSortedBagMultimapImpl<>(MutableMap.empty()).newEmpty();
         Verify.assertEmpty(multimap);
         Verify.assertInstanceOf(ImmutableSortedBagMultimap.class, multimap);
     }

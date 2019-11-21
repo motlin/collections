@@ -29,6 +29,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
@@ -42,7 +43,6 @@ import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.StringFunctions;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.ArrayListAdapter;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
@@ -77,7 +77,7 @@ public class FJIterateTest
         throw new RuntimeException("Thread death on its way!");
     };
 
-    private static final Function<Integer, Collection<String>> INT_TO_TWO_STRINGS = integer -> Lists.fixedSize.of(integer.toString(), integer.toString());
+    private static final Function<Integer, Collection<String>> INT_TO_TWO_STRINGS = integer -> FixedSizeList.of(integer.toString(), integer.toString());
 
     private static final Function0<AtomicInteger> ATOMIC_INTEGER_NEW = Functions0.zeroAtomicInteger();
 
@@ -92,7 +92,7 @@ public class FJIterateTest
     public void setUp()
     {
         Interval interval = Interval.oneTo(200);
-        this.iterables = Lists.immutable.of(
+        this.iterables = ImmutableList.of(
                 interval.toList(),
                 interval.toList().asUnmodifiable(),
                 interval.toList().asSynchronized(),
@@ -227,22 +227,22 @@ public class FJIterateTest
     public void testForEachImmutable()
     {
         IntegerSum sum1 = new IntegerSum(0);
-        ImmutableList<Integer> list1 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(16));
+        ImmutableList<Integer> list1 = ImmutableList.ofAll(FJIterateTest.createIntegerList(16));
         FJIterate.forEach(list1, new SumProcedure(sum1), new SumCombiner(sum1), 1, list1.size() / 2);
         Assert.assertEquals(16, sum1.getSum());
 
         IntegerSum sum2 = new IntegerSum(0);
-        ImmutableList<Integer> list2 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(7));
+        ImmutableList<Integer> list2 = ImmutableList.ofAll(FJIterateTest.createIntegerList(7));
         FJIterate.forEach(list2, new SumProcedure(sum2), new SumCombiner(sum2));
         Assert.assertEquals(7, sum2.getSum());
 
         IntegerSum sum3 = new IntegerSum(0);
-        ImmutableList<Integer> list3 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(15));
+        ImmutableList<Integer> list3 = ImmutableList.ofAll(FJIterateTest.createIntegerList(15));
         FJIterate.forEach(list3, new SumProcedure(sum3), new SumCombiner(sum3), 1, list3.size() / 2);
         Assert.assertEquals(15, sum3.getSum());
 
         IntegerSum sum4 = new IntegerSum(0);
-        ImmutableList<Integer> list4 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(35));
+        ImmutableList<Integer> list4 = ImmutableList.ofAll(FJIterateTest.createIntegerList(35));
         FJIterate.forEach(list4, new SumProcedure(sum4), new SumCombiner(sum4));
         Assert.assertEquals(35, sum4.getSum());
 
@@ -252,7 +252,7 @@ public class FJIterateTest
         Assert.assertEquals(35, sum5.getSum());
 
         IntegerSum sum6 = new IntegerSum(0);
-        ImmutableList<Integer> list6 = Lists.immutable.ofAll(FJIterateTest.createIntegerList(40));
+        ImmutableList<Integer> list6 = ImmutableList.ofAll(FJIterateTest.createIntegerList(40));
         FJIterate.forEach(list6, new SumProcedure(sum6), new SumCombiner(sum6), 1, list6.size() / 2);
         Assert.assertEquals(40, sum6.getSum());
 

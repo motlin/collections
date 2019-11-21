@@ -17,7 +17,6 @@ import java.util.TreeSet;
 
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -117,7 +116,7 @@ public class SynchronizedMutableSet2Test extends AbstractMutableSetTestCase
     public void iterator()
     {
         MutableSet<Integer> objects = this.newWith(1, 2, 3);
-        MutableBag<Integer> actual = Bags.mutable.of();
+        MutableBag<Integer> actual = MutableBag.empty();
 
         Iterator<Integer> iterator = objects.iterator();
         for (int i = objects.size(); i-- > 0; )
@@ -126,6 +125,6 @@ public class SynchronizedMutableSet2Test extends AbstractMutableSetTestCase
             actual.add(iterator.next());
         }
         Assert.assertFalse(iterator.hasNext());
-        Assert.assertEquals(Bags.mutable.of(1, 2, 3), actual);
+        Assert.assertEquals(MutableBag.of(1, 2, 3), actual);
     }
 }

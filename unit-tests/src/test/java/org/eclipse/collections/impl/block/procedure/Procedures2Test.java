@@ -19,7 +19,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.Procedures2;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
@@ -92,7 +91,7 @@ public class Procedures2Test
     @Test
     public void summarizeDouble()
     {
-        MutableList<Double> list = Lists.mutable.with(2.0, 2.0, 2.0, 3.0, 3.0, 3.0);
+        MutableList<Double> list = MutableList.of(2.0, 2.0, 2.0, 3.0, 3.0, 3.0);
         MutableMap<String, DoubleSummaryStatistics> map = list.aggregateInPlaceBy(
                 Object::toString,
                 DoubleSummaryStatistics::new,
@@ -108,7 +107,7 @@ public class Procedures2Test
     @Test
     public void summarizeFloat()
     {
-        MutableList<Float> list = Lists.mutable.with(2.0f, 2.0f, 2.0f, 3.0f, 3.0f, 3.0f);
+        MutableList<Float> list = MutableList.of(2.0f, 2.0f, 2.0f, 3.0f, 3.0f, 3.0f);
         MutableMap<String, DoubleSummaryStatistics> map = list.aggregateInPlaceBy(
                 Object::toString,
                 DoubleSummaryStatistics::new,
@@ -124,7 +123,7 @@ public class Procedures2Test
     @Test
     public void summarizeLong()
     {
-        MutableList<Long> list = Lists.mutable.with(2L, 2L, 2L, 3L, 3L, 3L);
+        MutableList<Long> list = MutableList.of(2L, 2L, 2L, 3L, 3L, 3L);
         MutableMap<String, LongSummaryStatistics> map = list.aggregateInPlaceBy(
                 Object::toString,
                 LongSummaryStatistics::new,
@@ -140,7 +139,7 @@ public class Procedures2Test
     @Test
     public void summarizeInt()
     {
-        MutableList<Integer> list = Lists.mutable.with(2, 2, 2, 3, 3, 3);
+        MutableList<Integer> list = MutableList.of(2, 2, 2, 3, 3, 3);
         MutableMap<String, IntSummaryStatistics> map = list.aggregateInPlaceBy(
                 Object::toString,
                 IntSummaryStatistics::new,

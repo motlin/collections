@@ -12,10 +12,10 @@ package org.eclipse.collections.test.bag.mutable.sorted;
 
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.SortedIterableTestCase;
 import org.eclipse.collections.test.bag.BagTestCase;
 import org.eclipse.collections.test.domain.A;
@@ -35,13 +35,13 @@ public interface SortedBagTestCase extends SortedIterableTestCase, BagTestCase, 
     @Override
     default <T> SortedBag<T> getExpectedFiltered(T... elements)
     {
-        return new TreeBag<>(Comparators.reverseNaturalOrder(), Lists.immutable.with(elements));
+        return new TreeBag<>(Comparators.reverseNaturalOrder(), ImmutableList.of(elements));
     }
 
     @Override
     default <T> MutableSortedBag<T> newMutableForFilter(T... elements)
     {
-        return new TreeBag<>(Comparators.reverseNaturalOrder(), Lists.immutable.with(elements));
+        return new TreeBag<>(Comparators.reverseNaturalOrder(), ImmutableList.of(elements));
     }
 
     @Override
@@ -98,11 +98,11 @@ public interface SortedBagTestCase extends SortedIterableTestCase, BagTestCase, 
     default void SortedBag_forEachWith()
     {
         SortedBag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        MutableList<Integer> result = Lists.mutable.with();
+        MutableList<Integer> result = MutableList.empty();
         bag.forEachWith((argument1, argument2) -> {
             result.add(argument1);
             result.add(argument2);
         }, 0);
-        assertEquals(Lists.immutable.with(3, 0, 3, 0, 3, 0, 2, 0, 2, 0, 1, 0), result);
+        assertEquals(ImmutableList.of(3, 0, 3, 0, 3, 0, 2, 0, 2, 0, 1, 0), result);
     }
 }

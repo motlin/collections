@@ -17,11 +17,11 @@ import org.eclipse.collections.api.block.function.primitive.BooleanToObjectFunct
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
 import org.eclipse.collections.api.iterator.BooleanIterator;
 import org.eclipse.collections.api.iterator.MutableBooleanIterator;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractMutableBooleanCollectionTestCase;
 import org.eclipse.collections.impl.collection.mutable.primitive.SynchronizedBooleanCollection;
 import org.eclipse.collections.impl.collection.mutable.primitive.UnmodifiableBooleanCollection;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
@@ -392,24 +392,24 @@ public abstract class ObjectBooleanHashMapValuesTestCase extends AbstractMutable
     {
         BooleanIterable iterable1 = this.newWith(true);
         Verify.assertIterablesEqual(
-                Lists.mutable.with(BooleanBags.mutable.with(true)).toSet(),
+                MutableList.of(BooleanBags.mutable.with(true)).toSet(),
                 iterable1.chunk(1).toSet());
 
         BooleanIterable iterable2 = this.newWith(false);
         Verify.assertIterablesEqual(
-                Lists.mutable.with(BooleanBags.mutable.with(false)).toSet(),
+                MutableList.of(BooleanBags.mutable.with(false)).toSet(),
                 iterable2.chunk(1).toSet());
 
         BooleanIterable iterable3 = this.newWith(false, true);
         Verify.assertIterablesEqual(
-                Lists.mutable.with(BooleanBags.mutable.with(false), BooleanBags.mutable.with(true)).toSet(),
+                MutableList.of(BooleanBags.mutable.with(false), BooleanBags.mutable.with(true)).toSet(),
                 iterable3.chunk(1).toSet());
 
         Verify.assertIterablesEqual(
-                Lists.mutable.with(BooleanBags.mutable.with(false, true)),
+                MutableList.of(BooleanBags.mutable.with(false, true)),
                 iterable3.chunk(2));
         Verify.assertIterablesEqual(
-                Lists.mutable.with(BooleanBags.mutable.with(false, true)),
+                MutableList.of(BooleanBags.mutable.with(false, true)),
                 iterable3.chunk(3));
 
         Verify.assertThrows(IllegalArgumentException.class, () -> this.classUnderTest().chunk(0));

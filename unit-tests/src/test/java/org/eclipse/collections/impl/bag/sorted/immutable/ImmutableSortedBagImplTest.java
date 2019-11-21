@@ -14,10 +14,9 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import org.eclipse.collections.api.bag.sorted.ImmutableSortedBag;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
-import org.eclipse.collections.impl.factory.SortedBags;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,31 +25,31 @@ public class ImmutableSortedBagImplTest extends AbstractImmutableSortedBagTestCa
     @Override
     protected ImmutableSortedBag<Integer> classUnderTest()
     {
-        return SortedBags.immutable.with(1, 1, 1, 2);
+        return ImmutableSortedBag.of(1, 1, 1, 2);
     }
 
     @Override
     protected <T> MutableCollection<T> newMutable()
     {
-        return SortedBags.mutable.empty();
+        return MutableSortedBag.empty();
     }
 
     @Override
     protected ImmutableSortedBag<Integer> classUnderTest(Comparator<? super Integer> comparator)
     {
-        return SortedBags.immutable.with(comparator, 1, 1, 1, 2);
+        return ImmutableSortedBag.of(comparator, 1, 1, 1, 2);
     }
 
     @Override
     protected <T> ImmutableSortedBag<T> newWith(T... elements)
     {
-        return SortedBags.immutable.with(elements);
+        return ImmutableSortedBag.of(elements);
     }
 
     @Override
     protected <T> ImmutableSortedBag<T> newWith(Comparator<? super T> comparator, T... elements)
     {
-        return SortedBags.immutable.with(comparator, elements);
+        return ImmutableSortedBag.of(comparator, elements);
     }
 
     @Override
@@ -61,7 +60,7 @@ public class ImmutableSortedBagImplTest extends AbstractImmutableSortedBagTestCa
 
         Comparator<Integer> comparator = Collections.reverseOrder();
         ImmutableSortedBag<Integer> bag = this.classUnderTest(comparator);
-        ImmutableSortedSet<Integer> expected = SortedSets.immutable.with(comparator, 2);
+        ImmutableSortedSet<Integer> expected = ImmutableSortedSet.of(comparator, 2);
         ImmutableSortedSet<Integer> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(expected.comparator(), actual.comparator());

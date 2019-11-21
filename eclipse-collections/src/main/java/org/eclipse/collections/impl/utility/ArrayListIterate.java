@@ -69,7 +69,6 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -1281,8 +1280,8 @@ public final class ArrayListIterate
         int size = list.size();
         if (ArrayListIterate.isOptimizableArrayList(list, size))
         {
-            MutableList<T> positiveResult = Lists.mutable.empty();
-            MutableList<T> negativeResult = Lists.mutable.empty();
+            MutableList<T> positiveResult = MutableList.empty();
+            MutableList<T> negativeResult = MutableList.empty();
             T[] elements = ArrayListIterate.getInternalArray(list);
             for (int i = 0; i < size; i++)
             {

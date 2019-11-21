@@ -13,8 +13,9 @@ package org.eclipse.collections.impl.lazy.iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.eclipse.collections.impl.factory.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,13 +24,13 @@ public class FlatCollectIteratorTest
     @Test(expected = NoSuchElementException.class)
     public void nextIfDoesntHaveAnything()
     {
-        new FlatCollectIterator<>(Lists.immutable.of(), object -> null).next();
+        new FlatCollectIterator<>(ImmutableList.empty(), object -> null).next();
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void removeIsUnsupported()
     {
-        new FlatCollectIterator<>(Lists.immutable.of().iterator(), object -> null).remove();
+        new FlatCollectIterator<>(ImmutableList.empty().iterator(), object -> null).remove();
     }
 
     @Test
@@ -37,9 +38,9 @@ public class FlatCollectIteratorTest
     {
         Object expected = new Object();
         FlatCollectIterator<List<Object>, Object> flattenIterator = new FlatCollectIterator<>(
-                Lists.fixedSize.of(
-                        Lists.fixedSize.of(),
-                        Lists.fixedSize.of(expected)),
+                FixedSizeList.of(
+                        FixedSizeList.empty(),
+                        FixedSizeList.of(expected)),
                 Functions.getPassThru());
         Assert.assertSame(expected, flattenIterator.next());
     }

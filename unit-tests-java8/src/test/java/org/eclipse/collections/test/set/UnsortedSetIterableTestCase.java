@@ -11,9 +11,9 @@
 package org.eclipse.collections.test.set;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.UnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Sets;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.isOneOf;
@@ -27,13 +27,13 @@ public interface UnsortedSetIterableTestCase extends SetIterableTestCase, Transf
     @Override
     default <T> UnsortedSetIterable<T> getExpectedTransformed(T... elements)
     {
-        return Sets.immutable.with(elements);
+        return ImmutableSet.of(elements);
     }
 
     @Override
     default <T> MutableSet<T> newMutableForTransform(T... elements)
     {
-        return Sets.mutable.with(elements);
+        return MutableSet.of(elements);
     }
 
     @Override

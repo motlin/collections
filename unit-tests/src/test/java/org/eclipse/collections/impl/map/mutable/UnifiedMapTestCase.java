@@ -19,13 +19,12 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -36,9 +35,6 @@ import org.eclipse.collections.impl.utility.ArrayIterate;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iMap;
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 public abstract class UnifiedMapTestCase extends MutableMapTestCase
 {
@@ -53,7 +49,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
     protected static final Integer COLLISION_9 = 136;
     protected static final Integer COLLISION_10 = 152;
     protected static final MutableList<Integer> COLLISIONS =
-            Lists.mutable.of(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4, COLLISION_5);
+            MutableList.of(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4, COLLISION_5);
     protected static final MutableList<Integer> MORE_COLLISIONS = FastList.newList(COLLISIONS)
             .with(COLLISION_6, COLLISION_7, COLLISION_8, COLLISION_9);
     protected static final String[] FREQUENT_COLLISIONS = {"\u9103\ufffe", "\u9104\uffdf",
@@ -422,8 +418,8 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
             MutableMap<Integer, Integer> integers = this.mapWithCollisionsOfSize(9);
             @SuppressWarnings("BoxingBoxedValue")
             Integer keyCopy = new Integer(item);
-            Assert.assertTrue(integers.entrySet().retainAll(mList(ImmutableEntry.of(keyCopy, keyCopy))));
-            Assert.assertEquals(iMap(keyCopy, keyCopy), integers);
+            Assert.assertTrue(integers.entrySet().retainAll(MutableList.of(ImmutableEntry.of(keyCopy, keyCopy))));
+            Assert.assertEquals(ImmutableMap.of(keyCopy, keyCopy), integers);
             Assert.assertNotSame(keyCopy, Iterate.getOnly(integers.entrySet()).getKey());
         }
 
@@ -458,7 +454,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
         // a map with a null key
         MutableMap<Integer, Integer> map = this.newMapWithKeyValue(null, 0);
 
-        MutableList<Object> retained = Lists.mutable.of();
+        MutableList<Object> retained = MutableList.empty();
         retained.add(null);
         Assert.assertFalse(map.keySet().retainAll(retained));
         Verify.assertContains(null, map.keySet());
@@ -836,7 +832,7 @@ public abstract class UnifiedMapTestCase extends MutableMapTestCase
                 .subList(0, FREQUENT_COLLISIONS.length - 2)
                 .toArray(new String[FREQUENT_COLLISIONS.length - 2]);
         MutableMap<String, String> map = this.newMap();
-        MutableSet<String> set = Sets.mutable.of(expected);
+        MutableSet<String> set = MutableSet.of(expected);
 
         ArrayIterate.forEach(FREQUENT_COLLISIONS, each -> map.put(each, each));
 

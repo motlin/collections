@@ -34,7 +34,7 @@ public interface MutableBagIterable<T> extends Bag<T>, MutableCollection<T>
      * <p>
      * For Example:
      * <pre>
-     * MutableBagIterable&lt;String&gt; names = Bags.mutable.of("A", "B", "B");
+     * MutableBagIterable&lt;String&gt; names = MutableBag.of("A", "B", "B");
      * Assert.assertEquals(4, names.<b>addOccurrences</b>("A", 3));
      * </pre>
      *

@@ -13,14 +13,13 @@ package org.eclipse.collections.impl.set.fixed;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
@@ -30,8 +29,6 @@ import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
 
 /**
  * JUnit test for {@link DoubletonSet}.
@@ -79,8 +76,8 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void equalsAndHashCode()
     {
         super.equalsAndHashCode();
-        MutableSet<String> one = Sets.fixedSize.of("1", "2");
-        Verify.assertEqualsAndHashCode(one, mSet("1", "2"));
+        MutableSet<String> one = FixedSizeSet.of("1", "2");
+        Verify.assertEqualsAndHashCode(one, MutableSet.of("1", "2"));
         Verify.assertPostSerializedEqualsAndHashCode(one);
     }
 
@@ -129,7 +126,7 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void addingAllToOtherSet()
     {
-        MutableSet<String> newSet = UnifiedSet.newSet(Sets.fixedSize.of("1", "2"));
+        MutableSet<String> newSet = UnifiedSet.newSet(FixedSizeSet.of("1", "2"));
         newSet.add("3");
         Verify.assertContainsAll(newSet, "1", "2", "3");
     }
@@ -179,8 +176,8 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void forEach()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableSet<String> source = Sets.fixedSize.of("1", "2");
+        MutableList<String> result = MutableList.empty();
+        MutableSet<String> source = FixedSizeSet.of("1", "2");
         source.forEach(CollectionAddProcedure.on(result));
         Assert.assertEquals(FastList.newListWith("1", "2"), result);
     }
@@ -189,8 +186,8 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     public void forEachWithIndex()
     {
         int[] indexSum = new int[1];
-        MutableList<String> result = Lists.mutable.of();
-        MutableSet<String> source = Sets.fixedSize.of("1", "2");
+        MutableList<String> result = MutableList.empty();
+        MutableSet<String> source = FixedSizeSet.of("1", "2");
         source.forEachWithIndex((each, index) ->
         {
             result.add(each);
@@ -203,8 +200,8 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void forEachWith()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableSet<String> source = Sets.fixedSize.of("1", "2");
+        MutableList<String> result = MutableList.empty();
+        MutableSet<String> source = FixedSizeSet.of("1", "2");
         source.forEachWith(Procedures2.fromProcedure(CollectionAddProcedure.on(result)), null);
         Assert.assertEquals(FastList.newListWith("1", "2"), result);
     }
@@ -212,7 +209,7 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     @Test
     public void getFirstGetLast()
     {
-        MutableSet<String> source = Sets.fixedSize.of("1", "2");
+        MutableSet<String> source = FixedSizeSet.of("1", "2");
         Assert.assertEquals("1", source.getFirst());
         Assert.assertEquals("2", source.getLast());
     }
@@ -223,7 +220,7 @@ public class DoubletonSetTest extends AbstractMemoryEfficientMutableSetTestCase
     {
         super.groupByEach();
 
-        MutableSet<Integer> set = Sets.fixedSize.of(1, 2);
+        MutableSet<Integer> set = FixedSizeSet.of(1, 2);
         MutableMultimap<Integer, Integer> expected = UnifiedSetMultimap.newMultimap();
         set.forEach(Procedures.cast(value -> expected.putAll(-value, Interval.fromTo(value, set.size()))));
         Multimap<Integer, Integer> actual =

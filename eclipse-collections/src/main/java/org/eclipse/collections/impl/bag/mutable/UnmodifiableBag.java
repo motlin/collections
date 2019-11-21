@@ -52,7 +52,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractUnmodifiableMutableCollection;
-import org.eclipse.collections.impl.factory.Bags;
 
 /**
  * An unmodifiable view of a bag.
@@ -101,7 +100,7 @@ public class UnmodifiableBag<T>
     @Override
     public ImmutableBag<T> toImmutable()
     {
-        return Bags.immutable.withAll(this);
+        return ImmutableBag.ofAll(this);
     }
 
     @Override
@@ -258,7 +257,7 @@ public class UnmodifiableBag<T>
     @Override
     public <V> MutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        return this.getMutableBag().collectWithOccurrences(function, Bags.mutable.empty());
+        return this.getMutableBag().collectWithOccurrences(function, MutableBag.empty());
     }
 
     @Override

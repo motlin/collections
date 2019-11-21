@@ -14,8 +14,8 @@ import java.util.Optional;
 
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.map.MapIterable;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
@@ -154,7 +154,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         MapIterable<Integer, String> actual = map.collect((key, value) -> Tuples.pair(key + 1, key + value));
         // TODO: Use IterableTestCase.assertEquals instead, after setting up methods like getExpectedTransformed, but for maps.
-        Assert.assertEquals(Maps.mutable.with(4, "3Three", 3, "2Two", 2, "1One"), actual);
+        Assert.assertEquals(MutableMap.of(4, "3Three", 3, "2Two", 2, "1One"), actual);
     }
 
     @Test

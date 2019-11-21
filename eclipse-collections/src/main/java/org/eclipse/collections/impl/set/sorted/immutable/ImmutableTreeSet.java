@@ -34,7 +34,6 @@ import org.eclipse.collections.api.set.sorted.ImmutableSortedSet;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.set.sorted.ParallelSortedSetIterable;
 import org.eclipse.collections.api.set.sorted.SortedSetIterable;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.lazy.AbstractLazyIterable;
 import org.eclipse.collections.impl.lazy.parallel.AbstractBatch;
 import org.eclipse.collections.impl.lazy.parallel.AbstractParallelIterable;
@@ -582,10 +581,10 @@ final class ImmutableTreeSet<T>
         }
         if (count == 0)
         {
-            return SortedSets.immutable.empty(this.comparator());
+            return ImmutableSortedSet.empty(this.comparator());
         }
 
-        MutableSortedSet<T> output = SortedSets.mutable.of(this.comparator());
+        MutableSortedSet<T> output = MutableSortedSet.of(this.comparator());
 
         for (int i = 0; i < count; i++)
         {
@@ -609,10 +608,10 @@ final class ImmutableTreeSet<T>
         }
         if (count >= this.size())
         {
-            return SortedSets.immutable.empty(this.comparator());
+            return ImmutableSortedSet.empty(this.comparator());
         }
 
-        MutableSortedSet<T> output = SortedSets.mutable.of(this.comparator());
+        MutableSortedSet<T> output = MutableSortedSet.of(this.comparator());
         for (int i = 0; i < this.size(); i++)
         {
             if (i >= count)

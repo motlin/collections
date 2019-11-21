@@ -32,7 +32,6 @@ import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.map.AbstractMapIterable;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectDoubleHashMap;
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
@@ -214,7 +213,7 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
     @Override
     public <V1> MutableBag<V1> countBy(Function<? super V, ? extends V1> function)
     {
-        return this.collect(function, Bags.mutable.empty());
+        return this.collect(function, MutableBag.empty());
     }
 
     /**
@@ -223,7 +222,7 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
     @Override
     public <V1, P> MutableBag<V1> countByWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
     {
-        return this.collectWith(function, parameter, Bags.mutable.empty());
+        return this.collectWith(function, parameter, MutableBag.empty());
     }
 
     /**
@@ -232,6 +231,6 @@ public abstract class AbstractMutableMapIterable<K, V> extends AbstractMapIterab
     @Override
     public <V1> MutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
     {
-        return this.flatCollect(function, Bags.mutable.empty());
+        return this.flatCollect(function, MutableBag.empty());
     }
 }

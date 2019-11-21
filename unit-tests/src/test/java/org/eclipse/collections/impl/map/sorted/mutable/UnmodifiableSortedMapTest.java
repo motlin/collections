@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.map.sorted.mutable;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,9 +22,9 @@ import org.junit.Test;
 public class UnmodifiableSortedMapTest
 {
     private final UnmodifiableSortedMap<Integer, String> map = new UnmodifiableSortedMap<>(
-            new TreeMap<>(SortedMaps.mutable.of(1, "1", 2, "2", 3, "3", 4, "4")));
+            new TreeMap<>(MutableSortedMap.of(1, "1", 2, "2", 3, "3", 4, "4")));
     private final UnmodifiableSortedMap<Integer, String> revMap = new UnmodifiableSortedMap<>(
-            new TreeMap<>(SortedMaps.mutable.of(Comparators.reverseNaturalOrder(),
+            new TreeMap<>(MutableSortedMap.of(Comparators.reverseNaturalOrder(),
                     1, "1", 2, "2", 3, "3", 4, "4")));
 
     @Test
@@ -72,7 +72,7 @@ public class UnmodifiableSortedMapTest
     {
         Verify.assertThrows(UnsupportedOperationException.class, () -> map.put(3, "1"));
 
-        Verify.assertThrows(UnsupportedOperationException.class, () -> map.putAll(SortedMaps.mutable.of(1, "1", 2, "2")));
+        Verify.assertThrows(UnsupportedOperationException.class, () -> map.putAll(MutableSortedMap.of(1, "1", 2, "2")));
 
         Verify.assertThrows(UnsupportedOperationException.class, () -> map.remove(2));
 

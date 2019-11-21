@@ -14,14 +14,13 @@ import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.primitive.ImmutableBooleanBag;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
 import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -29,8 +28,6 @@ import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iBag;
 
 public class ImmutableHashBagTest extends ImmutableBagTestCase
 {
@@ -69,8 +66,8 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         super.selectInstancesOf();
 
         ImmutableBag<Number> numbers = ImmutableHashBag.newBagWith(1, 2.0, 2.0, 3, 3, 3, 4.0, 4.0, 4.0, 4.0);
-        Assert.assertEquals(iBag(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iBag(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
+        Assert.assertEquals(ImmutableBag.of(1, 3, 3, 3), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(ImmutableBag.of(2.0, 2.0, 4.0, 4.0, 4.0, 4.0), numbers.selectInstancesOf(Double.class));
     }
 
     @Override
@@ -118,7 +115,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
     public void groupByUniqueKey()
     {
         ImmutableBag<Integer> immutableBag = ImmutableHashBag.newBagWith(1, 2, 3);
-        Assert.assertEquals(Maps.immutable.of(1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id));
+        Assert.assertEquals(ImmutableMap.of(1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id));
     }
 
     @Override
@@ -126,7 +123,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
     public void groupByUniqueKey_target()
     {
         ImmutableBag<Integer> immutableBag = ImmutableHashBag.newBagWith(1, 2, 3);
-        Assert.assertEquals(Maps.immutable.of(0, 0, 1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0)));
+        Assert.assertEquals(ImmutableMap.of(0, 0, 1, 1, 2, 2, 3, 3), immutableBag.groupByUniqueKey(id -> id, UnifiedMap.newWithKeysValues(0, 0)));
     }
 
     @Test
@@ -206,7 +203,7 @@ public class ImmutableHashBagTest extends ImmutableBagTestCase
         super.selectUnique();
 
         ImmutableBag<String> bag = this.newBag();
-        ImmutableSet<String> expected = Sets.immutable.of("1");
+        ImmutableSet<String> expected = ImmutableSet.of("1");
         ImmutableSet<String> actual = bag.selectUnique();
         Assert.assertEquals(expected, actual);
     }

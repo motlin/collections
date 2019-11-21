@@ -17,11 +17,10 @@ import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
 import org.eclipse.collections.api.multimap.list.MutableListMultimap;
 import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
 import org.eclipse.collections.api.multimap.set.SetMultimap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Multimaps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimapTestCase;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
@@ -71,7 +70,7 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
         super.putAllPairs();
 
         MutableMultimap<Integer, String> multimap = this.newMultimapWithKeysValues(1, "One", 2, "2");
-        MutableList<Pair<Integer, String>> pairs = Lists.mutable.of(Tuples.pair(1, "One"));
+        MutableList<Pair<Integer, String>> pairs = MutableList.of(Tuples.pair(1, "One"));
         Assert.assertFalse(multimap.putAllPairs(pairs));
         MutableMultimap<Integer, String> expected = this.newMultimapWithKeysValues(1, "One", 2, "2");
         Assert.assertEquals(expected, multimap);
@@ -83,8 +82,8 @@ public abstract class AbstractMutableSetMultimapTestCase extends AbstractMutable
     {
         SetMultimap<String, Integer> multimap = this.newMultimapWithKeysValues("Less than 2", 1, "Less than 3", 1, "Less than 3", 2, "Less than 3", 2);
         SetMultimap<Integer, String> flipped = multimap.flip();
-        Assert.assertEquals(Sets.immutable.with("Less than 3"), flipped.get(2));
-        Assert.assertEquals(Sets.immutable.with("Less than 2", "Less than 3"), flipped.get(1));
+        Assert.assertEquals(ImmutableSet.of("Less than 3"), flipped.get(2));
+        Assert.assertEquals(ImmutableSet.of("Less than 2", "Less than 3"), flipped.get(1));
     }
 
     @Override

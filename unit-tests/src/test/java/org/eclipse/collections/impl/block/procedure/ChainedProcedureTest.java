@@ -12,7 +12,6 @@ package org.eclipse.collections.impl.block.procedure;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
@@ -23,8 +22,8 @@ public class ChainedProcedureTest
     @Test
     public void procedure()
     {
-        MutableList<String> list1 = Lists.mutable.of();
-        MutableList<String> list2 = Lists.mutable.of();
+        MutableList<String> list1 = MutableList.empty();
+        MutableList<String> list2 = MutableList.empty();
         Procedure<String> procedure1 = new CollectionAddProcedure<>(list1);
         Procedure<String> procedure2 = new CollectionAddProcedure<>(list2);
         ChainedProcedure<String> chainedProcedure = ChainedProcedure.with(procedure1, procedure2);

@@ -13,10 +13,10 @@ package org.eclipse.collections.impl.list.fixed;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
@@ -48,7 +48,7 @@ public class SextupletonListTest extends AbstractMemoryEfficientMutableListTestC
     @Test
     public void testEqualsAndHashCode()
     {
-        MutableList<String> one = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> one = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         List<String> oneA = new ArrayList<>(one);
         Verify.assertEqualsAndHashCode(one, oneA);
         Verify.assertPostSerializedEqualsAndHashCode(one);
@@ -105,7 +105,7 @@ public class SextupletonListTest extends AbstractMemoryEfficientMutableListTestC
     @Test
     public void testSet()
     {
-        MutableList<String> list = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> list = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         Assert.assertEquals("1", list.set(0, "6"));
         Assert.assertEquals("2", list.set(1, "5"));
         Assert.assertEquals("3", list.set(2, "4"));
@@ -134,7 +134,7 @@ public class SextupletonListTest extends AbstractMemoryEfficientMutableListTestC
     @Test
     public void testGetFirstGetLast()
     {
-        MutableList<String> list6 = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> list6 = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         Assert.assertEquals("1", list6.getFirst());
         Assert.assertEquals("6", list6.getLast());
     }
@@ -142,8 +142,8 @@ public class SextupletonListTest extends AbstractMemoryEfficientMutableListTestC
     @Test
     public void testForEach()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> result = MutableList.empty();
+        MutableList<String> source = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         source.forEach(CollectionAddProcedure.on(result));
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5", "6"), result);
     }
@@ -152,8 +152,8 @@ public class SextupletonListTest extends AbstractMemoryEfficientMutableListTestC
     public void testForEachWithIndex()
     {
         int[] indexSum = new int[1];
-        MutableList<String> result = Lists.mutable.of();
-        MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> result = MutableList.empty();
+        MutableList<String> source = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         source.forEachWithIndex((each, index) -> {
             result.add(each);
             indexSum[0] += index;
@@ -165,8 +165,8 @@ public class SextupletonListTest extends AbstractMemoryEfficientMutableListTestC
     @Test
     public void testForEachWith()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableList<String> source = Lists.fixedSize.of("1", "2", "3", "4", "5", "6");
+        MutableList<String> result = MutableList.empty();
+        MutableList<String> source = FixedSizeList.of("1", "2", "3", "4", "5", "6");
         source.forEachWith(Procedures2.fromProcedure(result::add), null);
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4", "5", "6"), result);
     }
@@ -174,8 +174,8 @@ public class SextupletonListTest extends AbstractMemoryEfficientMutableListTestC
     @Test
     public void testForLoop()
     {
-        MutableList<String> list = Lists.fixedSize.of("one", "two", "three", "four", "five", "six");
-        MutableList<String> upperList = Lists.fixedSize.of("ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX");
+        MutableList<String> list = FixedSizeList.of("one", "two", "three", "four", "five", "six");
+        MutableList<String> upperList = FixedSizeList.of("ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX");
         for (String each : list)
         {
             Verify.assertContains(each.toUpperCase(), upperList);
@@ -185,9 +185,9 @@ public class SextupletonListTest extends AbstractMemoryEfficientMutableListTestC
     @Test
     public void testSubList()
     {
-        MutableList<String> list = Lists.fixedSize.of("one", "two", "three", "four", "five", "six");
+        MutableList<String> list = FixedSizeList.of("one", "two", "three", "four", "five", "six");
         MutableList<String> subList = list.subList(0, 5);
-        MutableList<String> upperList = Lists.fixedSize.of("ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX");
+        MutableList<String> upperList = FixedSizeList.of("ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX");
         for (String each : subList)
         {
             Verify.assertContains(each.toUpperCase(), upperList);

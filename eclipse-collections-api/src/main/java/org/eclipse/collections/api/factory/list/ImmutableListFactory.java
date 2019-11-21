@@ -12,8 +12,8 @@ package org.eclipse.collections.api.factory.list;
 
 import java.util.stream.Stream;
 
-import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.ImmutableList;
+import org.eclipse.collections.api.list.MutableList;
 
 public interface ImmutableListFactory
 {
@@ -121,6 +121,6 @@ public interface ImmutableListFactory
      */
     default <T> ImmutableList<T> fromStream(Stream<? extends T> stream)
     {
-        return Lists.mutable.<T>fromStream(stream).toImmutable();
+        return MutableList.<T>fromStream(stream).toImmutable();
     }
 }

@@ -23,7 +23,6 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -98,12 +97,12 @@ public class ProceduresTest
     @Test
     public void fromObjectIntProcedure()
     {
-        ImmutableList<String> expectedResults = Lists.immutable.of("zero0", "one1", "two2");
+        ImmutableList<String> expectedResults = ImmutableList.of("zero0", "one1", "two2");
 
-        MutableList<String> actualResults = Lists.mutable.of();
+        MutableList<String> actualResults = MutableList.empty();
         ObjectIntProcedure<String> objectIntProcedure = (each, index) -> actualResults.add(each + index);
 
-        ImmutableList<String> numberStrings = Lists.immutable.of("zero", "one", "two");
+        ImmutableList<String> numberStrings = ImmutableList.of("zero", "one", "two");
         Procedure<String> procedure = Procedures.fromObjectIntProcedure(objectIntProcedure);
         numberStrings.forEach(procedure);
 
@@ -115,7 +114,7 @@ public class ProceduresTest
     {
         MutableList<Integer> integers = Interval.oneTo(10).toList();
         integers.add(null);
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         integers.forEach(Procedures.synchronizedEach(CollectionAddProcedure.on(result)));
         Assert.assertEquals(result, integers);
     }

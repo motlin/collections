@@ -38,6 +38,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
@@ -54,8 +55,6 @@ import org.eclipse.collections.impl.bag.mutable.primitive.LongHashBag;
 import org.eclipse.collections.impl.bag.mutable.primitive.ShortHashBag;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.partition.bag.PartitionHashBag;
 
@@ -153,7 +152,7 @@ public abstract class AbstractImmutableBag<T>
     @Override
     public <V> ImmutableBag<V> collectWithOccurrences(ObjectIntToObjectFunction<? super T, ? extends V> function)
     {
-        return this.collectWithOccurrences(function, Bags.mutable.<V>empty()).toImmutable();
+        return this.collectWithOccurrences(function, MutableBag.<V>empty()).toImmutable();
     }
 
     @Override
@@ -216,7 +215,7 @@ public abstract class AbstractImmutableBag<T>
         MutableList<ObjectIntPair<T>> result = this.occurrencesSortingBy(
                 n,
                 item -> -item.getTwo(),
-                Lists.fixedSize.empty());
+                FixedSizeList.empty());
         return result.toImmutable();
     }
 
@@ -226,7 +225,7 @@ public abstract class AbstractImmutableBag<T>
         MutableList<ObjectIntPair<T>> result = this.occurrencesSortingBy(
                 n,
                 ObjectIntPair::getTwo,
-                Lists.fixedSize.empty());
+                FixedSizeList.empty());
         return result.toImmutable();
     }
 
@@ -245,10 +244,10 @@ public abstract class AbstractImmutableBag<T>
         }
 
         Iterator<T> iterator = this.iterator();
-        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        MutableList<RichIterable<T>> result = MutableList.empty();
         while (iterator.hasNext())
         {
-            MutableCollection<T> batch = Bags.mutable.empty();
+            MutableCollection<T> batch = MutableBag.empty();
             for (int i = 0; i < size && iterator.hasNext(); i++)
             {
                 batch.add(iterator.next());

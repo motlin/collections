@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.collection.mutable;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -25,6 +25,6 @@ public class CollectionAdapterSerializationTest
                         + "b2xsZWN0aW9uQWRhcHRlcgAAAAAAAAABAgABTAAIZGVsZWdhdGV0ABZMamF2YS91dGlsL0NvbGxl\n"
                         + "Y3Rpb247eHBzcgAyb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5saXN0Lm11dGFibGUuRmFz\n"
                         + "dExpc3QAAAAAAAAAAQwAAHhwdwQAAAAAeA==",
-                new CollectionAdapter<>(Lists.mutable.of()));
+                new CollectionAdapter<>(MutableList.empty()));
     }
 }

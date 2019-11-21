@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Functions0;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -45,7 +45,9 @@ public class Functions0Test
         Verify.assertThrowsWithCause(
                 RuntimeException.class,
                 IOException.class,
-                () -> Functions0.throwing(() -> { throw new IOException(); }).value());
+                () -> Functions0.throwing(() -> {
+                    throw new IOException();
+                }).value());
     }
 
     @Test
@@ -56,7 +58,9 @@ public class Functions0Test
                 IOException.class,
                 () -> {
                     Functions0.throwing(
-                            () -> { throw new IOException(); },
+                            () -> {
+                                throw new IOException();
+                            },
                             RuntimeException::new).value();
                 });
         Verify.assertThrowsWithCause(
@@ -64,14 +68,18 @@ public class Functions0Test
                 IOException.class,
                 () -> {
                     Functions0.throwing(
-                            () -> { throw new IOException(); },
+                            () -> {
+                                throw new IOException();
+                            },
                             this::throwMyException).value();
                 });
         Verify.assertThrows(
                 NullPointerException.class,
                 () -> {
                     Functions0.throwing(
-                            () -> { throw new NullPointerException(); },
+                            () -> {
+                                throw new NullPointerException();
+                            },
                             this::throwMyException).value();
                 });
     }
@@ -84,7 +92,7 @@ public class Functions0Test
     @Test
     public void newFastList()
     {
-        Assert.assertEquals(Lists.mutable.of(), Functions0.newFastList().value());
+        Assert.assertEquals(MutableList.empty(), Functions0.newFastList().value());
         Verify.assertInstanceOf(FastList.class, Functions0.newFastList().value());
     }
 
@@ -98,7 +106,7 @@ public class Functions0Test
     @Test
     public void newHashBag()
     {
-        Assert.assertEquals(Bags.mutable.of(), Functions0.newHashBag().value());
+        Assert.assertEquals(MutableBag.empty(), Functions0.newHashBag().value());
         Verify.assertInstanceOf(HashBag.class, Functions0.newHashBag().value());
     }
 

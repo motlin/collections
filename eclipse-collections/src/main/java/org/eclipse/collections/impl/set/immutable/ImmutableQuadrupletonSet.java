@@ -20,7 +20,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
 import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Sets;
 
 final class ImmutableQuadrupletonSet<T>
         extends AbstractImmutableSet<T>
@@ -80,7 +79,7 @@ final class ImmutableQuadrupletonSet<T>
     {
         if (!this.contains(element))
         {
-            return Sets.immutable.with(this.element1, this.element2, this.element3, this.element4, element);
+            return ImmutableSet.of(this.element1, this.element2, this.element3, this.element4, element);
         }
         return this;
     }
@@ -92,17 +91,17 @@ final class ImmutableQuadrupletonSet<T>
         {
             if (Comparators.nullSafeEquals(element, this.element1))
             {
-                return Sets.immutable.with(this.element2, this.element3, this.element4);
+                return ImmutableSet.of(this.element2, this.element3, this.element4);
             }
             if (Comparators.nullSafeEquals(element, this.element2))
             {
-                return Sets.immutable.with(this.element1, this.element3, this.element4);
+                return ImmutableSet.of(this.element1, this.element3, this.element4);
             }
             if (Comparators.nullSafeEquals(element, this.element3))
             {
-                return Sets.immutable.with(this.element1, this.element2, this.element4);
+                return ImmutableSet.of(this.element1, this.element2, this.element4);
             }
-            return Sets.immutable.with(this.element1, this.element2, this.element3);
+            return ImmutableSet.of(this.element1, this.element2, this.element3);
         }
         return this;
     }

@@ -30,8 +30,6 @@ import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.ImmutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.SortedBags;
 import org.eclipse.collections.impl.multimap.AbstractImmutableMultimap;
 import org.eclipse.collections.impl.multimap.AbstractMutableMultimap;
 import org.eclipse.collections.impl.multimap.ImmutableMultimapSerializationProxy;
@@ -98,7 +96,7 @@ public class ImmutableSortedBagMultimapImpl<K, V>
     @Override
     protected ImmutableSortedBag<V> createCollection()
     {
-        return SortedBags.immutable.with(this.comparator);
+        return ImmutableSortedBag.of(this.comparator);
     }
 
     @Override
@@ -110,7 +108,7 @@ public class ImmutableSortedBagMultimapImpl<K, V>
     @Override
     public ImmutableSortedBagMultimap<K, V> newEmpty()
     {
-        return new ImmutableSortedBagMultimapImpl<>(Maps.immutable.with(), this.comparator);
+        return new ImmutableSortedBagMultimapImpl<>(ImmutableMap.empty(), this.comparator);
     }
 
     @Override

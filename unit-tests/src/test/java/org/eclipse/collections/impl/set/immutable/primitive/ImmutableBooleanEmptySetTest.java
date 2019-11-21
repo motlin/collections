@@ -15,10 +15,10 @@ import java.util.NoSuchElementException;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.primitive.ImmutableBooleanCollection;
 import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.primitive.ImmutableBooleanSet;
 import org.eclipse.collections.impl.block.factory.primitive.BooleanPredicates;
 import org.eclipse.collections.impl.collection.immutable.primitive.AbstractImmutableBooleanCollectionTestCase;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.factory.primitive.BooleanBags;
 import org.eclipse.collections.impl.factory.primitive.BooleanSets;
 import org.eclipse.collections.impl.test.Verify;
@@ -45,7 +45,7 @@ public class ImmutableBooleanEmptySetTest extends AbstractImmutableBooleanCollec
     @Override
     protected RichIterable<Object> newObjectCollectionWith(Object... elements)
     {
-        return Sets.immutable.with(elements);
+        return ImmutableSet.of(elements);
     }
 
     @Override

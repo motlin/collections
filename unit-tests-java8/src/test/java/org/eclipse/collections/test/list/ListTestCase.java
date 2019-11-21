@@ -12,7 +12,7 @@ package org.eclipse.collections.test.list;
 
 import java.util.List;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.test.CollectionTestCase;
 import org.junit.Test;
 
@@ -49,7 +49,7 @@ public interface ListTestCase extends CollectionTestCase
     {
         List<Integer> list = this.newWith(1, 2, 3);
         assertEquals(Integer.valueOf(2), list.set(1, 4));
-        assertEquals(Lists.immutable.with(1, 4, 3), list);
+        assertEquals(ImmutableList.of(1, 4, 3), list);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -57,7 +57,7 @@ public interface ListTestCase extends CollectionTestCase
     {
         List<Integer> list = this.newWith(1, 2, 3);
         assertEquals(Integer.valueOf(2), list.set(-1, 4));
-        assertEquals(Lists.immutable.with(1, 4, 3), list);
+        assertEquals(ImmutableList.of(1, 4, 3), list);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -65,6 +65,6 @@ public interface ListTestCase extends CollectionTestCase
     {
         List<Integer> list = this.newWith(1, 2, 3);
         assertEquals(Integer.valueOf(2), list.set(4, 4));
-        assertEquals(Lists.immutable.with(1, 4, 3), list);
+        assertEquals(ImmutableList.of(1, 4, 3), list);
     }
 }

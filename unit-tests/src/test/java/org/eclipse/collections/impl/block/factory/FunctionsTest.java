@@ -26,7 +26,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.function.primitive.IntegerFunctionImpl;
 import org.eclipse.collections.impl.block.function.primitive.LongFunctionImpl;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -37,8 +36,6 @@ import org.eclipse.collections.impl.test.domain.Person;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 public class FunctionsTest
 {
@@ -211,14 +208,14 @@ public class FunctionsTest
     public void firstNotEmptyCollectionValue()
     {
         Function<Object, ImmutableList<String>> function1 = Functions.firstNotEmptyCollectionValue(
-                Functions.getFixedValue(Lists.immutable.of()),
-                Functions.getFixedValue(Lists.immutable.of("hello")),
-                Functions.getFixedValue(Lists.immutable.of()));
-        Assert.assertEquals(iList("hello"), function1.valueOf(null));
+                Functions.getFixedValue(ImmutableList.empty()),
+                Functions.getFixedValue(ImmutableList.of("hello")),
+                Functions.getFixedValue(ImmutableList.empty()));
+        Assert.assertEquals(ImmutableList.of("hello"), function1.valueOf(null));
 
         Function<Object, ImmutableList<String>> function2 = Functions.firstNotEmptyCollectionValue(
-                Functions.getFixedValue(Lists.immutable.of()),
-                Functions.getFixedValue(Lists.immutable.of()));
+                Functions.getFixedValue(ImmutableList.empty()),
+                Functions.getFixedValue(ImmutableList.empty()));
         Assert.assertNull(function2.valueOf(null));
     }
 
@@ -528,7 +525,7 @@ public class FunctionsTest
     @Test
     public void size()
     {
-        ImmutableList<ImmutableList<Integer>> list = Lists.immutable.of(Lists.immutable.of(1), Lists.immutable.of(1, 2), Lists.immutable.of(1, 2, 3));
+        ImmutableList<ImmutableList<Integer>> list = ImmutableList.of(ImmutableList.of(1), ImmutableList.of(1, 2), ImmutableList.of(1, 2, 3));
         ImmutableList<Integer> sizes = list.collect(Functions.getSizeOf());
         Assert.assertEquals(FastList.newListWith(1, 2, 3), sizes);
     }

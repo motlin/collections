@@ -39,8 +39,8 @@ import org.eclipse.collections.api.list.primitive.LongList;
 import org.eclipse.collections.api.list.primitive.ShortList;
 import org.eclipse.collections.api.ordered.ReversibleIterable;
 import org.eclipse.collections.api.ordered.SortedIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
@@ -227,11 +227,11 @@ public interface IterableTestCase
     default void Iterable_next()
     {
         Iterator<Integer> iterator = this.newWith(3, 2, 1).iterator();
-        MutableSet<Integer> set = Sets.mutable.with();
+        MutableSet<Integer> set = MutableSet.empty();
         assertTrue(set.add(iterator.next()));
         assertTrue(set.add(iterator.next()));
         assertTrue(set.add(iterator.next()));
-        IterableTestCase.assertEquals(Sets.immutable.with(3, 2, 1), set);
+        IterableTestCase.assertEquals(ImmutableSet.of(3, 2, 1), set);
     }
 
     @Test(expected = NoSuchElementException.class)

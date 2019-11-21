@@ -31,6 +31,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MapIterable;
@@ -46,7 +47,6 @@ import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.factory.StringFunctions;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.ArrayListAdapter;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
@@ -77,7 +77,7 @@ public class ParallelIterateTest
         throw new RuntimeException("Thread death on its way!");
     };
 
-    private static final Function<Integer, Collection<String>> INT_TO_TWO_STRINGS = integer -> Lists.fixedSize.of(integer.toString(), integer.toString());
+    private static final Function<Integer, Collection<String>> INT_TO_TWO_STRINGS = integer -> FixedSizeList.of(integer.toString(), integer.toString());
 
     private static final Function<Integer, String> EVEN_OR_ODD = value -> value % 2 == 0 ? "Even" : "Odd";
     private static final Function<BigDecimal, String> EVEN_OR_ODD_BD = value -> value.intValue() % 2 == 0 ? "Even" : "Odd";
@@ -91,7 +91,7 @@ public class ParallelIterateTest
     public void setUp()
     {
         Interval interval = Interval.oneTo(200);
-        this.iterables = Lists.immutable.of(
+        this.iterables = ImmutableList.of(
                 interval.toList(),
                 interval.toList().asUnmodifiable(),
                 interval.toList().asSynchronized(),
@@ -226,22 +226,22 @@ public class ParallelIterateTest
     public void testForEachImmutable()
     {
         IntegerSum sum1 = new IntegerSum(0);
-        ImmutableList<Integer> list1 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(16));
+        ImmutableList<Integer> list1 = ImmutableList.ofAll(ParallelIterateTest.createIntegerList(16));
         ParallelIterate.forEach(list1, new SumProcedure(sum1), new SumCombiner(sum1), 1, list1.size() / 2);
         Assert.assertEquals(16, sum1.getSum());
 
         IntegerSum sum2 = new IntegerSum(0);
-        ImmutableList<Integer> list2 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(7));
+        ImmutableList<Integer> list2 = ImmutableList.ofAll(ParallelIterateTest.createIntegerList(7));
         ParallelIterate.forEach(list2, new SumProcedure(sum2), new SumCombiner(sum2));
         Assert.assertEquals(7, sum2.getSum());
 
         IntegerSum sum3 = new IntegerSum(0);
-        ImmutableList<Integer> list3 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(15));
+        ImmutableList<Integer> list3 = ImmutableList.ofAll(ParallelIterateTest.createIntegerList(15));
         ParallelIterate.forEach(list3, new SumProcedure(sum3), new SumCombiner(sum3), 1, list3.size() / 2);
         Assert.assertEquals(15, sum3.getSum());
 
         IntegerSum sum4 = new IntegerSum(0);
-        ImmutableList<Integer> list4 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(35));
+        ImmutableList<Integer> list4 = ImmutableList.ofAll(ParallelIterateTest.createIntegerList(35));
         ParallelIterate.forEach(list4, new SumProcedure(sum4), new SumCombiner(sum4));
         Assert.assertEquals(35, sum4.getSum());
 
@@ -251,7 +251,7 @@ public class ParallelIterateTest
         Assert.assertEquals(35, sum5.getSum());
 
         IntegerSum sum6 = new IntegerSum(0);
-        ImmutableList<Integer> list6 = Lists.immutable.ofAll(ParallelIterateTest.createIntegerList(40));
+        ImmutableList<Integer> list6 = ImmutableList.ofAll(ParallelIterateTest.createIntegerList(40));
         ParallelIterate.forEach(list6, new SumProcedure(sum6), new SumCombiner(sum6), 1, list6.size() / 2);
         Assert.assertEquals(40, sum6.getSum());
 
@@ -566,7 +566,7 @@ public class ParallelIterateTest
     {
         MutableList<Integer> group1 = Interval.oneTo(100_000).toList().shuffleThis();
         MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
-        MutableList<Integer> integers = Lists.mutable.withAll(group1);
+        MutableList<Integer> integers = MutableList.ofAll(group1);
         integers.addAll(group2);
         ObjectDoubleMap<Integer> result = ParallelIterate.sumByDouble(
                 integers,
@@ -614,7 +614,7 @@ public class ParallelIterateTest
     {
         MutableList<Integer> group1 = Interval.oneTo(100_000).toList().shuffleThis();
         MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
-        MutableList<Integer> integers = Lists.mutable.withAll(group1);
+        MutableList<Integer> integers = MutableList.ofAll(group1);
         integers.addAll(group2);
         ObjectDoubleMap<Integer> result = ParallelIterate.sumByFloat(
                 integers,

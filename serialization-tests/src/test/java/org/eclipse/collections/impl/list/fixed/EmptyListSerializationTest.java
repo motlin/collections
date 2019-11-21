@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.list.fixed;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.impl.list.mutable.FastListSerializationTest;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class EmptyListSerializationTest
                 1L,
                 "rO0ABXNyADFvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxpc3QuZml4ZWQuRW1wdHlMaXN0\n"
                         + "AAAAAAAAAAECAAB4cA==",
-                Lists.fixedSize.of());
+                FixedSizeList.empty());
     }
 
     @Test
@@ -33,6 +33,6 @@ public class EmptyListSerializationTest
         Verify.assertSerializedForm(
                 1L,
                 FastListSerializationTest.FAST_LIST_EMPTY,
-                Lists.fixedSize.of().subList(0, 0));
+                FixedSizeList.empty().subList(0, 0));
     }
 }

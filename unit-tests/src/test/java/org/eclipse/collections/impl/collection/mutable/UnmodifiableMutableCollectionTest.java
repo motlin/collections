@@ -26,6 +26,7 @@ import org.eclipse.collections.api.collection.primitive.MutableFloatCollection;
 import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.multimap.Multimap;
@@ -39,7 +40,6 @@ import org.eclipse.collections.impl.block.factory.PrimitiveFunctions;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.factory.StringPredicates;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
@@ -57,8 +57,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 /**
  * JUnit test for {@link UnmodifiableMutableCollection}.
@@ -143,10 +141,10 @@ public class UnmodifiableMutableCollectionTest
         Assert.assertTrue(this.unmodifiableCollection.allSatisfyWith((ignored1, ignored2) -> true, ""));
         Assert.assertEquals(this.mutableCollection, this.unmodifiableCollection.toList());
         Verify.assertListsEqual(
-                Lists.mutable.of("Bon Jovi", "Europe", METALLICA, "Scorpions"),
+                MutableList.of("Bon Jovi", "Europe", METALLICA, "Scorpions"),
                 this.unmodifiableCollection.toSortedList());
         Verify.assertListsEqual(
-                Lists.mutable.of("Scorpions", METALLICA, "Europe", "Bon Jovi"),
+                MutableList.of("Scorpions", METALLICA, "Europe", "Bon Jovi"),
                 this.unmodifiableCollection.toSortedList(Collections.reverseOrder()));
         Verify.assertSize(4, this.unmodifiableCollection.toSet());
         Verify.assertSize(4, this.unmodifiableCollection.toMap(Functions.getStringPassThru(), Functions.getStringPassThru()));
@@ -396,7 +394,7 @@ public class UnmodifiableMutableCollectionTest
     public void selectInstancesOf()
     {
         MutableCollection<Number> numbers = UnmodifiableMutableCollection.of(FastList.newListWith(1, 2.0, 3, 4.0, 5));
-        Assert.assertEquals(iList(1, 3, 5), numbers.selectInstancesOf(Integer.class));
-        Assert.assertEquals(iList(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
+        Assert.assertEquals(ImmutableList.of(1, 3, 5), numbers.selectInstancesOf(Integer.class));
+        Assert.assertEquals(ImmutableList.of(1, 2.0, 3, 4.0, 5), numbers.selectInstancesOf(Number.class));
     }
 }

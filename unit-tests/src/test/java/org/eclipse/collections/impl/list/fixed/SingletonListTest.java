@@ -15,6 +15,7 @@ import java.util.Iterator;
 
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
@@ -26,7 +27,6 @@ import org.eclipse.collections.impl.block.factory.Predicates2;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.SynchronizedMutableList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
@@ -99,7 +99,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void tap()
     {
-        MutableList<Integer> tapResult = Lists.mutable.of();
+        MutableList<Integer> tapResult = MutableList.empty();
         MutableList<Integer> collection = SingletonListTest.newWith(1);
         Assert.assertSame(collection, collection.tap(tapResult::add));
         Assert.assertEquals(collection.toList(), tapResult);
@@ -108,7 +108,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void forEach()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableList<Integer> collection = SingletonListTest.newWith(1);
         collection.forEach(CollectionAddProcedure.on(result));
         Assert.assertEquals(FastList.newListWith(1), result);
@@ -116,13 +116,13 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
 
     private static <T> MutableList<T> newWith(T item)
     {
-        return Lists.fixedSize.of(item);
+        return FixedSizeList.of(item);
     }
 
     @Test
     public void forEachWith()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableList<Integer> collection = SingletonListTest.newWith(1);
         collection.forEachWith((argument1, argument2) -> result.add(argument1 + argument2), 0);
         Assert.assertEquals(FastList.newListWith(1), result);
@@ -131,7 +131,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void forEachWithIndex()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableList<Integer> collection = SingletonListTest.newWith(1);
         collection.forEachWithIndex((object, index) -> result.add(object + index));
         Verify.assertContainsAll(result, 1);
@@ -468,19 +468,19 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
     @Test
     public void testToString()
     {
-        MutableList<MutableList<?>> list = Lists.fixedSize.of(Lists.fixedSize.of());
+        MutableList<MutableList<?>> list = FixedSizeList.of(FixedSizeList.empty());
         list.set(0, list);
         Assert.assertEquals("[(this SingletonList)]", list.toString());
     }
 
     private MutableList<Integer> newList()
     {
-        return Lists.fixedSize.of(1);
+        return FixedSizeList.of(1);
     }
 
     private MutableList<Integer> classUnderTestWithNull()
     {
-        return Lists.fixedSize.of((Integer) null);
+        return FixedSizeList.of((Integer) null);
     }
 
     @Test
@@ -553,7 +553,7 @@ public class SingletonListTest extends AbstractMemoryEfficientMutableListTestCas
         MutableList<Integer> list = new SingletonList<>(2);
         Assert.assertSame(list, list.without(9));
         list = list.without(2);
-        Verify.assertListsEqual(Lists.mutable.of(), list);
+        Verify.assertListsEqual(MutableList.empty(), list);
         Verify.assertInstanceOf(EmptyList.class, list);
     }
 }

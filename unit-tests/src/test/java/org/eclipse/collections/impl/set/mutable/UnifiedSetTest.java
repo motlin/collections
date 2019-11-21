@@ -15,13 +15,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.concurrent.Executors;
 
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.Pool;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.math.IntegerSum;
@@ -62,9 +62,9 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
                 UnifiedSet.newSet().with("1", "2", "3", "4"));
 
         MutableSet<String> list = UnifiedSet.<String>newSet().with("A")
-                .withAll(Lists.fixedSize.of("1", "2"))
-                .withAll(Lists.fixedSize.of())
-                .withAll(Sets.fixedSize.of("3", "4"));
+                .withAll(FixedSizeList.of("1", "2"))
+                .withAll(FixedSizeList.empty())
+                .withAll(FixedSizeSet.of("3", "4"));
         Verify.assertEqualsAndHashCode(UnifiedSet.newSetWith("A", "1", "2", "3", "4"), list);
     }
 
@@ -611,7 +611,7 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
     public void trimToSize()
     {
         UnifiedSet<String> set = UnifiedSet.newSet();
-        MutableSet<String> expected = Sets.mutable.empty();
+        MutableSet<String> expected = MutableSet.empty();
 
         Interval integers = Interval.fromTo(0, 250);
         integers.each(each ->
@@ -628,7 +628,7 @@ public class UnifiedSetTest extends AbstractMutableSetTestCase
         Assert.assertEquals(expected, set);
         Assert.assertEquals(261, set.size());
 
-        MutableList<Integer> toRemove = Lists.mutable.withAll(Interval.evensFromTo(0, 20));
+        MutableList<Integer> toRemove = MutableList.ofAll(Interval.evensFromTo(0, 20));
 
         toRemove.addAll(Interval.oddsFromTo(35, 55));
         toRemove.each(each ->

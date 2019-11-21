@@ -36,12 +36,12 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.UnsortedMapIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.procedure.MapCollectProcedure;
 import org.eclipse.collections.impl.factory.HashingStrategyMaps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.AbstractMutableMap;
 import org.eclipse.collections.impl.parallel.BatchIterable;
@@ -1236,7 +1236,7 @@ public class UnifiedMapWithHashingStrategy<K, V> extends AbstractMutableMap<K, V
         }
         if (map.isEmpty())
         {
-            return Sets.immutable.<Entry<K, V>>of().castToSet();
+            return ImmutableSet.<Entry<K, V>>empty().castToSet();
         }
         throw new IllegalStateException("Entry set was null and size was non-zero");
     }

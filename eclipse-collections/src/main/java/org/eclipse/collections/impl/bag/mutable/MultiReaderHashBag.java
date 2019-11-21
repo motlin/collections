@@ -65,8 +65,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.collection.mutable.AbstractMultiReaderMutableCollection;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Iterables;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
@@ -188,7 +186,7 @@ public final class MultiReaderHashBag<T>
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
-            return Bags.immutable.withAll(this.delegate);
+            return ImmutableBag.ofAll(this.delegate);
         }
     }
 
@@ -362,7 +360,7 @@ public final class MultiReaderHashBag<T>
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
-            return this.collectWithOccurrences(function, Bags.mutable.empty());
+            return this.collectWithOccurrences(function, MutableBag.empty());
         }
     }
 
@@ -645,7 +643,7 @@ public final class MultiReaderHashBag<T>
             extends UntouchableMutableCollection<T>
             implements MutableBag<T>
     {
-        private final MutableList<UntouchableIterator<T>> requestedIterators = Iterables.mList();
+        private final MutableList<UntouchableIterator<T>> requestedIterators = MutableList.empty();
 
         private UntouchableMutableBag(MutableBag<T> newDelegate)
         {
@@ -701,7 +699,7 @@ public final class MultiReaderHashBag<T>
         @Override
         public ImmutableBag<T> toImmutable()
         {
-            return Bags.immutable.withAll(this.getDelegate());
+            return ImmutableBag.ofAll(this.getDelegate());
         }
 
         @Override

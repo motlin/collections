@@ -34,8 +34,6 @@ import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates;
 import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
@@ -46,8 +44,6 @@ import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.utility.Iterate;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
  * JUnit test for {@link AbstractMemoryEfficientMutableSet}.
@@ -101,28 +97,28 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
     public void removeAll_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.removeAll(mList("1", "2"));
+        set.removeAll(MutableList.of("1", "2"));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void removeAllIterable_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.removeAllIterable(mList("1", "2"));
+        set.removeAllIterable(MutableList.of("1", "2"));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void retainAll_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.retainAll(mList("1", "2"));
+        set.retainAll(MutableList.of("1", "2"));
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void retainAllIterable_throws()
     {
         MutableSet<String> set = this.classUnderTest();
-        set.retainAllIterable(mList("1", "2"));
+        set.retainAllIterable(MutableList.of("1", "2"));
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -262,11 +258,11 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
 
         MutableSet<Pair<String, Object>> pairs = set.zip(nulls);
         Assert.assertEquals(set, pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(nulls, pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        Assert.assertEquals(nulls, pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         MutableSet<Pair<String, Object>> pairsPlusOne = set.zip(nullsPlusOne);
         Assert.assertEquals(set, pairsPlusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        Assert.assertEquals(nulls, pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         MutableSet<Pair<String, Object>> pairsMinusOne = set.zip(nullsMinusOne);
         Assert.assertEquals(set.size() - 1, pairsMinusOne.size());
@@ -358,7 +354,7 @@ public abstract class AbstractMemoryEfficientMutableSetTestCase
         MutableSet<String> set = this.classUnderTest();
         RichIterable<RichIterable<String>> chunks = set.chunk(2);
         MutableList<Integer> sizes = chunks.collect(RichIterable::size, FastList.newList());
-        MutableBag<Integer> hashBag = Bags.mutable.of();
+        MutableBag<Integer> hashBag = MutableBag.empty();
         hashBag.addOccurrences(2, this.classUnderTest().size() / 2);
         if (this.classUnderTest().size() % 2 != 0)
         {

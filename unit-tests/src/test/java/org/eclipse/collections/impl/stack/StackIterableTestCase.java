@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.SortedBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
@@ -33,6 +34,7 @@ import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.partition.stack.PartitionStack;
 import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.api.stack.StackIterable;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
@@ -48,9 +50,6 @@ import org.eclipse.collections.impl.block.factory.Procedures;
 import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -138,15 +137,15 @@ public abstract class StackIterableTestCase
 
         Verify.assertThrows(IllegalArgumentException.class, () -> stack.peek(4));
 
-        Assert.assertEquals(Lists.mutable.with(1, 2, 3), stack.peek(3));
+        Assert.assertEquals(MutableList.of(1, 2, 3), stack.peek(3));
     }
 
     @Test
     public void peek()
     {
         Assert.assertEquals("3", this.newStackWith("1", "2", "3").peek());
-        Assert.assertEquals(Lists.mutable.with(), this.newStackWith("1", "2", "3").peek(0));
-        Assert.assertEquals(Lists.mutable.with("3", "2"), this.newStackWith("1", "2", "3").peek(2));
+        Assert.assertEquals(MutableList.empty(), this.newStackWith("1", "2", "3").peek(0));
+        Assert.assertEquals(MutableList.of("3", "2"), this.newStackWith("1", "2", "3").peek(2));
     }
 
     @Test
@@ -199,7 +198,7 @@ public abstract class StackIterableTestCase
     {
         StackIterable<Integer> stack = this.newStackWith(1, 2, 3, 4);
         Assert.assertTrue(stack.containsAll(Interval.oneTo(2)));
-        Assert.assertFalse(stack.containsAll(Lists.mutable.with(1, 2, 5)));
+        Assert.assertFalse(stack.containsAll(MutableList.of(1, 2, 5)));
     }
 
     @Test
@@ -221,7 +220,7 @@ public abstract class StackIterableTestCase
                 stack.collect(function));
         Assert.assertEquals(3, function.count);
 
-        Assert.assertEquals(Lists.mutable.with("true", "false", "null"), stack.collect(String::valueOf, FastList.newList()));
+        Assert.assertEquals(MutableList.of("true", "false", "null"), stack.collect(String::valueOf, FastList.newList()));
     }
 
     /**
@@ -248,12 +247,12 @@ public abstract class StackIterableTestCase
     {
         StackIterable<String> stack = this.newStackFromTopToBottom("4", "3", "2", "1");
 
-        MutableList<ObjectIntPair<String>> expected = Lists.mutable.with(
+        MutableList<ObjectIntPair<String>> expected = MutableList.of(
                 PrimitiveTuples.pair("4", 0),
                 PrimitiveTuples.pair("3", 1),
                 PrimitiveTuples.pair("2", 2),
                 PrimitiveTuples.pair("1", 3));
-        Assert.assertEquals(expected, stack.collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty()));
+        Assert.assertEquals(expected, stack.collectWithIndex(PrimitiveTuples::pair, MutableList.empty()));
     }
 
     @Override
@@ -427,7 +426,7 @@ public abstract class StackIterableTestCase
         CountingPredicate<Integer> predicate2 = CountingPredicate.of(Predicates.lessThan(3));
         CountingFunction<Object, String> function2 = CountingFunction.of(String::valueOf);
         Assert.assertEquals(
-                Lists.mutable.with("1", "2"),
+                MutableList.of("1", "2"),
                 stack.collectIf(predicate2, function2, FastList.newList()));
         Assert.assertEquals(5, predicate2.count);
         Assert.assertEquals(2, function2.count);
@@ -448,7 +447,7 @@ public abstract class StackIterableTestCase
     {
         StackIterable<Integer> stack = this.newStackFromTopToBottom(3, 2, 1);
         Assert.assertEquals(
-                Lists.mutable.with(4, 3, 2),
+                MutableList.of(4, 3, 2),
                 stack.collectWith(AddFunction.INTEGER, 1, FastList.newList()));
     }
 
@@ -459,7 +458,7 @@ public abstract class StackIterableTestCase
         StackIterable<String> stack = this.newStackFromTopToBottom("1", "One", "2", "Two");
 
         CountingFunction<String, Iterable<Character>> function = CountingFunction.of(object -> {
-            MutableList<Character> result = Lists.mutable.of();
+            MutableList<Character> result = MutableList.empty();
             char[] chars = object.toCharArray();
             for (char aChar : chars)
             {
@@ -474,7 +473,7 @@ public abstract class StackIterableTestCase
         Assert.assertEquals(4, function.count);
 
         Assert.assertEquals(
-                Lists.mutable.with('1', 'O', 'n', 'e', '2', 'T', 'w', 'o'),
+                MutableList.of('1', 'O', 'n', 'e', '2', 'T', 'w', 'o'),
                 stack.flatCollect(function, FastList.newList()));
     }
 
@@ -491,7 +490,7 @@ public abstract class StackIterableTestCase
                 this.newStackFromTopToBottom(2, 3),
                 stack.select(Predicates.greaterThan(1)));
         Assert.assertEquals(
-                Lists.mutable.with(2, 3),
+                MutableList.of(2, 3),
                 stack.select(Predicates.greaterThan(1), FastList.newList()));
     }
 
@@ -532,7 +531,7 @@ public abstract class StackIterableTestCase
                 stack.reject(predicate));
         Assert.assertEquals(3, predicate.count);
         Assert.assertEquals(
-                Lists.mutable.with(2, 1),
+                MutableList.of(2, 1),
                 stack.reject(Predicates.greaterThan(2), FastList.newList()));
     }
 
@@ -814,7 +813,7 @@ public abstract class StackIterableTestCase
     {
         MutableList<Integer> group1 = Interval.oneTo(100_000).toList().shuffleThis();
         MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
-        MutableList<Integer> integers = Lists.mutable.withAll(group1);
+        MutableList<Integer> integers = MutableList.ofAll(group1);
         integers.addAll(group2);
         StackIterable<Integer> values = this.newStackWith(integers.toArray(new Integer[]{}));
         ObjectDoubleMap<Integer> result = values.sumByFloat(
@@ -843,7 +842,7 @@ public abstract class StackIterableTestCase
     {
         MutableList<Integer> group1 = Interval.oneTo(100_000).toList().shuffleThis();
         MutableList<Integer> group2 = Interval.fromTo(100_001, 200_000).toList().shuffleThis();
-        MutableList<Integer> integers = Lists.mutable.withAll(group1);
+        MutableList<Integer> integers = MutableList.ofAll(group1);
         integers.addAll(group2);
         StackIterable<Integer> values = this.newStackWith(integers.toArray(new Integer[]{}));
         ObjectDoubleMap<Integer> result = values.sumByDouble(
@@ -1008,10 +1007,10 @@ public abstract class StackIterableTestCase
     {
         Verify.assertIterablesEqual(
                 FastList.<RichIterable<String>>newListWith(
-                        Lists.mutable.with("7", "6"),
-                        Lists.mutable.with("5", "4"),
-                        Lists.mutable.with("3", "2"),
-                        Lists.mutable.with("1")),
+                        MutableList.of("7", "6"),
+                        MutableList.of("5", "4"),
+                        MutableList.of("3", "2"),
+                        MutableList.of("1")),
                 this.newStackFromTopToBottom("7", "6", "5", "4", "3", "2", "1").chunk(2));
     }
 
@@ -1021,7 +1020,7 @@ public abstract class StackIterableTestCase
     {
         RichIterable<String> collection = this.newWith("1");
         RichIterable<RichIterable<String>> groups = collection.chunk(2);
-        Verify.assertIterablesEqual(Lists.mutable.with(1), groups.collect(RichIterable::size));
+        Verify.assertIterablesEqual(MutableList.of(1), groups.collect(RichIterable::size));
     }
 
     @Override
@@ -1036,7 +1035,7 @@ public abstract class StackIterableTestCase
     @Test
     public void tap()
     {
-        MutableList<String> tapResult = Lists.mutable.of();
+        MutableList<String> tapResult = MutableList.empty();
         StackIterable<String> stack = this.newStackWith("1", "2", "3", "4", "5");
         Assert.assertSame(stack, stack.tap(tapResult::add));
         Assert.assertEquals(stack.toList(), tapResult);
@@ -1078,7 +1077,7 @@ public abstract class StackIterableTestCase
     public void toList()
     {
         Assert.assertEquals(
-                Lists.mutable.with(4, 3, 2, 1),
+                MutableList.of(4, 3, 2, 1),
                 this.newStackFromTopToBottom(4, 3, 2, 1).toList());
     }
 
@@ -1125,12 +1124,12 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackWith(2, 1, 5, 4);
 
         Assert.assertEquals(expected, stack.toSortedSet());
-        Assert.assertEquals(Lists.mutable.with(1, 2, 4, 5), stack.toSortedSet().toList());
+        Assert.assertEquals(MutableList.of(1, 2, 4, 5), stack.toSortedSet().toList());
 
         MutableSortedSet<Integer> reversed = stack.toSortedSet(Comparators.reverseNaturalOrder());
         Verify.assertSortedSetsEqual(reversed, stack.toSortedSet(Comparators.reverseNaturalOrder()));
         Assert.assertEquals(
-                Lists.mutable.with(5, 4, 2, 1),
+                MutableList.of(5, 4, 2, 1),
                 stack.toSortedSet(Comparators.reverseNaturalOrder()).toList());
     }
 
@@ -1145,7 +1144,7 @@ public abstract class StackIterableTestCase
                 expected,
                 stack.toSortedSetBy(String::valueOf));
         Assert.assertEquals(
-                Lists.mutable.with(1, 10, 2, 3, 4, 5, 6, 7, 8, 9),
+                MutableList.of(1, 10, 2, 3, 4, 5, 6, 7, 8, 9),
                 stack.toSortedSetBy(String::valueOf).toList());
     }
 
@@ -1154,7 +1153,7 @@ public abstract class StackIterableTestCase
     public void toBag()
     {
         Assert.assertEquals(
-                Bags.mutable.of("C", "B", "A"),
+                MutableBag.of("C", "B", "A"),
                 this.newStackFromTopToBottom("C", "B", "A").toBag());
     }
 
@@ -1165,12 +1164,12 @@ public abstract class StackIterableTestCase
         StackIterable<Integer> stack = this.newStackWith(2, 2, 1, 5, 4);
 
         Verify.assertSortedBagsEqual(expected, stack.toSortedBag());
-        Assert.assertEquals(Lists.mutable.with(1, 2, 2, 4, 5), stack.toSortedBag().toList());
+        Assert.assertEquals(MutableList.of(1, 2, 2, 4, 5), stack.toSortedBag().toList());
 
         SortedBag<Integer> expected2 = TreeBag.newBagWith(Comparators.reverseNaturalOrder(), 1, 2, 2, 4, 5);
         Verify.assertSortedBagsEqual(expected2, stack.toSortedBag(Comparators.reverseNaturalOrder()));
         Assert.assertEquals(
-                Lists.mutable.with(5, 4, 2, 2, 1),
+                MutableList.of(5, 4, 2, 2, 1),
                 stack.toSortedBag(Comparators.reverseNaturalOrder()).toList());
     }
 
@@ -1216,7 +1215,7 @@ public abstract class StackIterableTestCase
     public void asLazy()
     {
         Assert.assertEquals(
-                Lists.mutable.with("3", "2", "1"),
+                MutableList.of("3", "2", "1"),
                 this.newStackFromTopToBottom("3", "2", "1").asLazy().toList());
     }
 
@@ -1260,7 +1259,7 @@ public abstract class StackIterableTestCase
 
         Verify.assertPostSerializedEqualsAndHashCode(this.newStackWith(null, null, null));
 
-        Assert.assertEquals(Stacks.mutable.of(), this.newStackWith());
+        Assert.assertEquals(MutableStack.empty(), this.newStackWith());
     }
 
     @Test

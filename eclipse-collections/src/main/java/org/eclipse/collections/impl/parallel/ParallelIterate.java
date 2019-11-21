@@ -32,6 +32,7 @@ import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.map.MutableMapIterable;
@@ -43,7 +44,6 @@ import org.eclipse.collections.impl.block.factory.Functions0;
 import org.eclipse.collections.impl.block.procedure.MultimapPutProcedure;
 import org.eclipse.collections.impl.block.procedure.MutatingAggregationProcedure;
 import org.eclipse.collections.impl.block.procedure.NonMutatingAggregationProcedure;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.fixed.ArrayAdapter;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -52,8 +52,6 @@ import org.eclipse.collections.impl.map.mutable.primitive.ObjectLongHashMap;
 import org.eclipse.collections.impl.multimap.list.SynchronizedPutFastListMultimap;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.eclipse.collections.impl.utility.Iterate;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 /**
  * The ParallelIterate class contains several parallel algorithms that work with Collections. All of the higher
@@ -244,7 +242,7 @@ public final class ParallelIterate
             }
             else
             {
-                combiner.combineAll(iList(procedure));
+                combiner.combineAll(ImmutableList.of(procedure));
             }
         }
         else
@@ -490,7 +488,7 @@ public final class ParallelIterate
             }
             else
             {
-                combiner.combineAll(iList(procedure));
+                combiner.combineAll(ImmutableList.of(procedure));
             }
         }
         else
@@ -521,7 +519,7 @@ public final class ParallelIterate
             }
             else
             {
-                combiner.combineAll(iList(procedure));
+                combiner.combineAll(ImmutableList.of(procedure));
             }
         }
         else
@@ -1379,7 +1377,7 @@ public final class ParallelIterate
 
     private static final class SumByDoubleProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByDoubleProcedure<T, V>>
     {
-        private final MutableMap<V, DoubleDoublePair> map = Maps.mutable.of();
+        private final MutableMap<V, DoubleDoublePair> map = MutableMap.empty();
         private final Function<? super T, ? extends V> groupBy;
         private final DoubleFunction<? super T> function;
 
@@ -1453,7 +1451,7 @@ public final class ParallelIterate
 
     private static final class SumByFloatProcedure<T, V> implements Procedure<T>, ProcedureFactory<SumByFloatProcedure<T, V>>
     {
-        private final MutableMap<V, DoubleDoublePair> map = Maps.mutable.of();
+        private final MutableMap<V, DoubleDoublePair> map = MutableMap.empty();
         private final Function<? super T, ? extends V> groupBy;
         private final FloatFunction<? super T> function;
 

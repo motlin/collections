@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.bimap.mutable;
 
-import org.eclipse.collections.impl.factory.BiMaps;
+import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class SynchronizedBiMapSerializationTest
                         + "aXplZEJpTWFwU2VyaWFsaXphdGlvblByb3h5AAAAAAAAAAEMAAB4cHNyADRvcmcuZWNsaXBzZS5j\n"
                         + "b2xsZWN0aW9ucy5pbXBsLmJpbWFwLm11dGFibGUuSGFzaEJpTWFwAAAAAAAAAAEMAAB4cHcIAAAA\n"
                         + "AD9AAAB4eA==",
-                SynchronizedBiMap.of(BiMaps.mutable.of()));
+                SynchronizedBiMap.of(MutableBiMap.of()));
     }
 
     @Test
@@ -38,6 +38,6 @@ public class SynchronizedBiMapSerializationTest
                         + "AQIAAUwACGRlbGVnYXRldAAPTGphdmEvdXRpbC9TZXQ7eHBzcgAzb3JnLmVjbGlwc2UuY29sbGVj\n"
                         + "dGlvbnMuaW1wbC5zZXQubXV0YWJsZS5VbmlmaWVkU2V0AAAAAAAAAAEMAAB4cHcIAAAAAD9AAAB4\n"
                         + "eA==",
-                SynchronizedBiMap.of(BiMaps.mutable.of()).keySet());
+                SynchronizedBiMap.of(MutableBiMap.of()).keySet());
     }
 }

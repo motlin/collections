@@ -15,13 +15,15 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.collections.api.bag.Bag;
+import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.ImmutableSet;
+import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.primitive.ObjectIntPair;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
@@ -352,24 +354,24 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
     {
         Bag<Integer> bag1 = this.newWith(3, 3, 3, 2, 2, 1);
         Bag<ObjectIntPair<Integer>> actual1 =
-                bag1.collectWithOccurrences(PrimitiveTuples::pair, Bags.mutable.empty());
+                bag1.collectWithOccurrences(PrimitiveTuples::pair, MutableBag.empty());
         Assert.assertEquals(
-                Bags.immutable.with(
+                ImmutableBag.of(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1)),
                 actual1);
         Assert.assertEquals(
-                Lists.mutable.with(
+                MutableList.of(
                         PrimitiveTuples.pair(Integer.valueOf(1), 1),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(3), 3)),
                 bag1.collectWithOccurrences(PrimitiveTuples::pair));
 
         Set<ObjectIntPair<Integer>> actual2 =
-                bag1.collectWithOccurrences(PrimitiveTuples::pair, Sets.mutable.empty());
+                bag1.collectWithOccurrences(PrimitiveTuples::pair, MutableSet.empty());
         Assert.assertEquals(
-                Sets.immutable.with(
+                ImmutableSet.of(
                         PrimitiveTuples.pair(Integer.valueOf(3), 3),
                         PrimitiveTuples.pair(Integer.valueOf(2), 2),
                         PrimitiveTuples.pair(Integer.valueOf(1), 1)),
@@ -377,7 +379,7 @@ public class UnmodifiableSortedBagTest extends AbstractMutableSortedBagTestCase
 
         Bag<Integer> bag2 = this.newWith(3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 4, 5, 7);
         Assert.assertEquals(
-                Lists.mutable.with(6, 5, 8, 5, 6, 8),
+                MutableList.of(6, 5, 8, 5, 6, 8),
                 bag2.collectWithOccurrences((each, index) -> each + index));
     }
 }

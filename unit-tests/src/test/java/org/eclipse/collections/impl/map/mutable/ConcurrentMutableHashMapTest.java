@@ -11,20 +11,19 @@
 package org.eclipse.collections.impl.map.mutable;
 
 import org.eclipse.collections.api.map.ConcurrentMutableMap;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.partition.PartitionIterable;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iSet;
 
 /**
  * JUnit test for {@link ConcurrentMutableHashMap}.
@@ -144,8 +143,8 @@ public class ConcurrentMutableHashMapTest extends ConcurrentHashMapTestCase
                 "C", 3,
                 "D", 4);
         PartitionIterable<Integer> partition = map.partition(IntegerPredicates.isEven());
-        Assert.assertEquals(iSet(2, 4), partition.getSelected().toSet());
-        Assert.assertEquals(iSet(1, 3), partition.getRejected().toSet());
+        Assert.assertEquals(ImmutableSet.of(2, 4), partition.getSelected().toSet());
+        Assert.assertEquals(ImmutableSet.of(1, 3), partition.getRejected().toSet());
     }
 
     @Override
@@ -158,8 +157,8 @@ public class ConcurrentMutableHashMapTest extends ConcurrentHashMapTestCase
                 "C", 3,
                 "D", 4);
         PartitionIterable<Integer> partition = map.partitionWith(Predicates2.in(), map.select(IntegerPredicates.isEven()));
-        Assert.assertEquals(iSet(2, 4), partition.getSelected().toSet());
-        Assert.assertEquals(iSet(1, 3), partition.getRejected().toSet());
+        Assert.assertEquals(ImmutableSet.of(2, 4), partition.getSelected().toSet());
+        Assert.assertEquals(ImmutableSet.of(1, 3), partition.getRejected().toSet());
     }
 
     @Override
@@ -168,8 +167,8 @@ public class ConcurrentMutableHashMapTest extends ConcurrentHashMapTestCase
         // java.util.concurrent.ConcurrentHashMap doesn't support null keys OR values
         MapIterable<Integer, String> map = this.newMapWithKeysValues(1, "1", 2, "2", 3, "3");
         Verify.assertPostSerializedEqualsAndHashCode(map);
-        Verify.assertEqualsAndHashCode(Maps.mutable.of(1, "1", 2, "2", 3, "3"), map);
-        Verify.assertEqualsAndHashCode(Maps.immutable.of(1, "1", 2, "2", 3, "3"), map);
+        Verify.assertEqualsAndHashCode(MutableMap.of(1, "1", 2, "2", 3, "3"), map);
+        Verify.assertEqualsAndHashCode(ImmutableMap.of(1, "1", 2, "2", 3, "3"), map);
 
         Assert.assertNotEquals(map, this.newMapWithKeysValues(1, "1", 2, "2"));
         Assert.assertNotEquals(map, this.newMapWithKeysValues(1, "1", 2, "2", 3, "3", 4, "4"));

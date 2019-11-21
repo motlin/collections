@@ -65,11 +65,8 @@ import org.eclipse.collections.api.set.primitive.MutableLongSet;
 import org.eclipse.collections.api.set.primitive.MutableShortSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.collection.mutable.AbstractMultiReaderMutableCollection;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.lazy.parallel.set.MultiReaderParallelUnsortedSetIterable;
 import org.eclipse.collections.impl.utility.LazyIterate;
-
-import static org.eclipse.collections.impl.factory.Iterables.mList;
 
 /**
  * MultiReadUnifiedSet provides a thread-safe wrapper around a UnifiedSet, using a ReentrantReadWriteLock. In order to
@@ -185,7 +182,7 @@ public final class MultiReaderUnifiedSet<T>
     {
         try (LockWrapper wrapper = this.lockWrapper.acquireReadLock())
         {
-            return Sets.immutable.withAll(this.delegate);
+            return ImmutableSet.ofAll(this.delegate);
         }
     }
 
@@ -468,7 +465,7 @@ public final class MultiReaderUnifiedSet<T>
             extends UntouchableMutableCollection<T>
             implements MutableSet<T>
     {
-        private final MutableList<UntouchableIterator<T>> requestedIterators = mList();
+        private final MutableList<UntouchableIterator<T>> requestedIterators = MutableList.empty();
 
         private UntouchableMutableSet(MutableSet<T> newDelegate)
         {
@@ -527,7 +524,7 @@ public final class MultiReaderUnifiedSet<T>
         @Override
         public ImmutableSet<T> toImmutable()
         {
-            return Sets.immutable.withAll(this.getDelegate());
+            return ImmutableSet.ofAll(this.getDelegate());
         }
 
         @Override

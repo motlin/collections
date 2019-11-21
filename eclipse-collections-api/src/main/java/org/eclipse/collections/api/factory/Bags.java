@@ -19,17 +19,17 @@ import org.eclipse.collections.api.factory.bag.MutableBagFactory;
  * Mutable Examples:
  *
  * <pre>
- * MutableBag&lt;String&gt; emptyBag = Bags.mutable.empty();
- * MutableBag&lt;String&gt; bagWith = Bags.mutable.with("a", "b", "c");
- * MutableBag&lt;String&gt; bagOf = Bags.mutable.of("a", "b", "c");
+ * MutableBag&lt;String&gt; emptyBag = MutableBag.empty();
+ * MutableBag&lt;String&gt; bagWith = MutableBag.of("a", "b", "c");
+ * MutableBag&lt;String&gt; bagOf = MutableBag.of("a", "b", "c");
  * </pre>
  *
  * Immutable Examples:
  *
  * <pre>
- * ImmutableBag&lt;String&gt; emptyBag = Bags.immutable.empty();
- * ImmutableBag&lt;String&gt; bagWith = Bags.immutable.with("a", "b", "c");
- * ImmutableBag&lt;String&gt; bagOf = Bags.immutable.of("a", "b", "c");
+ * ImmutableBag&lt;String&gt; emptyBag = ImmutableBag.empty();
+ * ImmutableBag&lt;String&gt; bagWith = ImmutableBag.of("a", "b", "c");
+ * ImmutableBag&lt;String&gt; bagOf = ImmutableBag.of("a", "b", "c");
  * </pre>
  */
 @SuppressWarnings("ConstantNamingConvention")

@@ -80,7 +80,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedur
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.immutable.AbstractImmutableCollection;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
@@ -166,7 +165,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     {
         MutableList<T> intermediateResult = FastList.newList();
         this.forEach(new SelectProcedure<>(predicate, intermediateResult));
-        return Sets.immutable.withAll(intermediateResult);
+        return ImmutableSet.ofAll(intermediateResult);
     }
 
     @Override
@@ -180,7 +179,7 @@ public abstract class AbstractImmutableSet<T> extends AbstractImmutableCollectio
     {
         MutableList<T> intermediateResult = FastList.newList();
         this.forEach(new RejectProcedure<>(predicate, intermediateResult));
-        return Sets.immutable.withAll(intermediateResult);
+        return ImmutableSet.ofAll(intermediateResult);
     }
 
     @Override

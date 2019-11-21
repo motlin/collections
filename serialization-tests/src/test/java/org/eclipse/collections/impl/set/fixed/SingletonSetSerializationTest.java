@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.set.fixed;
 
-import org.eclipse.collections.impl.factory.Sets;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -23,6 +23,6 @@ public class SingletonSetSerializationTest
                 1L,
                 "rO0ABXNyADNvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLnNldC5maXhlZC5TaW5nbGV0b25T\n"
                         + "ZXQAAAAAAAAAAQwAAHhwcHg=",
-                Sets.fixedSize.of(null));
+                FixedSizeSet.of(null));
     }
 }

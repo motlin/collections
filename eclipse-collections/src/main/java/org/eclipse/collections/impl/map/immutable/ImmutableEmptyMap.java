@@ -23,15 +23,14 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.utility.LazyIterate;
 
 /**
- * This is a zero element {@link ImmutableMap} which is created by calling the Maps.immutable.empty() method.
+ * This is a zero element {@link ImmutableMap} which is created by calling the ImmutableMap.empty() method.
  */
 final class ImmutableEmptyMap<K, V>
         extends AbstractImmutableMap<K, V>
@@ -86,13 +85,13 @@ final class ImmutableEmptyMap<K, V>
     @Override
     public Set<K> keySet()
     {
-        return Sets.immutable.<K>of().castToSet();
+        return ImmutableSet.<K>empty().castToSet();
     }
 
     @Override
     public Collection<V> values()
     {
-        return Lists.immutable.<V>empty().castToList();
+        return ImmutableList.<V>empty().castToList();
     }
 
     @Override
@@ -126,7 +125,7 @@ final class ImmutableEmptyMap<K, V>
     @Override
     public ImmutableMap<V, K> flipUniqueValues()
     {
-        return Maps.immutable.with();
+        return ImmutableMap.empty();
     }
 
     @Override
@@ -196,13 +195,13 @@ final class ImmutableEmptyMap<K, V>
     @Override
     public <K2, V2> ImmutableMap<K2, V2> collect(Function2<? super K, ? super V, Pair<K2, V2>> function)
     {
-        return Maps.immutable.empty();
+        return ImmutableMap.empty();
     }
 
     @Override
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return Maps.immutable.empty();
+        return ImmutableMap.empty();
     }
 
     @Override

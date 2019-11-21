@@ -41,8 +41,6 @@ import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.impl.Counter;
 import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
-import org.eclipse.collections.impl.factory.SortedBags;
-import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.partition.bag.sorted.PartitionImmutableSortedBagImpl;
@@ -486,7 +484,7 @@ class ImmutableSortedBagImpl<T>
     @Override
     public ImmutableSortedSet<T> distinct()
     {
-        return SortedSets.immutable.with(this.comparator(), this.elements);
+        return ImmutableSortedSet.of(this.comparator(), this.elements);
     }
 
     @Override
@@ -539,13 +537,13 @@ class ImmutableSortedBagImpl<T>
     @Override
     public MutableSortedSet<T> toSortedSet()
     {
-        return SortedSets.mutable.with(this.elements);
+        return MutableSortedSet.of(this.elements);
     }
 
     @Override
     public MutableSortedSet<T> toSortedSet(Comparator<? super T> comparator)
     {
-        return SortedSets.mutable.with(comparator, this.elements);
+        return MutableSortedSet.of(comparator, this.elements);
     }
 
     @Override
@@ -666,7 +664,7 @@ class ImmutableSortedBagImpl<T>
         }
         if (count == 0)
         {
-            return SortedBags.immutable.empty(this.comparator());
+            return ImmutableSortedBag.empty(this.comparator());
         }
         if (count >= this.size())
         {
@@ -704,7 +702,7 @@ class ImmutableSortedBagImpl<T>
         }
         if (count >= this.size())
         {
-            return SortedBags.immutable.empty(this.comparator());
+            return ImmutableSortedBag.empty(this.comparator());
         }
 
         MutableSortedBag<T> output = TreeBag.newBag(this.comparator());

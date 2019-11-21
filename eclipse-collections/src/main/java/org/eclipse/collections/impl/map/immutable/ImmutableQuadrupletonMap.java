@@ -21,13 +21,12 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.map.ImmutableMap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Predicates2;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.tuple.Tuples;
 
 final class ImmutableQuadrupletonMap<K, V>
@@ -60,19 +59,19 @@ final class ImmutableQuadrupletonMap<K, V>
     @Override
     public RichIterable<K> keysView()
     {
-        return Lists.immutable.with(this.key1, this.key2, this.key3, this.key4).asLazy();
+        return ImmutableList.of(this.key1, this.key2, this.key3, this.key4).asLazy();
     }
 
     @Override
     public RichIterable<V> valuesView()
     {
-        return Lists.immutable.with(this.value1, this.value2, this.value3, this.value4).asLazy();
+        return ImmutableList.of(this.value1, this.value2, this.value3, this.value4).asLazy();
     }
 
     @Override
     public RichIterable<Pair<K, V>> keyValuesView()
     {
-        return Lists.immutable.with(
+        return ImmutableList.of(
                 Tuples.pair(this.key1, this.value1),
                 Tuples.pair(this.key2, this.value2),
                 Tuples.pair(this.key3, this.value3),
@@ -128,13 +127,13 @@ final class ImmutableQuadrupletonMap<K, V>
     @Override
     public Set<K> keySet()
     {
-        return Sets.immutable.with(this.key1, this.key2, this.key3, this.key4).castToSet();
+        return ImmutableSet.of(this.key1, this.key2, this.key3, this.key4).castToSet();
     }
 
     @Override
     public Collection<V> values()
     {
-        return Lists.immutable.with(this.value1, this.value2, this.value3, this.value4).castToList();
+        return ImmutableList.of(this.value1, this.value2, this.value3, this.value4).castToList();
     }
 
     @Override
@@ -174,7 +173,7 @@ final class ImmutableQuadrupletonMap<K, V>
     @Override
     public ImmutableMap<V, K> flipUniqueValues()
     {
-        return Maps.immutable.with(this.value1, this.key1, this.value2, this.key2, this.value3, this.key3, this.value4, this.key4);
+        return ImmutableMap.of(this.value1, this.key1, this.value2, this.key2, this.value3, this.key3, this.value4, this.key4);
     }
 
     @Override
@@ -230,13 +229,13 @@ final class ImmutableQuadrupletonMap<K, V>
         Pair<K2, V2> pair3 = function.value(this.key3, this.value3);
         Pair<K2, V2> pair4 = function.value(this.key4, this.value4);
 
-        return Maps.immutable.with(pair1.getOne(), pair1.getTwo(), pair2.getOne(), pair2.getTwo(), pair3.getOne(), pair3.getTwo(), pair4.getOne(), pair4.getTwo());
+        return ImmutableMap.of(pair1.getOne(), pair1.getTwo(), pair2.getOne(), pair2.getTwo(), pair3.getOne(), pair3.getTwo(), pair4.getOne(), pair4.getTwo());
     }
 
     @Override
     public <R> ImmutableMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        return Maps.immutable.with(
+        return ImmutableMap.of(
                 this.key1, function.value(this.key1, this.value1),
                 this.key2, function.value(this.key2, this.value2),
                 this.key3, function.value(this.key3, this.value3),
@@ -307,37 +306,37 @@ final class ImmutableQuadrupletonMap<K, V>
         switch (result)
         {
             case 1:
-                return Maps.immutable.with(this.key1, this.value1);
+                return ImmutableMap.of(this.key1, this.value1);
             case 2:
-                return Maps.immutable.with(this.key2, this.value2);
+                return ImmutableMap.of(this.key2, this.value2);
             case 3:
-                return Maps.immutable.with(this.key1, this.value1, this.key2, this.value2);
+                return ImmutableMap.of(this.key1, this.value1, this.key2, this.value2);
             case 4:
-                return Maps.immutable.with(this.key3, this.value3);
+                return ImmutableMap.of(this.key3, this.value3);
             case 5:
-                return Maps.immutable.with(this.key1, this.value1, this.key3, this.value3);
+                return ImmutableMap.of(this.key1, this.value1, this.key3, this.value3);
             case 6:
-                return Maps.immutable.with(this.key2, this.value2, this.key3, this.value3);
+                return ImmutableMap.of(this.key2, this.value2, this.key3, this.value3);
             case 7:
-                return Maps.immutable.with(this.key1, this.value1, this.key2, this.value2, this.key3, this.value3);
+                return ImmutableMap.of(this.key1, this.value1, this.key2, this.value2, this.key3, this.value3);
             case 8:
-                return Maps.immutable.with(this.key4, this.value4);
+                return ImmutableMap.of(this.key4, this.value4);
             case 9:
-                return Maps.immutable.with(this.key1, this.value1, this.key4, this.value4);
+                return ImmutableMap.of(this.key1, this.value1, this.key4, this.value4);
             case 10:
-                return Maps.immutable.with(this.key2, this.value2, this.key4, this.value4);
+                return ImmutableMap.of(this.key2, this.value2, this.key4, this.value4);
             case 11:
-                return Maps.immutable.with(this.key1, this.value1, this.key2, this.value2, this.key4, this.value4);
+                return ImmutableMap.of(this.key1, this.value1, this.key2, this.value2, this.key4, this.value4);
             case 12:
-                return Maps.immutable.with(this.key3, this.value3, this.key4, this.value4);
+                return ImmutableMap.of(this.key3, this.value3, this.key4, this.value4);
             case 13:
-                return Maps.immutable.with(this.key1, this.value1, this.key3, this.value3, this.key4, this.value4);
+                return ImmutableMap.of(this.key1, this.value1, this.key3, this.value3, this.key4, this.value4);
             case 14:
-                return Maps.immutable.with(this.key2, this.value2, this.key3, this.value3, this.key4, this.value4);
+                return ImmutableMap.of(this.key2, this.value2, this.key3, this.value3, this.key4, this.value4);
             case 15:
-                return Maps.immutable.with(this.key1, this.value1, this.key2, this.value2, this.key3, this.value3, this.key4, this.value4);
+                return ImmutableMap.of(this.key1, this.value1, this.key2, this.value2, this.key3, this.value3, this.key4, this.value4);
             default:
-                return Maps.immutable.empty();
+                return ImmutableMap.empty();
         }
     }
 

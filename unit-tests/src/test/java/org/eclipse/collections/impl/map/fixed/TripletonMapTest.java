@@ -12,6 +12,7 @@ package org.eclipse.collections.impl.map.fixed;
 
 import java.util.Map;
 
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.api.map.MutableMap;
@@ -21,8 +22,6 @@ import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Multimaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -86,7 +85,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachKeyValue()
     {
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
         map.forEachKeyValue((key, value) -> collection.add(key + value));
         Assert.assertEquals(FastList.newListWith("1One", "2Two", "3Three"), collection);
@@ -184,7 +183,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachValue()
     {
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
         map.forEachValue(CollectionAddProcedure.on(collection));
         Assert.assertEquals(FastList.newListWith("1", "2", "3"), collection);
@@ -194,7 +193,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEach()
     {
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
         map.forEach(CollectionAddProcedure.on(collection));
         Assert.assertEquals(FastList.newListWith("1", "2", "3"), collection);
@@ -204,7 +203,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachKey()
     {
-        MutableList<Integer> collection = Lists.mutable.of();
+        MutableList<Integer> collection = MutableList.empty();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
         map.forEachKey(CollectionAddProcedure.on(collection));
         Assert.assertEquals(FastList.newListWith(1, 2, 3), collection);
@@ -280,7 +279,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachWith()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableMap<Integer, Integer> map = new TripletonMap<>(1, 1, 2, 2, 3, 3);
         map.forEachWith((argument1, argument2) -> result.add(argument1 + argument2), 10);
         Assert.assertEquals(FastList.newListWith(11, 12, 13), result);
@@ -290,7 +289,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void forEachWithIndex()
     {
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
         map.forEachWithIndex((value, index) ->
         {
@@ -304,7 +303,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void entrySet()
     {
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
         for (Map.Entry<Integer, String> entry : map.entrySet())
         {
@@ -317,7 +316,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void values()
     {
-        MutableList<String> result = Lists.mutable.of();
+        MutableList<String> result = MutableList.empty();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
         for (String value : map.values())
         {
@@ -330,7 +329,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void keySet()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "One", 2, "Two", 3, "Three");
         for (Integer key : map.keySet())
         {
@@ -485,7 +484,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void iterator()
     {
-        MutableList<String> collection = Lists.mutable.of();
+        MutableList<String> collection = MutableList.empty();
         MutableMap<Integer, String> map = new TripletonMap<>(1, "1", 2, "2", 3, "3");
         for (String eachValue : map)
         {
@@ -505,7 +504,7 @@ public class TripletonMapTest extends AbstractMemoryEfficientMutableMapTest
     @Test
     public void asLazyValues()
     {
-        Assert.assertEquals(Bags.mutable.of("One", "Two", "Three"), this.classUnderTest().valuesView().toBag());
+        Assert.assertEquals(MutableBag.of("One", "Two", "Three"), this.classUnderTest().valuesView().toBag());
     }
 
     @Test

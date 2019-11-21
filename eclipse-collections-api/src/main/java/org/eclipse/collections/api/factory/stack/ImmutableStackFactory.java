@@ -12,8 +12,8 @@ package org.eclipse.collections.api.factory.stack;
 
 import java.util.stream.Stream;
 
-import org.eclipse.collections.api.factory.Stacks;
 import org.eclipse.collections.api.stack.ImmutableStack;
+import org.eclipse.collections.api.stack.MutableStack;
 
 public interface ImmutableStackFactory
 {
@@ -58,7 +58,7 @@ public interface ImmutableStackFactory
      */
     default <T> ImmutableStack<T> fromStream(Stream<? extends T> stream)
     {
-        return Stacks.mutable.<T>fromStream(stream).toImmutable();
+        return MutableStack.<T>fromStream(stream).toImmutable();
     }
 
     /**

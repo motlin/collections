@@ -15,13 +15,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.mList;
-import static org.eclipse.collections.impl.factory.Iterables.mMap;
-import static org.eclipse.collections.impl.factory.Iterables.mSet;
 
 /**
  * JUnit test to make sure that the methods {@link Verify#assertListsEqual(String, List, List)},
@@ -30,22 +27,22 @@ import static org.eclipse.collections.impl.factory.Iterables.mSet;
  */
 public class CollectionsEqualTest
 {
-    private final MutableList<String> list = mList("asdf", "qwer");
-    private final MutableList<String> list2 = mList("asdf", "zxcv");
-    private final MutableList<String> list3 = mList("asdf");
+    private final MutableList<String> list = MutableList.of("asdf", "qwer");
+    private final MutableList<String> list2 = MutableList.of("asdf", "zxcv");
+    private final MutableList<String> list3 = MutableList.of("asdf");
 
-    private final MutableSet<String> set = mSet("asdf", "qwer");
-    private final MutableSet<String> set2 = mSet("asdf", "zxcv");
-    private final MutableSet<String> set3 = mSet("asdf");
+    private final MutableSet<String> set = MutableSet.of("asdf", "qwer");
+    private final MutableSet<String> set2 = MutableSet.of("asdf", "zxcv");
+    private final MutableSet<String> set3 = MutableSet.of("asdf");
 
-    private final MutableSet<String> bigSet1 = mSet("1", "2", "3", "4", "5", "6");
-    private final MutableSet<String> bigSet2 = mSet("7", "8", "9", "10", "11", "12");
+    private final MutableSet<String> bigSet1 = MutableSet.of("1", "2", "3", "4", "5", "6");
+    private final MutableSet<String> bigSet2 = MutableSet.of("7", "8", "9", "10", "11", "12");
 
-    private final Map<String, String> map = mMap("asdf", "asdf", "qwer", "qwer");
-    private final Map<String, String> map2 = mMap("asdf", "zxcv", "qwer", "qwer");
-    private final Map<String, String> map3 = mMap("zxcv", "asdf", "qwer", "qwer");
-    private final Map<String, String> map4 = mMap("zxcv", "zxcv", "qwer", "qwer");
-    private final Map<String, String> map5 = mMap("asdf", "asdf");
+    private final Map<String, String> map = MutableMap.of("asdf", "asdf", "qwer", "qwer");
+    private final Map<String, String> map2 = MutableMap.of("asdf", "zxcv", "qwer", "qwer");
+    private final Map<String, String> map3 = MutableMap.of("zxcv", "asdf", "qwer", "qwer");
+    private final Map<String, String> map4 = MutableMap.of("zxcv", "zxcv", "qwer", "qwer");
+    private final Map<String, String> map5 = MutableMap.of("asdf", "asdf");
 
     @Test
     public void listsEqual()

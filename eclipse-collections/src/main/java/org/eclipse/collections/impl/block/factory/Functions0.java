@@ -24,10 +24,6 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.block.function.PassThruFunction0;
 import org.eclipse.collections.impl.block.function.checked.CheckedFunction0;
 import org.eclipse.collections.impl.block.function.checked.ThrowingFunction0;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 
 public final class Functions0
 {
@@ -168,7 +164,7 @@ public final class Functions0
         @Override
         public MutableList<T> value()
         {
-            return Lists.mutable.empty();
+            return MutableList.empty();
         }
     }
 
@@ -179,7 +175,7 @@ public final class Functions0
         @Override
         public MutableMap<K, V> value()
         {
-            return Maps.mutable.empty();
+            return MutableMap.empty();
         }
     }
 
@@ -190,7 +186,7 @@ public final class Functions0
         @Override
         public MutableSet<T> value()
         {
-            return Sets.mutable.empty();
+            return MutableSet.empty();
         }
     }
 
@@ -201,7 +197,7 @@ public final class Functions0
         @Override
         public MutableBag<T> value()
         {
-            return Bags.mutable.empty();
+            return MutableBag.empty();
         }
     }
 

@@ -11,11 +11,11 @@
 package org.eclipse.collections.test.bag;
 
 import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.ImmutableBag;
 import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.bag.UnsortedBag;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.test.UnorderedIterableTestCase;
 import org.junit.Test;
 
@@ -32,26 +32,26 @@ public interface UnsortedBagTestCase extends UnorderedIterableTestCase, BagTestC
     @Override
     default <T> UnsortedBag<T> getExpectedFiltered(T... elements)
     {
-        return Bags.immutable.with(elements);
+        return ImmutableBag.of(elements);
     }
 
     @Override
     default <T> MutableBag<T> newMutableForFilter(T... elements)
     {
-        return Bags.mutable.with(elements);
+        return MutableBag.of(elements);
     }
 
     @Test
     default void UnsortedBag_forEachWith()
     {
         UnsortedBag<Integer> bag = this.newWith(3, 3, 3, 2, 2, 1);
-        MutableBag<Integer> result = Bags.mutable.with();
+        MutableBag<Integer> result = MutableBag.empty();
         Object sentinel = new Object();
         bag.forEachWith((argument1, argument2) -> {
             result.add(argument1);
             assertSame(sentinel, argument2);
         }, sentinel);
-        assertEquals(Bags.immutable.with(3, 3, 3, 2, 2, 1), result);
+        assertEquals(ImmutableBag.of(3, 3, 3, 2, 2, 1), result);
     }
 
     @Override
@@ -91,11 +91,11 @@ public interface UnsortedBagTestCase extends UnorderedIterableTestCase, BagTestC
         assertThat(
                 iterable.toList(),
                 isOneOf(
-                        Lists.immutable.with(2, 2, 1),
-                        Lists.immutable.with(1, 2, 2),
-                        Lists.immutable.with(2, 1, 2)));
+                        ImmutableList.of(2, 2, 1),
+                        ImmutableList.of(1, 2, 2),
+                        ImmutableList.of(2, 1, 2)));
 
-        MutableList<Integer> target = Lists.mutable.empty();
+        MutableList<Integer> target = MutableList.empty();
         iterable.each(target::add);
         assertEquals(
                 target,
@@ -107,10 +107,10 @@ public interface UnsortedBagTestCase extends UnorderedIterableTestCase, BagTestC
     default void RichIterable_into()
     {
         assertThat(
-                this.newWith(2, 2, 1).into(Lists.mutable.empty()),
+                this.newWith(2, 2, 1).into(MutableList.empty()),
                 isOneOf(
-                        Lists.immutable.with(2, 2, 1),
-                        Lists.immutable.with(1, 2, 2),
-                        Lists.immutable.with(2, 1, 2)));
+                        ImmutableList.of(2, 2, 1),
+                        ImmutableList.of(1, 2, 2),
+                        ImmutableList.of(2, 1, 2)));
     }
 }

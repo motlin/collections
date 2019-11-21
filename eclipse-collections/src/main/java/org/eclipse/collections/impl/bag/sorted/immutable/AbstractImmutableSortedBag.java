@@ -36,6 +36,7 @@ import org.eclipse.collections.api.block.predicate.Predicate2;
 import org.eclipse.collections.api.block.predicate.primitive.IntPredicate;
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.collection.MutableCollection;
+import org.eclipse.collections.api.list.FixedSizeList;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.ImmutableBooleanList;
@@ -59,9 +60,6 @@ import org.eclipse.collections.impl.bag.sorted.mutable.TreeBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.eclipse.collections.impl.block.factory.Predicates;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -115,7 +113,7 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public <V> ImmutableBag<V> countBy(Function<? super T, ? extends V> function)
     {
-        return this.collect(function, Bags.mutable.<V>empty()).toImmutable();
+        return this.collect(function, MutableBag.<V>empty()).toImmutable();
     }
 
     /**
@@ -124,7 +122,7 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public <V, P> ImmutableBag<V> countByWith(Function2<? super T, ? super P, ? extends V> function, P parameter)
     {
-        return this.collectWith(function, parameter, Bags.mutable.<V>empty()).toImmutable();
+        return this.collectWith(function, parameter, MutableBag.<V>empty()).toImmutable();
     }
 
     /**
@@ -133,7 +131,7 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public <V> ImmutableBag<V> countByEach(Function<? super T, ? extends Iterable<V>> function)
     {
-        return this.countByEach(function, Bags.mutable.empty()).toImmutable();
+        return this.countByEach(function, MutableBag.empty()).toImmutable();
     }
 
     @Override
@@ -405,7 +403,7 @@ abstract class AbstractImmutableSortedBag<T>
         }
         if (n == 0)
         {
-            return Lists.fixedSize.empty();
+            return FixedSizeList.empty();
         }
         int keySize = Math.min(n, this.sizeDistinct());
         MutableList<ObjectIntPair<T>> sorted = this.toListWithOccurrences().sortThisByInt(function);
@@ -421,7 +419,7 @@ abstract class AbstractImmutableSortedBag<T>
     @Override
     public MutableStack<T> toStack()
     {
-        return Stacks.mutable.withAll(this);
+        return MutableStack.ofAll(this);
     }
 
     @Override
@@ -432,7 +430,7 @@ abstract class AbstractImmutableSortedBag<T>
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
 
-        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        MutableList<RichIterable<T>> result = MutableList.empty();
         T[] objects = (T[]) this.toArray();
         MutableCollection<T> batch = TreeBag.newBag(this.comparator());
         int j = 0;

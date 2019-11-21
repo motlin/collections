@@ -21,7 +21,6 @@ import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.CollidingInt;
 import org.eclipse.collections.impl.block.factory.Procedures;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.MultiReaderUnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
@@ -286,7 +285,7 @@ public class MultiReaderUnifiedSetAcceptanceTest
     {
         MultiReaderUnifiedSet<CollidingInt> set = MultiReaderUnifiedSet.newSet();
 
-        MutableList<CollidingInt> toRetain = Lists.mutable.of();
+        MutableList<CollidingInt> toRetain = MutableList.empty();
 
         int size = 100000;
         for (int i = 0; i < size; i++)

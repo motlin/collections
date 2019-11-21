@@ -30,6 +30,7 @@ import org.eclipse.collections.api.collection.primitive.MutableIntCollection;
 import org.eclipse.collections.api.collection.primitive.MutableLongCollection;
 import org.eclipse.collections.api.collection.primitive.MutableShortCollection;
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.FixedSizeMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.api.set.sorted.MutableSortedSet;
 import org.eclipse.collections.api.tuple.Pair;
@@ -49,9 +50,6 @@ import org.eclipse.collections.impl.block.function.AddFunction;
 import org.eclipse.collections.impl.block.predicate.MapEntryPredicate;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
 import org.eclipse.collections.impl.block.procedure.MapPutProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.set.sorted.mutable.TreeSortedSet;
@@ -103,7 +101,7 @@ public class MapIterateTest
     @Test
     public void functionMapTransformation()
     {
-        MutableMap<Integer, Integer> input = Maps.fixedSize.of(1, 10, 2, 20);
+        MutableMap<Integer, Integer> input = FixedSizeMap.of(1, 10, 2, 20);
 
         MutableMap<String, String> result = MapIterate.collect(input, Functions.getToString(), Functions.getToString());
 
@@ -115,7 +113,7 @@ public class MapIterateTest
     @Test
     public void simpleMapTransformation()
     {
-        MutableMap<Locale, Currency> input = Maps.fixedSize.of(Locale.UK, Currency.getInstance(Locale.UK), Locale.JAPAN, Currency.getInstance(Locale.JAPAN));
+        MutableMap<Locale, Currency> input = FixedSizeMap.of(Locale.UK, Currency.getInstance(Locale.UK), Locale.JAPAN, Currency.getInstance(Locale.JAPAN));
 
         Function<Locale, String> getCountry = Locale::getCountry;
         Function<Currency, String> getCurrencyCode = Currency::getCurrencyCode;
@@ -128,7 +126,7 @@ public class MapIterateTest
     @Test
     public void complexMapTransformation()
     {
-        MutableMap<Locale, Currency> input = Maps.fixedSize.of(Locale.UK, Currency.getInstance(Locale.UK), Locale.JAPAN, Currency.getInstance(Locale.JAPAN));
+        MutableMap<Locale, Currency> input = FixedSizeMap.of(Locale.UK, Currency.getInstance(Locale.UK), Locale.JAPAN, Currency.getInstance(Locale.JAPAN));
 
         Function2<Locale, Currency, Pair<String, String>> function = (locale, currency) -> Tuples.pair(locale.getDisplayCountry(Locale.ENGLISH) + ':' + currency.getCurrencyCode(), currency.getCurrencyCode());
         MutableMap<String, String> result = MapIterate.collect(input, function);
@@ -153,7 +151,7 @@ public class MapIterateTest
     @Test
     public void reverseMapping()
     {
-        MutableMap<Integer, Integer> input = Maps.fixedSize.of(1, 10, 2, 20);
+        MutableMap<Integer, Integer> input = FixedSizeMap.of(1, 10, 2, 20);
 
         MutableMap<Integer, Integer> result = MapIterate.reverseMapping(input);
         Verify.assertContainsKeyValue(10, 1, result);
@@ -199,7 +197,7 @@ public class MapIterateTest
     {
         MutableMap<String, Integer> map = this.getIntegerMap();
         Collection<Integer> results = MapIterate.select(map, Integer.class::isInstance, FastList.newList());
-        Assert.assertEquals(Bags.mutable.of(1, 2, 3, 4, 5), HashBag.newBag(results));
+        Assert.assertEquals(MutableBag.of(1, 2, 3, 4, 5), HashBag.newBag(results));
     }
 
     @Test
@@ -222,7 +220,7 @@ public class MapIterateTest
     {
         MutableMap<String, Integer> map = UnifiedMap.newMap();
         map.putAll(this.getIntegerMap());
-        MutableList<Integer> list = Lists.mutable.of();
+        MutableList<Integer> list = MutableList.empty();
         MapIterate.forEachValue(map, CollectionAddProcedure.on(list));
         MapIterate.forEachValue(new HashMap<>(map), CollectionAddProcedure.on(list));
         MapIterate.forEachValue(new HashMap<>(), CollectionAddProcedure.on(list));
@@ -260,7 +258,7 @@ public class MapIterateTest
     {
         MutableMap<String, Integer> map = UnifiedMap.newMap();
         map.putAll(this.getIntegerMap());
-        MutableBag<String> bag = Bags.mutable.of();
+        MutableBag<String> bag = MutableBag.empty();
         MapIterate.forEachKey(map, CollectionAddProcedure.on(bag));
         MapIterate.forEachKey(new HashMap<>(map), CollectionAddProcedure.on(bag));
         MapIterate.forEachKey(new HashMap<>(), CollectionAddProcedure.on(bag));
@@ -526,7 +524,7 @@ public class MapIterateTest
     {
         Assert.assertTrue(MapIterate.isEmpty(null));
         Assert.assertTrue(MapIterate.isEmpty(UnifiedMap.newMap()));
-        Assert.assertFalse(MapIterate.isEmpty(Maps.fixedSize.of("1", "1")));
+        Assert.assertFalse(MapIterate.isEmpty(FixedSizeMap.of("1", "1")));
     }
 
     @Test
@@ -534,7 +532,7 @@ public class MapIterateTest
     {
         Assert.assertFalse(MapIterate.notEmpty(null));
         Assert.assertFalse(MapIterate.notEmpty(UnifiedMap.newMap()));
-        Assert.assertTrue(MapIterate.notEmpty(Maps.fixedSize.of("1", "1")));
+        Assert.assertTrue(MapIterate.notEmpty(FixedSizeMap.of("1", "1")));
     }
 
     @Test
@@ -554,7 +552,7 @@ public class MapIterateTest
     @Test
     public void addAllKeysToCollection()
     {
-        MutableList<Character> target = Lists.mutable.of();
+        MutableList<Character> target = MutableList.empty();
         MapIterate.addAllKeysTo(newLittleMap(), target);
         Assert.assertEquals(FastList.newListWith('a', 'b').toBag(), target.toBag());
     }
@@ -562,7 +560,7 @@ public class MapIterateTest
     @Test
     public void addAllValuesToCollection()
     {
-        MutableList<Integer> target = Lists.mutable.of();
+        MutableList<Integer> target = MutableList.empty();
         MapIterate.addAllValuesTo(newLittleMap(), target);
         Assert.assertEquals(FastList.newListWith(1, 2).toBag(), target.toBag());
     }
@@ -712,7 +710,7 @@ public class MapIterateTest
     @Test
     public void collectIntoTarget()
     {
-        MutableList<String> target = Lists.mutable.of();
+        MutableList<String> target = MutableList.empty();
         MutableList<String> result = MapIterate.collect(newLittleMap(), String::valueOf, target);
         Assert.assertEquals(FastList.newListWith("1", "2").toBag(), result.toBag());
         Assert.assertSame(target, result);

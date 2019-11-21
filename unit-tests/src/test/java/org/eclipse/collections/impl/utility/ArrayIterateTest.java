@@ -21,6 +21,8 @@ import java.util.List;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function3;
+import org.eclipse.collections.api.list.FixedSizeList;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.list.primitive.MutableBooleanList;
 import org.eclipse.collections.api.map.MutableMap;
@@ -43,7 +45,6 @@ import org.eclipse.collections.impl.block.function.MaxSizeFunction;
 import org.eclipse.collections.impl.block.function.MinSizeFunction;
 import org.eclipse.collections.impl.block.function.NegativeIntervalFunction;
 import org.eclipse.collections.impl.block.procedure.MapPutProcedure;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.AddToList;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -60,8 +61,6 @@ import org.eclipse.collections.impl.multimap.list.FastListMultimap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.eclipse.collections.impl.factory.Iterables.iList;
 
 public class ArrayIterateTest
 {
@@ -292,8 +291,8 @@ public class ArrayIterateTest
     {
         PartitionIterable<Integer> result =
                 ArrayIterate.partition(new Integer[]{1, 2, 3, 3, 4, 4, 5, 5, 5, 2}, Predicates.greaterThan(3));
-        Assert.assertEquals(Lists.immutable.of(4, 4, 5, 5, 5), result.getSelected());
-        Assert.assertEquals(Lists.immutable.of(1, 2, 3, 3, 2), result.getRejected());
+        Assert.assertEquals(ImmutableList.of(4, 4, 5, 5, 5), result.getSelected());
+        Assert.assertEquals(ImmutableList.of(1, 2, 3, 3, 2), result.getRejected());
     }
 
     @Test
@@ -301,8 +300,8 @@ public class ArrayIterateTest
     {
         PartitionIterable<Integer> result =
                 ArrayIterate.partitionWith(new Integer[]{1, 2, 3, 3, 4, 4, 5, 5, 5, 2}, Predicates2.greaterThan(), 3);
-        Assert.assertEquals(Lists.immutable.of(4, 4, 5, 5, 5), result.getSelected());
-        Assert.assertEquals(Lists.immutable.of(1, 2, 3, 3, 2), result.getRejected());
+        Assert.assertEquals(ImmutableList.of(4, 4, 5, 5, 5), result.getSelected());
+        Assert.assertEquals(ImmutableList.of(1, 2, 3, 3, 2), result.getRejected());
     }
 
     @Test
@@ -326,7 +325,7 @@ public class ArrayIterateTest
     {
         Boolean[] objectArray = {true, false, null};
         Assert.assertEquals(
-                iList("true", "false", "null"),
+                ImmutableList.of("true", "false", "null"),
                 ArrayIterate.collect(objectArray, String::valueOf));
     }
 
@@ -527,7 +526,7 @@ public class ArrayIterateTest
     {
         Boolean[] objectArray = {true, false, null};
         Assert.assertEquals(
-                iList("true", "false", "null"),
+                ImmutableList.of("true", "false", "null"),
                 ArrayIterate.collectWith(objectArray, Functions2.fromFunction(String::valueOf), null));
     }
 
@@ -538,18 +537,18 @@ public class ArrayIterateTest
         Function<Integer, Interval> function = Interval::zeroTo;
 
         Assert.assertEquals(
-                Lists.immutable.with(0, 1, 0, 1, 2, 0, 1, 2, 3, 0, 1, 2, 3, 4),
+                ImmutableList.of(0, 1, 0, 1, 2, 0, 1, 2, 3, 0, 1, 2, 3, 4),
                 ArrayIterate.flatCollect(objectArray, function));
 
         Assert.assertEquals(
-                Lists.immutable.with(5, 0, 1, 0, 1, 2, 0, 1, 2, 3, 0, 1, 2, 3, 4),
+                ImmutableList.of(5, 0, 1, 0, 1, 2, 0, 1, 2, 3, 0, 1, 2, 3, 4),
                 ArrayIterate.flatCollect(objectArray, function, FastList.newListWith(5)));
     }
 
     @Test
     public void addAllTo()
     {
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         ArrayIterate.addAllTo(new Integer[]{1, 2, 3}, result);
         Assert.assertEquals(FastList.newListWith(1, 2, 3), result);
     }
@@ -632,7 +631,7 @@ public class ArrayIterateTest
     public void selectInstancesOf()
     {
         Assert.assertEquals(
-                iList(1, 3, 5),
+                ImmutableList.of(1, 3, 5),
                 ArrayIterate.selectInstancesOf(new Number[]{1, 2.0, 3, 4.0, 5}, Integer.class));
     }
 
@@ -697,7 +696,7 @@ public class ArrayIterateTest
     @Test
     public void collectIf()
     {
-        Object[] integers = Lists.fixedSize.of(1, 2, 3).toArray();
+        Object[] integers = FixedSizeList.of(1, 2, 3).toArray();
         Verify.assertContainsAll(ArrayIterate.collectIf(integers, Integer.class::isInstance, String::valueOf), "1", "2", "3");
         Verify.assertContainsAll(ArrayIterate.collectIf(integers, Integer.class::isInstance, String::valueOf, FastList.newList()), "1", "2", "3");
     }
@@ -896,7 +895,7 @@ public class ArrayIterateTest
         ArrayIterate.forEachWithIndex(integers, 9, 0, (each, index) -> builder5.append(each).append(index));
         Assert.assertEquals("19282736353443424140", builder5.toString());
 
-        MutableList<Integer> result = Lists.mutable.of();
+        MutableList<Integer> result = MutableList.empty();
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ArrayIterate.forEachWithIndex(integers, -1, 0, new AddToList(result)));
         Verify.assertThrows(IndexOutOfBoundsException.class, () -> ArrayIterate.forEachWithIndex(integers, 0, -1, new AddToList(result)));
     }
@@ -1188,13 +1187,13 @@ public class ArrayIterateTest
                 pairs.collect((Function<Pair<String, ?>, String>) Pair::getOne));
         Assert.assertEquals(
                 FastList.newListWith(nulls),
-                pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+                pairs.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         MutableList<Pair<String, Object>> pairsPlusOne = ArrayIterate.zip(array, nullsPlusOne);
         Assert.assertEquals(
                 FastList.newListWith(array),
                 pairsPlusOne.collect((Function<Pair<String, ?>, String>) Pair::getOne));
-        Assert.assertEquals(FastList.newListWith(nulls), pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, Lists.mutable.of()));
+        Assert.assertEquals(FastList.newListWith(nulls), pairsPlusOne.collect((Function<Pair<?, Object>, Object>) Pair::getTwo, MutableList.empty()));
 
         MutableList<Pair<String, Object>> pairsMinusOne = ArrayIterate.zip(array, nullsMinusOne);
         Assert.assertEquals(array.length - 1, pairsMinusOne.size());
@@ -1229,11 +1228,11 @@ public class ArrayIterateTest
         String[] array = {"1", "2", "3", "4", "5", "6", "7"};
         RichIterable<RichIterable<String>> groups = ArrayIterate.chunk(array, 2);
         Assert.assertEquals(
-                Lists.immutable.with(
-                        Lists.immutable.with("1", "2"),
-                        Lists.immutable.with("3", "4"),
-                        Lists.immutable.with("5", "6"),
-                        Lists.immutable.with("7")),
+                ImmutableList.of(
+                        ImmutableList.of("1", "2"),
+                        ImmutableList.of("3", "4"),
+                        ImmutableList.of("5", "6"),
+                        ImmutableList.of("7")),
                 groups);
     }
 

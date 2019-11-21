@@ -11,12 +11,11 @@
 package org.eclipse.collections.impl.set.fixed;
 
 import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.block.factory.Procedures2;
 import org.eclipse.collections.impl.block.procedure.CollectionAddProcedure;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
@@ -115,7 +114,7 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
     public void equalsAndHashCode()
     {
         super.equalsAndHashCode();
-        MutableSet<String> quadrupletonSet = Sets.fixedSize.of("1", "2", "3", "4");
+        MutableSet<String> quadrupletonSet = FixedSizeSet.of("1", "2", "3", "4");
         MutableSet<String> set = UnifiedSet.newSetWith("1", "2", "3", "4");
         Verify.assertEqualsAndHashCode(quadrupletonSet, set);
         Verify.assertPostSerializedEqualsAndHashCode(quadrupletonSet);
@@ -124,7 +123,7 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
     @Test
     public void addingAllToOtherSet()
     {
-        MutableSet<String> newSet = UnifiedSet.newSet(Sets.fixedSize.of("1", "2", "3", "4"));
+        MutableSet<String> newSet = UnifiedSet.newSet(FixedSizeSet.of("1", "2", "3", "4"));
         newSet.add("5");
         Verify.assertContainsAll(newSet, "1", "2", "3", "4", "5");
     }
@@ -176,7 +175,7 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
     @Test
     public void getFirstGetLast()
     {
-        MutableSet<String> list5 = Sets.fixedSize.of("1", "2", "3", "4");
+        MutableSet<String> list5 = FixedSizeSet.of("1", "2", "3", "4");
         Assert.assertEquals("1", list5.getFirst());
         Assert.assertEquals("4", list5.getLast());
     }
@@ -184,8 +183,8 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
     @Test
     public void forEach()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableSet<String> source = Sets.fixedSize.of("1", "2", "3", "4");
+        MutableList<String> result = MutableList.empty();
+        MutableSet<String> source = FixedSizeSet.of("1", "2", "3", "4");
         source.forEach(CollectionAddProcedure.on(result));
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4"), result);
     }
@@ -194,8 +193,8 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
     public void forEachWithIndex()
     {
         int[] indexSum = new int[1];
-        MutableList<String> result = Lists.mutable.of();
-        MutableSet<String> source = Sets.fixedSize.of("1", "2", "3", "4");
+        MutableList<String> result = MutableList.empty();
+        MutableSet<String> source = FixedSizeSet.of("1", "2", "3", "4");
         source.forEachWithIndex((each, index) ->
         {
             result.add(each);
@@ -208,8 +207,8 @@ public class QuadrupletonSetTest extends AbstractMemoryEfficientMutableSetTestCa
     @Test
     public void forEachWith()
     {
-        MutableList<String> result = Lists.mutable.of();
-        MutableSet<String> source = Sets.fixedSize.of("1", "2", "3", "4");
+        MutableList<String> result = MutableList.empty();
+        MutableSet<String> source = FixedSizeSet.of("1", "2", "3", "4");
         source.forEachWith(Procedures2.fromProcedure(CollectionAddProcedure.on(result)), null);
         Assert.assertEquals(FastList.newListWith("1", "2", "3", "4"), result);
     }

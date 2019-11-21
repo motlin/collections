@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.lazy;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,8 +23,8 @@ public class ZipIterableTest
     public void setUp()
     {
         this.zipIterable = new ZipIterable<>(
-                Lists.immutable.of('a', 'b', 'c'),
-                Lists.immutable.of(0, 1, 2));
+                ImmutableList.of('a', 'b', 'c'),
+                ImmutableList.of(0, 1, 2));
     }
 
     @Test

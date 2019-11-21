@@ -17,6 +17,8 @@ import java.util.TreeSet;
 import java.util.concurrent.Callable;
 
 import junit.framework.AssertionFailedError;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.multimap.bag.BagMultimap;
 import org.eclipse.collections.api.multimap.bag.ImmutableBagMultimap;
 import org.eclipse.collections.api.multimap.bag.MutableBagMultimap;
@@ -31,12 +33,10 @@ import org.eclipse.collections.api.multimap.sortedbag.MutableSortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedbag.SortedBagMultimap;
 import org.eclipse.collections.api.multimap.sortedset.MutableSortedSetMultimap;
 import org.eclipse.collections.api.multimap.sortedset.SortedSetMultimap;
+import org.eclipse.collections.api.set.ImmutableSet;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.block.factory.IntegerPredicates;
-import org.eclipse.collections.impl.factory.Lists;
-import org.eclipse.collections.impl.factory.Maps;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.IntArrayList;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
@@ -743,7 +743,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertEmpty(Maps.immutable.of("foo", "bar"));
+            Verify.assertEmpty(ImmutableMap.of("foo", "bar"));
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -773,7 +773,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertNotEmpty(Lists.mutable.of());
+            Verify.assertNotEmpty(MutableList.empty());
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -803,7 +803,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertIterableNotEmpty(Lists.mutable.of());
+            Verify.assertIterableNotEmpty(MutableList.empty());
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -969,7 +969,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertSize(3, Maps.immutable.of("foo", "bar"));
+            Verify.assertSize(3, ImmutableMap.of("foo", "bar"));
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -984,7 +984,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertSize(3, Sets.immutable.of("foo", "bar"));
+            Verify.assertSize(3, ImmutableSet.of("foo", "bar"));
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -1149,7 +1149,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertContainsAllKeyValues(Maps.immutable.of("foo", "bar"), "baz", "quaz");
+            Verify.assertContainsAllKeyValues(ImmutableMap.of("foo", "bar"), "baz", "quaz");
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -1164,7 +1164,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertContainsAllKeyValues(Maps.immutable.of("foo", "bar"), "foo", "quaz");
+            Verify.assertContainsAllKeyValues(ImmutableMap.of("foo", "bar"), "foo", "quaz");
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -1179,7 +1179,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertContainsAllKeyValues(Maps.immutable.of("foo", "bar"), "baz");
+            Verify.assertContainsAllKeyValues(ImmutableMap.of("foo", "bar"), "baz");
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -1239,7 +1239,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertContains("bar", Sets.immutable.of("foo"));
+            Verify.assertContains("bar", ImmutableSet.of("foo"));
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -1284,7 +1284,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertContainsKey("foo", Maps.immutable.of("foozle", "bar"));
+            Verify.assertContainsKey("foo", ImmutableMap.of("foozle", "bar"));
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -1344,7 +1344,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertContainsKeyValue("foo", "bar", Maps.immutable.of("baz", "quaz"));
+            Verify.assertContainsKeyValue("foo", "bar", ImmutableMap.of("baz", "quaz"));
             Assert.fail();
         }
         catch (AssertionError ex)
@@ -1359,7 +1359,7 @@ public class VerifyTest
     {
         try
         {
-            Verify.assertContainsKeyValue("foo", "bar", Maps.immutable.of("baz", "quaz"));
+            Verify.assertContainsKeyValue("foo", "bar", ImmutableMap.of("baz", "quaz"));
             Assert.fail();
         }
         catch (AssertionError ex)

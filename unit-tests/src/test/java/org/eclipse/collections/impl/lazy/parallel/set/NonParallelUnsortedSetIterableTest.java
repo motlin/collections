@@ -10,8 +10,8 @@
 
 package org.eclipse.collections.impl.lazy.parallel.set;
 
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.list.mutable.CompositeFastList;
 
 public class NonParallelUnsortedSetIterableTest extends NonParallelUnsortedSetIterableTestCase
@@ -25,6 +25,6 @@ public class NonParallelUnsortedSetIterableTest extends NonParallelUnsortedSetIt
     @Override
     protected ParallelUnsortedSetIterable<Integer> newWith(Integer... littleElements)
     {
-        return new CompositeFastList<Integer>().withAll(Lists.mutable.of(littleElements)).asParallel(null, this.batchSize).asUnique();
+        return new CompositeFastList<Integer>().withAll(MutableList.of(littleElements)).asParallel(null, this.batchSize).asUnique();
     }
 }

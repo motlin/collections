@@ -15,7 +15,6 @@ import java.util.Iterator;
 import org.eclipse.collections.api.RichIterable;
 import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.factory.Lists;
 
 public final class MutableCollectionIterate
 {
@@ -31,7 +30,7 @@ public final class MutableCollectionIterate
             throw new IllegalArgumentException("Size for groups must be positive but was: " + size);
         }
         Iterator<T> iterator = collection.iterator();
-        MutableList<RichIterable<T>> result = Lists.mutable.empty();
+        MutableList<RichIterable<T>> result = MutableList.empty();
         while (iterator.hasNext())
         {
             MutableCollection<T> batch = collection.newEmpty();

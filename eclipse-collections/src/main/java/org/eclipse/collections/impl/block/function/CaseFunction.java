@@ -14,14 +14,13 @@ import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.predicate.Predicate;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.tuple.Tuples;
 
 public class CaseFunction<T extends Comparable<? super T>, V> implements Function<T, V>
 {
     private static final long serialVersionUID = 1L;
 
-    private final MutableList<Pair<Predicate<? super T>, Function<? super T, ? extends V>>> predicateFunctions = Lists.mutable.empty();
+    private final MutableList<Pair<Predicate<? super T>, Function<? super T, ? extends V>>> predicateFunctions = MutableList.empty();
     private Function<? super T, ? extends V> defaultFunction;
 
     public CaseFunction()

@@ -17,6 +17,7 @@ import java.util.SortedMap;
 
 import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.bag.ImmutableBag;
+import org.eclipse.collections.api.bag.MutableBag;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function0;
 import org.eclipse.collections.api.block.function.Function2;
@@ -73,8 +74,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectFloatProced
 import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
-import org.eclipse.collections.impl.factory.Bags;
-import org.eclipse.collections.impl.factory.SortedMaps;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.list.mutable.primitive.ByteArrayList;
@@ -228,7 +227,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public ImmutableSortedMap<K, V> select(Predicate2<? super K, ? super V> predicate)
     {
-        MutableSortedMap<K, V> selectedMap = SortedMaps.mutable.with(this.comparator());
+        MutableSortedMap<K, V> selectedMap = MutableSortedMap.of(this.comparator());
         this.forEachKeyValue((key, value) ->
         {
             if (predicate.accept(key, value))
@@ -254,7 +253,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public ImmutableSortedMap<K, V> reject(Predicate2<? super K, ? super V> predicate)
     {
-        MutableSortedMap<K, V> rejectedMap = SortedMaps.mutable.with(this.comparator());
+        MutableSortedMap<K, V> rejectedMap = MutableSortedMap.of(this.comparator());
         this.forEachKeyValue((key, value) ->
         {
             if (!predicate.accept(key, value))
@@ -382,7 +381,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public <R> ImmutableSortedMap<K, R> collectValues(Function2<? super K, ? super V, ? extends R> function)
     {
-        MutableSortedMap<K, R> collectedMap = SortedMaps.mutable.with(this.comparator());
+        MutableSortedMap<K, R> collectedMap = MutableSortedMap.of(this.comparator());
         this.forEachKeyValue((key, value) -> collectedMap.put(key, function.value(key, value)));
         return collectedMap.toImmutable();
     }
@@ -587,7 +586,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public <V1> ImmutableBag<V1> countBy(Function<? super V, ? extends V1> function)
     {
-        return this.collect(function, Bags.mutable.<V1>empty()).toImmutable();
+        return this.collect(function, MutableBag.<V1>empty()).toImmutable();
     }
 
     /**
@@ -596,7 +595,7 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public <V1, P> ImmutableBag<V1> countByWith(Function2<? super V, ? super P, ? extends V1> function, P parameter)
     {
-        return this.collectWith(function, parameter, Bags.mutable.<V1>empty()).toImmutable();
+        return this.collectWith(function, parameter, MutableBag.<V1>empty()).toImmutable();
     }
 
     /**
@@ -605,6 +604,6 @@ public abstract class AbstractImmutableSortedMap<K, V>
     @Override
     public <V1> ImmutableBag<V1> countByEach(Function<? super V, ? extends Iterable<V1>> function)
     {
-        return this.countByEach(function, Bags.mutable.empty()).toImmutable();
+        return this.countByEach(function, MutableBag.empty()).toImmutable();
     }
 }

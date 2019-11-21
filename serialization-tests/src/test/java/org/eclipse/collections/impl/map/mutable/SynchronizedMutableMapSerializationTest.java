@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl.map.mutable;
 
-import org.eclipse.collections.impl.factory.Maps;
+import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class SynchronizedMutableMapSerializationTest
                         + "aXplZE1hcFNlcmlhbGl6YXRpb25Qcm94eQAAAAAAAAABDAAAeHBzcgAzb3JnLmVjbGlwc2UuY29s\n"
                         + "bGVjdGlvbnMuaW1wbC5tYXAubXV0YWJsZS5VbmlmaWVkTWFwAAAAAAAAAAEMAAB4cHcIAAAAAD9A\n"
                         + "AAB4eA==",
-                SynchronizedMutableMap.of(Maps.mutable.of()));
+                SynchronizedMutableMap.of(MutableMap.empty()));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class SynchronizedMutableMapSerializationTest
                         + "AQIAAUwACGRlbGVnYXRldAAPTGphdmEvdXRpbC9TZXQ7eHBzcgAzb3JnLmVjbGlwc2UuY29sbGVj\n"
                         + "dGlvbnMuaW1wbC5zZXQubXV0YWJsZS5VbmlmaWVkU2V0AAAAAAAAAAEMAAB4cHcIAAAAAD9AAAB4\n"
                         + "eA==",
-                SynchronizedMutableMap.of(Maps.mutable.of()).keySet());
+                SynchronizedMutableMap.of(MutableMap.empty()).keySet());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class SynchronizedMutableMapSerializationTest
                         + "aGlzJDB0ADVMb3JnL2VjbGlwc2UvY29sbGVjdGlvbnMvaW1wbC9tYXAvbXV0YWJsZS9VbmlmaWVk\n"
                         + "TWFwO3hwc3IAM29yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwubWFwLm11dGFibGUuVW5pZmll\n"
                         + "ZE1hcAAAAAAAAAABDAAAeHB3CAAAAAA/QAAAeHg=",
-                SynchronizedMutableMap.of(Maps.mutable.of()).entrySet());
+                SynchronizedMutableMap.of(MutableMap.empty()).entrySet());
     }
 
     @Test
@@ -66,6 +66,6 @@ public class SynchronizedMutableMapSerializationTest
                         + "QWRhcHRlcgAAAAAAAAABAgABTAAIZGVsZWdhdGV0ABZMamF2YS91dGlsL0NvbGxlY3Rpb247eHBz\n"
                         + "cgAyb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5saXN0Lm11dGFibGUuRmFzdExpc3QAAAAA\n"
                         + "AAAAAQwAAHhwdwQAAAAAeHg=",
-                SynchronizedMutableMap.of(Maps.mutable.of()).values());
+                SynchronizedMutableMap.of(MutableMap.empty()).values());
     }
 }

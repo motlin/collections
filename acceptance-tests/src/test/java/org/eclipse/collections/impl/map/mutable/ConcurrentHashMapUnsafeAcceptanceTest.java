@@ -22,7 +22,6 @@ import org.eclipse.collections.api.block.procedure.Procedure2;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.list.Interval;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.parallel.ParallelIterate;
@@ -114,9 +113,9 @@ public class ConcurrentHashMapUnsafeAcceptanceTest
         ParallelIterate.forEach(Interval.oneTo(1000), each -> {
             map1.put(each, each);
             Assert.assertEquals(each, map1.get(each));
-            map2.putAll(Maps.mutable.of(each, each));
+            map2.putAll(MutableMap.of(each, each));
             map1.remove(each);
-            map1.putAll(Maps.mutable.of(each, each));
+            map1.putAll(MutableMap.of(each, each));
             Assert.assertEquals(each, map2.get(each));
             map2.remove(each);
             Assert.assertNull(map2.get(each));
@@ -143,8 +142,8 @@ public class ConcurrentHashMapUnsafeAcceptanceTest
             map1.put(each, each);
             map1.put(each, each);
             Assert.assertEquals(each, map1.get(each));
-            map2.putAll(Maps.mutable.of(each, each));
-            map2.putAll(Maps.mutable.of(each, each));
+            map2.putAll(MutableMap.of(each, each));
+            map2.putAll(MutableMap.of(each, each));
             map1.remove(each);
             Assert.assertNull(map1.putIfAbsentGetIfPresent(each, new KeyTransformer(), new ValueFactory(), null, null));
             Assert.assertEquals(each, map1.putIfAbsentGetIfPresent(each, new KeyTransformer(), new ValueFactory(), null, null));

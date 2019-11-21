@@ -20,7 +20,6 @@ import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.set.FixedSizeSet;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.set.ParallelUnsortedSetIterable;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.set.mutable.AbstractMutableSet;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -100,7 +99,7 @@ abstract class AbstractMemoryEfficientMutableSet<T>
         {
             return this;
         }
-        return Sets.fixedSize.ofAll(this.toList().withAll(elements));
+        return FixedSizeSet.ofAll(this.toList().withAll(elements));
     }
 
     @Override
@@ -110,7 +109,7 @@ abstract class AbstractMemoryEfficientMutableSet<T>
         {
             return this;
         }
-        return Sets.fixedSize.ofAll(this.toList().withoutAll(elements));
+        return FixedSizeSet.ofAll(this.toList().withoutAll(elements));
     }
 
     @Override

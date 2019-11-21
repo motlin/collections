@@ -53,7 +53,6 @@ import org.eclipse.collections.impl.block.procedure.primitive.CollectIntProcedur
 import org.eclipse.collections.impl.block.procedure.primitive.CollectLongProcedure;
 import org.eclipse.collections.impl.block.procedure.primitive.CollectShortProcedure;
 import org.eclipse.collections.impl.collection.mutable.AbstractMutableCollection;
-import org.eclipse.collections.impl.factory.Sets;
 import org.eclipse.collections.impl.multimap.set.UnifiedSetMultimap;
 import org.eclipse.collections.impl.partition.set.PartitionUnifiedSet;
 import org.eclipse.collections.impl.set.mutable.primitive.BooleanHashSet;
@@ -265,7 +264,7 @@ public abstract class AbstractMutableSet<T>
     @Override
     public ImmutableSet<T> toImmutable()
     {
-        return Sets.immutable.withAll(this);
+        return ImmutableSet.ofAll(this);
     }
 
     /**

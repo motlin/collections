@@ -26,7 +26,6 @@ import org.eclipse.collections.api.multimap.MutableMultimap;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.UnmodifiableRichIterable;
 import org.eclipse.collections.impl.block.factory.Functions;
-import org.eclipse.collections.impl.factory.Bags;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.utility.Iterate;
 
@@ -91,7 +90,7 @@ public abstract class AbstractMultimap<K, V, C extends RichIterable<V>>
     @Override
     public Bag<K> keyBag()
     {
-        MutableBag<K> bag = Bags.mutable.empty();
+        MutableBag<K> bag = MutableBag.empty();
         this.getMap().forEachKeyValue((key, value) -> bag.addOccurrences(key, value.size()));
         return bag;
     }

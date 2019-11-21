@@ -56,25 +56,25 @@ import org.eclipse.collections.impl.utility.LazyIterate;
  * Mutable Examples:
  *
  * <pre>
- * MutableSet&lt;String&gt; emptySet = Sets.mutable.empty();
- * MutableSet&lt;String&gt; setWith = Sets.mutable.with("a", "b", "c");
- * MutableSet&lt;String&gt; setOf = Sets.mutable.of("a", "b", "c");
+ * MutableSet&lt;String&gt; emptySet = MutableSet.empty();
+ * MutableSet&lt;String&gt; setWith = MutableSet.of("a", "b", "c");
+ * MutableSet&lt;String&gt; setOf = MutableSet.of("a", "b", "c");
  * </pre>
  *
  * Immutable Examples:
  *
  * <pre>
- * ImmutableSet&lt;String&gt; emptySet = Sets.immutable.empty();
- * ImmutableSet&lt;String&gt; setWith = Sets.immutable.with("a", "b", "c");
- * ImmutableSet&lt;String&gt; setOf = Sets.immutable.of("a", "b", "c");
+ * ImmutableSet&lt;String&gt; emptySet = ImmutableSet.empty();
+ * ImmutableSet&lt;String&gt; setWith = ImmutableSet.of("a", "b", "c");
+ * ImmutableSet&lt;String&gt; setOf = ImmutableSet.of("a", "b", "c");
  * </pre>
  *
  * FixedSize Examples:
  *
  * <pre>
- * FixedSizeSet&lt;String&gt; emptySet = Sets.fixedSize.empty();
- * FixedSizeSet&lt;String&gt; setWith = Sets.fixedSize.with("a", "b", "c");
- * FixedSizeSet&lt;String&gt; setOf = Sets.fixedSize.of("a", "b", "c");
+ * FixedSizeSet&lt;String&gt; emptySet = FixedSizeSet.empty();
+ * FixedSizeSet&lt;String&gt; setWith = FixedSizeSet.of("a", "b", "c");
+ * FixedSizeSet&lt;String&gt; setOf = FixedSizeSet.of("a", "b", "c");
  * </pre>
  */
 @SuppressWarnings("ConstantNamingConvention")

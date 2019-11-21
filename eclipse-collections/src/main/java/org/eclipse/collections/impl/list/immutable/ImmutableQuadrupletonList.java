@@ -15,7 +15,6 @@ import java.util.RandomAccess;
 
 import org.eclipse.collections.api.block.procedure.Procedure;
 import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.impl.factory.Lists;
 
 /**
  * This is a four element immutable List which is created by calling
@@ -82,6 +81,6 @@ final class ImmutableQuadrupletonList<T>
     @Override
     public ImmutableList<T> newWith(T newItem)
     {
-        return Lists.immutable.with(this.element1, this.element2, this.element3, this.element4, newItem);
+        return ImmutableList.of(this.element1, this.element2, this.element3, this.element4, newItem);
     }
 }

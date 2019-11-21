@@ -57,7 +57,7 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
     {
         if (items == null || items.length == 0)
         {
-            return this.of();
+            return this.empty();
         }
         return new ImmutableSortedBagImpl<>(TreeBag.newBagWith(items));
     }
@@ -90,7 +90,7 @@ public class ImmutableSortedBagFactoryImpl implements ImmutableSortedBagFactory
     {
         if (comparator == null)
         {
-            return this.of();
+            return this.empty();
         }
         return new ImmutableEmptySortedBag<>(comparator);
     }

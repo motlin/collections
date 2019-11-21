@@ -10,7 +10,7 @@
 
 package org.eclipse.collections.impl;
 
-import org.eclipse.collections.impl.factory.Lists;
+import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
@@ -25,6 +25,6 @@ public class UnmodifiableRichIterableSerializationTest
                         + "YWJsZQAAAAAAAAABAgABTAAIaXRlcmFibGV0ACpMb3JnL2VjbGlwc2UvY29sbGVjdGlvbnMvYXBp\n"
                         + "L1JpY2hJdGVyYWJsZTt4cHNyADJvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmxpc3QubXV0\n"
                         + "YWJsZS5GYXN0TGlzdAAAAAAAAAABDAAAeHB3BAAAAAB4",
-                UnmodifiableRichIterable.of(Lists.mutable.of()));
+                UnmodifiableRichIterable.of(MutableList.empty()));
     }
 }
