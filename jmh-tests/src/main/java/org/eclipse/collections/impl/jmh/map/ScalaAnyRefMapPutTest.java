@@ -46,8 +46,9 @@ public class ScalaAnyRefMapPutTest
     public int size;
     @Param({"true", "false"})
     public boolean isPresized;
+    //Adding a loadFactor for only ease of data plots
     @Param("0.75")
-    public float loadFactor; //Adding a loadFactor for only ease of data plots
+    public float loadFactor;
     private String[] elements;
 
     @Setup

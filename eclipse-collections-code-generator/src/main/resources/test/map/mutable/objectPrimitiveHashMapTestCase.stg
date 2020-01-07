@@ -173,7 +173,8 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
         assertEquals(1, occupiedWithSentinels.get(hashMap));
         assertEquals(3, occupiedWithData.get(hashMap));
 
-        hashMap.updateValue(2.0f, <(literal.(type))("0")>, function); // putting in a slot marked REMOVED
+        // putting in a slot marked REMOVED
+        hashMap.updateValue(2.0f, <(literal.(type))("0")>, function);
         assertEquals(0, occupiedWithSentinels.get(hashMap));
         assertEquals(4, occupiedWithData.get(hashMap));
     }
@@ -200,7 +201,8 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
         assertEquals(7, occupiedWithData.get(hashMap));
         assertEquals(1, occupiedWithSentinels.get(hashMap));
 
-        hashMap.put(2.0f, <(literal.(type))("9")>); // putting in a slot marked REMOVED
+        // putting in a slot marked REMOVED
+        hashMap.put(2.0f, <(literal.(type))("9")>);
         assertEquals(8, occupiedWithData.get(hashMap));
         assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
@@ -226,7 +228,8 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
         assertEquals(3, occupiedWithData.get(hashMap));
         assertEquals(1, occupiedWithSentinels.get(hashMap));
 
-        hashMap.getIfAbsentPut(2.0f, <(literal.(type))("5")>); //putting in a slot marked REMOVED
+        // putting in a slot marked REMOVED
+        hashMap.getIfAbsentPut(2.0f, <(literal.(type))("5")>);
         assertEquals(4, occupiedWithData.get(hashMap));
         assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
@@ -254,7 +257,8 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
         assertEquals(3, occupiedWithData.get(hashMap));
         assertEquals(1, occupiedWithSentinels.get(hashMap));
 
-        hashMap.getIfAbsentPut(2.0f, function); //putting in a slot marked REMOVED
+        // putting in a slot marked REMOVED
+        hashMap.getIfAbsentPut(2.0f, function);
         assertEquals(4, occupiedWithData.get(hashMap));
         assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
@@ -282,7 +286,8 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
         assertEquals(3, occupiedWithData.get(hashMap));
         assertEquals(1, occupiedWithSentinels.get(hashMap));
 
-        hashMap.getIfAbsentPutWith(2.0f, function, Integer.valueOf(5)); //putting in a slot marked REMOVED
+        // putting in a slot marked REMOVED
+        hashMap.getIfAbsentPutWith(2.0f, function, Integer.valueOf(5));
         assertEquals(4, occupiedWithData.get(hashMap));
         assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
@@ -310,7 +315,8 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
         assertEquals(3, occupiedWithData.get(hashMap));
         assertEquals(1, occupiedWithSentinels.get(hashMap));
 
-        hashMap.getIfAbsentPutWithKey(2.0f, function); //putting in a slot marked REMOVED
+        // putting in a slot marked REMOVED
+        hashMap.getIfAbsentPutWithKey(2.0f, function);
         assertEquals(4, occupiedWithData.get(hashMap));
         assertEquals(0, occupiedWithSentinels.get(hashMap));
     }
@@ -335,7 +341,8 @@ public abstract class Object<name>HashMapTestCase extends AbstractMutableObject<
         assertEquals(1, occupiedWithSentinels.get(hashMap));
         assertEquals(7, occupiedWithData.get(hashMap));
 
-        hashMap.put(2.0f, <(literal.(type))("3")>); //putting in a slot marked as REMOVED
+        // putting in a slot marked as REMOVED
+        hashMap.put(2.0f, <(literal.(type))("3")>);
 
         assertEquals(0, occupiedWithSentinels.get(hashMap));
         assertEquals(8, occupiedWithData.get(hashMap));
