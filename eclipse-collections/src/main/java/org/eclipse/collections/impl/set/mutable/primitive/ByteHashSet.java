@@ -52,10 +52,16 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
     private static final byte MAX_BYTE_GROUP_1 = -65;
     private static final byte MAX_BYTE_GROUP_2 = -1;
     private static final byte MAX_BYTE_GROUP_3 = 63;
-    private long bitGroup1; // -128 to -65
-    private long bitGroup2; //-64 to -1
-    private long bitGroup3; //0 to 63
-    private long bitGroup4; // 64 to 127
+
+    // -128 to -65
+    private long bitGroup1;
+    // -64 to -1
+    private long bitGroup2;
+    // 0 to 63
+    private long bitGroup3;
+    // 64 to 127
+    private long bitGroup4;
+
     private short size;
 
     public ByteHashSet()
@@ -873,7 +879,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
 
         if (this.bitGroup1 != 0L)
         {
-            //the minimum has to be from this
+            // the minimum has to be from this
             min = (byte) (128 - Long.numberOfLeadingZeros(this.bitGroup1));
             min *= -1;
         }
@@ -1035,10 +1041,16 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
     private static final class ImmutableByteHashSet implements ImmutableByteSet, Serializable
     {
         private static final long serialVersionUID = 1L;
-        private final long bitGroup1; // -128 to -65
-        private final long bitGroup2; //-64 to -1
-        private final long bitGroup3; //0 to 63
-        private final long bitGroup4; // 64 to 127
+
+        // -128 to -65
+        private final long bitGroup1;
+        // -64 to -1
+        private final long bitGroup2;
+        // 0 to 63
+        private final long bitGroup3;
+        // 64 to 127
+        private final long bitGroup4;
+
         private final short size;
 
         private ImmutableByteHashSet(
@@ -1527,7 +1539,7 @@ public final class ByteHashSet implements MutableByteSet, Externalizable
 
             if (this.bitGroup1 != 0L)
             {
-                //the minimum has to be from this
+                // the minimum has to be from this
                 min = (byte) (128 - Long.numberOfLeadingZeros(this.bitGroup1));
                 min *= -1;
             }
