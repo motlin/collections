@@ -19,20 +19,24 @@ import org.eclipse.collections.api.list.ImmutableList;
 import org.eclipse.collections.api.list.MutableList;
 
 public interface ImmutableListFactory
+        extends ListFactory
 {
     /**
      * @since 6.0
      */
+    @Override
     <T> ImmutableList<T> empty();
 
     /**
      * Same as {@link #empty()}.
      */
+    @Override
     <T> ImmutableList<T> of();
 
     /**
      * Same as {@link #empty()}.
      */
+    @Override
     <T> ImmutableList<T> with();
 
     /**
@@ -108,20 +112,25 @@ public interface ImmutableListFactory
     /**
      * Same as {@link #with(Object[])}.
      */
+    @Override
     <T> ImmutableList<T> of(T... items);
 
+    @Override
     <T> ImmutableList<T> with(T... items);
 
     /**
      * Same as {@link #withAll(Iterable)}.
      */
+    @Override
     <T> ImmutableList<T> ofAll(Iterable<? extends T> items);
 
+    @Override
     <T> ImmutableList<T> withAll(Iterable<? extends T> items);
 
     /**
      * @since 10.0.
      */
+    @Override
     default <T> ImmutableList<T> fromStream(Stream<? extends T> stream)
     {
         return Lists.mutable.<T>fromStream(stream).toImmutable();
