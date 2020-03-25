@@ -124,7 +124,7 @@
         <guava.version>28.0-jre</guava.version>
         <trove4j.version>3.0.3</trove4j.version>
         <checkstyle.version>8.23</checkstyle.version>
-        <checkstyle.plugin.version>3.1.0</checkstyle.plugin.version>
+        <checkstyle.plugin.version>3.1.1</checkstyle.plugin.version>
         <findbugs.plugin.version>3.0.5</findbugs.plugin.version>
         <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
 
