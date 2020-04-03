@@ -120,7 +120,7 @@
 
         <slf4j.version>1.7.30</slf4j.version>
         <clover.version>4.0.6</clover.version>
-        <scala.version>2.13.0</scala.version>
+        <scala.version>2.13.1</scala.version>
         <guava.version>28.2-jre</guava.version>
         <trove4j.version>3.0.3</trove4j.version>
         <checkstyle.version>8.29</checkstyle.version>
