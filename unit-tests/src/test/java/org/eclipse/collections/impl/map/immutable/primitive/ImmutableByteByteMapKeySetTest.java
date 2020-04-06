@@ -10,6 +10,7 @@
 
 package org.eclipse.collections.impl.map.immutable.primitive;
 
+import org.eclipse.collections.api.map.primitive.MutableByteByteMap;
 import org.eclipse.collections.api.set.primitive.ByteSet;
 import org.eclipse.collections.api.set.primitive.ImmutableByteSet;
 import org.eclipse.collections.impl.map.mutable.primitive.ByteByteHashMap;
@@ -33,7 +34,7 @@ public class ImmutableByteByteMapKeySetTest extends AbstractImmutableByteHashSet
     @Override
     protected ImmutableByteSet newWith(byte... elements)
     {
-        ByteByteHashMap byteByteHashMap = new ByteByteHashMap();
+        MutableByteByteMap byteByteHashMap = new ByteByteHashMap();
         for (byte element : elements)
         {
             byteByteHashMap.put(element, element);

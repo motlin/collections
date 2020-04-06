@@ -786,24 +786,24 @@ public abstract class AbstractBooleanSetTestCase extends AbstractMutableBooleanC
     public void appendString()
     {
         super.appendString();
-        StringBuilder appendable = new StringBuilder();
+        Appendable appendable = new StringBuilder();
         this.emptySet.appendString(appendable);
         assertEquals("", appendable.toString());
 
-        StringBuilder appendable1 = new StringBuilder();
+        Appendable appendable1 = new StringBuilder();
         this.setWithFalse.appendString(appendable1);
         assertEquals("false", appendable1.toString());
 
-        StringBuilder appendable2 = new StringBuilder();
+        Appendable appendable2 = new StringBuilder();
         this.setWithTrue.appendString(appendable2);
         assertEquals("true", appendable2.toString());
 
-        StringBuilder appendable3 = new StringBuilder();
+        Appendable appendable3 = new StringBuilder();
         this.setWithTrueFalse.appendString(appendable3);
         assertTrue("true, false".equals(appendable3.toString())
                 || "false, true".equals(appendable3.toString()));
 
-        StringBuilder appendable4 = new StringBuilder();
+        Appendable appendable4 = new StringBuilder();
         this.setWithTrueFalse.appendString(appendable4, "[", ", ", "]");
         assertTrue("[true, false]".equals(appendable4.toString())
                 || "[false, true]".equals(appendable4.toString()));
