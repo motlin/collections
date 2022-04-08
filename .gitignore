@@ -21,6 +21,7 @@ test-coverage/**
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/shelf
+.idea/dictionaries/*.xml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -30,31 +31,22 @@ test-coverage/**
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
-
-# Gradle
-.idea/**/gradle.xml
 .idea/**/libraries
 
-# Gradle and Maven with auto-import
-# When using Gradle or Maven with auto-import, you should exclude module files,
-# since they will be recreated, and may cause churn.  Uncomment if using
-# auto-import.
+# Other IntelliJ plugins
 .idea/scala_compiler.xml
+.idea/**/mongoSettings.xml
+.idea/checkstyle-idea.xml
+.idea/jarRepositories.xml
+.idea/markdown-navigator.xml
+.idea/markdown-navigator/profiles_settings.xml
+.idea_modules/
 
 # CMake
 cmake-build-*/
 
-# Mongo Explorer plugin
-.idea/**/mongoSettings.xml
-
-# File-based project format
-*.iws
-
 # IntelliJ
 out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
@@ -71,7 +63,7 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
-# Eclipe
+# Eclipse
 .project
 .settings/
 .classpath
