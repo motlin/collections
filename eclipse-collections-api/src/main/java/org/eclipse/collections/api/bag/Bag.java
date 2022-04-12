@@ -235,7 +235,7 @@ public interface Bag<T>
         this.forEachWithOccurrences((each, occurrences) ->
         {
             int result = function.intValueOf(each);
-            for (int i = 0; i < occurrences; i++)
+            for (int index = 0; index < occurrences; index++)
             {
                 stats.accept(result);
             }
@@ -253,7 +253,7 @@ public interface Bag<T>
         this.forEachWithOccurrences((each, occurrences) ->
         {
             float result = function.floatValueOf(each);
-            for (int i = 0; i < occurrences; i++)
+            for (int index = 0; index < occurrences; index++)
             {
                 stats.accept(result);
             }

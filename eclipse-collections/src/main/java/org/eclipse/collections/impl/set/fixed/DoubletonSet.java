@@ -33,7 +33,6 @@ final class DoubletonSet<T>
     private T element1;
     private T element2;
 
-    @SuppressWarnings("UnusedDeclaration")
     public DoubletonSet()
     {
         // For Externalizable use only

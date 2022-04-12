@@ -31,5 +31,5 @@ public interface PartitionMutableStack<T> extends PartitionStack<T>
      * @deprecated in 5.0
      */
     @Deprecated
-    void add(T t);
+    void add(T object);
 }

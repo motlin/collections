@@ -26,7 +26,6 @@ class ImmutableBagSerializationProxy<T> implements Externalizable
 
     private UnsortedBag<T> bag;
 
-    @SuppressWarnings("UnusedDeclaration")
     public ImmutableBagSerializationProxy()
     {
         // Empty constructor for Externalizable class

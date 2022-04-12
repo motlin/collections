@@ -47,7 +47,6 @@ final class DoubletonMap<K, V>
     private K key2;
     private V value2;
 
-    @SuppressWarnings("UnusedDeclaration")
     public DoubletonMap()
     {
         // For Externalizable use only

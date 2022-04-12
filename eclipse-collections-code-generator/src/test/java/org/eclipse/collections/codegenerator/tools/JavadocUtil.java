@@ -56,15 +56,15 @@ public class JavadocUtil
     private String generatedClass;
     private String template;
 
-    public JavadocUtil generatedClass(String gc)
+    public JavadocUtil generatedClass(String generatedClass)
     {
-        this.generatedClass = gc;
+        this.generatedClass = generatedClass;
         return this;
     }
 
-    public JavadocUtil template(String t)
+    public JavadocUtil template(String template)
     {
-        this.template = t;
+        this.template = template;
         return this;
     }
 
@@ -155,10 +155,10 @@ public class JavadocUtil
                 // Remove existing javadoc
                 iter.previous();
                 while (iter.hasPrevious()
-                    && (line = iter.previous().trim()).startsWith("@")
-                    || line.startsWith("*/")
-                    || line.startsWith("*")
-                    || line.startsWith("/**"))
+                        && (line = iter.previous().trim()).startsWith("@")
+                        || line.startsWith("*/")
+                        || line.startsWith("*")
+                        || line.startsWith("/**"))
                 {
                     iter.remove();
                 }
@@ -171,36 +171,37 @@ public class JavadocUtil
     }
 
     // Remove all types and type placeholders so lines will exactly match
-    private static String normalizeTemplateLine(String s)
+    private static String normalizeTemplateLine(String string)
     {
-        s = s.replace("<type1>", "<type>").replace("<type2>", "<type>");
-        s = s.replace("<name1>", "<name>").replace("<name2>", "<name>");
+        string = string.replace("<type1>", "<type>").replace("<type2>", "<type>");
+        string = string.replace("<name1>", "<name>").replace("<name2>", "<name>");
         // boolean is a common return value for is...() methods - normalize
         // it to match normalized lines from the generated class. Also remove \
-        return s.replace("boolean", "<type>").replaceAll(Pattern.quote("\\"), "");
+        return string.replace("boolean", "<type>").replaceAll(Pattern.quote("\\"), "");
     }
 
     // TODO: Multiple types/names not properly supported
-    private static String normalizeGeneratedClassLine(String s)
+    private static String normalizeGeneratedClassLine(String string)
     {
-        for (Primitive p : Primitive.values())
+        for (Primitive primitive : Primitive.values())
         {
-            s = s.replace(p.type, "<type>").replace(p.getName(), "<name>");
+            string = string.replace(primitive.type, "<type>").replace(primitive.getName(), "<name>");
         }
         // ... but "interface" gets erroneously replaced
-        return s.replace("<type>erface", "interface");
+        return string.replace("<type>erface", "interface");
     }
 
     public static void main(String... args) throws IOException
     {
         if (args.length < 2 || args.length % 2 > 0)
         {
-            throw new IllegalArgumentException("You must specify pairs of file paths: a generated class followed by its template");
+            throw new IllegalArgumentException(
+                    "You must specify pairs of file paths: a generated class followed by its template");
         }
 
-        for (int i = 0; i < args.length; i += 2)
+        for (int index = 0; index < args.length; index += 2)
         {
-            new JavadocUtil().generatedClass(args[i]).template(args[i + 1]).process();
+            new JavadocUtil().generatedClass(args[index]).template(args[index + 1]).process();
         }
     }
 }

@@ -94,7 +94,8 @@ public final class FileUtils
         return files;
     }
 
-    private static void recurseURL(URL url, List<URL> files, String templateDirectory) throws URISyntaxException, IOException
+    private static void recurseURL(URL url, List<URL> files, String templateDirectory)
+            throws URISyntaxException, IOException
     {
         if ("file".equals(url.getProtocol()))
         {
@@ -111,7 +112,8 @@ public final class FileUtils
         }
     }
 
-    private static void recurse(File rootDirectory, File file, List<URL> files, String templateDirectory) throws IOException
+    private static void recurse(File rootDirectory, File file, List<URL> files, String templateDirectory)
+            throws IOException
     {
         if (file.isDirectory())
         {

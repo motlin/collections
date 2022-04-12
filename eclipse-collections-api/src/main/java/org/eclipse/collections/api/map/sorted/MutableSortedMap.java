@@ -214,7 +214,7 @@ public interface MutableSortedMap<K, V>
      * However, Java 5 TreeMap returns a keySet that does not inherit from SortedSet therefore we have decided to
      * return the keySet simply as a MutableSet to maintain Java 5 compatibility.
      */
-    //todo: Change return type to MutableSortedSet when we move to Java 6
+    // TODO: Change return type to MutableSortedSet. This has been possible since moving to Java 6.
     @Override
     MutableSet<K> keySet();
 

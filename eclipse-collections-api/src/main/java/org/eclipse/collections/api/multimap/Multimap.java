@@ -45,7 +45,6 @@ import org.eclipse.collections.api.tuple.Pair;
  * @param <V> the type of mapped values
  * @since 1.0
  */
-@SuppressWarnings("JavaDoc")
 public interface Multimap<K, V>
 {
     /**

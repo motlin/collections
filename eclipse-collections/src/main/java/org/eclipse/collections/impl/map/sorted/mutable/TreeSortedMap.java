@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -17,6 +17,7 @@ import java.io.ObjectOutput;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -41,7 +42,7 @@ public class TreeSortedMap<K, V>
         implements Externalizable
 {
     private static final long serialVersionUID = 1L;
-    private TreeMap<K, V> treeMap;
+    private NavigableMap<K, V> treeMap;
 
     public TreeSortedMap()
     {

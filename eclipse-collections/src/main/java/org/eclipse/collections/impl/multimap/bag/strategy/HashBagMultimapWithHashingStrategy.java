@@ -39,7 +39,6 @@ public final class HashBagMultimapWithHashingStrategy<K, V>
      * @deprecated Empty default constructor used for serialization. Instantiating an HashBagMultimapWithHashingStrategy with
      * this constructor will have a null multimapHashingStrategy, and throw NullPointerException when used.
      */
-    @SuppressWarnings("UnusedDeclaration")
     @Deprecated
     public HashBagMultimapWithHashingStrategy()
     {

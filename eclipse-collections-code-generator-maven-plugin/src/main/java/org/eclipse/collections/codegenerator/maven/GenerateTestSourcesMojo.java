@@ -27,7 +27,10 @@ public class GenerateTestSourcesMojo extends AbstractGenerateMojo
     @Parameter(property = "templateDirectory", required = true, defaultValue = "test")
     private String templateDirectory;
 
-    @Parameter(property = "outputDirectory", defaultValue = "${project.build.directory}/generated-test-sources/java", required = true)
+    @Parameter(
+            property = "outputDirectory",
+            defaultValue = "${project.build.directory}/generated-test-sources/java",
+            required = true)
     private File outputDirectory;
 
     @Override

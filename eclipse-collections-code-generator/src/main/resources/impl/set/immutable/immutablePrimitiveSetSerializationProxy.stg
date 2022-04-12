@@ -34,7 +34,6 @@ public final class Immutable<name>SetSerializationProxy implements Externalizabl
 
     private <name>Set set;
 
-    @SuppressWarnings("UnusedDeclaration")
     public Immutable<name>SetSerializationProxy()
     {
         // Empty constructor for Externalizable class

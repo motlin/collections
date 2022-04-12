@@ -40,7 +40,11 @@ public abstract class AbstractGenerateMojo extends AbstractMojo
         }
         else
         {
-            this.getLog().info("Generating sources in " + this.mavenProject.getArtifactId() + " to " + this.getOutputDirectory());
+            String message = String.format(
+                    "Generating sources in %s to %s",
+                    this.mavenProject.getArtifactId(),
+                    this.getOutputDirectory());
+            this.getLog().info(message);
         }
 
         List<URL> urls = Arrays.asList(((URLClassLoader) this.getClass().getClassLoader()).getURLs());

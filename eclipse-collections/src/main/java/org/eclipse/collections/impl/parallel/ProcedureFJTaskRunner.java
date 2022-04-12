@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -89,7 +89,7 @@ public final class ProcedureFJTaskRunner<T, BT extends Procedure<? super T>>
         {
             throw new RuntimeException("One or more parallel tasks failed", this.error);
         }
-        //don't combine until the lock is notified
+        // don't combine until the lock is notified
         this.combineTasks();
     }
 

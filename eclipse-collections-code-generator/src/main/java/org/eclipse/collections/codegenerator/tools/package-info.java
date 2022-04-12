@@ -9,6 +9,7 @@
  */
 
 /**
- * This package contains utilities used by {@link org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator} to get the string form to write to file.
+ * This package contains utilities used by {@link org.eclipse.collections.codegenerator.EclipseCollectionsCodeGenerator}
+ * to get the string form to write to file.
  */
 package org.eclipse.collections.codegenerator.tools;

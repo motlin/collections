@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -42,13 +42,12 @@ public interface InternalIterable<T>
      *     }
      * });
      * </pre>
-     * NOTE: This method started to conflict with {@link Iterable#forEach(java.util.function.Consumer)}
+     * NOTE: This method started to conflict with {@link Iterable#forEach(Consumer)}
      * since Java 1.8. It is recommended to use {@link RichIterable#each(Procedure)} instead to avoid casting to Procedure.
      *
      * @see RichIterable#each(Procedure)
-     * @see Iterable#forEach(java.util.function.Consumer)
+     * @see Iterable#forEach(Consumer)
      */
-    @SuppressWarnings("UnnecessaryFullyQualifiedName")
     void forEach(Procedure<? super T> procedure);
 
     @Override

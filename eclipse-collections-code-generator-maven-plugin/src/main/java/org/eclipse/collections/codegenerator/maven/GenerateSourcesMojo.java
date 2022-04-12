@@ -27,7 +27,10 @@ public class GenerateSourcesMojo extends AbstractGenerateMojo
     @Parameter(property = "templateDirectory", required = true)
     private String templateDirectory;
 
-    @Parameter(property = "outputDirectory", defaultValue = "${project.build.directory}/generated-sources/java", required = true)
+    @Parameter(
+            property = "outputDirectory",
+            defaultValue = "${project.build.directory}/generated-sources/java",
+            required = true)
     private File outputDirectory;
 
     @Override

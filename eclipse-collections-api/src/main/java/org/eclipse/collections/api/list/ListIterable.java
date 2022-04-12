@@ -66,7 +66,7 @@ public interface ListIterable<T>
      * Returns the index of the last occurrence of the specified item
      * in this list, or -1 if this list does not contain the item.
      */
-    int lastIndexOf(Object o);
+    int lastIndexOf(Object object);
 
     /**
      * Returns the item at index 0 of the container. If the container is empty, null is returned. If null

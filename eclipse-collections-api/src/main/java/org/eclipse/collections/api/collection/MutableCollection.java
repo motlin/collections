@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Goldman Sachs and others.
+ * Copyright (c) 2022 Goldman Sachs and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompany this distribution.
@@ -409,7 +409,9 @@ public interface MutableCollection<T>
      * @since 9.2
      */
     @Override
-    default <P, V> MutableCollection<V> flatCollectWith(Function2<? super T, ? super P, ? extends Iterable<V>> function, P parameter)
+    default <P, V> MutableCollection<V> flatCollectWith(
+            Function2<? super T, ? super P, ? extends Iterable<V>> function,
+            P parameter)
     {
         return this.flatCollect(each -> function.apply(each, parameter));
     }
@@ -476,13 +478,17 @@ public interface MutableCollection<T>
     <V> MutableObjectLongMap<V> sumByInt(Function<? super T, ? extends V> groupBy, IntFunction<? super T> function);
 
     @Override
-    <V> MutableObjectDoubleMap<V> sumByFloat(Function<? super T, ? extends V> groupBy, FloatFunction<? super T> function);
+    <V> MutableObjectDoubleMap<V> sumByFloat(
+            Function<? super T, ? extends V> groupBy,
+            FloatFunction<? super T> function);
 
     @Override
     <V> MutableObjectLongMap<V> sumByLong(Function<? super T, ? extends V> groupBy, LongFunction<? super T> function);
 
     @Override
-    <V> MutableObjectDoubleMap<V> sumByDouble(Function<? super T, ? extends V> groupBy, DoubleFunction<? super T> function);
+    <V> MutableObjectDoubleMap<V> sumByDouble(
+            Function<? super T, ? extends V> groupBy,
+            DoubleFunction<? super T> function);
 
     /**
      * @since 9.0

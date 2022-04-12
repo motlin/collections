@@ -33,7 +33,7 @@ public class EclipseCollectionsCodeGenerator
     private final File outputDirectory;
     private final String fileExtension;
 
-    private int numFileWritten = 0;
+    private int numFileWritten;
 
     public EclipseCollectionsCodeGenerator(
             String templateDirectory,

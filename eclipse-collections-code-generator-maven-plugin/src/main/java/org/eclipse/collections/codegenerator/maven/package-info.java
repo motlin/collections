@@ -9,6 +9,7 @@
  */
 
 /**
- * This package contains the mojo implementation used by maven during the generate-source phase to generate code for primitive collections.
+ * This package contains the mojo implementation used by maven during the generate-source phase to generate code for
+ * primitive collections.
  */
 package org.eclipse.collections.codegenerator.maven;

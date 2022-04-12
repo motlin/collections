@@ -24,7 +24,6 @@ class HashBagWithHashingStrategySerializationProxy<T> implements Externalizable
 
     private HashBagWithHashingStrategy<T> bagWithHashingStrategy;
 
-    @SuppressWarnings("UnusedDeclaration")
     public HashBagWithHashingStrategySerializationProxy()
     {
         // Empty constructor for Externalizable class

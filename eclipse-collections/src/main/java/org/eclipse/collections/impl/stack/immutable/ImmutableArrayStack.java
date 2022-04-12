@@ -1217,4 +1217,3 @@ final class ImmutableArrayStack<T> implements ImmutableStack<T>, Serializable
         }
     }
 }
-

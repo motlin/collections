@@ -26,7 +26,6 @@ class ImmutableBiMapSerializationProxy<K, V> implements Externalizable
 
     private ImmutableBiMap<K, V> biMap;
 
-    @SuppressWarnings("UnusedDeclaration")
     public ImmutableBiMapSerializationProxy()
     {
         // Empty constructor for Externalizable class
