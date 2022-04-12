@@ -32,9 +32,157 @@
     <!-- Checks whether files end with a new line.                        -->
     <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
     <module name="NewlineAtEndOfFile">
-        <property name="lineSeparator" value="lf" />
         <property name="fileExtensions" value="java, xml, stg, scala" />
     </module>
+
+    <property name="fileExtensions" value="java, properties, xml, vm, g, g4, dtd" />
+
+    <!-- BeforeExecutionFileFilters is required for sources that are based on java9 -->
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="module\-info\.java$" />
+    </module>
+
+    <!-- Filters -->
+    <!-- Tone down the checking for test code -->
+    <module name="SuppressWarningsFilter" />
+    <module name="SuppressWithPlainTextCommentFilter">
+        <!--
+          Use suppressions.xml for suppressions, this is only example.
+          checkFormat will prevent suppression comments from being valid.
+        -->
+        <property name="checkFormat" value="IGNORETHIS" />
+        <property name="offCommentFormat" value="CSOFF\: .*" />
+        <property name="onCommentFormat" value="CSON\: .*" />
+    </module>
+
+    <!-- Regexp -->
+    <module name="RegexpMultiline">
+        <property name="id" value="regexpMultilineDefault" />
+    </module>
+    <module name="RegexpMultiline">
+        <property name="id" value="noIndentationConfigExamples" />
+        <property name="format" value="&lt;source&gt;\r?\n\s+" />
+        <property name="fileExtensions" value="xml" />
+        <property name="message" value="Content of source tag should not be Indented" />
+    </module>
+    <module name="RegexpMultiline">
+        <property name="id" value="noConsecutiveLines" />
+        <property name="format" value="\r?\n[\t ]*\r?\n[\t ]*\r?\n" />
+        <property name="fileExtensions" value="java,xml,properties" />
+        <property name="message" value="Unnecessary consecutive lines" />
+    </module>
+    <!--
+    <module name="RegexpMultiline">
+        <property name="id" value="commentFirstSentenceMultiline" />
+        <property name="format" value="/\*\*\W+\* +\p{javaLowerCase}" />
+        <property name="fileExtensions" value="java" />
+        <property name="message"
+            value="First sentence in a comment should start with a capital letter" />
+    </module>
+    -->
+    <module name="RegexpMultiline">
+        <property name="id" value="noEmptyFile" />
+        <property name="format" value="^\s*$" />
+        <property name="matchAcrossLines" value="true" />
+        <property name="message" value="Empty file is not allowed" />
+    </module>
+    <module name="RegexpSingleline">
+        <property name="id" value="noTrailingWhitespace" />
+        <property name="format" value="\s+$" />
+        <property name="minimum" value="0" />
+        <property name="maximum" value="0" />
+        <property name="message" value="Trailing whitespace is not allowed" />
+    </module>
+    <!-- This is needed for correct metadata generation -->
+    <module name="RegexpSingleline">
+        <property name="id" value="propertyTypeOnNewLine" />
+        <property name="format" value="^ \* .+(Type|Default value|Validation type) is \{@code " />
+        <property name="minimum" value="0" />
+        <property name="maximum" value="0" />
+        <property name="message" value="Property attribute should be on new javadoc line" />
+    </module>
+    <module name="RegexpSingleline">
+        <property name="id" value="commentFirstSentenceSingleline" />
+        <property name="format" value="/\*\* +\p{javaLowerCase}" />
+        <property name="fileExtensions" value="java" />
+        <property name="message"
+            value="First sentence in a comment should start with a capital letter" />
+    </module>
+    <module name="RegexpSingleline">
+        <property name="id" value="assertThatShouldBeOnSeparateLine" />
+        <property name="format" value="assertWithMessage\(.*\).that\(" />
+        <property name="fileExtensions" value="java" />
+        <property name="message"
+            value="Truth''s ''that'' method call should be on separate line" />
+    </module>
+    <!--
+     Links to .dtd files should start with "/", "http://" or "https://",
+     otherwise they will be broken after archiving the documentation.
+     See https://github.com/checkstyle/checkstyle/issues/7340 for details.
+    -->
+    <module name="RegexpSingleline">
+        <property name="id" value="noRelativeLinks" />
+        <property name="format" value="href=&quot;(?!\/|https?:\/\/).*?\.dtd&quot;" />
+        <property name="fileExtensions" value="xml, vm" />
+        <property name="message"
+            value="Relative links to DTD files are prohibited. Please use absolute path or uri instead." />
+    </module>
+    <module name="RegexpSingleline">
+        <property name="id" value="noSourceforgeNetLinks" />
+        <property name="format" value="checkstyle\.sourceforge\.net" />
+        <property name="message"
+            value="Old site links should not be used, please use https://checkstyle.org" />
+    </module>
+    <module name="RegexpSingleline">
+        <property name="id" value="noSourceforgeIoLinks" />
+        <property name="format" value="checkstyle\.sourceforge\.io" />
+        <property name="message"
+            value="Old site links should not be used, please use https://checkstyle.org" />
+    </module>
+    <module name="RegexpSingleline">
+        <property name="id" value="noPackageCommentWithOtherVisibility" />
+        <property name="format" value="/\*\s+package\s+\*/\s+(private|protected|public)" />
+        <property name="fileExtensions" value="java" />
+        <property name="message"
+            value="Package comment marker should not be used if other visibility is defined" />
+    </module>
+    <module name="RegexpOnFilename">
+        <property name="id" value="regexpOnFilenameWithSpace" />
+    </module>
+    <module name="RegexpOnFilename">
+        <property name="id" value="javaFileLocation" />
+        <property name="folderPattern" value="[\\/]src[\\/]\w+[\\/]java[\\/]" />
+        <property name="fileNamePattern" value="\.java$" />
+        <property name="match" value="false" />
+        <message key="regexp.filepath.mismatch"
+            value="Only java files should be located in the ''src/*/java'' folders." />
+    </module>
+    <module name="RegexpOnFilename">
+        <property name="id" value="xmlFileLocation" />
+        <property name="folderPattern" value="[\\/]src[\\/]xdocs[\\/]" />
+        <property name="fileNamePattern" value="\.(xml)|(vm)$" />
+        <property name="match" value="false" />
+        <message key="regexp.filepath.mismatch"
+            value="All files in the ''src/xdocs'' folder should have the ''xml'' or ''vm'' extension." />
+    </module>
+    <module name="RegexpOnFilename">
+        <property name="id" value="testFileLocation" />
+        <property name="folderPattern" value="[\\/]src[\\/]it[\\/]java[\\/]" />
+        <property name="fileNamePattern" value="^((\w+Test)|(\w+TestSupport)|(Abstract\w+))\.java$" />
+        <property name="match" value="false" />
+        <message key="regexp.filepath.mismatch"
+            value="All files in the ''src/it/java'' folder
+                    should be named ''*Test.java'' or ''Abstract*.java''." />
+    </module>
+
+    <!--
+        <module name="LineLength">
+            <property name="fileExtensions" value="java"/>
+            <property name="max" value="120"/>
+            <property name="ignorePattern"
+                value="^( *\* *([^ ]+|\{@code .*|&lt;a href=&quot;[^&quot;]+&quot;&gt;)|(package|import) .*)$"/>
+        </module>
+    -->
 
     <module name="TreeWalker">
         <property name="tabWidth" value="4" />
@@ -54,9 +202,12 @@
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
 
+        <module name="RecordComponentName" />
         <module name="ConstantName" />
         <module name="LocalFinalVariableName" />
-        <module name="LocalVariableName" />
+        <module name="LocalVariableName">
+            <property name="allowOneCharVarInForLoop" value="true" />
+        </module>
         <module name="MemberName" />
         <module name="MethodName">
             <property name="format" value="^[a-z][a-zA-Z0-9_]*$" />
@@ -67,6 +218,12 @@
         <module name="MethodTypeParameterName">
             <property name="format" value="^[A-Z0-9]+$" />
         </module>
+        <module name="RecordTypeParameterName">
+            <property name="format" value="^[A-Z0-9]+$" />
+        </module>
+        <module name="InterfaceTypeParameterName">
+            <property name="format" value="^[A-Z0-9]+$" />
+        </module>
 
         <module name="PackageName">
             <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$" />
@@ -75,7 +232,9 @@
         <module name="ParameterName" />
         <module name="StaticVariableName" />
         <module name="TypeName" />
-        <module name="LambdaParameterName"/>
+        <module name="LambdaParameterName" />
+        <module name="PatternVariableName" />
+        <module name="IllegalIdentifierName" />
 
         <module name="AvoidStarImport">
             <property name="allowStaticMemberImports" value="true" />
@@ -97,6 +256,7 @@
         <module name="GenericWhitespace" />
         <module name="MethodParamPad" />
         <module name="NoLineWrap" />
+        <module name="NoWhitespaceBeforeCaseDefaultColon" />
         <module name="NoWhitespaceAfter">
             <property name="tokens" value="ARRAY_INIT" />
             <property name="tokens" value="AT" />
@@ -193,7 +353,7 @@
         </module>
 
         <module name="Indentation">
-            <property name="lineWrappingIndentation" value="8"/>
+            <property name="lineWrappingIndentation" value="8" />
         </module>
         <module name="CommentsIndentation" />
 
@@ -209,8 +369,33 @@
         <module name="LeftCurly">
             <property name="option" value="nl" />
             <!--TODO: Remove this, to include the LAMBDA token-->
-            <property name="tokens" value="INTERFACE_DEF, CLASS_DEF, ANNOTATION_DEF, ENUM_DEF, CTOR_DEF, METHOD_DEF, ENUM_CONSTANT_DEF, LITERAL_WHILE, LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_SYNCHRONIZED, LITERAL_SWITCH, LITERAL_DO, LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, STATIC_INIT, OBJBLOCK"/>
+            <property name="tokens" value="INTERFACE_DEF" />
+            <property name="tokens" value="CLASS_DEF" />
+            <property name="tokens" value="ANNOTATION_DEF" />
+            <property name="tokens" value="ENUM_DEF" />
+            <property name="tokens" value="CTOR_DEF" />
+            <property name="tokens" value="METHOD_DEF" />
+            <property name="tokens" value="ENUM_CONSTANT_DEF" />
+            <property name="tokens" value="LITERAL_WHILE" />
+            <property name="tokens" value="LITERAL_TRY" />
+            <property name="tokens" value="LITERAL_CATCH" />
+            <property name="tokens" value="LITERAL_FINALLY" />
+            <property name="tokens" value="LITERAL_SYNCHRONIZED" />
+            <property name="tokens" value="LITERAL_SWITCH" />
+            <property name="tokens" value="LITERAL_DO" />
+            <property name="tokens" value="LITERAL_IF" />
+            <property name="tokens" value="LITERAL_ELSE" />
+            <property name="tokens" value="LITERAL_FOR" />
+            <property name="tokens" value="STATIC_INIT" />
+            <property name="tokens" value="OBJBLOCK" />
         </module>
+
+        <!--
+                <module name="LeftCurly">
+                    <property name="option" value="eol"/>
+                    <property name="tokens" value="LAMBDA"/>
+                </module>
+        -->
 
         <module name="NeedBraces" />
 
@@ -230,14 +415,21 @@
             <property name="tokens" value="LITERAL_DO" />
             <property name="tokens" value="ANNOTATION_DEF" />
             <property name="tokens" value="ENUM_DEF" />
+            <property name="tokens" value="RECORD_DEF" />
+            <property name="tokens" value="COMPACT_CTOR_DEF" />
             <property name="option" value="alone" />
+        </module>
+        <module name="RightCurly">
+            <property name="tokens" value="INTERFACE_DEF" />
+            <property name="option" value="alone_or_singleline" />
         </module>
 
         <!-- Checks for common coding problems               -->
         <!-- See http://checkstyle.sf.net/config_coding.html -->
         <module name="EmptyStatement" />
         <module name="EmptyBlock">
-            <property name="tokens" value="ARRAY_INIT"/>
+            <property name="tokens" value="LITERAL_CATCH" />
+            <property name="tokens" value="ARRAY_INIT" />
             <property name="tokens" value="LITERAL_DEFAULT" />
             <property name="tokens" value="LITERAL_CASE" />
             <property name="tokens" value="INSTANCE_INIT" />
@@ -251,6 +443,7 @@
             <property name="tokens" value="LITERAL_TRY" />
             <property name="tokens" value="LITERAL_WHILE" />
             <property name="tokens" value="STATIC_INIT" />
+            <property name="option" value="text" />
         </module>
 
         <!-- Effective Java Item 8 - Always override hashCode when you override equals -->
@@ -422,9 +615,7 @@
 
         <module name="PackageDeclaration" />
 
-        <module name="MissingOverride">
-            <property name="javaFiveCompatibility" value="true" />
-        </module>
+        <module name="MissingOverride" />
 
         <module name="OneTopLevelClass" />
 
@@ -435,9 +626,133 @@
 
         <module name="OneStatementPerLine" />
 
-<!--Suppressing this check as in newer version of checkstyle parenthesis around expressions are getting triggered-->
-<!--        <module name="UnnecessaryParentheses" />-->
+        <!--Suppressing this check as in newer version of checkstyle parenthesis around expressions are getting triggered-->
+        <!--<module name="UnnecessaryParentheses" />-->
 
+        <!-- Annotations -->
+        <module name="AnnotationUseStyle" />
+        <module name="PackageAnnotation" />
+
+        <!-- Class Design -->
+        <!--
+                <module name="InnerTypeLast"/>
+        -->
+
+        <!-- Coding -->
+        <module name="ArrayTrailingComma" />
+        <module name="AvoidDoubleBraceInitialization" />
+        <module name="AvoidNoArgumentSuperConstructorCall" />
+        <module name="EqualsAvoidNull" />
+        <!--<module name="ExplicitInitialization" />-->
+        <module name="IllegalCatch">
+            <property name="illegalClassNames"
+                value="java.lang.NullPointerException" />
+        </module>
+        <!--
+        <module name="IllegalType">
+            <property name="illegalClassNames"
+                value="java.util.HashSet, HashSet, java.util.LinkedHashMap, LinkedHashMap,
+                       java.util.TreeMap, TreeMap, java.util.HashMap, HashMap,
+                       java.util.LinkedHashSet, LinkedHashSet, java.util.TreeSet, TreeSet,
+                       java.lang.StringBuffer, StringBuffer" />
+        </module>
+        -->
+        <module name="MatchXpath">
+            <property name="query" value="//CLASS_DEF[@text!='Checker' and @text!='Main']
+      //LITERAL_CATCH//METHOD_CALL[.//IDENT[@text = 'printStackTrace']]/.." />
+            <message key="matchxpath.match" value="Avoid using 'printStackTrace'." />
+        </module>
+<!--
+        <module name="MatchXpath">
+            <property name="query" value="//METHOD_DEF/MODIFIERS//
+            ANNOTATION[./IDENT[@text='Test']]/ANNOTATION_MEMBER_VALUE_PAIR
+            [./IDENT[@text='expected']]" />
+            <message key="matchxpath.match" value="Avoid using 'expected' attribute in Test annotation." />
+        </module>
+-->
+        <!--
+        <module name="MatchXpath">
+            <property name="id" value="singleLineCommentStartWithSpace" />
+            <property name="query"
+                value="//SINGLE_LINE_COMMENT[./COMMENT_CONTENT[not(starts-with(@text, ' '))
+                       and not(@text = '\n') and not(ends-with(@text, '//\n'))
+                       and not(@text = '\r') and not(ends-with(@text, '//\r'))
+                       and not(@text = '\r\n') and not(ends-with(@text, '//\r\n'))]]" />
+            <message key="matchxpath.match" value="Single line comment text should start with space." />
+        </module>
+        -->
+        <module name="MatchXpath">
+            <property name="id" value="blockCommentStartWithSpace" />
+            <property name="query"
+                value="//BLOCK_COMMENT_BEGIN[./COMMENT_CONTENT[matches(@text, '\\n+ *\*[^\\n ]\S')
+                       or matches(@text, '^[^\* \\n]') or matches(@text, '\\r+ *\*[^\\r ]\S')
+                       or matches(@text, '^[^\* \\r]') or matches(@text, '\\r\\n+ *\*[^\\r\\n ]\S')
+                       or matches(@text, '^[^\* \\r\\n]') and not(starts-with(@text, '*'))]]" />
+            <message key="matchxpath.match"
+                value="Block comment text should start with space after asterisk." />
+        </module>
+        <module name="NestedTryDepth" />
+        <module name="NoCodeInFile" />
+        <!--        <module name="OverloadMethodsDeclarationOrder"/>-->
+        <module name="StringLiteralEquality" />
+        <module name="UnnecessarySemicolonAfterOuterTypeDeclaration" />
+        <module name="UnnecessarySemicolonAfterTypeMemberDeclaration" />
+        <module name="UnnecessarySemicolonInEnumeration" />
+        <module name="UnnecessarySemicolonInTryWithResources" />
+        <module name="UnusedLocalVariable" />
+
+        <!-- Filters -->
+        <module name="SuppressionCommentFilter">
+            <!--
+              Use suppressions.xml for suppressions, this is only example.
+              checkFormat will prevent suppression comments from being valid.
+            -->
+            <property name="checkFormat" value="IGNORETHIS" />
+            <property name="offCommentFormat" value="CSOFF\: .*" />
+            <property name="onCommentFormat" value="CSON\: .*" />
+        </module>
+        <!-- Tone down the checking for test code -->
+        <module name="SuppressionXpathSingleFilter">
+            <property name="files" value=".*[\\/]src[\\/]test[\\/]" />
+            <property name="checks" value="MagicNumber" />
+        </module>
+        <module name="SuppressionXpathSingleFilter">
+            <property name="files" value=".*[\\/]src[\\/]test[\\/]" />
+            <property name="checks" value="MethodCount" />
+        </module>
+        <!-- Fixing these cases will decrease code readability -->
+        <module name="SuppressionXpathSingleFilter">
+            <property name="files" value=".*[\\/]src[\\/]test[\\/]" />
+            <property name="checks" value="MultipleStringLiterals" />
+        </module>
+        <module name="SuppressWithNearbyCommentFilter">
+            <property name="commentFormat"
+                value="-@cs\[(\w{8,}(\|\w{8,})*)\] \w[\(\)\-\.\'\`\,\:\;\w ]{10,}" />
+            <property name="checkFormat" value="$1" />
+            <property name="influenceFormat" value="3" />
+        </module>
+
+        <!-- Misc -->
+        <module name="DescendantToken" />
+        <!--<module name="TrailingComment" />-->
+
+        <!-- Regexp -->
+        <module name="Regexp">
+            <property name="id" value="regexpDefault" />
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="id" value="regexpSingleLineDefault" />
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="id" value="checkASCII" />
+            <property name="format" value="[^\p{ASCII}]" />
+            <property name="ignoreComments" value="true" />
+        </module>
+
+        <!-- Whitespace -->
+        <module name="SingleSpaceSeparator">
+            <property name="validateComments" value="false" />
+        </module>
     </module>
 
     <module name="RegexpHeader">
@@ -446,7 +761,9 @@
         <property name="fileExtensions" value="java, scala" />
     </module>
 
-    <module name="FileTabCharacter" />
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="false" />
+    </module>
 
     <module name="RegexpMultiline">
         <property name="format" value="\{\n\n" />
