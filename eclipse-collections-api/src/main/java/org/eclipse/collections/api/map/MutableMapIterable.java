@@ -40,6 +40,12 @@ import org.eclipse.collections.api.tuple.Pair;
  */
 public interface MutableMapIterable<K, V> extends MapIterable<K, V>, Map<K, V>
 {
+    @Override
+    default void forEach(BiConsumer<? super K, ? super V> action)
+    {
+        this.forEachKeyValue(action::accept);
+    }
+
     /**
      * This method allows mutable map the ability to add an element in the form of {@code Pair<? extends K, ? extends V>}.
      *

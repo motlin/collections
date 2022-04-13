@@ -291,6 +291,12 @@ public interface MutableList<T>
     <V> MutableList<T> distinctBy(Function<? super T, ? extends V> function);
 
     /**
+     * Overridden to make sure it doesn't inherit a default implementation
+     */
+    @Override
+    void sort(Comparator<? super T> comparator);
+
+    /**
      * Sorts the internal data structure of this list and returns the list itself as a convenience.
      *
      * @since 10.0 - Added default implementation.

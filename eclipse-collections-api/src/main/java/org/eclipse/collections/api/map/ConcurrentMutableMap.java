@@ -24,6 +24,12 @@ public interface ConcurrentMutableMap<K, V>
         extends MutableMap<K, V>, ConcurrentMap<K, V>
 {
     @Override
+    default void forEach(BiConsumer<? super K, ? super V> action)
+    {
+        MutableMap.super.forEach(action);
+    }
+
+    @Override
     ConcurrentMutableMap<K, V> tap(Procedure<? super V> procedure);
 
     @Override
