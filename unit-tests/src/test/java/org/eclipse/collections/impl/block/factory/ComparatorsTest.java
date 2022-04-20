@@ -61,31 +61,12 @@ public class ComparatorsTest
     }
 
     @Test
-    public void originalNaturalOrder()
-    {
-        MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
-        Assert.assertEquals(
-                Lists.mutable.with("1", "2", "3", "4"),
-                list.sortThis(Comparators.originalNaturalOrder()));
-        Assert.assertThrows(NullPointerException.class, () -> Lists.mutable.with("1", "2", null, "4").sortThis(Comparators.naturalOrder()));
-    }
-
-    @Test
     public void reverseNaturalOrder()
     {
         MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
         Assert.assertEquals(
                 Lists.mutable.with("4", "3", "2", "1"),
                 list.sortThis(Comparators.reverseNaturalOrder()));
-    }
-
-    @Test
-    public void originalReverseNaturalOrder()
-    {
-        MutableList<String> list = Lists.mutable.with("1", "4", "2", "3");
-        Assert.assertEquals(
-                Lists.mutable.with("4", "3", "2", "1"),
-                list.sortThis(Comparators.originalReverseNaturalOrder()));
     }
 
     @Test
@@ -210,17 +191,6 @@ public class ComparatorsTest
         Person raab = new Person(null, "Raab", 0);
         Person white = new Person(null, "White", 0);
         Comparator<Person> personComparator = Comparators.fromFunctions(Person.TO_LAST);
-        Verify.assertNegative(personComparator.compare(raab, white));
-        Verify.assertPositive(personComparator.compare(white, raab));
-        Verify.assertZero(personComparator.compare(raab, raab));
-    }
-
-    @Test
-    public void originalByFunction()
-    {
-        Person raab = new Person(null, "Raab", 0);
-        Person white = new Person(null, "White", 0);
-        Comparator<Person> personComparator = Comparators.originalByFunction(Person.TO_LAST);
         Verify.assertNegative(personComparator.compare(raab, white));
         Verify.assertPositive(personComparator.compare(white, raab));
         Verify.assertZero(personComparator.compare(raab, raab));

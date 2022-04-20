@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Random;
 
 import org.eclipse.collections.api.block.HashingStrategy;
-import org.eclipse.collections.api.block.factory.SerializableComparators;
 import org.eclipse.collections.api.block.function.Function;
 import org.eclipse.collections.api.block.function.Function2;
 import org.eclipse.collections.api.block.function.primitive.BooleanFunction;
@@ -265,7 +264,7 @@ public interface MutableList<T>
      */
     default <V extends Comparable<? super V>> MutableList<T> sortThisBy(Function<? super T, ? extends V> function)
     {
-        return this.sortThis(SerializableComparators.byFunction(function));
+        return this.sortThis(Comparator.comparing(function));
     }
 
     /**

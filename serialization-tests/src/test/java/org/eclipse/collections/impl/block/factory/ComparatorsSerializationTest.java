@@ -26,35 +26,13 @@ public class ComparatorsSerializationTest
     }
 
     @Test
-    public void originalNaturalOrder()
+    public void naturalOrder()
     {
         Verify.assertSerializedForm(
                 1L,
                 "rO0ABXNyAE1vcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuQ29tcGFy\n"
                         + "YXRvcnMkTmF0dXJhbE9yZGVyQ29tcGFyYXRvcgAAAAAAAAABAgAAeHA=",
-                Comparators.originalNaturalOrder());
-    }
-
-    @Test
-    public void naturalOrder()
-    {
-        Verify.assertSerializedForm(
-                1L,
-                "rO0ABXNyAFhvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5hcGkuYmxvY2suZmFjdG9yeS5TZXJpYWxp\n"
-                        + "emFibGVDb21wYXJhdG9ycyROYXR1cmFsT3JkZXJDb21wYXJhdG9yAAAAAAAAAAECAAB4cA==",
                 Comparators.naturalOrder());
-    }
-
-    @Test
-    public void originalReverseNaturalOrder()
-    {
-        Verify.assertSerializedForm(
-                1L,
-                "rO0ABXNyAEhvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuQ29tcGFy\n"
-                        + "YXRvcnMkUmV2ZXJzZUNvbXBhcmF0b3IAAAAAAAAAAQIAAUwACmNvbXBhcmF0b3J0ABZMamF2YS91\n"
-                        + "dGlsL0NvbXBhcmF0b3I7eHBzcgBNb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5ibG9jay5m\n"
-                        + "YWN0b3J5LkNvbXBhcmF0b3JzJE5hdHVyYWxPcmRlckNvbXBhcmF0b3IAAAAAAAAAAQIAAHhw",
-                Comparators.originalReverseNaturalOrder());
     }
 
     @Test
@@ -62,11 +40,10 @@ public class ComparatorsSerializationTest
     {
         Verify.assertSerializedForm(
                 1L,
-                "rO0ABXNyAFNvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5hcGkuYmxvY2suZmFjdG9yeS5TZXJpYWxp\n"
-                        + "emFibGVDb21wYXJhdG9ycyRSZXZlcnNlQ29tcGFyYXRvcgAAAAAAAAABAgABTAAKY29tcGFyYXRv\n"
-                        + "cnQAOkxvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvYmxvY2svU2VyaWFsaXphYmxlQ29tcGFy\n"
-                        + "YXRvcjt4cHNyAFhvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5hcGkuYmxvY2suZmFjdG9yeS5TZXJp\n"
-                        + "YWxpemFibGVDb21wYXJhdG9ycyROYXR1cmFsT3JkZXJDb21wYXJhdG9yAAAAAAAAAAECAAB4cA==\n",
+                "rO0ABXNyAEhvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuQ29tcGFy\n"
+                        + "YXRvcnMkUmV2ZXJzZUNvbXBhcmF0b3IAAAAAAAAAAQIAAUwACmNvbXBhcmF0b3J0ABZMamF2YS91\n"
+                        + "dGlsL0NvbXBhcmF0b3I7eHBzcgBNb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5ibG9jay5m\n"
+                        + "YWN0b3J5LkNvbXBhcmF0b3JzJE5hdHVyYWxPcmRlckNvbXBhcmF0b3IAAAAAAAAAAQIAAHhw",
                 Comparators.reverseNaturalOrder());
     }
 
@@ -79,7 +56,7 @@ public class ComparatorsSerializationTest
                         + "YXRvcnMkUmV2ZXJzZUNvbXBhcmF0b3IAAAAAAAAAAQIAAUwACmNvbXBhcmF0b3J0ABZMamF2YS91\n"
                         + "dGlsL0NvbXBhcmF0b3I7eHBzcgBNb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5ibG9jay5m\n"
                         + "YWN0b3J5LkNvbXBhcmF0b3JzJE5hdHVyYWxPcmRlckNvbXBhcmF0b3IAAAAAAAAAAQIAAHhw",
-                Comparators.reverse(Comparators.originalNaturalOrder()));
+                Comparators.reverse(Comparators.naturalOrder()));
     }
 
     @Test
@@ -92,7 +69,7 @@ public class ComparatorsSerializationTest
                         + "YXJhdG9ydAAWTGphdmEvdXRpbC9Db21wYXJhdG9yO3hwc3IATW9yZy5lY2xpcHNlLmNvbGxlY3Rp\n"
                         + "b25zLmltcGwuYmxvY2suZmFjdG9yeS5Db21wYXJhdG9ycyROYXR1cmFsT3JkZXJDb21wYXJhdG9y\n"
                         + "AAAAAAAAAAECAAB4cA==",
-                Comparators.safeNullsLow(Comparators.originalNaturalOrder()));
+                Comparators.safeNullsLow(Comparators.naturalOrder()));
     }
 
     @Test
@@ -105,7 +82,7 @@ public class ComparatorsSerializationTest
                         + "cGFyYXRvcnQAFkxqYXZhL3V0aWwvQ29tcGFyYXRvcjt4cHNyAE1vcmcuZWNsaXBzZS5jb2xsZWN0\n"
                         + "aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuQ29tcGFyYXRvcnMkTmF0dXJhbE9yZGVyQ29tcGFyYXRv\n"
                         + "cgAAAAAAAAABAgAAeHA=",
-                Comparators.safeNullsHigh(Comparators.originalNaturalOrder()));
+                Comparators.safeNullsHigh(Comparators.naturalOrder()));
     }
 
     @Test
@@ -118,27 +95,11 @@ public class ComparatorsSerializationTest
                         + "L3V0aWwvQ29tcGFyYXRvcjt4cHVyABdbTGphdmEudXRpbC5Db21wYXJhdG9yO/ex2FW83SGgAgAA\n"
                         + "eHAAAAABc3IATW9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmltcGwuYmxvY2suZmFjdG9yeS5Db21w\n"
                         + "YXJhdG9ycyROYXR1cmFsT3JkZXJDb21wYXJhdG9yAAAAAAAAAAECAAB4cA==",
-                Comparators.chain(Comparators.originalNaturalOrder()));
+                Comparators.chain(Comparators.naturalOrder()));
     }
 
     @Test
     public void fromFunctions()
-    {
-        Verify.assertSerializedForm(
-                1L,
-                "rO0ABXNyAD9vcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5hcGkuYmxvY2suY29tcGFyYXRvci5GdW5j\n"
-                        + "dGlvbkNvbXBhcmF0b3IAAAAAAAAAAQIAAkwACmNvbXBhcmF0b3J0ADpMb3JnL2VjbGlwc2UvY29s\n"
-                        + "bGVjdGlvbnMvYXBpL2Jsb2NrL1NlcmlhbGl6YWJsZUNvbXBhcmF0b3I7TAAIZnVuY3Rpb250ADVM\n"
-                        + "b3JnL2VjbGlwc2UvY29sbGVjdGlvbnMvYXBpL2Jsb2NrL2Z1bmN0aW9uL0Z1bmN0aW9uO3hwc3IA\n"
-                        + "WG9yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmFwaS5ibG9jay5mYWN0b3J5LlNlcmlhbGl6YWJsZUNv\n"
-                        + "bXBhcmF0b3JzJE5hdHVyYWxPcmRlckNvbXBhcmF0b3IAAAAAAAAAAQIAAHhwc3IARW9yZy5lY2xp\n"
-                        + "cHNlLmNvbGxlY3Rpb25zLmltcGwuYmxvY2suZmFjdG9yeS5GdW5jdGlvbnMkVG9TdHJpbmdGdW5j\n"
-                        + "dGlvbgAAAAAAAAABAgAAeHA=",
-                Comparators.fromFunctions(Functions.getToString()));
-    }
-
-    @Test
-    public void originalByFunction()
     {
         Verify.assertSerializedForm(
                 1L,
@@ -149,30 +110,11 @@ public class ComparatorsSerializationTest
                         + "LmZhY3RvcnkuQ29tcGFyYXRvcnMkTmF0dXJhbE9yZGVyQ29tcGFyYXRvcgAAAAAAAAABAgAAeHBz\n"
                         + "cgBFb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuaW1wbC5ibG9jay5mYWN0b3J5LkZ1bmN0aW9ucyRU\n"
                         + "b1N0cmluZ0Z1bmN0aW9uAAAAAAAAAAECAAB4cA==",
-                Comparators.originalByFunction(Functions.getToString()));
+                Comparators.fromFunctions(Functions.getToString()));
     }
 
     @Test
     public void fromFunctions2()
-    {
-        Verify.assertSerializedForm(
-                1L,
-                "rO0ABXNyAEhvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuQ29tcGFy\n"
-                        + "YXRvcnMkQ2hhaW5lZENvbXBhcmF0b3IAAAAAAAAAAQIAAVsAC2NvbXBhcmF0b3JzdAAXW0xqYXZh\n"
-                        + "L3V0aWwvQ29tcGFyYXRvcjt4cHVyABdbTGphdmEudXRpbC5Db21wYXJhdG9yO/ex2FW83SGgAgAA\n"
-                        + "eHAAAAACc3IAP29yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmFwaS5ibG9jay5jb21wYXJhdG9yLkZ1\n"
-                        + "bmN0aW9uQ29tcGFyYXRvcgAAAAAAAAABAgACTAAKY29tcGFyYXRvcnQAOkxvcmcvZWNsaXBzZS9j\n"
-                        + "b2xsZWN0aW9ucy9hcGkvYmxvY2svU2VyaWFsaXphYmxlQ29tcGFyYXRvcjtMAAhmdW5jdGlvbnQA\n"
-                        + "NUxvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvYmxvY2svZnVuY3Rpb24vRnVuY3Rpb247eHBz\n"
-                        + "cgBYb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuYXBpLmJsb2NrLmZhY3RvcnkuU2VyaWFsaXphYmxl\n"
-                        + "Q29tcGFyYXRvcnMkTmF0dXJhbE9yZGVyQ29tcGFyYXRvcgAAAAAAAAABAgAAeHBzcgBFb3JnLmVj\n"
-                        + "bGlwc2UuY29sbGVjdGlvbnMuaW1wbC5ibG9jay5mYWN0b3J5LkZ1bmN0aW9ucyRUb1N0cmluZ0Z1\n"
-                        + "bmN0aW9uAAAAAAAAAAECAAB4cHNxAH4ABXEAfgAKcQB+AAw=",
-                Comparators.fromFunctions(Functions.getToString(), Functions.getToString()));
-    }
-
-    @Test
-    public void chainTwoOriginalByFunctions()
     {
         Verify.assertSerializedForm(
                 1L,
@@ -186,32 +128,11 @@ public class ComparatorsSerializationTest
                         + "Y2suZmFjdG9yeS5Db21wYXJhdG9ycyROYXR1cmFsT3JkZXJDb21wYXJhdG9yAAAAAAAAAAECAAB4\n"
                         + "cHNyAEVvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuRnVuY3Rpb25z\n"
                         + "JFRvU3RyaW5nRnVuY3Rpb24AAAAAAAAAAQIAAHhwc3EAfgAFcQB+AApxAH4ADA==",
-                Comparators.chain(
-                        Comparators.originalByFunction(Functions.getToString()),
-                        Comparators.originalByFunction(Functions.getToString())));
+                Comparators.fromFunctions(Functions.getToString(), Functions.getToString()));
     }
 
     @Test
     public void fromFunctions3()
-    {
-        Verify.assertSerializedForm(
-                1L,
-                "rO0ABXNyAEhvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuQ29tcGFy\n"
-                        + "YXRvcnMkQ2hhaW5lZENvbXBhcmF0b3IAAAAAAAAAAQIAAVsAC2NvbXBhcmF0b3JzdAAXW0xqYXZh\n"
-                        + "L3V0aWwvQ29tcGFyYXRvcjt4cHVyABdbTGphdmEudXRpbC5Db21wYXJhdG9yO/ex2FW83SGgAgAA\n"
-                        + "eHAAAAADc3IAP29yZy5lY2xpcHNlLmNvbGxlY3Rpb25zLmFwaS5ibG9jay5jb21wYXJhdG9yLkZ1\n"
-                        + "bmN0aW9uQ29tcGFyYXRvcgAAAAAAAAABAgACTAAKY29tcGFyYXRvcnQAOkxvcmcvZWNsaXBzZS9j\n"
-                        + "b2xsZWN0aW9ucy9hcGkvYmxvY2svU2VyaWFsaXphYmxlQ29tcGFyYXRvcjtMAAhmdW5jdGlvbnQA\n"
-                        + "NUxvcmcvZWNsaXBzZS9jb2xsZWN0aW9ucy9hcGkvYmxvY2svZnVuY3Rpb24vRnVuY3Rpb247eHBz\n"
-                        + "cgBYb3JnLmVjbGlwc2UuY29sbGVjdGlvbnMuYXBpLmJsb2NrLmZhY3RvcnkuU2VyaWFsaXphYmxl\n"
-                        + "Q29tcGFyYXRvcnMkTmF0dXJhbE9yZGVyQ29tcGFyYXRvcgAAAAAAAAABAgAAeHBzcgBFb3JnLmVj\n"
-                        + "bGlwc2UuY29sbGVjdGlvbnMuaW1wbC5ibG9jay5mYWN0b3J5LkZ1bmN0aW9ucyRUb1N0cmluZ0Z1\n"
-                        + "bmN0aW9uAAAAAAAAAAECAAB4cHNxAH4ABXEAfgAKcQB+AAxzcQB+AAVxAH4ACnEAfgAM",
-                Comparators.fromFunctions(Functions.getToString(), Functions.getToString(), Functions.getToString()));
-    }
-
-    @Test
-    public void chainThreeOriginalByFunctions()
     {
         Verify.assertSerializedForm(
                 1L,
@@ -226,10 +147,7 @@ public class ComparatorsSerializationTest
                         + "cHNyAEVvcmcuZWNsaXBzZS5jb2xsZWN0aW9ucy5pbXBsLmJsb2NrLmZhY3RvcnkuRnVuY3Rpb25z\n"
                         + "JFRvU3RyaW5nRnVuY3Rpb24AAAAAAAAAAQIAAHhwc3EAfgAFcQB+AApxAH4ADHNxAH4ABXEAfgAK\n"
                         + "cQB+AAw=",
-                Comparators.chain(
-                        Comparators.originalByFunction(Functions.getToString()),
-                        Comparators.originalByFunction(Functions.getToString()),
-                        Comparators.originalByFunction(Functions.getToString())));
+                Comparators.fromFunctions(Functions.getToString(), Functions.getToString(), Functions.getToString()));
     }
 
     @Test
