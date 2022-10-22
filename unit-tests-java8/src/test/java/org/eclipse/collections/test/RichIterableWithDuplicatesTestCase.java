@@ -25,9 +25,9 @@ public interface RichIterableWithDuplicatesTestCase extends RichIterableTestCase
     @Test
     default void Iterable_sanity_check()
     {
-        String s = "";
-        Iterable<String> oneCopy = this.newWith(s);
-        Iterable<String> twoCopies = this.newWith(s, s);
+        Integer i = 3;
+        Iterable<Integer> oneCopy = this.newWith(i);
+        Iterable<Integer> twoCopies = this.newWith(i, i);
         assertIterablesEqual(!this.allowsDuplicates(), twoCopies.equals(oneCopy));
     }
 

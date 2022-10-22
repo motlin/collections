@@ -28,7 +28,8 @@ import org.junit.jupiter.api.Test;
 import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public interface MutableListTestCase extends MutableCollectionTestCase, ListTestCase, ListIterableTestCase, MutableOrderedIterableTestCase
+public interface MutableListTestCase
+        extends MutableCollectionTestCase, ListTestCase, ListIterableTestCase, MutableOrderedIterableTestCase
 {
     @Override
     <T> MutableList<T> newWith(T... elements);
@@ -94,5 +95,25 @@ public interface MutableListTestCase extends MutableCollectionTestCase, ListTest
         MutableList<Integer> sortedList = mutableList.sortThis(Comparators.reverseNaturalOrder());
         assertSame(mutableList, sortedList);
         assertIterablesEqual(Lists.immutable.with(5, 4, 3, 2, 1), sortedList);
+    }
+
+    @Test
+    default void MutableList_subList_subList_remove()
+    {
+        MutableList<Integer> list = this.newWith(1, 2, 3, 4);
+        MutableList<Integer> sublist = list.subList(0, 3);
+        MutableList<Integer> sublist2 = sublist.subList(0, 2);
+
+        assertIterablesEqual(Lists.immutable.with(1, 2, 3), sublist);
+        assertIterablesEqual(Lists.immutable.with(1, 2), sublist2);
+
+        sublist2.add(5);
+
+        assertIterablesEqual(Lists.immutable.with(1, 2, 5, 3), sublist);
+        assertIterablesEqual(Lists.immutable.with(1, 2, 5), sublist2);
+
+        assertIterablesEqual("B", sublist2.remove(1));
+        assertIterablesEqual(Lists.immutable.with(1, 5, 3), sublist);
+        assertIterablesEqual(Lists.immutable.with(1, 5), sublist2);
     }
 }

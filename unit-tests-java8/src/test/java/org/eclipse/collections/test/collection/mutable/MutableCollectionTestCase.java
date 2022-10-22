@@ -57,11 +57,11 @@ public interface MutableCollectionTestCase extends CollectionTestCase, RichItera
     @Test
     default void MutableCollection_sanity_check()
     {
-        String s = "";
+        Integer i = Integer.valueOf(3);
 
-        MutableCollection<String> collection = this.newWith();
-        assertTrue(collection.add(s));
-        assertIterablesEqual(this.allowsDuplicates(), collection.add(s));
+        MutableCollection<Integer> collection = this.newWith();
+        assertTrue(collection.add(i));
+        assertIterablesEqual(this.allowsDuplicates(), collection.add(i));
         assertIterablesEqual(this.allowsDuplicates() ? 2 : 1, collection.size());
     }
 
