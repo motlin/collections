@@ -28,6 +28,7 @@ import org.eclipse.collections.impl.factory.primitive.<name>Bags;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 /**
@@ -242,7 +243,7 @@ public class Unmodifiable<name>BagTest extends AbstractMutable<name>BagTestCase
     {
         super.asUnmodifiable();
         Assert.assertSame(this.bag, this.bag.asUnmodifiable());
-        Assert.assertEquals(this.bag, this.bag.asUnmodifiable());
+        assertEquals(this.bag, this.bag.asUnmodifiable());
     }
 
     @Override
