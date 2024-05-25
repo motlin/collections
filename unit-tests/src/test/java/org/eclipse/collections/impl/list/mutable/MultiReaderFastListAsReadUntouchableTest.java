@@ -16,7 +16,7 @@ import org.eclipse.collections.api.collection.MutableCollection;
 import org.eclipse.collections.api.list.MutableList;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class MultiReaderFastListAsReadUntouchableTest extends UnmodifiableMutableListTestCase
 {

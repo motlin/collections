@@ -18,9 +18,9 @@ import org.eclipse.collections.impl.factory.primitive.BooleanLists;
 import org.eclipse.collections.impl.math.MutableInteger;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TapBooleanIterableTest
 {

@@ -21,7 +21,7 @@ import org.junit.Test;
 import static org.eclipse.collections.impl.factory.Iterables.mList;
 import static org.eclipse.collections.impl.factory.Iterables.mMap;
 import static org.eclipse.collections.impl.factory.Iterables.mSet;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * JUnit test to make sure that the methods {@link Verify#assertListsEqual(String, List, List)},

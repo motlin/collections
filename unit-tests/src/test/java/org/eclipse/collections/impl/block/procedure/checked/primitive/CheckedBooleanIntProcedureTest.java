@@ -19,8 +19,8 @@ import org.eclipse.collections.api.tuple.primitive.BooleanIntPair;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class CheckedBooleanIntProcedureTest
 {

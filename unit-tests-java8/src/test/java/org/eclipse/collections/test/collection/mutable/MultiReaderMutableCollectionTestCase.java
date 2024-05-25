@@ -13,7 +13,7 @@ package org.eclipse.collections.test.collection.mutable;
 import org.eclipse.collections.impl.collection.mutable.AbstractMultiReaderMutableCollection;
 import org.junit.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface MultiReaderMutableCollectionTestCase extends MutableCollectionTestCase
 {

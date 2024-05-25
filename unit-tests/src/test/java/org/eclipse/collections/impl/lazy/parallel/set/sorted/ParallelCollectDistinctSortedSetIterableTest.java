@@ -20,7 +20,7 @@ import org.eclipse.collections.impl.factory.SortedSets;
 import org.eclipse.collections.impl.lazy.parallel.set.ParallelUnsortedSetIterableTestCase;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParallelCollectDistinctSortedSetIterableTest extends ParallelUnsortedSetIterableTestCase
 {

@@ -17,8 +17,8 @@ import org.eclipse.collections.impl.collection.mutable.UnmodifiableMutableCollec
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MultiReaderHashBagAsReadUntouchableTest extends UnmodifiableMutableCollectionTestCase<Integer>
 {

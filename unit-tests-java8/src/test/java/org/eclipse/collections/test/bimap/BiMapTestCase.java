@@ -16,8 +16,8 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
 import org.eclipse.collections.test.map.MapIterableTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 
@@ -47,22 +47,22 @@ public interface BiMapTestCase extends RichIterableUniqueTestCase, MapIterableTe
         RichIterableUniqueTestCase.super.Iterable_toString();
 
         BiMap<String, Integer> bimap = this.newWithKeysValues("Two", 2, "One", 1);
-        Assert.assertEquals("{Two=2, One=1}", bimap.toString());
-        Assert.assertEquals("[Two, One]", bimap.keysView().toString());
-        Assert.assertEquals("[2, 1]", bimap.valuesView().toString());
-        Assert.assertEquals("[Two:2, One:1]", bimap.keyValuesView().toString());
-        Assert.assertEquals("[2, 1]", bimap.asLazy().toString());
+        Assertions.assertEquals("{Two=2, One=1}", bimap.toString());
+        Assertions.assertEquals("[Two, One]", bimap.keysView().toString());
+        Assertions.assertEquals("[2, 1]", bimap.valuesView().toString());
+        Assertions.assertEquals("[Two:2, One:1]", bimap.keyValuesView().toString());
+        Assertions.assertEquals("[2, 1]", bimap.asLazy().toString());
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{10=4, 9=4, 8=4, 7=4, 6=3, 5=3, 4=3, 3=2, 2=2, 1=1}",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toString());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keysView().toString());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "[4, 4, 4, 4, 3, 3, 3, 2, 2, 1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).valuesView().toString());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "[10:4, 9:4, 8:4, 7:4, 6:3, 5:3, 4:3, 3:2, 2:2, 1:1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keyValuesView().toString());
     }

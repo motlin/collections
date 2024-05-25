@@ -25,12 +25,12 @@ import org.eclipse.collections.impl.factory.primitive.IntLists;
 import org.eclipse.collections.impl.factory.primitive.IntSets;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface OrderedIterableTestCase extends RichIterableTestCase
 {
@@ -42,10 +42,10 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     {
         RichIterable<ObjectIntPair<Integer>> pairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
                 .collectWithIndex(PrimitiveTuples::pair);
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Lists.mutable.with(3, 2, 1, 0),
                 pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
     }
@@ -58,19 +58,19 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     {
         RichIterable<ObjectIntPair<Integer>> pairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
                 .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 IntLists.mutable.with(0, 1, 2, 3),
                 pairs.collectInt(ObjectIntPair::getTwo, IntLists.mutable.empty()));
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Lists.mutable.with(3, 2, 1, 0),
                 pairs.collect(ObjectIntPair::getOne, Lists.mutable.empty()));
 
         RichIterable<ObjectIntPair<Integer>> setOfPairs = ((OrderedIterable<Integer>) this.newWith(3, 2, 1, 0))
                 .collectWithIndex(PrimitiveTuples::pair, Lists.mutable.empty());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 IntSets.mutable.with(0, 1, 2, 3),
                 setOfPairs.collectInt(ObjectIntPair::getTwo, IntSets.mutable.empty()));
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Sets.mutable.with(3, 2, 1, 0),
                 setOfPairs.collect(ObjectIntPair::getOne, Sets.mutable.empty()));
     }
@@ -168,7 +168,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
     default void OrderedIterable_zipWithIndex()
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Lists.immutable.with(
                         Tuples.pair(4, 0),
                         Tuples.pair(4, 1),
@@ -189,7 +189,7 @@ public interface OrderedIterableTestCase extends RichIterableTestCase
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
         MutableList<Pair<Integer, Integer>> target = Lists.mutable.empty();
         MutableList<Pair<Integer, Integer>> result = iterable.zipWithIndex(target);
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Lists.immutable.with(
                         Tuples.pair(4, 0),
                         Tuples.pair(4, 1),

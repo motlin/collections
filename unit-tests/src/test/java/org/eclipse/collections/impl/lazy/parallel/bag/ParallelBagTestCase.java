@@ -16,7 +16,7 @@ import org.eclipse.collections.impl.bag.mutable.HashBag;
 import org.eclipse.collections.impl.lazy.parallel.ParallelIterableTestCase;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class ParallelBagTestCase extends ParallelIterableTestCase
 {

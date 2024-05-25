@@ -13,8 +13,8 @@ package org.eclipse.collections.impl.block.factory.primitive;
 import org.eclipse.collections.api.list.primitive.CharList;
 import org.eclipse.collections.impl.block.predicate.primitive.CharPredicate;
 import org.eclipse.collections.impl.factory.primitive.CharLists;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * Junit test for {@link CharPredicate}.
@@ -82,7 +82,7 @@ public class CharPredicateTest
     @Test
     public void isUndefined()
     {
-        Assert.assertTrue(CharPredicates.isUndefined().accept((char) 888));
+        Assertions.assertTrue(CharPredicates.isUndefined().accept((char) 888));
         assertFalse(CharLists.mutable.of('A', 'B', 'C', '0', '1', '2', '3'), CharPredicate.IS_UNDEFINED);
         assertFalse(CharLists.mutable.of('a', 'b', 'c', '0', '1', '2', '3'), CharPredicate.IS_UNDEFINED);
         assertFalse(CharLists.mutable.of('.', '$', '*'), CharPredicate.IS_UNDEFINED);
@@ -90,11 +90,11 @@ public class CharPredicateTest
 
     private static void assertTrue(CharList charList, CharPredicate predicate)
     {
-        charList.forEach(element -> Assert.assertTrue(predicate.accept(element)));
+        charList.forEach(element -> Assertions.assertTrue(predicate.accept(element)));
     }
 
     private static void assertFalse(CharList charList, CharPredicate predicate)
     {
-        charList.forEach(element -> Assert.assertFalse(predicate.accept(element)));
+        charList.forEach(element -> Assertions.assertFalse(predicate.accept(element)));
     }
 }

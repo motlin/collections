@@ -17,7 +17,7 @@ import org.eclipse.collections.api.partition.bag.sorted.PartitionMutableSortedBa
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PartitionTreeBagTest
 {

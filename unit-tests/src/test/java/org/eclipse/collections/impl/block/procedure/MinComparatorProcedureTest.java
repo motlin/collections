@@ -13,7 +13,7 @@ package org.eclipse.collections.impl.block.procedure;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.junit.Test;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class MinComparatorProcedureTest
 {

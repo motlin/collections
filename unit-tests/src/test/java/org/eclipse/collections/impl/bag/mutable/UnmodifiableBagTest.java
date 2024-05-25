@@ -44,7 +44,7 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iBag;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Abstract JUnit test for {@link UnmodifiableBag}.

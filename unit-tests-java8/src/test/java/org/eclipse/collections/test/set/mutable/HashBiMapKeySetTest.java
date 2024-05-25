@@ -19,7 +19,7 @@ import org.eclipse.collections.test.set.SetTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @RunWith(Java8Runner.class)
 public class HashBiMapKeySetTest implements SetTestCase

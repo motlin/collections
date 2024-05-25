@@ -12,8 +12,8 @@ package org.eclipse.collections.impl.block.function.checked;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CheckedFunction2Test
 {

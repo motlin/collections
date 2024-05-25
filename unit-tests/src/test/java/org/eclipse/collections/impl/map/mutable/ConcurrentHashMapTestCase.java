@@ -24,7 +24,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
 {
@@ -68,9 +68,9 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
         ParallelIterate.forEach(list, each -> map.updateValue(each % 50, () -> 0, integer -> integer + 1), 1, this.executor);
         assertEquals(Interval.zeroTo(49).toSet(), map.keySet());
         assertEquals(
-                HashBag.newBag(map.values()).toStringOfItemToCount(),
                 FastList.newList(Collections.nCopies(50, 2)),
-                FastList.newList(map.values()));
+                FastList.newList(map.values()),
+                HashBag.newBag(map.values()).toStringOfItemToCount());
     }
 
     @Override
@@ -102,8 +102,8 @@ public abstract class ConcurrentHashMapTestCase extends MutableMapTestCase
         }, "test"), 1, this.executor);
         assertEquals(Interval.zeroTo(99).toSet(), map.keySet());
         assertEquals(
-                HashBag.newBag(map.values()).toStringOfItemToCount(),
                 FastList.newList(Collections.nCopies(100, 2)),
-                FastList.newList(map.values()));
+                FastList.newList(map.values()),
+                HashBag.newBag(map.values()).toStringOfItemToCount());
     }
 }

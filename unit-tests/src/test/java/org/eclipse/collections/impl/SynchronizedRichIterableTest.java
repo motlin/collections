@@ -24,8 +24,8 @@ import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
 import static org.eclipse.collections.impl.factory.Iterables.iList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class SynchronizedRichIterableTest extends AbstractRichIterableTestCase
 {

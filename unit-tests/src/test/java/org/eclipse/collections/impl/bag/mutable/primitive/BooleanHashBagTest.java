@@ -21,11 +21,11 @@ import org.eclipse.collections.impl.list.mutable.primitive.BooleanArrayList;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * JUnit test for {@link BooleanHashBag}.
@@ -115,7 +115,7 @@ public class BooleanHashBagTest extends AbstractMutableBooleanBagTestCase
         StringBuilder appendable2 = new StringBuilder();
         BooleanHashBag bag1 = this.newWith(false, false, true);
         bag1.appendString(appendable2);
-        assertEquals(appendable2.toString(), "false, false, true", appendable2.toString());
+        assertEquals("false, false, true", appendable2.toString(), appendable2.toString());
     }
 
     @Override

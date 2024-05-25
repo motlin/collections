@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.collections.impl.list.Interval;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * JUnit test for {@link ParallelIterate}.

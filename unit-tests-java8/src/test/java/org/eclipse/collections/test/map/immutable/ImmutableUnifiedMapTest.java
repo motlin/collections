@@ -17,14 +17,14 @@ import org.eclipse.collections.api.map.MapIterable;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @RunWith(Java8Runner.class)
 public class ImmutableUnifiedMapTest implements ImmutableMapTestCase
@@ -67,7 +67,7 @@ public class ImmutableUnifiedMapTest implements ImmutableMapTestCase
         MapIterable<Integer, String> result = map.flipUniqueValues();
 
         // TODO: Use IterableTestCase.assertEquals instead, after setting up methods like getExpectedTransformed, but for maps.
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 UnifiedMap.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 result);
 

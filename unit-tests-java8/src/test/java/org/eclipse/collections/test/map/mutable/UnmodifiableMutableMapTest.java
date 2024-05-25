@@ -20,14 +20,14 @@ import org.eclipse.collections.impl.map.mutable.UnmodifiableMutableMap;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.eclipse.collections.impl.tuple.ImmutableEntry;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @RunWith(Java8Runner.class)
 public class UnmodifiableMutableMapTest implements MutableMapTestCase, FixedSizeIterableTestCase
@@ -189,6 +189,6 @@ public class UnmodifiableMutableMapTest implements MutableMapTestCase, FixedSize
             fail("Expected lambda not to be called on unmodifiable map");
             return null;
         }));
-        Assert.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+        Assertions.assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
     }
 }

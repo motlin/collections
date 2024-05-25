@@ -12,7 +12,7 @@ package org.eclipse.collections.test;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public interface OrderedIterableWithDuplicatesTestCase extends RichIterableWithDuplicatesTestCase, OrderedIterableTestCase
 {

@@ -14,7 +14,7 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
 import org.junit.Test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface UnmodifiableMutableStackTestCase extends MutableStackTestCase, FixedSizeIterableTestCase
 {

@@ -24,15 +24,15 @@ import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.eclipse.collections.test.RichIterableWithDuplicatesTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
 {
@@ -63,22 +63,22 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
     default void Iterable_toString()
     {
         MapIterable<String, Integer> map = this.newWithKeysValues("Two", 2, "One", 1);
-        Assert.assertEquals("{Two=2, One=1}", map.toString());
-        Assert.assertEquals("[Two, One]", map.keysView().toString());
-        Assert.assertEquals("[2, 1]", map.valuesView().toString());
-        Assert.assertEquals("[Two:2, One:1]", map.keyValuesView().toString());
-        Assert.assertEquals("[2, 1]", map.asLazy().toString());
+        Assertions.assertEquals("{Two=2, One=1}", map.toString());
+        Assertions.assertEquals("[Two, One]", map.keysView().toString());
+        Assertions.assertEquals("[2, 1]", map.valuesView().toString());
+        Assertions.assertEquals("[Two:2, One:1]", map.keyValuesView().toString());
+        Assertions.assertEquals("[2, 1]", map.asLazy().toString());
 
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "{10=4, 9=4, 8=4, 7=4, 6=3, 5=3, 4=3, 3=2, 2=2, 1=1}",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).toString());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keysView().toString());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "[4, 4, 4, 4, 3, 3, 3, 2, 2, 1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).valuesView().toString());
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 "[10:4, 9:4, 8:4, 7:4, 6:3, 5:3, 4:3, 3:2, 2:2, 1:1]",
                 this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1).keyValuesView().toString());
     }
@@ -118,7 +118,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<String, Long> expected =
                 Maps.mutable.with(lessThanTen, Interval.fromTo(1, 9).sumOfInt(Integer::intValue),
                         greaterOrEqualsToTen, Interval.fromTo(10, 20).sumOfInt(Integer::intValue));
-        Assert.assertEquals(expected, result);
+        Assertions.assertEquals(expected, result);
     }
 
     @Test
@@ -219,7 +219,7 @@ public interface MapIterableTestCase extends RichIterableWithDuplicatesTestCase
         MapIterable<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         MapIterable<Integer, String> actual = map.collect((key, value) -> Tuples.pair(key + 1, key + value));
         // TODO: Use IterableTestCase.assertEquals instead, after setting up methods like getExpectedTransformed, but for maps.
-        Assert.assertEquals(Maps.mutable.with(4, "3Three", 3, "2Two", 2, "1One"), actual);
+        Assertions.assertEquals(Maps.mutable.with(4, "3Three", 3, "2Two", 2, "1One"), actual);
     }
 
     @Test

@@ -21,9 +21,9 @@ import org.eclipse.collections.test.RichIterableTestCase;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface MutableCollectionTestCase extends CollectionTestCase, RichIterableTestCase
 {

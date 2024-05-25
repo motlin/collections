@@ -12,7 +12,7 @@ package org.eclipse.collections.impl.block.function;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Junit test for {@link SubtractFunction}.

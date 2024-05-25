@@ -100,21 +100,21 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.multimap.bag.HashBagMultimap;
 import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.eclipse.collections.test.IterableTestCase.assertNotEquals;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isOneOf;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SuppressWarnings("UnnecessaryCodeBlock")
 public interface RichIterableTestCase extends IterableTestCase
@@ -1768,11 +1768,11 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> integers = this.newWith(1, 2, 3, 4, 5, 6);
         Bag<Integer> evensAndOdds = integers.countBy(each -> Integer.valueOf(each % 2));
-        Assert.assertEquals(3, evensAndOdds.occurrencesOf(1));
-        Assert.assertEquals(3, evensAndOdds.occurrencesOf(0));
+        Assertions.assertEquals(3, evensAndOdds.occurrencesOf(1));
+        Assertions.assertEquals(3, evensAndOdds.occurrencesOf(0));
         Bag<Integer> evensAndOdds2 = integers.countBy(each -> Integer.valueOf(each % 2), Bags.mutable.empty());
-        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(1));
-        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(0));
+        Assertions.assertEquals(3, evensAndOdds2.occurrencesOf(1));
+        Assertions.assertEquals(3, evensAndOdds2.occurrencesOf(0));
     }
 
     /**
@@ -1783,11 +1783,11 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> integers = this.newWith(1, 2, 3, 4, 5, 6);
         Bag<Integer> evensAndOdds = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2);
-        Assert.assertEquals(3, evensAndOdds.occurrencesOf(1));
-        Assert.assertEquals(3, evensAndOdds.occurrencesOf(0));
+        Assertions.assertEquals(3, evensAndOdds.occurrencesOf(1));
+        Assertions.assertEquals(3, evensAndOdds.occurrencesOf(0));
         Bag<Integer> evensAndOdds2 = integers.countByWith((each, parm) -> Integer.valueOf(each % parm), 2, Bags.mutable.empty());
-        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(1));
-        Assert.assertEquals(3, evensAndOdds2.occurrencesOf(0));
+        Assertions.assertEquals(3, evensAndOdds2.occurrencesOf(1));
+        Assertions.assertEquals(3, evensAndOdds2.occurrencesOf(0));
     }
 
     /**
@@ -1850,10 +1850,10 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
 
-        Assert.assertEquals(30.0f, iterable.sumOfFloat(Integer::floatValue), 0.001);
-        Assert.assertEquals(30.0, iterable.sumOfDouble(Integer::doubleValue), 0.001);
-        Assert.assertEquals(30, iterable.sumOfInt(Integer::intValue));
-        Assert.assertEquals(30L, iterable.sumOfLong(Integer::longValue));
+        Assertions.assertEquals(30.0f, iterable.sumOfFloat(Integer::floatValue), 0.001);
+        Assertions.assertEquals(30.0, iterable.sumOfDouble(Integer::doubleValue), 0.001);
+        Assertions.assertEquals(30, iterable.sumOfInt(Integer::intValue));
+        Assertions.assertEquals(30L, iterable.sumOfLong(Integer::longValue));
     }
 
     @Test
@@ -1883,17 +1883,17 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> bigIterable = this.newWith(5, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
 
-        Assert.assertEquals(55.0f, bigIterable.summarizeFloat(Integer::floatValue).getSum(), 0.001);
-        Assert.assertEquals(55.0, bigIterable.summarizeDouble(Integer::doubleValue).getSum(), 0.001);
-        Assert.assertEquals(55, bigIterable.summarizeInt(Integer::intValue).getSum());
-        Assert.assertEquals(55L, bigIterable.summarizeLong(Integer::longValue).getSum());
+        Assertions.assertEquals(55.0f, bigIterable.summarizeFloat(Integer::floatValue).getSum(), 0.001);
+        Assertions.assertEquals(55.0, bigIterable.summarizeDouble(Integer::doubleValue).getSum(), 0.001);
+        Assertions.assertEquals(55, bigIterable.summarizeInt(Integer::intValue).getSum());
+        Assertions.assertEquals(55L, bigIterable.summarizeLong(Integer::longValue).getSum());
 
         RichIterable<Integer> littleIterable = this.newWith(5, 4, 3, 2, 1);
 
-        Assert.assertEquals(15.0f, littleIterable.summarizeFloat(Integer::floatValue).getSum(), 0.001);
-        Assert.assertEquals(15.0, littleIterable.summarizeDouble(Integer::doubleValue).getSum(), 0.001);
-        Assert.assertEquals(15, littleIterable.summarizeInt(Integer::intValue).getSum());
-        Assert.assertEquals(15L, littleIterable.summarizeLong(Integer::longValue).getSum());
+        Assertions.assertEquals(15.0f, littleIterable.summarizeFloat(Integer::floatValue).getSum(), 0.001);
+        Assertions.assertEquals(15.0, littleIterable.summarizeDouble(Integer::doubleValue).getSum(), 0.001);
+        Assertions.assertEquals(15, littleIterable.summarizeInt(Integer::intValue).getSum());
+        Assertions.assertEquals(15L, littleIterable.summarizeLong(Integer::longValue).getSum());
     }
 
     @Test
@@ -1902,37 +1902,37 @@ public interface RichIterableTestCase extends IterableTestCase
         RichIterable<Integer> littleIterable = this.newWith(1, 2, 3, 1, 2, 3);
         MutableBag<Integer> result =
                 littleIterable.reduceInPlace(Collectors.toCollection(Bags.mutable::empty));
-        Assert.assertEquals(Bags.immutable.with(1, 1, 2, 2, 3, 3), result);
+        Assertions.assertEquals(Bags.immutable.with(1, 1, 2, 2, 3, 3), result);
 
         RichIterable<Integer> bigIterable = this.newWith(Interval.oneTo(20).toArray());
         MutableBag<Integer> bigResult =
                 bigIterable.reduceInPlace(Collectors.toCollection(Bags.mutable::empty));
-        Assert.assertEquals(Interval.oneTo(20).toBag(), bigResult);
+        Assertions.assertEquals(Interval.oneTo(20).toBag(), bigResult);
 
         String joining =
                 result.collect(Object::toString).reduceInPlace(Collectors.joining(","));
-        Assert.assertEquals(result.collect(Object::toString).makeString(","), joining);
+        Assertions.assertEquals(result.collect(Object::toString).makeString(","), joining);
 
         ImmutableBag<Integer> immutableBag = result.toImmutable();
         String joining2 =
                 immutableBag.collect(Object::toString).reduceInPlace(Collectors.joining(","));
-        Assert.assertEquals(immutableBag.collect(Object::toString).makeString(","), joining2);
+        Assertions.assertEquals(immutableBag.collect(Object::toString).makeString(","), joining2);
 
         String joining3 =
                 result.asLazy().collect(Object::toString).reduceInPlace(Collectors.joining(","));
-        Assert.assertEquals(result.asLazy().collect(Object::toString).makeString(","), joining3);
+        Assertions.assertEquals(result.asLazy().collect(Object::toString).makeString(","), joining3);
 
         Map<Boolean, List<Integer>> expected =
                 littleIterable.toList().stream().collect(Collectors.partitioningBy(each -> each % 2 == 0));
         Map<Boolean, List<Integer>> actual =
                 littleIterable.reduceInPlace(Collectors.partitioningBy(each -> each % 2 == 0));
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
 
         Map<String, List<Integer>> groupByJDK =
                 littleIterable.toList().stream().collect(Collectors.groupingBy(Object::toString));
         Map<String, List<Integer>> groupByEC =
                 result.reduceInPlace(Collectors.groupingBy(Object::toString));
-        Assert.assertEquals(groupByJDK, groupByEC);
+        Assertions.assertEquals(groupByJDK, groupByEC);
     }
 
     @Test
@@ -1941,28 +1941,28 @@ public interface RichIterableTestCase extends IterableTestCase
         RichIterable<Integer> littleIterable = this.newWith(1, 2, 3, 1, 2, 3);
         MutableBag<Integer> result =
                 littleIterable.reduceInPlace(Bags.mutable::empty, MutableBag::add);
-        Assert.assertEquals(Bags.immutable.with(1, 1, 2, 2, 3, 3), result);
+        Assertions.assertEquals(Bags.immutable.with(1, 1, 2, 2, 3, 3), result);
 
         RichIterable<Integer> bigIterable = this.newWith(Interval.oneTo(20).toArray());
         MutableBag<Integer> bigResult =
                 bigIterable.reduceInPlace(Bags.mutable::empty, MutableBag::add);
-        Assert.assertEquals(Interval.oneTo(20).toBag(), bigResult);
+        Assertions.assertEquals(Interval.oneTo(20).toBag(), bigResult);
 
         String joining =
                 result.collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
-        Assert.assertEquals(result.collect(Object::toString).makeString(""), joining);
+        Assertions.assertEquals(result.collect(Object::toString).makeString(""), joining);
 
         ImmutableBag<Integer> immutableBag = result.toImmutable();
         String joining2 =
                 immutableBag.collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
-        Assert.assertEquals(immutableBag.collect(Object::toString).makeString(""), joining2);
+        Assertions.assertEquals(immutableBag.collect(Object::toString).makeString(""), joining2);
 
         String joining3 =
                 result.asLazy().collect(Object::toString).reduceInPlace(StringBuilder::new, StringBuilder::append).toString();
-        Assert.assertEquals(result.asLazy().collect(Object::toString).makeString(""), joining3);
+        Assertions.assertEquals(result.asLazy().collect(Object::toString).makeString(""), joining3);
 
         int atomicAdd = littleIterable.reduceInPlace(AtomicInteger::new, AtomicInteger::addAndGet).get();
-        Assert.assertEquals(12, atomicAdd);
+        Assertions.assertEquals(12, atomicAdd);
     }
 
     @Test
@@ -1971,20 +1971,20 @@ public interface RichIterableTestCase extends IterableTestCase
         RichIterable<Integer> littleIterable = this.newWith(1, 2, 3, 1, 2, 3);
         Optional<Integer> result =
                 littleIterable.reduce(Integer::sum);
-        Assert.assertEquals(12, result.get().intValue());
+        Assertions.assertEquals(12, result.get().intValue());
 
         RichIterable<Integer> bigIterable = this.newWith(Interval.oneTo(20).toArray());
         Optional<Integer> bigResult =
                 bigIterable.reduce(Integer::max);
-        Assert.assertEquals(20, bigResult.get().intValue());
+        Assertions.assertEquals(20, bigResult.get().intValue());
 
         Optional<Integer> max =
                 littleIterable.reduce(Integer::max);
-        Assert.assertEquals(3, max.get().intValue());
+        Assertions.assertEquals(3, max.get().intValue());
 
         Optional<Integer> min =
                 littleIterable.reduce(Integer::min);
-        Assert.assertEquals(1, min.get().intValue());
+        Assertions.assertEquals(1, min.get().intValue());
 
         RichIterable<Integer> iterableEmpty = this.newWith();
         Optional<Integer> resultEmpty =
@@ -2006,17 +2006,17 @@ public interface RichIterableTestCase extends IterableTestCase
     {
         RichIterable<Integer> iterable = this.newWith(4, 4, 4, 4, 3, 3, 3, 2, 2, 1);
 
-        Assert.assertEquals(31, iterable.injectIntoInt(1, AddFunction.INTEGER_TO_INT));
-        Assert.assertEquals(30, iterable.injectIntoInt(0, AddFunction.INTEGER_TO_INT));
+        Assertions.assertEquals(31, iterable.injectIntoInt(1, AddFunction.INTEGER_TO_INT));
+        Assertions.assertEquals(30, iterable.injectIntoInt(0, AddFunction.INTEGER_TO_INT));
 
-        Assert.assertEquals(31L, iterable.injectIntoLong(1, AddFunction.INTEGER_TO_LONG));
-        Assert.assertEquals(30L, iterable.injectIntoLong(0, AddFunction.INTEGER_TO_LONG));
+        Assertions.assertEquals(31L, iterable.injectIntoLong(1, AddFunction.INTEGER_TO_LONG));
+        Assertions.assertEquals(30L, iterable.injectIntoLong(0, AddFunction.INTEGER_TO_LONG));
 
-        Assert.assertEquals(31.0d, iterable.injectIntoDouble(1, AddFunction.INTEGER_TO_DOUBLE), 0.001);
-        Assert.assertEquals(30.0d, iterable.injectIntoDouble(0, AddFunction.INTEGER_TO_DOUBLE), 0.001);
+        Assertions.assertEquals(31.0d, iterable.injectIntoDouble(1, AddFunction.INTEGER_TO_DOUBLE), 0.001);
+        Assertions.assertEquals(30.0d, iterable.injectIntoDouble(0, AddFunction.INTEGER_TO_DOUBLE), 0.001);
 
-        Assert.assertEquals(31.0f, iterable.injectIntoFloat(1, AddFunction.INTEGER_TO_FLOAT), 0.001f);
-        Assert.assertEquals(30.0f, iterable.injectIntoFloat(0, AddFunction.INTEGER_TO_FLOAT), 0.001f);
+        Assertions.assertEquals(31.0f, iterable.injectIntoFloat(1, AddFunction.INTEGER_TO_FLOAT), 0.001f);
+        Assertions.assertEquals(30.0f, iterable.injectIntoFloat(0, AddFunction.INTEGER_TO_FLOAT), 0.001f);
     }
 
     @Test

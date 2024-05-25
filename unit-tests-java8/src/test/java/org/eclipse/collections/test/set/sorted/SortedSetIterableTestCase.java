@@ -29,8 +29,8 @@ import org.eclipse.collections.test.domain.B;
 import org.eclipse.collections.test.domain.C;
 import org.eclipse.collections.test.list.TransformsToListTrait;
 import org.eclipse.collections.test.set.SetIterableTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.eclipse.collections.impl.test.Verify.assertThrows;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
@@ -69,14 +69,14 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     @Test
     default void RichIterable_getFirst_empty_null()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().getFirst());
+        Assertions.assertThrows(NoSuchElementException.class, () -> this.newWith().getFirst());
     }
 
     @Override
     @Test
     default void RichIterable_getLast_empty_null()
     {
-        Assert.assertThrows(NoSuchElementException.class, () -> this.newWith().getLast());
+        Assertions.assertThrows(NoSuchElementException.class, () -> this.newWith().getLast());
     }
 
     @Override
@@ -157,7 +157,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     default void OrderedIterable_zipWithIndex()
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Lists.immutable.with(
                         Tuples.pair(4, 0),
                         Tuples.pair(3, 1),
@@ -171,7 +171,7 @@ public interface SortedSetIterableTestCase extends SetIterableTestCase, SortedIt
     default void OrderedIterable_zipWithIndex_target()
     {
         RichIterable<Integer> iterable = this.newWith(4, 3, 2, 1);
-        Assert.assertEquals(
+        Assertions.assertEquals(
                 Lists.immutable.with(
                         Tuples.pair(4, 0),
                         Tuples.pair(3, 1),

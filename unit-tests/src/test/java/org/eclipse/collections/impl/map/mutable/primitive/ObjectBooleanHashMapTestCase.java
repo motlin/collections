@@ -21,9 +21,9 @@ import org.eclipse.collections.api.map.primitive.MutableObjectBooleanMap;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class ObjectBooleanHashMapTestCase extends AbstractMutableObjectBooleanMapTestCase
 {
@@ -155,7 +155,7 @@ public abstract class ObjectBooleanHashMapTestCase extends AbstractMutableObject
 
         for (int i = 11; i < 75; i++)
         {
-            assertFalse(String.valueOf(i), hashMap.containsKey(i));
+            assertFalse(hashMap.containsKey(i), String.valueOf(i));
             hashMap.put(i, (i & 1) == 0);
         }
         assertEquals(256L, ((Object[]) keys.get(hashMap)).length);

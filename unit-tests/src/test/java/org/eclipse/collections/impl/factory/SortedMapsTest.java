@@ -13,7 +13,7 @@ package org.eclipse.collections.impl.factory;
 import org.eclipse.collections.api.factory.map.sorted.MutableSortedMapFactory;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SortedMapsTest
 {

@@ -17,7 +17,7 @@ import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.impl.block.factory.Functions;
 import org.junit.Test;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class FlatCollectIteratorTest
 {

@@ -20,8 +20,8 @@ import org.eclipse.collections.test.set.SetTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 // TODO MapIterable.keySet() should return SetIterable, and use SetIterableTestCase here
 @RunWith(Java8Runner.class)

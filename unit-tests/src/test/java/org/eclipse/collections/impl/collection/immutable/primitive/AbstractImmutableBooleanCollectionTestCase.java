@@ -15,7 +15,7 @@ import org.eclipse.collections.api.collection.primitive.MutableBooleanCollection
 import org.eclipse.collections.impl.collection.mutable.primitive.AbstractBooleanIterableTestCase;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Abstract JUnit test for {@link ImmutableBooleanCollection}s.

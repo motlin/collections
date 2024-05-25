@@ -16,7 +16,7 @@ import org.eclipse.collections.api.partition.list.PartitionImmutableList;
 import org.eclipse.collections.api.partition.list.PartitionMutableList;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PartitionFastListTest
 {

@@ -34,11 +34,11 @@ import org.eclipse.collections.impl.tuple.primitive.PrimitiveTuples;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ImmutableBooleanHashSetTest extends AbstractImmutableBooleanCollectionTestCase
 {
@@ -465,14 +465,14 @@ public class ImmutableBooleanHashSetTest extends AbstractImmutableBooleanCollect
         assertEquals("", this.emptySet.makeString("/"));
         assertEquals("false", this.falseSet.makeString("/"));
         assertEquals("true", this.trueSet.makeString("/"));
-        assertTrue(this.trueFalseSet.makeString("/"), "true/false".equals(this.trueFalseSet.makeString("/"))
-                || "false/true".equals(this.trueFalseSet.makeString("/")));
+        assertTrue("true/false".equals(this.trueFalseSet.makeString("/"))
+                || "false/true".equals(this.trueFalseSet.makeString("/")), this.trueFalseSet.makeString("/"));
 
         assertEquals("[]", this.emptySet.makeString("[", "/", "]"));
         assertEquals("[false]", this.falseSet.makeString("[", "/", "]"));
         assertEquals("[true]", this.trueSet.makeString("[", "/", "]"));
-        assertTrue(this.trueFalseSet.makeString("[", "/", "]"), "[true/false]".equals(this.trueFalseSet.makeString("[", "/", "]"))
-                || "[false/true]".equals(this.trueFalseSet.makeString("[", "/", "]")));
+        assertTrue("[true/false]".equals(this.trueFalseSet.makeString("[", "/", "]"))
+                || "[false/true]".equals(this.trueFalseSet.makeString("[", "/", "]")), this.trueFalseSet.makeString("[", "/", "]"));
     }
 
     @Override

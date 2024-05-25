@@ -15,7 +15,7 @@ import org.eclipse.collections.impl.map.mutable.primitive.AbstractObjectBooleanM
 import org.eclipse.collections.impl.map.mutable.primitive.ObjectBooleanHashMap;
 import org.junit.Test;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public abstract class AbstractImmutableObjectBooleanMapTestCase extends AbstractObjectBooleanMapTestCase
 {

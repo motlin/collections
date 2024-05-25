@@ -24,9 +24,9 @@ import org.junit.Test;
 
 import static org.eclipse.collections.impl.test.Verify.assertIterablesEqual;
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTestCase
 {

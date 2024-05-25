@@ -22,9 +22,9 @@ import org.eclipse.collections.impl.map.sorted.mutable.SortedMapAdapter;
 import org.eclipse.collections.impl.test.junit.Java8Runner;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @RunWith(Java8Runner.class)
 public class SortedMapAdapterTest implements MutableSortedMapIterableTestCase

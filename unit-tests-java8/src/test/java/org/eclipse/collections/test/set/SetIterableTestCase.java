@@ -17,12 +17,12 @@ import org.eclipse.collections.api.set.SetIterable;
 import org.eclipse.collections.impl.test.Verify;
 import org.eclipse.collections.test.CollisionsTestCase;
 import org.eclipse.collections.test.RichIterableUniqueTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
 import static org.eclipse.collections.test.IterableTestCase.assertNotEquals;
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public interface SetIterableTestCase extends RichIterableUniqueTestCase, CollisionsTestCase
 {
@@ -65,7 +65,7 @@ public interface SetIterableTestCase extends RichIterableUniqueTestCase, Collisi
         assertNotEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_4, COLLISION_5));
         assertNotEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_5));
 
-        Assert.assertEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4));
+        Assertions.assertEquals(expected, this.newWith(COLLISION_1, COLLISION_2, COLLISION_3, COLLISION_4));
 
         if (this.allowsNull())
         {

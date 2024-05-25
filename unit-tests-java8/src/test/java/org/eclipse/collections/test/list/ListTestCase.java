@@ -14,11 +14,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.collections.test.CollectionTestCase;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.eclipse.collections.test.IterableTestCase.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface ListTestCase extends CollectionTestCase
 {
@@ -46,7 +46,7 @@ public interface ListTestCase extends CollectionTestCase
     default void Iterable_toString()
     {
         Iterable<Integer> iterable = this.newWith(3, 3, 3, 2, 2, 1);
-        Assert.assertEquals("[3, 3, 3, 2, 2, 1]", iterable.toString());
+        Assertions.assertEquals("[3, 3, 3, 2, 2, 1]", iterable.toString());
     }
 
     @Test

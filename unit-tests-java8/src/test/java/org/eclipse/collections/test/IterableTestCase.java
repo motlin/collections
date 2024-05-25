@@ -44,15 +44,15 @@ import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.list.mutable.MultiReaderFastList;
 import org.eclipse.collections.impl.test.SerializeTestHelper;
 import org.eclipse.collections.impl.test.Verify;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.eclipse.collections.impl.test.Verify.assertIterablesEqual;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface IterableTestCase
 {
@@ -108,17 +108,17 @@ public interface IterableTestCase
             return;
         }
 
-        Assert.assertEquals(o1, o2);
+        Assertions.assertEquals(o1, o2);
 
-        assertFalse("Neither item should equal null", o1.equals(null));
-        assertFalse("Neither item should equal null", o2.equals(null));
+        assertFalse(o1.equals(null), "Neither item should equal null");
+        assertFalse(o2.equals(null), "Neither item should equal null");
         assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
         assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
-        Assert.assertEquals(o1, o1);
-        Assert.assertEquals(o2, o2);
-        Assert.assertEquals(o1, o2);
-        Assert.assertEquals(o2, o1);
-        Assert.assertEquals(o1.hashCode(), o2.hashCode());
+        Assertions.assertEquals(o1, o1);
+        Assertions.assertEquals(o2, o2);
+        Assertions.assertEquals(o1, o2);
+        Assertions.assertEquals(o2, o1);
+        Assertions.assertEquals(o1.hashCode(), o2.hashCode());
 
         checkNotSame(o1, o2);
 
@@ -168,15 +168,15 @@ public interface IterableTestCase
 
     static void assertNotEquals(Object o1, Object o2)
     {
-        Assert.assertNotEquals(o1, o2);
-        Assert.assertNotEquals(o2, o1);
+        Assertions.assertNotEquals(o1, o2);
+        Assertions.assertNotEquals(o2, o1);
 
-        assertFalse("Neither item should equal null", o1.equals(null));
-        assertFalse("Neither item should equal null", o2.equals(null));
-        Assert.assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
-        Assert.assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
-        Assert.assertEquals(o1, o1);
-        Assert.assertEquals(o2, o2);
+        assertFalse(o1.equals(null), "Neither item should equal null");
+        assertFalse(o2.equals(null), "Neither item should equal null");
+        Assertions.assertNotEquals("Neither item should equal new Object()", o1.equals(new Object()));
+        Assertions.assertNotEquals("Neither item should equal new Object()", o2.equals(new Object()));
+        Assertions.assertEquals(o1, o1);
+        Assertions.assertEquals(o2, o2);
     }
 
     static <T> void addAllTo(T[] elements, MutableCollection<T> result)
