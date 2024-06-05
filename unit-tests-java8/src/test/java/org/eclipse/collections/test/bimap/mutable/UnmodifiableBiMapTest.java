@@ -14,11 +14,13 @@ import java.util.Random;
 
 import org.eclipse.collections.api.bimap.MutableBiMap;
 import org.eclipse.collections.impl.bimap.mutable.HashBiMap;
+import org.eclipse.collections.test.map.UnmodifiableMapTestCase;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class UnmodifiableBiMapTest implements UnmodifiableBiMapTestCase
+public class UnmodifiableBiMapTest
+        implements UnmodifiableBiMapTestCase, UnmodifiableMapTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
 

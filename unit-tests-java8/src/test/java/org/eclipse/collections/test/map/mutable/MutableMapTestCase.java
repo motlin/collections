@@ -33,6 +33,11 @@ public interface MutableMapTestCase extends UnsortedMapIterableTestCase, Mutable
     default void Iterable_toString()
     {
         UnsortedMapIterableTestCase.super.Iterable_toString();
+
+        MutableMap<String, Integer> map = this.newWithKeysValues("Two", 2, "One", 1);
+        assertThat(map.keySet().toString(), isOneOf("[One, Two]", "[Two, One]"));
+        assertThat(map.values().toString(), isOneOf("[1, 2]", "[2, 1]"));
+        assertThat(map.entrySet().toString(), isOneOf("[One=1, Two=2]", "[Two=2, One=1]"));
     }
 
     @Override

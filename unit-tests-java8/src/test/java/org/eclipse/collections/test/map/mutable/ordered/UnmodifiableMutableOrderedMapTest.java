@@ -16,13 +16,14 @@ import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.map.ordered.mutable.UnmodifiableMutableOrderedMap;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
+import org.eclipse.collections.test.map.UnmodifiableMapTestCase;
 import org.eclipse.collections.test.map.mutable.UnmodifiableMutableMapIterableTestCase;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class UnmodifiableMutableOrderedMapTest
-        implements MutableOrderedMapTestCase, FixedSizeIterableTestCase, UnmodifiableMutableMapIterableTestCase
+public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestCase, FixedSizeIterableTestCase,
+        UnmodifiableMutableMapIterableTestCase, UnmodifiableMapTestCase
 {
     @Override
     public <T> MutableOrderedMap<Object, T> newWith(T... elements)

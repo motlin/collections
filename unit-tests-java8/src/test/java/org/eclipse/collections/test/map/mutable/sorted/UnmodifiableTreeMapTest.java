@@ -15,11 +15,13 @@ import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
 import org.eclipse.collections.impl.map.sorted.mutable.UnmodifiableTreeMap;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
+import org.eclipse.collections.test.map.UnmodifiableMapTestCase;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class UnmodifiableTreeMapTest implements MutableSortedMapIterableTestCase, FixedSizeIterableTestCase
+public class UnmodifiableTreeMapTest
+        implements MutableSortedMapIterableTestCase, FixedSizeIterableTestCase, UnmodifiableMapTestCase
 {
     @Override
     public <T> MutableSortedMap<Object, T> newWith(T... elements)

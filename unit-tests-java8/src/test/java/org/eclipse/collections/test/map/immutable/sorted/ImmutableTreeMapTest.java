@@ -14,11 +14,13 @@ import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.api.map.sorted.MutableSortedMap;
 import org.eclipse.collections.impl.block.factory.Comparators;
 import org.eclipse.collections.impl.map.sorted.mutable.TreeSortedMap;
+import org.eclipse.collections.test.map.UnmodifiableMapTestCase;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ImmutableTreeMapTest implements ImmutableSortedMapIterableTestCase
+public class ImmutableTreeMapTest
+        implements ImmutableSortedMapIterableTestCase, UnmodifiableMapTestCase
 {
     @Override
     public <T> ImmutableSortedMap<Object, T> newWith(T... elements)

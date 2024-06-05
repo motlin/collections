@@ -15,12 +15,14 @@ import java.util.Random;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.UnmodifiableMutableMap;
+import org.eclipse.collections.test.FixedSizeIterableTestCase;
+import org.eclipse.collections.test.map.UnmodifiableMapTestCase;
+import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class UnmodifiableMutableMapTest
-        implements MutableMapTestCase, UnmodifiableMutableMapIterableTestCase
+public class UnmodifiableMutableMapTest implements MutableMapTestCase, FixedSizeIterableTestCase, UnmodifiableMutableMapIterableTestCase, UnmodifiableMapTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
 

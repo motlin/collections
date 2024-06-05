@@ -16,6 +16,7 @@ import org.eclipse.collections.api.map.ImmutableMap;
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.block.factory.HashingStrategies;
 import org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy;
+import org.eclipse.collections.test.map.UnmodifiableMapTestCase;
 import org.eclipse.collections.test.map.immutable.ImmutableMapTestCase;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,8 @@ import static org.eclipse.collections.test.IterableTestCase.assertIterablesEqual
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ImmutableUnifiedMapWithHashingStrategyTest implements ImmutableMapTestCase
+public class ImmutableUnifiedMapWithHashingStrategyTest
+        implements ImmutableMapTestCase, UnmodifiableMapTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
 
