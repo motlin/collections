@@ -54,6 +54,7 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTest
     @Override
     default void Iterable_toString()
     {
+        MapIterableTestCase.super.Iterable_toString();
         MapTestCase.super.Iterable_toString();
     }
 

@@ -11,6 +11,7 @@
 package org.eclipse.collections.test.map.mutable.ordered;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
@@ -59,5 +60,35 @@ public class UnmodifiableMutableOrderedMapTest implements MutableOrderedMapTestC
     public void Iterable_remove()
     {
         UnmodifiableMutableMapIterableTestCase.super.Iterable_remove();
+    }
+
+    @Override
+    public void Map_computeIfPresent()
+    {
+        Map<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+
+        assertThrows(UnsupportedOperationException.class, () -> map.computeIfPresent(1, (k, v) -> "1"));
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+
+        assertThrows(UnsupportedOperationException.class, () -> map.computeIfPresent(1, (k, v) -> "One"));
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+
+        assertThrows(UnsupportedOperationException.class, () -> map.computeIfPresent(1, (k, v) -> null));
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+
+        // TODO: This should throw for consistency with other Unmodifiable Maps
+        String value1 = map.computeIfPresent(4, (k, v) -> "Four");
+        assertNull(value1);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+
+        // TODO: This should throw for consistency with other Unmodifiable Maps
+        String value2 = map.computeIfPresent(4, (k, v) -> null);
+        assertNull(value2);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
+
+        // TODO: This should throw for consistency with other Unmodifiable Maps
+        String value3 = map.computeIfPresent(null, (k, v) -> "4");
+        assertNull(value3);
+        assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map);
     }
 }

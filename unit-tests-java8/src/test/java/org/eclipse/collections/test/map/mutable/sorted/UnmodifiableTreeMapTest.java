@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class UnmodifiableTreeMapTest
-        implements MutableSortedMapIterableTestCase, FixedSizeIterableTestCase, UnmodifiableMapTestCase
+        implements MutableSortedMapIterableTestCase, FixedSizeIterableTestCase
 {
     @Override
     public <T> MutableSortedMap<Object, T> newWith(T... elements)

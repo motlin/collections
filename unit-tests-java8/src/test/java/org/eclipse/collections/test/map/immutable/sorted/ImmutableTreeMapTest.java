@@ -50,4 +50,23 @@ public class ImmutableTreeMapTest
         }
         return result.toImmutable();
     }
+
+    @Override
+    public boolean supportsNullKeys()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean supportsNullValues()
+    {
+        return true;
+    }
+
+    @Override
+    public void Iterable_toString()
+    {
+        ImmutableSortedMapIterableTestCase.super.Iterable_toString();
+        UnmodifiableMapTestCase.super.Iterable_toString();
+    }
 }

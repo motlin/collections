@@ -19,8 +19,7 @@ import org.eclipse.collections.test.map.UnmodifiableMapTestCase;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ConcurrentHashMapUnsafeTest
-        implements MutableMapTestCase, UnmodifiableMapTestCase
+public class ConcurrentHashMapUnsafeTest implements MutableMapTestCase
 {
     private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
 

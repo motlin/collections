@@ -1,7 +1,6 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0" is_locked="false">
     <option name="myName" value="IDE" />
-    <option name="myName" value="IDE" />
     <inspection_tool class="AbstractBeanReferencesInspection" enabled="false" level="INSPECTION" enabled_by_default="false" />
     <inspection_tool class="AbstractClassExtendsConcreteClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AbstractClassNeverImplemented" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -132,7 +131,6 @@
       <option name="reportWhenNoStatementFollow" value="true" />
     </inspection_tool>
     <inspection_tool class="ConfusingFloatingPointLiteral" enabled="true" level="INSPECTION" enabled_by_default="true" />
-    <inspection_tool class="ConfusingMainMethod" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ConfusingOctalEscape" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ConstantConditionalExpressionJS" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ConstantDeclaredInInterface" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -569,6 +567,23 @@
     <inspection_tool class="NestingDepth" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="m_limit" value="5" />
     </inspection_tool>
+    <inspection_tool class="NewMethodNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+      <extension name="InstanceMethodNamingConvention" enabled="false">
+        <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+        <option name="m_minLength" value="4" />
+        <option name="m_maxLength" value="64" />
+      </extension>
+      <extension name="JUnit4MethodNamingConvention" enabled="false">
+        <option name="m_regex" value="(?!test)[a-z][A-Za-z_\d]*" />
+        <option name="m_minLength" value="3" />
+        <option name="m_maxLength" value="99" />
+      </extension>
+      <extension name="StaticMethodNamingConvention" enabled="false">
+        <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+        <option name="m_minLength" value="4" />
+        <option name="m_maxLength" value="64" />
+      </extension>
+    </inspection_tool>
     <inspection_tool class="NoButtonGroup" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="NoLabelFor" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="NoScrollPane" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -800,7 +815,6 @@
     <inspection_tool class="Since15" enabled="false" level="WARNING" enabled_by_default="true">
       <effectiveLL value="JDK_1_6" />
     </inspection_tool>
-    <inspection_tool class="SizeReplaceableByIsEmpty" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SleepWhileHoldingLock" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="SocketResource" enabled="true" level="INSPECTION" enabled_by_default="true">
       <option name="insideTryAllowed" value="false" />
@@ -908,9 +922,7 @@
     <inspection_tool class="TeardownIsPublicVoidNoArg" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="TestCaseInProductCode" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="TestCaseWithConstructor" enabled="true" level="INSPECTION" enabled_by_default="true" />
-    <inspection_tool class="TestCaseWithNoTestMethods" enabled="true" level="INSPECTION" enabled_by_default="true">
-      <option name="ignoreSupers" value="true" />
-    </inspection_tool>
+    <inspection_tool class="TestCaseWithNoTestMethods" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="TestMethodInProductCode" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="TestMethodIsPublicVoidNoArg" enabled="true" level="INSPECTION" enabled_by_default="true" />
     <inspection_tool class="TestOnlyProblems" enabled="true" level="INSPECTION" enabled_by_default="true" />
@@ -993,7 +1005,7 @@
       <option name="onlyWarnOnAbstractMethods" value="false" />
     </inspection_tool>
     <inspection_tool class="UnnecessaryFullyQualifiedName" enabled="true" level="INSPECTION" enabled_by_default="false">
-      <scope name="No package-info.java" level="INSPECTION" enabled="true">
+      <scope name="No package-info.java" level="INSPECTION" enabled="true" editorAttributes="NOT_USED_ELEMENT_ATTRIBUTES">
         <option name="m_ignoreJavadoc" value="false" />
         <option name="ignoreInModuleStatements" value="true" />
       </scope>

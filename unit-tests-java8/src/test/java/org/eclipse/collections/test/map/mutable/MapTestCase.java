@@ -29,9 +29,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public interface MapTestCase
 {
-    <T> Map<Object, T> newWith(T... elements);
+    // Returns Object to allow subclasses to return either Map or MapIterable, and be cast to Map either way
+    <T> Object newWith(T... elements);
 
-    <K, V> Map<K, V> newWithKeysValues(Object... elements);
+    // Returns Object to allow subclasses to return either Map or MapIterable, and be cast to Map either way
+    <K, V> Object newWithKeysValues(Object... elements);
 
     default boolean supportsNullKeys()
     {
@@ -51,7 +53,7 @@ public interface MapTestCase
     @Test
     default void Iterable_toString()
     {
-        Map<String, Integer> map = this.newWithKeysValues("Two", 2, "One", 1);
+        Map<String, Integer> map = (Map<String, Integer>) this.newWithKeysValues("Two", 2, "One", 1);
         assertThat(map.toString(), isOneOf("{One=1, Two=2}", "{Two=2, One=1}"));
         assertThat(map.keySet().toString(), isOneOf("[One, Two]", "[Two, One]"));
         assertThat(map.values().toString(), isOneOf("[1, 2]", "[2, 1]"));
@@ -61,11 +63,11 @@ public interface MapTestCase
     @Test
     default void Map_clear()
     {
-        Map<Object, String> map = this.newWith("Three", "Two", "One");
+        Map<Object, String> map = (Map<Object, String>) this.newWith("Three", "Two", "One");
         map.clear();
         assertIterablesEqual(this.newWith(), map);
 
-        Map<Object, Object> map2 = this.newWith();
+        Map<Object, Object> map2 = (Map<Object, Object>) this.newWith();
         map2.clear();
         assertIterablesEqual(this.newWith(), map2);
     }
@@ -73,19 +75,19 @@ public interface MapTestCase
     @Test
     default void Map_remove()
     {
-        Map<Integer, String> map1 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map1 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertIterablesEqual("Two", map1.remove(2));
         assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 1, "One"),
                 map1);
 
-        Map<Integer, String> map2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map2 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertNull(map2.remove(4));
         assertEquals(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 map2);
 
-        Map<Integer, String> map3 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map3 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         if (this.supportsNullKeys())
         {
             assertNull(map3.remove(null));
@@ -93,7 +95,8 @@ public interface MapTestCase
                     this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                     map3);
 
-            Map<Integer, String> map4 = this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
+            Map<Integer, String> map4 =
+                    (Map<Integer, String>) this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
             assertEquals("Two", map4.remove(null));
             assertIterablesEqual(
                     this.newWithKeysValues(3, "Three", 1, "One"),
@@ -106,7 +109,7 @@ public interface MapTestCase
 
         if (this.supportsNullValues())
         {
-            Map<Integer, String> map5 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
+            Map<Integer, String> map5 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
             assertNull(map5.remove(4));
             assertEquals(
                     this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
@@ -117,31 +120,31 @@ public interface MapTestCase
     @Test
     default void Map_entrySet_remove()
     {
-        Map<Integer, String> map1 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map1 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertTrue(map1.entrySet().remove(ImmutableEntry.of(2, "Two")));
         assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 1, "One"),
                 map1);
 
-        Map<Integer, String> map2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map2 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertFalse(map2.entrySet().remove(ImmutableEntry.of(4, "Four")));
         assertEquals(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 map2);
 
-        Map<Integer, String> map3 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map3 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertFalse(map3.entrySet().remove(ImmutableEntry.of(2, "One")));
         assertEquals(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 map3);
 
-        Map<Integer, String> map4 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map4 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertFalse(map4.entrySet().remove(ImmutableEntry.of(4, "One")));
         assertEquals(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 map4);
 
-        Map<Integer, String> map5 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map5 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         if (this.supportsNullKeys())
         {
             assertFalse(map5.entrySet().remove(ImmutableEntry.of(null, "Two")));
@@ -149,13 +152,13 @@ public interface MapTestCase
                     this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                     map5);
 
-            Map<Integer, String> map6 = this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
+            Map<Integer, String> map6 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
             assertTrue(map6.entrySet().remove(ImmutableEntry.of(null, "Two")));
             assertEquals(
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map6);
 
-            Map<Integer, String> map7 = this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
+            Map<Integer, String> map7 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
             assertFalse(map7.entrySet().remove(ImmutableEntry.of(null, "One")));
             assertEquals(
                     this.newWithKeysValues(3, "Three", null, "Two", 1, "One"),
@@ -178,13 +181,13 @@ public interface MapTestCase
 
         if (this.supportsNullValues())
         {
-            Map<Integer, String> map8 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
+            Map<Integer, String> map8 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
             assertTrue(map8.entrySet().remove(ImmutableEntry.of(4, null)));
             assertEquals(
                     this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                     map8);
 
-            Map<Integer, String> map9 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
+            Map<Integer, String> map9 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
             assertFalse(map9.entrySet().remove(ImmutableEntry.of(4, "One")));
             assertEquals(
                     this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null),
@@ -210,7 +213,7 @@ public interface MapTestCase
     @Test
     default void Map_put()
     {
-        Map<Integer, String> map = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertNull(map.put(4, "Four"));
         assertIterablesEqual(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, "Four"),
@@ -248,7 +251,7 @@ public interface MapTestCase
         AlwaysEqual key2 = new AlwaysEqual();
         Object value1 = new Object();
         Object value2 = new Object();
-        Map<AlwaysEqual, Object> map2 = this.newWithKeysValues(key1, value1);
+        Map<AlwaysEqual, Object> map2 = (Map<AlwaysEqual, Object>) this.newWithKeysValues(key1, value1);
         Object previousValue = map2.put(key2, value2);
         assertSame(value1, previousValue);
         map2.forEach((key, value) -> assertSame(key1, key));
@@ -258,16 +261,16 @@ public interface MapTestCase
     @Test
     default void Map_putAll()
     {
-        Map<Integer, String> map = this.newWithKeysValues(
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(
                 3, "Three",
                 2, "2");
-        Map<Integer, String> toAdd = this.newWithKeysValues(
+        Map<Integer, String> toAdd = (Map<Integer, String>) this.newWithKeysValues(
                 2, "Two",
                 1, "One");
 
         map.putAll(toAdd);
 
-        Map<Integer, String> expected = this.newWithKeysValues(
+        Map<Integer, String> expected = (Map<Integer, String>) this.newWithKeysValues(
                 3, "Three",
                 2, "Two",
                 1, "One");
@@ -280,7 +283,7 @@ public interface MapTestCase
         assertIterablesEqual(expected, map);
 
         //Testing JDK map
-        Map<Integer, String> map2 = this.newWithKeysValues(
+        Map<Integer, String> map2 = (Map<Integer, String>) this.newWithKeysValues(
                 3, "Three",
                 2, "2");
         Map<Integer, String> hashMapToAdd = new LinkedHashMap<>();
@@ -294,7 +297,7 @@ public interface MapTestCase
     @Test
     default void Map_merge()
     {
-        Map<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(1, "1", 2, "2", 3, "3");
 
         // null value
         assertThrows(NullPointerException.class, () -> map.merge(1, null, (v1, v2) -> {
@@ -344,7 +347,7 @@ public interface MapTestCase
     @Test
     default void Map_replace()
     {
-        Map<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(1, "1", 2, "2", 3, "3");
 
         String value1 = map.replace(1, "One");
         assertEquals("1", value1);
@@ -364,7 +367,7 @@ public interface MapTestCase
             assertNull(value4);
             assertEquals(this.newWithKeysValues(1, "One", 2, "2", 3, "3"), map);
 
-            Map<Integer, String> map2 = this.newWithKeysValues(1, "1", null, "2", 3, "3");
+            Map<Integer, String> map2 = (Map<Integer, String>) this.newWithKeysValues(1, "1", null, "2", 3, "3");
             String value5 = map2.replace(null, "Four");
             assertEquals("2", value5);
             assertEquals(this.newWithKeysValues(1, "1", null, "Four", 3, "3"), map2);
@@ -372,12 +375,12 @@ public interface MapTestCase
 
         if (this.supportsNullValues())
         {
-            Map<Integer, String> map3 = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+            Map<Integer, String> map3 = (Map<Integer, String>) this.newWithKeysValues(1, "1", 2, "2", 3, "3");
             String value6 = map3.replace(3, null);
             assertEquals("3", value6);
             assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, null), map3);
 
-            Map<Integer, String> map4 = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+            Map<Integer, String> map4 = (Map<Integer, String>) this.newWithKeysValues(1, "1", 2, "2", 3, "3");
             String value7 = map4.replace(4, null);
             assertNull(value7);
             assertEquals(this.newWithKeysValues(1, "1", 2, "2", 3, "3"), map4);
@@ -387,7 +390,7 @@ public interface MapTestCase
     @Test
     default void Map_replaceAll()
     {
-        Map<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(1, "1", 2, "2", 3, "3");
 
         map.replaceAll((k, v) -> v + v);
         assertEquals(this.newWithKeysValues(1, "11", 2, "22", 3, "33"), map);
@@ -400,7 +403,7 @@ public interface MapTestCase
 
         if (this.supportsNullKeys())
         {
-            Map<Integer, String> map2 = this.newWithKeysValues(1, "1", null, "2", 3, "3");
+            Map<Integer, String> map2 = (Map<Integer, String>) this.newWithKeysValues(1, "1", null, "2", 3, "3");
             map2.replaceAll((k, v) -> v + v);
             assertEquals(this.newWithKeysValues(1, "11", null, "22", 3, "33"), map2);
         }
@@ -409,7 +412,7 @@ public interface MapTestCase
     @Test
     default void Map_putIfAbsent()
     {
-        Map<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(1, "1", 2, "2", 3, "3");
 
         String value1 = map.putIfAbsent(1, "1");
         assertEquals("1", value1);
@@ -451,25 +454,25 @@ public interface MapTestCase
     @Test
     default void Map_removeValue()
     {
-        Map<Integer, String> map1 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map1 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertTrue(map1.remove(2, "Two"));
         assertEquals(
                 this.newWithKeysValues(3, "Three", 1, "One"),
                 map1);
 
-        Map<Integer, String> map2 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map2 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertFalse(map2.remove(4, "Four"));
         assertEquals(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 map2);
 
-        Map<Integer, String> map3 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map3 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertFalse(map3.remove(2, "One"));
         assertEquals(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                 map3);
 
-        Map<Integer, String> map4 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+        Map<Integer, String> map4 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
         assertFalse(map4.remove(4, "One"));
         assertEquals(
                 this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
@@ -477,19 +480,19 @@ public interface MapTestCase
 
         if (this.supportsNullKeys())
         {
-            Map<Integer, String> map5 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
+            Map<Integer, String> map5 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One");
             assertFalse(map5.remove(null, "Two"));
             assertEquals(
                     this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                     map5);
 
-            Map<Integer, String> map6 = this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
+            Map<Integer, String> map6 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
             assertTrue(map6.remove(null, "Two"));
             assertEquals(
                     this.newWithKeysValues(3, "Three", 1, "One"),
                     map6);
 
-            Map<Integer, String> map7 = this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
+            Map<Integer, String> map7 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", null, "Two", 1, "One");
             assertFalse(map7.remove(null, "One"));
             assertEquals(
                     this.newWithKeysValues(3, "Three", null, "Two", 1, "One"),
@@ -498,13 +501,13 @@ public interface MapTestCase
 
         if (this.supportsNullValues())
         {
-            Map<Integer, String> map8 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
+            Map<Integer, String> map8 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
             assertTrue(map8.remove(4, null));
             assertEquals(
                     this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                     map8);
 
-            Map<Integer, String> map9 = this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
+            Map<Integer, String> map9 = (Map<Integer, String>) this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null);
             assertFalse(map9.remove(4, "One"));
             assertEquals(
                     this.newWithKeysValues(3, "Three", 2, "Two", 1, "One", 4, null),
@@ -515,7 +518,7 @@ public interface MapTestCase
     @Test
     default void Map_computeIfAbsent()
     {
-        Map<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(1, "1", 2, "2", 3, "3");
 
         String value1 = map.computeIfAbsent(1, k -> "1");
         assertEquals("1", value1);
@@ -552,7 +555,7 @@ public interface MapTestCase
     @Test
     default void Map_computeIfPresent()
     {
-        Map<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(1, "1", 2, "2", 3, "3");
 
         String value1 = map.computeIfPresent(1, (k, v) -> "1");
         assertEquals("1", value1);
@@ -580,7 +583,7 @@ public interface MapTestCase
             assertNull(value6);
             assertEquals(this.newWithKeysValues(2, "2", 3, "3"), map);
 
-            Map<Integer, String> map2 = this.newWithKeysValues(1, "1", null, "2", 3, "3");
+            Map<Integer, String> map2 = (Map<Integer, String>) this.newWithKeysValues(1, "1", null, "2", 3, "3");
             String value7 = map2.computeIfPresent(null, (k, v) -> "Two");
             assertEquals("Two", value7);
             assertEquals(this.newWithKeysValues(1, "1", null, "Two", 3, "3"), map2);
@@ -590,7 +593,7 @@ public interface MapTestCase
     @Test
     default void Map_compute()
     {
-        Map<Integer, String> map = this.newWithKeysValues(1, "1", 2, "2", 3, "3");
+        Map<Integer, String> map = (Map<Integer, String>) this.newWithKeysValues(1, "1", 2, "2", 3, "3");
 
         String value1 = map.compute(1, (k, v) -> "1");
         assertEquals("1", value1);

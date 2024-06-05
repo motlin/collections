@@ -10,9 +10,14 @@
 
 package org.eclipse.collections.test.map.immutable.sorted;
 
+import java.util.Map;
+
 import org.eclipse.collections.api.map.sorted.ImmutableSortedMap;
 import org.eclipse.collections.test.FixedSizeIterableTestCase;
 import org.eclipse.collections.test.map.SortedMapIterableTestCase;
+
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 
 public interface ImmutableSortedMapIterableTestCase extends SortedMapIterableTestCase, FixedSizeIterableTestCase
 {

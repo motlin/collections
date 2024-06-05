@@ -60,6 +60,25 @@ public class ImmutableUnifiedMapTest
     }
 
     @Override
+    public boolean supportsNullKeys()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean supportsNullValues()
+    {
+        return true;
+    }
+
+    @Override
+    public void Iterable_toString()
+    {
+        ImmutableMapTestCase.super.Iterable_toString();
+        UnmodifiableMapTestCase.super.Iterable_toString();
+    }
+
+    @Override
     public void MapIterable_flipUniqueValues()
     {
         MapIterable<String, Integer> map = this.newWithKeysValues("Three", 3, "Two", 2, "One", 1);

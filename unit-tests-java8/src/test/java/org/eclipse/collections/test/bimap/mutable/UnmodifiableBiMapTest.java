@@ -58,4 +58,23 @@ public class UnmodifiableBiMapTest
         }
         return result.asUnmodifiable();
     }
+
+    @Override
+    public boolean supportsNullKeys()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean supportsNullValues()
+    {
+        return true;
+    }
+
+    @Override
+    public void Iterable_toString()
+    {
+        UnmodifiableBiMapTestCase.super.Iterable_toString();
+        UnmodifiableMapTestCase.super.Iterable_toString();
+    }
 }

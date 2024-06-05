@@ -65,6 +65,19 @@ public class ImmutableUnifiedMapWithHashingStrategyTest
         return false;
     }
 
+    @Override
+    public boolean supportsNullValues()
+    {
+        return true;
+    }
+
+    @Override
+    public void Iterable_toString()
+    {
+        ImmutableMapTestCase.super.Iterable_toString();
+        UnmodifiableMapTestCase.super.Iterable_toString();
+    }
+
     @Test
     public void sanity()
     {
