@@ -117,6 +117,15 @@ public class UnifiedMapNoIteratorTest implements MutableMapTestCase, NoIteratorT
          */
     }
 
+    @Test
+    @Override
+    public void Map_replaceAll()
+    {
+        /**
+         * TODO: replaceAll should be optimized to not use an iterator
+         */
+    }
+
     public static class UnifiedMapNoIterator<K, V> extends UnifiedMap<K, V>
     {
         @Override

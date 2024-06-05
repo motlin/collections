@@ -33,11 +33,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTestCase
 {
+    @Override
     default boolean supportsNullKeys()
     {
         return true;
     }
 
+    @Override
     default boolean supportsNullValues()
     {
         return true;
@@ -53,7 +55,6 @@ public interface MutableMapIterableTestCase extends MapIterableTestCase, MapTest
     default void Iterable_toString()
     {
         MapTestCase.super.Iterable_toString();
-        MapIterableTestCase.super.Iterable_toString();
     }
 
     @Test

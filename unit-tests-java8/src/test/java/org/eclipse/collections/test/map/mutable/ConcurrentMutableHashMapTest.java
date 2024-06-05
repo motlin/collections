@@ -62,4 +62,10 @@ public class ConcurrentMutableHashMapTest implements MutableMapTestCase, NoDetec
     {
         return false;
     }
+
+    @Override
+    public boolean supportsRemovingNullInEntries()
+    {
+        return true;
+    }
 }

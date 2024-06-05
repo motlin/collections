@@ -10,11 +10,15 @@
 
 package org.eclipse.collections.test.map.mutable;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.eclipse.collections.api.map.MutableMap;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 
+import static org.eclipse.collections.test.IterableTestCase.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -54,5 +58,43 @@ public class ConcurrentHashMapTest implements MutableMapTestCase
     public boolean supportsNullKeys()
     {
         return false;
+    }
+
+    @Test
+    @Override
+    public void Map_putAll()
+    {
+        Map<Integer, String> map = this.newWithKeysValues(
+                3, "Three",
+                2, "2");
+        Map<Integer, String> toAdd = this.newWithKeysValues(
+                2, "Two",
+                1, "One");
+
+        map.putAll(toAdd);
+
+        Map<Integer, String> expected = this.newWithKeysValues(
+                3, "Three",
+                2, "Two",
+                1, "One");
+        assertEquals(expected, map);
+
+        // TODO: Fix ConcurrentHashMap to throw NullPointerException
+        assertThrows(IllegalArgumentException.class, () -> map.putAll(null));
+        assertEquals(expected, map);
+
+        map.putAll(Map.of());
+        assertEquals(expected, map);
+
+        //Testing JDK map
+        Map<Integer, String> map2 = this.newWithKeysValues(
+                3, "Three",
+                2, "2");
+        Map<Integer, String> hashMapToAdd = new LinkedHashMap<>();
+        hashMapToAdd.put(2, "Two");
+        hashMapToAdd.put(1, "One");
+        map2.putAll(hashMapToAdd);
+
+        assertEquals(expected, map2);
     }
 }

@@ -163,7 +163,7 @@ public interface MapTestCase
         }
         else if (this.supportsRemovingNullInEntries())
         {
-assertFalse(map5.entrySet().remove(ImmutableEntry.of(null, "Two")));
+            assertFalse(map5.entrySet().remove(ImmutableEntry.of(null, "Two")));
             assertEquals(
                     this.newWithKeysValues(3, "Three", 2, "Two", 1, "One"),
                     map5);
