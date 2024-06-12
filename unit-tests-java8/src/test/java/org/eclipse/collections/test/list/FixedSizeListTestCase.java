@@ -85,4 +85,23 @@ public interface FixedSizeListTestCase extends FixedSizeCollectionTestCase, List
 
         assertEquals(Lists.immutable.with("A", "B", "C", "D"), list);
     }
+
+    @Override
+    default void List_subList_subList_clear()
+    {
+        List<String> list = this.newWith("A", "B", "C", "D", "E", "F");
+        List<String> sublist = list.subList(3, 6);
+        List<String> sublist2 = sublist.subList(0, 2);
+        assertEquals(Lists.immutable.with("D", "E", "F"), sublist);
+        assertEquals(Lists.immutable.with("D", "E"), sublist2);
+
+        assertThrows(UnsupportedOperationException.class, sublist2::clear);
+        assertEquals(Lists.immutable.with("D", "E", "F"), sublist);
+        assertEquals(Lists.immutable.with("D", "E"), sublist2);
+
+        assertThrows(UnsupportedOperationException.class, () -> sublist2.add("J"));
+        assertEquals(Lists.immutable.with("A", "B", "C", "D", "E", "F"), list);
+        assertEquals(Lists.immutable.with("D", "E", "F"), sublist);
+        assertEquals(Lists.immutable.with("D", "E"), sublist2);
+    }
 }

@@ -213,6 +213,19 @@ public class FastList<T>
     }
 
     @Override
+    public void removeRange(int fromIndex, int toIndex)
+    {
+        if (fromIndex > toIndex)
+        {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ')');
+        }
+        System.arraycopy(this.items, toIndex, this.items, fromIndex, this.size - toIndex);
+        int newSize = this.size - (toIndex - fromIndex);
+        Arrays.fill(this.items, newSize, this.size, null);
+        this.size = newSize;
+    }
+
+    @Override
     public void clear()
     {
         Arrays.fill(this.items, 0, this.size, null);

@@ -71,3 +71,5 @@ fabric.properties
 .project
 .settings/
 .classpath
+
+**/*.iml

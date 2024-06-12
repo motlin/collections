@@ -576,6 +576,12 @@ public abstract class AbstractMutableList<T>
     }
 
     @Override
+    public void clear()
+    {
+        this.removeRange(0, this.size());
+    }
+
+    @Override
     public MutableList<T> subList(int fromIndex, int toIndex)
     {
         AbstractMutableList.subListRangeCheck(fromIndex, toIndex, this.size());
@@ -697,11 +703,9 @@ public abstract class AbstractMutableList<T>
         @Override
         public void clear()
         {
-            for (Iterator<T> iterator = this.iterator(); iterator.hasNext(); )
-            {
-                iterator.next();
-                iterator.remove();
-            }
+            this.original.removeRange(this.offset, this.offset + this.size());
+            this.updateSize(-this.size());
+            this.size = 0;
         }
 
         @Override
