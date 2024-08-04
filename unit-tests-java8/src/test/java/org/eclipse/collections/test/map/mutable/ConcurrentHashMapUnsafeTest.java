@@ -13,9 +13,11 @@ package org.eclipse.collections.test.map.mutable;
 import java.util.Random;
 
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMapUnsafe;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ConcurrentHashMapUnsafeTest implements MutableMapTestCase
@@ -54,5 +56,13 @@ public class ConcurrentHashMapUnsafeTest implements MutableMapTestCase
     public boolean supportsNullKeys()
     {
         return false;
+    }
+
+    @Override
+    public void MutableMapIterable_entrySet_setValue()
+    {
+        // TODO 2024-08-04: Support for setValue() on Entry.
+        MutableMapIterable<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
+        assertThrows(UnsupportedOperationException.class, () -> map.entrySet().forEach(each -> each.setValue(each.getValue() + 1)));
     }
 }

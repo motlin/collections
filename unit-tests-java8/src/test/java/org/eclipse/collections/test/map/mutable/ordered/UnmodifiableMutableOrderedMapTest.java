@@ -12,6 +12,7 @@ package org.eclipse.collections.test.map.mutable.ordered;
 
 import java.util.LinkedHashMap;
 
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.api.map.MutableOrderedMap;
 import org.eclipse.collections.impl.map.ordered.mutable.OrderedMapAdapter;
 import org.eclipse.collections.impl.map.ordered.mutable.UnmodifiableMutableOrderedMap;
@@ -19,6 +20,7 @@ import org.eclipse.collections.test.FixedSizeIterableTestCase;
 import org.eclipse.collections.test.map.mutable.UnmodifiableMutableMapIterableTestCase;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class UnmodifiableMutableOrderedMapTest
@@ -58,5 +60,12 @@ public class UnmodifiableMutableOrderedMapTest
     public void Iterable_remove()
     {
         UnmodifiableMutableMapIterableTestCase.super.Iterable_remove();
+    }
+
+    @Override
+    public void MutableMapIterable_entrySet_setValue()
+    {
+        MutableMapIterable<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
+        assertThrows(UnsupportedOperationException.class, () -> map.entrySet().forEach(each -> each.setValue(each.getValue() + 1)));
     }
 }

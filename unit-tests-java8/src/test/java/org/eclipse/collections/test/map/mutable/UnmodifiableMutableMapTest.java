@@ -13,10 +13,12 @@ package org.eclipse.collections.test.map.mutable;
 import java.util.Random;
 
 import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.eclipse.collections.impl.map.mutable.UnmodifiableMutableMap;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class UnmodifiableMutableMapTest
@@ -56,5 +58,12 @@ public class UnmodifiableMutableMapTest
     public void Iterable_remove()
     {
         UnmodifiableMutableMapIterableTestCase.super.Iterable_remove();
+    }
+
+    @Override
+    public void MutableMapIterable_entrySet_setValue()
+    {
+        MutableMapIterable<String, Integer> map = this.newWithKeysValues("3", 3, "2", 2, "1", 1);
+        assertThrows(UnsupportedOperationException.class, () -> map.entrySet().forEach(each -> each.setValue(each.getValue() + 1)));
     }
 }
